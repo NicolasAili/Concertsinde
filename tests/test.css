@@ -1,0 +1,51 @@
+.diaporama {
+    animation: slide 7.5s ease infinite 0s;
+    width: 400%;
+}
+
+.diaporama {
+margin: 0;
+padding: 0;
+display: flex;
+}
+
+ul {
+    margin-top: 0;
+    list-style-image: url(data:image/gif;base64,R0lGODlhBQANAIAAAGOMnP///yH5BAEAAAEALAAAAAAFAA0AAAIJjI+pu+APo4SpADs=);
+}
+
+@keyframes slide
+{
+0%, 13.33%, 100% {
+    transform: translate(0,0);
+  }
+  26.67%, 40% {
+    transform: translate(-25%,0);
+  }
+  53.33%, 66.67% {
+    transform: translate(-50%,0);
+  }
+  80%, 93.33% {
+    transform: translate(-75%,0);
+  }
+}
+html
+{
+	background-color: green;
+	margin: 0;
+}
+
+.cadre
+{
+position: relative;
+width: 400px;
+margin: 0 5em;
+border: 12px solid #FFF;
+overflow: hidden;
+/*box-shadow: 1px 1px 20px #888;*/
+border-radius: 5px;
+max-width: 100%;
+box-sizing: border-box;
+margin: 0 auto; 
+}
+

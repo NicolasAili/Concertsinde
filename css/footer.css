@@ -1,0 +1,17 @@
+footer
+{
+	width: 100%;
+  	text-align: center;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	background-color: #270000;
+	color: #fff;
+	font-size: 150%;
+	text-decoration: none;
+	padding-top: 20px;
+}
+
+.x, .x:visited
+{
+	color: #ff0000;
+}

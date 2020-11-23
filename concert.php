@@ -12,7 +12,7 @@
 		<meta name="Description" content="Recap" />
 	</head>
 	<header>
-		<?php //include('header.php'); ?>
+		<?php include('header.php'); ?>
 	</header>
 	<body>
 		<?php	      
@@ -64,19 +64,24 @@
 				<div id="recap">
 					<div class="inwhile">
 						<h1> Récapitulatif : </h1>
-						<div class="artiste"> <?php //echo $_POST['artiste']; ?> </div>
+						<div class="artiste"> <?php echo $_POST['artiste']; ?> </div>
 						<div class="dahe">Date et heure</div>
-						<div class="date"> <?php //echo $_POST['date']; ?> </div>
-						<div class="heure"> <?php //echo $_POST['heure']; ?> </div>
-						<div class="pacp">Pays ville et CP</div>
-						<div class="pays"> <?php //echo $_POST['pays']; ?> </div>
-						<div class="ville"> <?php //echo $_POST['ville']; ?> </div>
-						<div class="cp"> <?php //echo $_POST['cp']; ?> </div>					
+						<div class="date"> <?php echo $_POST['date']; ?> </div>
+						<div class="heure"> <?php echo $_POST['heure']; ?> </div>
+						<div class="pacp">Pays, ville, adresse et CP</div>
+						<?php
+							$str = "SELECT adresse, pays, ville, cp FROM salle WHERE Nom_salle = '$salle'";
+							$result = mysqli_query($con, $str);
+						?> 
+						<?php $row = mysqli_fetch_array($result); ?>
+						<div class="pays"><?php	echo $row['pays']; ?> </div>
+						<div class="ville"> <?php echo $row['ville']; ?></div>
+						<div class="cp"> <?php echo $row['cp']; ?> </div>
 						<div class="saad">Salle et adresse</div>
-						<div class="salle"> <?php //echo $_POST['salle']; ?> </div>
-						<div class="adresse"> <?php //echo $_POST['adresse']; ?> </div>
+						<div class="salle"> <?php echo $_POST['salle']; ?> </div>
+						<div class="adresse"> <?php echo $row['adresse'];  ?> </div>
 					</div>
-				</div>-->
+				</div>
 				<?php
 			}
 		?>

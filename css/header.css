@@ -240,6 +240,11 @@ body
 	background-color: rgb(230,230,230);
 }
 
+.imgmaison
+{
+	height: 75px;
+}
+
 .liun, .lideux, .litrois, .liquatre, .licinq, .lisix, .lisept
 {
 	text-decoration: none;
@@ -255,7 +260,7 @@ body
 	border-right: 3px solid #A9A9A9;
 }
 
-.liun, .licinq, .lisix, .lisept
+.licinq, .lisix, .lisept
 {
 	width: 200px;
 }

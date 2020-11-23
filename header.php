@@ -66,10 +66,10 @@
 			?>
 		</div>
 		<div class="lowernav">
-			<a href=".\prochain.php" class="liun">Prochain Concerts</a>	
-			<a href=".\artistes.php" class="lideux">Artistes</a>
-			<a href=".\villes.php" class="litrois">Villes</a>
-			<a href=".\pays.php" class="liquatre">Pays</a>
+			<a href=".\accueil.php" class="liun"><img class="imgmaison" src="./image/maison.png"></a>
+			<a href=".\artistes.php" class="lideux">Tous les artistes</a>
+			<!--<a href=".\villes.php" class="litrois">Villes</a>-->
+			<!--<a href=".\pays.php" class="liquatre">Pays</a>-->
 			<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 			<a href=".\nous.php" class="lisix">Qui sommes-nous ?</a>
 			<a href=".\mention.php" class="lisept">Mentions légales</a>
@@ -83,10 +83,10 @@
 		</a>
 	</div>
 	<div class="lowernav">
-		<a href=".\prochain.php" class="liun">Prochain Concerts</a>	
+		<!--<a href=".\prochain.php" class="liun">Prochain Concerts</a>	-->
 		<a href=".\artistes.php" class="lideux">Artistes</a>
-		<a href=".\villes.php" class="litrois">Villes</a>
-		<a href=".\pays.php" class="liquatre">Pays</a>
+		<!--<a href=".\villes.php" class="litrois">Villes</a>-->
+		<!--<a href=".\pays.php" class="liquatre">Pays</a>-->
 		<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 		<a href=".\nous.php" class="lisix">Qui sommes-nous ?</a>
 		<a href=".\mention.php" class="lisept">Mentions légales</a>

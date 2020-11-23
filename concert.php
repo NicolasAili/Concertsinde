@@ -39,36 +39,28 @@
 				$adresse = $_POST['adresse'];
 				$cp = $_POST['cp'];
 				echo "<script>alert(\" bitetest\")</script>";
-				$testartiste = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = $artiste");
-				//$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
+				echo $artiste;
+				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
+				
 				//mysqli_query($con, $insertartiste);
-				$row_cnt = mysqli_num_rows($testartiste);
-				if($row_cnt>0)
+				$row_cnt = mysqli_num_rows($result);
+				if($row_cnt<1) //si pas de ligne trouvée
 				{
 					echo "<script>alert(\" correspondance trouvee\")</script>";
-				 
-				}
-				else
-				{
-					echo "<script>alert(\"pas de correspondance trouveee\")</script>";
+					$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
+					mysqli_query($con, $insertartiste);
 				}
 				/* Ferme le jeu de résultats */
-				mysqli_free_result($testartiste);
-				//echo "<script>alert(\"pas de correspondance trouveee\")</script>";
-			}
-
-				//else
-				//{
-				//	echo "<script>alert(\" correspondance trouvee\")</script>";
-				//}
-				$testsalle = "SELECT Nom_salle FROM salle WHERE Nom_salle = $salle";
-				if ($salle==0)
+				mysqli_free_result($result);
+				$result = "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'";
+				$row_cnt = mysqli_num_rows($result);
+				if($row_cnt<1) //si pas de ligne trouvée
 				{
-					//$insertsalle = "INSERT INTO salle (Nom_salle) VALUES ('$salle)";
-					//mysqli_query($con, $insertsalle);
+					$insertsalle = "INSERT INTO salle (Nom_salle) VALUES ('$salle)";
+					mysqli_query($con, $insertsalle);
 				}
-				//$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, ID_user, Date_ajout) VALUES ('$date', '$heure', $artiste, '$salle', '$artiste', , NOW())";
-				//mysqli_query($con, $sql);
+				$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, Date_ajout) VALUES ('$date', '$heure', $artiste, '$salle', NOW())";
+				mysqli_query($con, $sql);
 				?>
 				<div id="recap">
 					<div class="inwhile">
@@ -87,7 +79,7 @@
 					</div>
 				</div>-->
 				<?php
-			
+			}
 		?>
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

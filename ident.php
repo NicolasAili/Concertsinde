@@ -31,7 +31,7 @@ if (isset($_POST['inscription']))
     			$result = mysqli_query($con, $sql);
     			if ($result == FALSE)
     			{
-    				$sql = "INSERT INTO utilisateur (pseudo, email, password) VALUES ('$pseudo', '$email', '$password')";
+    				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$password', NOW())";
     				mysqli_query($con, $sql);
     				header('Location: ./connexion.php');
     			}

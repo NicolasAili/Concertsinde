@@ -18,7 +18,7 @@
 		<div class="indentfi">
 			 <h1>Ajout d'un concert</h1>
 			 <form action="concert.php" method="post" class="connect">
-				<label for="artiste">Nom de l'artisite ou du groupe:  </label> 
+				<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
 				<input type="text" name="artiste" placeholder="Saisir l'artiste"   id="artiste" required>
 				<br>
 				<br>

@@ -12,7 +12,7 @@
 		<meta name="Description" content="Recap" />
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php //include('header.php'); ?>
 	</header>
 	<body>
 		<?php	      
@@ -38,27 +38,56 @@
 				$salle = $_POST['salle'];
 				$adresse = $_POST['adresse'];
 				$cp = $_POST['cp'];
-				$sql = "INSERT INTO concert (artiste, date, heure, pays, ville, salle, adresse, cp) VALUES ('$artiste', '$date', '$heure', '$pays', '$ville', '$salle', '$adresse', '$cp')";
-				mysqli_query($con, $sql);
+				echo "<script>alert(\" bitetest\")</script>";
+				$testartiste = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = $artiste");
+				//$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
+				//mysqli_query($con, $insertartiste);
+				$row_cnt = mysqli_num_rows($testartiste);
+				if($row_cnt>0)
+				{
+					echo "<script>alert(\" correspondance trouvee\")</script>";
+				 
+				}
+				else
+				{
+					echo "<script>alert(\"pas de correspondance trouveee\")</script>";
+				}
+				/* Ferme le jeu de résultats */
+				mysqli_free_result($testartiste);
+				//echo "<script>alert(\"pas de correspondance trouveee\")</script>";
+			}
+
+				//else
+				//{
+				//	echo "<script>alert(\" correspondance trouvee\")</script>";
+				//}
+				$testsalle = "SELECT Nom_salle FROM salle WHERE Nom_salle = $salle";
+				if ($salle==0)
+				{
+					//$insertsalle = "INSERT INTO salle (Nom_salle) VALUES ('$salle)";
+					//mysqli_query($con, $insertsalle);
+				}
+				//$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, ID_user, Date_ajout) VALUES ('$date', '$heure', $artiste, '$salle', '$artiste', , NOW())";
+				//mysqli_query($con, $sql);
 				?>
 				<div id="recap">
 					<div class="inwhile">
 						<h1> Récapitulatif : </h1>
-						<div class="artiste"> <?php echo $_POST['artiste']; ?> </div>
+						<div class="artiste"> <?php //echo $_POST['artiste']; ?> </div>
 						<div class="dahe">Date et heure</div>
-						<div class="date"> <?php echo $_POST['date']; ?> </div>
-						<div class="heure"> <?php echo $_POST['heure']; ?> </div>
+						<div class="date"> <?php //echo $_POST['date']; ?> </div>
+						<div class="heure"> <?php //echo $_POST['heure']; ?> </div>
 						<div class="pacp">Pays ville et CP</div>
-						<div class="pays"> <?php echo $_POST['pays']; ?> </div>
-						<div class="ville"> <?php echo $_POST['ville']; ?> </div>
-						<div class="cp"> <?php echo $_POST['cp']; ?> </div>					
+						<div class="pays"> <?php //echo $_POST['pays']; ?> </div>
+						<div class="ville"> <?php //echo $_POST['ville']; ?> </div>
+						<div class="cp"> <?php //echo $_POST['cp']; ?> </div>					
 						<div class="saad">Salle et adresse</div>
-						<div class="salle"> <?php echo $_POST['salle']; ?> </div>
-						<div class="adresse"> <?php echo $_POST['adresse']; ?> </div>
+						<div class="salle"> <?php //echo $_POST['salle']; ?> </div>
+						<div class="adresse"> <?php //echo $_POST['adresse']; ?> </div>
 					</div>
-				</div>
+				</div>-->
 				<?php
-			}
+			
 		?>
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

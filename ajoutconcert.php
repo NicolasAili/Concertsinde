@@ -30,22 +30,22 @@
 				<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure" required>
 				<br>
 				<br>
-				<label for="pays">Pays: </label> 
+				<!--<label for="pays">Pays: </label> 
 				<input type="text" name="pays" placeholder="Pays ou a lieu le concert" id="pays" required>
-				<br>
+				<br>-->
 				<label for="ville">Ville: </label> 
 				<input type="text" name="ville" placeholder="Ville ou a lieu le concert" id="ville" required>
 				<br>
 				<label for="salle">Salle: </label> 
 				<input type="text" name="salle" placeholder="Salle ou a lieu le concert" id="salle" require>
 				<br>
-				<label for="adresse">Adresse: </label> 
+				<!--<label for="adresse">Adresse: </label> 
 				<input type="text" name="adresse" placeholder="Adresse ou a lieu le concert" id="adresse" required>
 				<br>
 				<label for="cp">Code postal: </label> 
 				<input type="text" name="cp" placeholder="Code postal ou a lieu le concert" id="cp" required>
 				<br>
-				<br>
+				<br>-->
 				<input  type="submit" value="Enregister le concert" name="concert" href="">
 			</form>
 		</div>

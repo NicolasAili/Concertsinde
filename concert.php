@@ -33,33 +33,32 @@
 				$artiste = $_POST['artiste'];
 				$date = $_POST['date'];
 				$heure = $_POST['heure'];
-				$pays = $_POST['pays'];
+				//$pays = $_POST['pays'];
 				$ville = $_POST['ville'];
 				$salle = $_POST['salle'];
-				$adresse = $_POST['adresse'];
-				$cp = $_POST['cp'];
-				echo "<script>alert(\" bitetest\")</script>";
-				echo $artiste;
+				//$adresse = $_POST['adresse'];
+				//$cp = $_POST['cp'];
+
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
-				
-				//mysqli_query($con, $insertartiste);
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée
 				{
-					echo "<script>alert(\" correspondance trouvee\")</script>";
 					$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
 					mysqli_query($con, $insertartiste);
 				}
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
-				$result = "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'";
-				$row_cnt = mysqli_num_rows($result);
+
+				$results = mysqli_query($con,"SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'");
+				$row_cnt = mysqli_num_rows($results);
 				if($row_cnt<1) //si pas de ligne trouvée
 				{
-					$insertsalle = "INSERT INTO salle (Nom_salle) VALUES ('$salle)";
+					$insertsalle = "INSERT INTO salle (Nom_salle, Ville) VALUES ('$salle', '$ville')";
 					mysqli_query($con, $insertsalle);
 				}
-				$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, Date_ajout) VALUES ('$date', '$heure', $artiste, '$salle', NOW())";
+				mysqli_free_result($results);
+
+				$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, Date_ajout) VALUES ('$date', '$heure', '$artiste', '$salle', NOW())";
 				mysqli_query($con, $sql);
 				?>
 				<div id="recap">

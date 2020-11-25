@@ -266,13 +266,12 @@ body
 
 .lideux, .litrois, .liquatre, .licinq, .lisix, .lisept
 {
-	border-right: 3px solid #A9A9A9;
+	
 }
 
 .lideux
 {
-	margin-left: 13%;
-	border-left: 3px solid #A9A9A9;
+	
 }
 
 .lideux, .licinq, .lisix, .lisept
@@ -301,6 +300,7 @@ body
 {
 	height: 75px;
 }
+
 
 #recherche-hidden
 {
@@ -352,7 +352,8 @@ margin: 0;
 .logos
 {
 	display: flex;
-	float: left;
+	width: 100%;
+	justify-content: flex-end;
 }
 
 

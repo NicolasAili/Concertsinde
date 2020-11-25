@@ -9,7 +9,7 @@
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="page d'acceuil" />
-		<link rel="stylesheet" type="text/css" href="css/body/header.css" />	
+		<link rel="stylesheet" type="text/css" href="css/header.css" />	
 		<link rel="stylesheet" type="text/css" href="css/body/accueil.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
 	</head>
@@ -21,7 +21,7 @@
 			<div class="blocun">
 				<h1> Objectifs du site </h1>
 				<p> L'objectif de notre site web est de permettre aux fans de rap indépendant de pouvoir être facilement au courant des concerts futurs au sein de ce milieu.</p>
-				<p>Ce site a pour caractéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs.</p>
+				<p>Ce site a pour car actéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs.</p>
 				<p>Nous vous invitons néanmoins à créer un compte, cela vous permettra de modifier les annonces qui ont déjà été passées mais qui comportent des erreurs. </p>
 				<p>Bien que le site soit administré, nous faisons entièrement confiance à la communauté. 
 				</p>

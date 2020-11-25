@@ -35,7 +35,7 @@
 		?>
 
 		<?php
-			$str = "SELECT artiste, date FROM concert ORDER BY artiste ASC";
+			$str = "SELECT * FROM artiste";
 			$result = mysqli_query($con, $str);
 			?>
 			<div id="lesartistes">
@@ -43,6 +43,7 @@
 			while($row = mysqli_fetch_array($result)) 
 			{
 				?>
+				$nbr = "SELECT COUNT(*) FROM concert"
 				<div class = "inwhile">
 				
 					<div class="artiste"><?php echo $row['artiste'] ."  ";?></div>

@@ -35,33 +35,40 @@
 		?>
 
 		<?php
+			$cnt = 0;
 			$str = "SELECT * FROM artiste";
 			$result = mysqli_query($con, $str);
-			?>
+		?>
 			<div id="lesartistes">
-			<?php
-			while($row = mysqli_fetch_array($result)) 
-			{
-				?>
-				$nbr = "SELECT COUNT(*) FROM concert"
-				<div class = "inwhile">
-				
-					<div class="artiste"><?php echo $row['artiste'] ."  ";?></div>
-
-					<?php
-					if ($row['artiste'] != null)
-					{
-						?>
-						<div class="date"> <?php echo $row['date'];?></div>
-						<?php
-					}
-
-
-				?>
-				</div>
 				<?php
-			}
-			?>	
+				while($row = mysqli_fetch_array($result)) 
+				{
+				?>
+					<div class = "inwhile">
+						<?php
+							echo $cnt;
+							$cnt++;
+						?>
+						<div class="artiste">
+							<?php 
+								echo $row['Nom_artiste'];
+								$artistecnt = $row['Nom_artiste'];
+							?>
+						</div>
+						<div class="nbconcert">
+							<?php
+								$nbr = "SELECT COUNT(*) FROM concert WHERE Nom_artiste = '$artistecnt'";
+								$resultnbr = mysqli_query($con, $nbr);
+								$rownbr = mysqli_fetch_array($resultnbr);
+								echo $rownbr[0];
+								mysqli_free_result($resultnbr);
+							?>
+								concerts à venir
+						</div>
+					</div>
+				<?php
+				}
+				?>	
 			</div>
 	</body>
 	<?php include('footer.html'); ?>

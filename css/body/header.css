@@ -218,7 +218,8 @@ body
 	border-bottom-left-radius: 50%;
 }
 
-.button {
+.button 
+{
 	color: #5c0000;
 	text-decoration: none;
 	text-align:center;
@@ -227,7 +228,8 @@ body
 }
 
 
-.identification {
+.identification 
+{
 	padding-left: 3%;
 	height: 100%;
 	margin-top: 0px;
@@ -245,7 +247,14 @@ body
 	background-color: rgb(230,230,230);
 }
 
-.liun, .lideux, .litrois, .liquatre, .licinq, .lisix, .lisept
+.liun
+{
+	padding: 0;
+	border-left: 3px solid black;
+	border-right: 3px solid black;
+}
+
+.lideux, .litrois, .liquatre, .licinq, .lisix, .lisept
 {
 	text-decoration: none;
 	line-height: 60px;
@@ -255,17 +264,23 @@ body
 	color: rgb(69,69,69);
 }
 
-.liun, .lideux, .litrois, .liquatre, .licinq, .lisix
+.lideux, .litrois, .liquatre, .licinq, .lisix, .lisept
 {
 	border-right: 3px solid #A9A9A9;
 }
 
-.liun, .licinq, .lisix, .lisept
+.lideux
+{
+	margin-left: 13%;
+	border-left: 3px solid #A9A9A9;
+}
+
+.lideux, .licinq, .lisix, .lisept
 {
 	width: 200px;
 }
 
-.lideux, .litrois, .liquatre
+, .litrois, .liquatre
 {
 	width: 100px;
 }
@@ -273,11 +288,13 @@ body
 .liun:visited, .lideux:visited, .litrois:visited, .liquatre:visited, .licinq:visited, .lisix:visited, .lisept:visited
 {
 	color: rgb(69,69,69);
+
 }
 
 .liun:hover, .lideux:hover, .litrois:hover, .liquatre:hover, .licinq:hover, .lisix:hover, .lisept:hover
 {
-	color: #5c0000;
+	color: #f9e6e6;
+	background-color: #3a0101;
 }
 
 .lowernav-hidden
@@ -335,7 +352,7 @@ margin: 0;
 .logos
 {
 	display: flex;
-	padding-left: 250px;
+	float: left;
 }
 
 

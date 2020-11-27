@@ -18,26 +18,32 @@
 		<div class="indentfi">
 			 <h1>Ajout d'un concert</h1>
 			 <form action="concert.php" method="post" class="connect">
-				<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
+				<label for="artiste">*Nom de l'artiste ou du groupe:  </label> 
 				<input type="text" name="artiste" placeholder="Saisir l'artiste"   id="artiste" required>
 				<br>
 				<br>
-				<label for="date">Date:  </label> 
+				<label for="date">*Date : </label> 
 				<input type="date" name="date" placeholder="Saisir la date du concert " id="date" required>
 				<br>
 				<br>
-				<label for="heure">Heure</label> 
+				<label for="heure">Heure : </label> 
 				<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure" required>
 				<br>
 				<br>
 				<!--<label for="pays">Pays: </label> 
 				<input type="text" name="pays" placeholder="Pays ou a lieu le concert" id="pays" required>
 				<br>-->
-				<label for="ville">Ville: </label> 
+				<label for="ville">*Ville : </label> 
 				<input type="text" name="ville" placeholder="Ville ou a lieu le concert" id="ville" required>
 				<br>
-				<label for="salle">Salle: </label> 
+				<label for="salle">Salle : </label> 
 				<input type="text" name="salle" placeholder="Salle ou a lieu le concert" id="salle" require>
+				<br>
+				<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
+				<input type="text" name="fb" placeholder="Lien de l'événement" id="fb" require>
+				<br>
+				<label for="ticket">Lien de la billetterie : </label> 
+				<input type="text" name="ticket" placeholder="Lien de l'événement" id="ticket" require>
 				<br>
 				<!--<label for="adresse">Adresse: </label> 
 				<input type="text" name="adresse" placeholder="Adresse ou a lieu le concert" id="adresse" required>

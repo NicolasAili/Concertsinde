@@ -36,6 +36,8 @@
 				//$pays = $_POST['pays'];
 				$ville = $_POST['ville'];
 				$salle = $_POST['salle'];
+				$fb = $_POST['fb'];
+				$ticket = $_POST['ticket'];
 				//$adresse = $_POST['adresse'];
 				//$cp = $_POST['cp'];
 
@@ -58,7 +60,7 @@
 				}
 				mysqli_free_result($results);
 
-				$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, Date_ajout) VALUES ('$date', '$heure', '$artiste', '$salle', NOW())";
+				$sql = "INSERT INTO concert (datec, heure, Nom_artiste, Nom_salle, Date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$salle', NOW(), '$fb', '$ticket')";
 				mysqli_query($con, $sql);
 				?>
 				<div id="recap">
@@ -80,6 +82,9 @@
 						<div class="saad">Salle et adresse</div>
 						<div class="salle"> <?php echo $_POST['salle']; ?> </div>
 						<div class="adresse"> <?php echo $row['adresse'];  ?> </div>
+						<div class="saad">Liens relatifs a l'evenement</div>
+						<div class="fb"> <?php echo $_POST['fb']; ?> </div>
+						<div class="ticket"> <?php echo $_POST['ticket']; ?> </div>
 					</div>
 				</div>
 				<?php

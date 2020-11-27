@@ -51,7 +51,10 @@
 						?>
 						<div class="artiste">
 							<?php 
-								echo $row['Nom_artiste'];
+							?>
+							<!--<a href=-->
+							<?php echo $row['Nom_artiste'];
+								
 								$artistecnt = $row['Nom_artiste'];
 							?>
 						</div>
@@ -62,8 +65,19 @@
 								$rownbr = mysqli_fetch_array($resultnbr);
 								echo $rownbr[0];
 								mysqli_free_result($resultnbr);
+								if($rownbr[0]>1)
+								{
 							?>
 								concerts à venir
+							<?php
+								}
+								else 
+								{
+							?>	
+								concert à venir
+							<?php		
+								}
+							?>
 						</div>
 					</div>
 				<?php

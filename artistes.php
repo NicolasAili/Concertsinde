@@ -36,7 +36,7 @@
 
 		<?php
 			$cnt = 0;
-			$str = "SELECT * FROM artiste";
+			$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
 			$result = mysqli_query($con, $str);
 		?>
 			<div id="lesartistes">
@@ -51,11 +51,9 @@
 						?>
 						<div class="artiste">
 							<?php 
-							?>
-							<!--<a href=-->
-							<?php echo $row['Nom_artiste'];
-								
 								$artistecnt = $row['Nom_artiste'];
+								echo '<a href="artiste/' . $row['Nom_artiste'] . '">' . $artistecnt;
+								echo '</a>'
 							?>
 						</div>
 						<div class="nbconcert">

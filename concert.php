@@ -6,14 +6,12 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
 		<link rel="stylesheet" type="text/css" href="css/body/concert.css" media="screen" />		
 		<?php include("salle.php"); // on appelle le fichier?>
-		<titleC></title>
+		<title></title>
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
 	</head>
-	<header>
-		<?php include('header.php'); ?>
-	</header>
+	
 	<body>
 		<?php	      
 			$servername = 'localhost';

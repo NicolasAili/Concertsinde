@@ -7,7 +7,7 @@
 	<div class="nav">
 		<div class="uppernav">
 			<div class="searchbar">
-				<input class="champ" type="recherche" placeholder="Artistes,Salles,Villes,Concerts,...">
+				<input class="champ"  type="submit" name="search" placeholder="Artistes,Salles,Villes,Concerts,...">
 				<input class="o-search-submit" value=" " type="submit">
 			</div>
 			<?php 

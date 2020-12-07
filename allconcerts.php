@@ -39,7 +39,7 @@
 			}
 		?>
 		<?php
-			$str = "SELECT * FROM concert";
+			$str = "SELECT * FROM `concert`, `artiste`, `salle` WHERE concert.Nom_artiste = artiste.Nom_artiste AND concert.Nom_salle = salle.Nom_salle";
 			$result = mysqli_query($con, $str);
 			$admin = 'administateur';
 			//echo $_SESSION['pseudo'];
@@ -51,17 +51,17 @@
 					{
 						?> 
 						<div class="inwhile"> 
-							<div class="artiste"> <?php echo $row['artiste'] ?> </div> 
+							<div class="artiste"> <?php echo $row['Nom_artiste'] ?> </div> 
 								<div class="dahe">Date et heure</div>
-							<div class="date"> <?php echo  $row['date'] ?> </div>  
+							<div class="date"> <?php echo  $row['datec'] ?> </div>  
 							<div class="heure"> <?php echo $row['heure'] ?> </div>  
 								<div class="pacp">Pays ville et CP</div>
-							<div class="pays"> <?php echo  $row['pays'] ?> </div> 
-							<div class="ville"> <?php echo $row['ville'] ?> </div> 
-							<div class="cp"> <?php echo  $row['cp'] ?> </div>
+							<div class="pays"> <?php echo  $row['Pays'] ?> </div> 
+							<div class="ville"> <?php echo $row['Ville'] ?> </div> 
+							<div class="cp"> <?php echo  $row['CP'] ?> </div>
 								<div class="saad">Salle et adresse</div> 
-							<div class="salle"> <?php echo  $row['salle'] ?> </div> 
-							<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
+							<div class="salle"> <?php echo  $row['Nom_salle'] ?> </div> 
+							<!--<div class="adresse"> <?php //echo $row['adresse'] ?> </div> -->
 						</div>
 						<?php
 					}

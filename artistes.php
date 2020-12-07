@@ -52,9 +52,9 @@
 						<div class="artiste">
 							<?php 
 								$artistecnt = $row['Nom_artiste'];
-								echo '<img src="./image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">'
-								echo '<a href="artiste/' . $row['Nom_artiste'] . '">' . $artistecnt;
-								echo '</a>'
+								echo '<img src="./image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">';
+								echo '<a href="artiste/' . $row['Nom_artiste'] . '.php">' . $artistecnt;
+								echo '</a>';
 							?>
 						</div>
 						<div class="nbconcert">

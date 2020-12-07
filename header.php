@@ -6,10 +6,10 @@
 	</div>
 	<div class="nav">
 		<div class="uppernav">
-			<div class="searchbar">
-				<input class="champ"  type="submit" name="search" placeholder="Artistes,Salles,Villes,Concerts,...">
-				<input class="o-search-submit" value=" " type="submit">
-			</div>
+			<form class="searchbar" action="searchresult.php" method="post">
+					<input class="champ"  type="recherche" name="searchfield" placeholder="Artistes,Salles,Villes,Concerts,...">
+					<input class="o-search-submit" name="search" type="submit">
+			</form>
 			<?php 
 				if (isset($_SESSION['pseudo']) == null)
 				{

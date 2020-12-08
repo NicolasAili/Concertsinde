@@ -61,39 +61,21 @@
 							<div class="cp"> <?php echo  $row['CP'] ?> </div>
 								<div class="saad">Salle et adresse</div> 
 							<div class="salle"> <?php echo  $row['Nom_salle'] ?> </div> 
-							<!--<div class="adresse"> <?php //echo $row['adresse'] ?> </div> -->
+							<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
+							<?php
+							if (isset($_SESSION['pseudo']) != null)
+							{
+								?> 
+								<form method="post" class="modif">
+								<input class="modifier" type="submit" value="Modifier une entrée "> 
+								<input type="text" name="artiste" placeholder="Saisir l'artiste"   id="artiste" required>
+								<?php
+		 					}
+		 					?>
 						</div>
 						<?php
 					}
-					if (isset($_SESSION['pseudo']) != null)
-						{
-		 				?>	
-		 					<div class="supprimer">
-		 						<div class="titre"> Supprimer un concert </div>
-						 		<form action="supprimer.php" method="post" class="form-example">
-						 			<div class="int">
-							 			<label for="name">Non d'artiste :  </label> 
-						    			<input type="text" name="artiste" placeholder="Entrer pseudo"   id="prenom" required>
-						    			<br>
-						    		</div>	
-						    		<div class="int">
-						    			<label for="name">Date du concert :</label> 
-						    			<input type="date" name="date" placeholder="Entrer mdp" id="password" required>
-					      				<br>
-					      			</div>
-					      			<div class="int">
-					      				<label for="name">Heure du concert :  </label> 
-						    			<input type="time" name="heure" placeholder="Entrer pseudo"   id="prenom" required>
-						    			<br>
-						    		</div>
-						    		<div class="intsuppr">
-										<input  type="submit" value="Supprimer le concert" name="supprimer">
-									</div>
-								</form>
-							</div>
-							<br/>
-		 				<?php
-		 				}
+					
 				?>
 						
 			</div>

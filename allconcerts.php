@@ -62,22 +62,36 @@
 								<div class="saad">Salle et adresse</div> 
 							<div class="salle"> <?php echo  $row['Nom_salle'] ?> </div> 
 							<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
-							<?php
-							if (isset($_SESSION['pseudo']) != null)
-							{
-								?> 
-								<form method="post" class="modif">
-								<input class="modifier" type="submit" value="Modifier une entrée "> 
-								<input type="text" name="artiste" placeholder="Saisir l'artiste"   id="artiste" required>
-								<?php
-		 					}
-		 					?>
+							<div class="saad">Liens relatifs a l'evenement</div>
+							<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
+							<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
+							<form method="post" action="modifconcert.php" class="modif">
+								<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $row['ID_concert'] . '"' ?> > 
+								<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['Nom_artiste'] . '"' ?> > 
+								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
+								<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
+								<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $row['Pays'] . '"' ?> > 
+								<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['Ville'] . '"' ?> > 
+								<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['CP'] . '"' ?> > 
+								<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['Nom_salle'] . '"' ?> > 
+								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
+								<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
+								<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
+								<style type="text/css">
+									#footer 
+									{
+									  display:flex;
+									}
+								</style>
+								<div id="footer">
+									<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+									<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
+								</div>
+							</form>
 						</div>
-						<?php
-					}
-					
-				?>
-						
+					<?php
+		 			}
+		 			?>			
 			</div>
 	</body>
 	<?php include('footer.html'); ?>

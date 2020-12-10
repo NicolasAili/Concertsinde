@@ -49,6 +49,7 @@
 			$salle = $_POST['salle'];
 			$sallepost = $_POST['sallepost'];
 			$testsalle = 0;
+			$testsalleexist = 0;
 			$adresse = $_POST['adresse'];
 			$adressepost = $_POST['adressepost'];
 			$testadresse = 0;
@@ -73,7 +74,23 @@
 			}*/
 			
 
-			
+			if($salle != NULL)
+			{
+				$testsalle = 1;
+				$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'");
+				$row_cnt = mysqli_num_rows($result);
+				if($row_cnt<1) //si pas de ligne trouvée
+				{
+					$testsalleexist = 1;
+					$insertartiste = "INSERT INTO salle VALUES ('$salle')";
+					mysqli_query($con, $insertartiste);
+				}
+				/* Ferme le jeu de résultats */
+				mysqli_free_result($result);
+				$sqlsal = "UPDATE concert SET Nom_salle = '$salle' WHERE ID_concert = $idconcert";
+    			mysqli_query($con, $sqlsal);
+			}
+
 			if($date != $datepost)
 			{
 				$testdate = 1;
@@ -89,27 +106,59 @@
 			if($pays != NULL)
 			{
 				$testpays = 1;
-				$sqlpays = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$sallepost'";
-    			mysqli_query($con, $sqlpays);
+				if(testsalle == 0)
+				{
+					$sqlpays = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqlpays);
+				}
+				if(testsalleexist == 1)
+				{
+					$sqlpaysex = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqlpaysex);
+				}
 			}
 			if($ville != NULL)
 			{
 				$testville = 1;
-				$sqlville = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$sallepost'";
-    			mysqli_query($con, $sqlville);
+				if(testsalle == 0)
+				{
+					$sqlville = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqlville);
+    			}
+    			if(testsalleexist == 1)
+				{
+					$sqlvilleex = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqlvilleex);
+    			}
 			}
 			if($cp != NULL)
 			{
 				$testcp = 1;
-				$sqlcp = "UPDATE salle SET CP = '$cp' WHERE CP = '$cppost'";
-    			mysqli_query($con, $sqlcp);
+				if(testsalle == 0)
+				{
+					$sqlcp = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqlcp);
+    			}
+    			if(testsalleexist == 1)
+				{
+					$sqlcpex = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqlcpex);
+    			}
 			}
-			
 			if($adresse != NULL)
 			{
 				$testadresse = 1;
-				$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE adresse = '$adressepost'";
-    			mysqli_query($con, $sqladr);
+				if(testsalle == 0)
+				{
+					$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqladr);
+    			}
+    			if(testsalleexist == 1)
+				{
+					$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqladrex);
+    			}
+
 			}
 			if($fb != NULL)
 			{
@@ -127,15 +176,17 @@
 			if ($artiste != NULL)
 			{
 				$testartiste = 1;
-				$sqlart = "UPDATE concert, artiste SET artiste.Nom_artiste = '$artiste' WHERE ID_concert = $idconcert AND concert.Nom_artiste = artiste.Nom_artiste";
+				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
+				$row_cnt = mysqli_num_rows($result);
+				if($row_cnt<1) //si pas de ligne trouvée
+				{
+					$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
+					mysqli_query($con, $insertartiste);
+				}
+				/* Ferme le jeu de résultats */
+				mysqli_free_result($result);
+				$sqlart = "UPDATE concert SET Nom_artiste = '$artiste' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqlart);	
-			}
-
-			if($salle != NULL)
-			{
-				$testsalle = 1;
-				$sqlsal = "UPDATE concert, salle SET salle.Nom_salle = '$salle' WHERE ID_concert = $idconcert AND concert.Nom_salle = salle.Nom_salle";
-    			mysqli_query($con, $sqlsal);
 			}
 
 	?>
@@ -165,6 +216,7 @@
 			</div>
 			<div class="champs">
 				<h2> Champ(s) modifié(s) : </h2>
+				<a href="allconcerts.php"> retour en arriere </a>
 				<br>
 				<?php
 				if($testdate == 1)

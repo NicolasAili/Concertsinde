@@ -12,6 +12,58 @@
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript">
+   			function getdata()
+			{
+   				var name = document.getElementById("salle");
+				   if(name)
+				   {
+				    $.ajax({
+				      type: 'post',
+				      url: 'getdata.php',
+				      data: 
+				      {
+				         name:name,
+				      },
+				      success: function (response) 
+				      {
+				         $('#res').html(response);
+				      }
+				    });
+				   }
+				   else
+				   {
+				    $('#res').html("Error");
+				   }
+			}
+
+			function getleave()
+			{
+				$("#salle").on("blur",  function() 
+				{ 
+					var name = document.getElementById("salle");
+					if(name)
+			   		{
+			    		$.ajax(
+			    		{
+				    		type: 'post',
+				        	url: 'detectsalle.php',
+				        	data: 
+				      		{
+				        		 name:name,
+				      		},
+				     		 success: function (response) 
+				     		{
+				         		
+				      		}
+			    		});
+			   		}
+				});
+			}
+
+  		</script>
+
 	</head>
 	<header>
 		<?php //include('header.php'); ?>
@@ -61,18 +113,23 @@
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
 						<br>
 						<br>
+						<label for="salle">Salle : </label> 
+						<input type="text" name="salle" <?php echo 'placeholder="' . $salle . '"' ?> id="salle" onkeyup="getdata();" onblur="getleave();">
+						<div id="res"> </div>
+						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
+						<br>
 						<label for="date">Date : </label> 
 						<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
 						<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> > 
 						<br>
 						<br>
-						<label for="heure">Heure (laissez les deux derniers chiffres à 0: </label> 
+						<label for="heure">Heure (laissez les deux derniers chiffres à 0) : </label> 
 						<input type="time" name="heure" <?php echo 'value="' . $heure . '"' ?>  id="heure">
 						<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> > 
 						<br>
 						<br>
 						<label for="pays">Pays: </label> 
-						<input type="text" name="pays" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
+						<input type="hidden" name="pays" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
 						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> > 
 						<br>
 						<label for="ville">Ville : </label> 
@@ -83,10 +140,6 @@
 						<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp">
 						<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
 						<br>
-						<br>
-						<label for="salle">Salle : </label> 
-						<input type="text" name="salle" <?php echo 'placeholder="' . $salle . '"' ?> id="salle">
-						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
 						<br>
 						<label for="adresse">Adresse: </label> 
 						<input type="text" name="adresse" <?php echo 'placeholder="' . $adresse . '"' ?>id="adresse">
@@ -121,6 +174,7 @@
 			?>
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 
+	
 </html>
 
 

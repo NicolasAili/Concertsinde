@@ -1,7 +1,7 @@
 <?php
-  if( isset( $_POST['name'] ) )
+  if( isset( $_POST['namesalle'] ) )
   {
-    $name = $_POST['name'];
+    $name = $_POST['namesalle'];
     $servername = 'localhost';
       $username = 'root';
       $password = '';
@@ -16,14 +16,14 @@
       }
     
     $data = "SELECT Nom_salle FROM salle WHERE Nom_salle = '$name'";
-    $query = mysql_query($data);
-    if($row = mysql_fetch_array($query))
+    $query = mysqli_query($con, $data);
+    if(mysqli_fetch_array($query))
     {
        echo "<p>"."salle trouvee"."</p>";
     }
     else
     {
-      echo "<p>"."aucune salle trouvee"."</p>";
+       echo "<p>"."aucune salle trouvee"."</p>";
     }
   }
 ?>

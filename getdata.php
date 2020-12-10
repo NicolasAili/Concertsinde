@@ -1,36 +1,36 @@
 <?php
-  if( isset( $_POST['name'] ) )
+  header('Content-type: application/json');
+  if( isset( $_POST['search'] ) )
   {
-    $name = $_POST['name'];
+    $name = $_POST['search'];
+    //echo $name;
+    //$name = "kini";
     $servername = 'localhost';
       $username = 'root';
       $password = '';
       $dbname = 'webbd';
       //Connexion à la BDD
       $con = mysqli_connect($servername, $username, $password, $dbname);
+      $response = array();
+      $n = 0;
       //Vérification de la connexion
       
       if(mysqli_connect_errno($con))
       {
         echo "Erreur de connexion" .mysqli_connect_error();
       }
-      echo("GROS CACA BOUDIN QUI PUE");
-    /*
-    $data = " SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '$name%' ";
-    $query = mysql_query($data);
-    while($row = mysql_fetch_array($query))
+      //echo("succes0");
+    $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
+    $result = mysqli_query($con, $str);
+    while($row = mysqli_fetch_array($result))
     {
-       echo "<p>".$row['Nom_salle']."</p>";
-    }*/
-     /*$data = " SELECT Nom_salle FROM salle WHERE Nom_salle = '$name' ";
-     $query = mysql_query($data);
-    if($row = mysql_fetch_array($query))
-    {
-       echo "<p>"."correspondance trouvee"."</p>";
+      //echo("succes");
+       //$t["Var{$n}"] = $row['Nom_salle'];
+       //$t["Var"] = $row['Nom_salle'];
+      //echo json_encode($t);
+      $response[] = array("label"=>$row['Nom_salle']);
     }
-    else
-    {
-      echo "<p>"."pas de correspondance trouvee"."</p>";
-    }*/
+    echo json_encode($response);
+    //echo json_encode($t);
   }
 ?>

@@ -6,66 +6,34 @@
 	<head>
 		<title>Recap</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/concert.css" media="screen" />		
-		<titleC></title>
+		<!--<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
+		<link rel="stylesheet" type="text/css" href="css/body/concert.css" media="screen" />		-->
+		<title></title>
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script type="text/javascript">
-   			function getdata()
-			{
-   				var name = document.getElementById("salle");
-				   if(name)
-				   {
-				    $.ajax({
-				      type: 'post',
-				      url: 'getdata.php',
-				      data: 
-				      {
-				         name:name,
-				      },
-				      success: function (response) 
-				      {
-				        $('#res').html(response);
-				      }
-				    });
-				   }
-				   else
-				   {
-				    $('#res').html("Error");
-				   }
-			}
+		<script type="text/javascript" src="./js/scriptform.js"></script> 
+		<!-- Script -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-			function getleave()
-			{
-					var namesalle = document.getElementById("salle");
-					//document.getElementById("resdeux").innerHTML=namesalle;
-					if(namesalle)
-			   		{
-			    		$.ajax(
-			    		{
-				    		type: 'post',
-				        	url: 'detectsalle.php',
-				        	data: 
-				      		{
-				        		 namesalle:namesalle,
-				      		},
-				     		 success: function (response) 
-				     		{
-				         		$('#resdeux').html(response);
-				      		}
-			    		});
-			   		}
-				
-			}
-  		</script>
+		<!-- jQuery UI -->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		
+		<!--<script src="./js/jquery.easy-autocomplete.min.js"></script>
+
+		
+		<link rel="stylesheet" href="./js/easy-autocomplete.min.css">
+
+		
+		<link rel="stylesheet" href="./js/easy-autocomplete.themes.min.css">-->
+			
+
 
 	</head>
-	<header>
+	<!--<header>
 		<?php //include('header.php'); ?>
-	</header>
+	</header>-->
 	<body>
 		<?php	      
 			$servername = 'localhost';
@@ -112,9 +80,9 @@
 						<br>
 						<br>
 						<label for="salle">Salle : </label> 
-						<input type="text" name="salle" <?php echo 'placeholder="' . $salle . '"' ?> id="salle" onkeyup="getdata();" onblur="getleave();">
+						<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata();" <?php echo 'placeholder="' . $salle . '"' ?>>
 						<div id="res"> </div>
-						<div id="resdeux"> </div>
+						<!--<div id="resdeux"> </div>-->
 						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
 						<br>
 						<label for="date">Date : </label> 
@@ -172,8 +140,7 @@
 			}
 			?>
 	</body>
-	<script type="text/javascript" src="./js/scrollnav.js"></script> 
-	
+	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
 </html>
 
 

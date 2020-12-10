@@ -40,10 +40,9 @@
 
 			function getleave()
 			{
-				$("#salle").on("blur",  function() 
-				{ 
-					var name = document.getElementById("salle");
-					if(name)
+					var namesalle = document.getElementById("salle");
+					document.getElementById("resdeux").innerHTML=namesalle;
+					if(namesalle)
 			   		{
 			    		$.ajax(
 			    		{
@@ -51,15 +50,15 @@
 				        	url: 'detectsalle.php',
 				        	data: 
 				      		{
-				        		 name:name,
+				        		 namesalle:namesalle,
 				      		},
 				     		 success: function (response) 
 				     		{
-				         		
+				         		$('#resdeux').html(response);
 				      		}
 			    		});
 			   		}
-				});
+				
 			}
 
   		</script>
@@ -116,6 +115,7 @@
 						<label for="salle">Salle : </label> 
 						<input type="text" name="salle" <?php echo 'placeholder="' . $salle . '"' ?> id="salle" onkeyup="getdata();" onblur="getleave();">
 						<div id="res"> </div>
+						<div id="resdeux"> </div>
 						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
 						<br>
 						<label for="date">Date : </label> 

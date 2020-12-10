@@ -28,7 +28,7 @@
 				      },
 				      success: function (response) 
 				      {
-				         $('#res').html(response);
+				        $('#res').html(response);
 				      }
 				    });
 				   }
@@ -41,7 +41,7 @@
 			function getleave()
 			{
 					var namesalle = document.getElementById("salle");
-					document.getElementById("resdeux").innerHTML=namesalle;
+					//document.getElementById("resdeux").innerHTML=namesalle;
 					if(namesalle)
 			   		{
 			    		$.ajax(
@@ -60,7 +60,6 @@
 			   		}
 				
 			}
-
   		</script>
 
 	</head>

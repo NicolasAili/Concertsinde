@@ -82,7 +82,6 @@
 						<label for="salle">Salle : </label> 
 						<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata();" <?php echo 'placeholder="' . $salle . '"' ?>>
 						<div id="res"> </div>
-						<!--<div id="resdeux"> </div>-->
 						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
 						<br>
 						<label for="date">Date : </label> 
@@ -96,7 +95,7 @@
 						<br>
 						<br>
 						<label for="pays">Pays: </label> 
-						<input type="hidden" name="pays" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
+						<input type="text" name="pays" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
 						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> > 
 						<br>
 						<label for="ville">Ville : </label> 

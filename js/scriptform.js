@@ -9,15 +9,23 @@
 			    		{
 				    		type: 'post',
 				        	url: 'detectsalle.php',
-				        	data: 
-				      		{
+				        	dataType: 'json', 
+
+				        	//dataType: "html",
+				      		data: {
 				        		 namesalle:namesalle,
 				      		},
-				      		dataType: 'html',
-				     		 success: function rep(data) 
+				     		 success: function (data) 
 				     		{
-				         		$('#res').html(data);
+				     			console.log(data[0]); //renvoie l'array complet: 0: Object { adresse: "1 rue du sable", pays: "Espagne", ville: "Madrid", … }
+				     			console.log(data); //même retour qu'avec data[0]
+				     			console.log(data[1]); //undefined
+				     			console.log(data.pays); //undefined
+
+				     			const obj = JSON.parse(data);
+				     			console.log(obj.pays); //Espagne si tout marche bien mais renvoie: "Uncaught SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data"
 				      		}
+				      		
 			    		});
 			   		}
 				

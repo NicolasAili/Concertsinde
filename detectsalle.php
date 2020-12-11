@@ -10,12 +10,12 @@
       //Connexion à la BDD
       $con = mysqli_connect($servername, $username, $password, $dbname);
       //Vérification de la connexion
-      
+       
       if(mysqli_connect_errno($con))
       {
         echo "Erreur de connexion" .mysqli_connect_error();
       }
-    
+     
     $response = array(); //var qui contiendra nos données JSON
     $data = "SELECT Nom_salle FROM salle WHERE Nom_salle = '$name'"; //on regarde si la var passée en paramètre existe dans notre BDD
     $query = mysqli_query($con, $data);
@@ -26,13 +26,15 @@
        if($row = mysqli_fetch_array($querypvcpa))
        {
           //echo("<p>" . $row['Pays'] . "</p>");
-          $response[] = array("adresse"=>$row['adresse'], "pays"=>$row['Pays'], "ville"=>$row['Ville'], "cp"=>$row['CP'], "region"=>$row['Region']); //on renvoie ces données dans notre var "response"
+          $response[] = array("test"=>'succes', "adresse"=>$row['adresse'], "pays"=>$row['Pays'], "ville"=>$row['Ville'], "cp"=>$row['CP'], "region"=>$row['Region']); //on renvoie ces données dans notre var "response"
        }
-       echo json_encode($response); //on encode en JSON
+       
     }
     else //si cette salle n'existe pas dans notre BDD
     {
-       echo "echec";
+       $response[] = array("test"=>'erreur');
     }
+
+    echo json_encode($response); //on encode en JSON
   }
 ?>

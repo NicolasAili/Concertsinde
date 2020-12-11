@@ -1,56 +1,63 @@
-	function getleave()
-			{
-					var namesalle = $('#salle').val();
-					//window.alert("ok");
-					if(namesalle)
-			   		{
-			   			//window.alert("ok1");
-			    		$.ajax(
-			    		{
-				    		type: 'post',
-				        	url: 'detectsalle.php',
-				        	dataType: 'json', 
+function getleave()
+{
+	var namesalle = $('#salle').val();
+        if(namesalle)
+        {
+            $.ajax(
+            {
+                type: 'post',
+                url: 'detectsalle.php',
+                dataType: "json",
+                data: {
+                     namesalle:namesalle,
+                },
+                 success: function (data)
+                {
+                	if(data[0].test == 'erreur')
+                	{
+                		$("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP/Adresse, sinon un gentil administrateur s'en chargera :D ");
+                		$("#pays").attr("placeholder", "salle non connue");
+                   	    $("#ville").attr("placeholder", "salle non connue");
+                    	$("#cp").attr("placeholder", "salle non connue");
+                    	$("#adresse").attr("placeholder", "salle non connue");
+                	}
+                   	else if(data[0].test == 'succes')
+                   	{
+                    	$("#pays").attr("placeholder", data[0].pays);
+                    	$("#ville").attr("placeholder", data[0].ville);
+                    	$("#cp").attr("placeholder", data[0].cp);
+                    	$("#adresse").attr("placeholder", data[0].adresse);
+                	}
+                	else
+                	{
+                		$("#res").html("erreur technique, merci de contacter l'administrateur du site");
+                	}
+                }                      
+            });
+        }        
+}				
 
-				        	//dataType: "html",
-				      		data: {
-				        		 namesalle:namesalle,
-				      		},
-				     		 success: function (data) 
-				     		{
-				     			console.log(data[0]); //renvoie l'array complet: 0: Object { adresse: "1 rue du sable", pays: "Espagne", ville: "Madrid", … }
-				     			console.log(data); //même retour qu'avec data[0]
-				     			console.log(data[1]); //undefined
-				     			console.log(data.pays); //undefined
-
-				     			const obj = JSON.parse(data);
-				     			console.log(obj.pays); //Espagne si tout marche bien mais renvoie: "Uncaught SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data"
-				      		}
-				      		
-			    		});
-			   		}
-				
-			}
-
-	function getdata()
-	{
-   		$( "#salle" ).autocomplete({
-   			source: function( request, response ) {
-   				$.ajax({
-   					url: "getdata.php",
-   					type: 'post',
-   					dataType: "json",
-   					data: {
-     						search: request.term
-    					  },
-    				success: function( data ) {
-     					response( data );
-    				}
-   				});
-   			},
-   			select: function (event, ui) {
-   				// Set selection
-   				$('#salle').val(ui.item.label); // display the selected text
-   				return false;
-  			}
-   		});
-   	}
+function getdata()
+{
+	$( "#salle" ).autocomplete({
+		source: function( request, response ) {
+			$.ajax({
+				url: "getdata.php",
+				type: 'post',
+				dataType: "json",
+				data: {
+						search: request.term
+				  },
+				success: function( data ) 
+				{
+					response( data );
+				}
+			});
+		},
+		select: function (event, ui) {
+			// Set selection
+			$('#salle').val(ui.item.label); // display the selected text
+			return false;
+		}
+	});
+}

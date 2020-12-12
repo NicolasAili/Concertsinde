@@ -57,6 +57,8 @@
 							<div class="heure"> <?php echo $row['heure'] ?> </div>  
 								<div class="pacp">Pays ville et CP</div>
 							<div class="pays"> <?php echo  $row['Pays'] ?> </div> 
+							<div class="region"> <?php echo  $row['Region'] ?> </div> 
+							<div class="departement"> <?php echo  $row['Departement'] ?> </div> 
 							<div class="ville"> <?php echo $row['Ville'] ?> </div> 
 							<div class="cp"> <?php echo  $row['CP'] ?> </div>
 								<div class="saad">Salle et adresse</div> 
@@ -71,6 +73,8 @@
 								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 								<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
 								<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $row['Pays'] . '"' ?> > 
+								<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $row['Region'] . '"' ?> > 
+								<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $row['Departement'] . '"' ?> > 
 								<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['Ville'] . '"' ?> > 
 								<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['CP'] . '"' ?> > 
 								<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['Nom_salle'] . '"' ?> > 

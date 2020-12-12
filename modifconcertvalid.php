@@ -40,6 +40,12 @@
 			$pays = $_POST['pays'];
 			$payspost = $_POST['payspost'];
 			$testpays = 0;
+			$region = $_POST['region'];
+			$regionpost = $_POST['regionpost'];
+			$testregion = 0;
+			$departement = $_POST['departement'];
+			$departementpost = $_POST['departementpost'];
+			$testdepartement = 0;
 			$ville = $_POST['ville'];
 			$villepost = $_POST['villepost'];
 			$testville = 0;
@@ -49,7 +55,6 @@
 			$salle = $_POST['salle'];
 			$sallepost = $_POST['sallepost'];
 			$testsalle = 0;
-			$testsalleexist = 0;
 			$adresse = $_POST['adresse'];
 			$adressepost = $_POST['adressepost'];
 			$testadresse = 0;
@@ -81,9 +86,8 @@
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée
 				{
-					$testsalleexist = 1;
-					$insertartiste = "INSERT INTO salle VALUES ('$salle')";
-					mysqli_query($con, $insertartiste);
+					$insertsalle = "INSERT INTO salle (Nom_salle) VALUES ('$salle')";
+					mysqli_query($con, $insertsalle);
 				}
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
@@ -106,56 +110,84 @@
 			if($pays != NULL)
 			{
 				$testpays = 1;
-				if(testsalle == 0)
+				if($testsalle == 1)
 				{
-					$sqlpays = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$sallepost'";
+					$sqlpays = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$salle'";
     				mysqli_query($con, $sqlpays);
 				}
-				if(testsalleexist == 1)
+				else if($testsalle == 0)
 				{
-					$sqlpaysex = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$salle'";
+					$sqlpaysex = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$sallepost'";
     				mysqli_query($con, $sqlpaysex);
 				}
+			}
+			if($region != NULL)
+			{
+				$testregion= 1;
+				if($testsalle == 1)
+				{
+					$sqlregion = "UPDATE salle SET Region = '$region' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqlregion);
+    			}
+    			else if($testsalle == 0)
+				{
+					$sqlregionex = "UPDATE salle SET Region = '$region' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqlregionex);
+    			}
+			}
+			if($departement != NULL)
+			{
+				$testdepartement = 1;
+				if($testsalle == 1)
+				{
+					$sqldpt = "UPDATE salle SET Departement = '$departement' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqldpt);
+    			}
+    			else if($testsalle == 0)
+				{
+					$sqldpteex = "UPDATE salle SET Departement = '$departement' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqldpteex);
+    			}
 			}
 			if($ville != NULL)
 			{
 				$testville = 1;
-				if(testsalle == 0)
+				if($testsalle == 1)
 				{
-					$sqlville = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$sallepost'";
+					$sqlville = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$salle'";
     				mysqli_query($con, $sqlville);
     			}
-    			if(testsalleexist == 1)
+    			else if($testsalle == 0)
 				{
-					$sqlvilleex = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$salle'";
+					$sqlvilleex = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$sallepost'";
     				mysqli_query($con, $sqlvilleex);
     			}
 			}
 			if($cp != NULL)
 			{
 				$testcp = 1;
-				if(testsalle == 0)
+				if($testsalle == 1)
 				{
-					$sqlcp = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$sallepost'";
+					$sqlcp = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$salle'";
     				mysqli_query($con, $sqlcp);
     			}
-    			if(testsalleexist == 1)
+    			else if($testsalle == 0)
 				{
-					$sqlcpex = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$salle'";
+					$sqlcpex = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$sallepost'";
     				mysqli_query($con, $sqlcpex);
     			}
 			}
 			if($adresse != NULL)
 			{
 				$testadresse = 1;
-				if(testsalle == 0)
+				if($testsalle == 1)
 				{
-					$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
+					$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
     				mysqli_query($con, $sqladr);
     			}
-    			if(testsalleexist == 1)
+    			else if($testsalle == 0)
 				{
-					$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
+					$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
     				mysqli_query($con, $sqladrex);
     			}
 
@@ -204,6 +236,8 @@
 					<div class="heure"> <?php echo $row['heure'] ?> </div>  
 						<div class="pacp">Pays ville et CP</div>
 					<div class="pays"> <?php echo  $row['Pays'] ?> </div> 
+					<div class="region"> <?php echo  $row['Region'] ?> </div> 
+					<div class="departement"> <?php echo  $row['Departement'] ?> </div> 
 					<div class="ville"> <?php echo $row['Ville'] ?> </div> 
 					<div class="cp"> <?php echo  $row['CP'] ?> </div>
 						<div class="saad">Salle et adresse</div> 
@@ -229,9 +263,8 @@
 					echo "nouvelle valeur : ";
 					echo $date;
 					echo '<br>';
-
+					echo '<br>';
 				}
-				echo '<br>';
 				if ($testheure == 1)
 				{
 					echo "heure modifiée";
@@ -242,8 +275,8 @@
 					echo "nouvelle valeur : ";
 					echo $heure;
 					echo '<br>';
+					echo '<br>';
 				}
-				echo '<br>';
 				if($testpays == 1)
 				{
 					echo "pays modifié";
@@ -254,8 +287,32 @@
 					echo "nouvelle valeur : ";
 					echo $pays;
 					echo '<br>';
+					echo '<br>';
 				}
-				echo '<br>';
+				if($testregion == 1)
+				{
+					echo "région modifiée";
+					echo '<br>';
+					echo "ancienne valeur : ";
+					echo $regionpost;
+					echo '<br>';
+					echo "nouvelle valeur : ";
+					echo $region;
+					echo '<br>';
+					echo '<br>';
+				}
+				if($testdepartement == 1)
+				{
+					echo "departement modifié";
+					echo '<br>';
+					echo "ancienne valeur : ";
+					echo $departementpost;
+					echo '<br>';
+					echo "nouvelle valeur : ";
+					echo $departement;
+					echo '<br>';
+					echo '<br>';
+				}
 				if($testville == 1)
 				{
 					echo "ville modifiée";
@@ -266,8 +323,8 @@
 					echo "nouvelle valeur : ";
 					echo $ville;
 					echo '<br>';
+					echo '<br>';
 				}
-				echo '<br>';
 				if($testcp == 1)
 				{
 					echo "code postal modifié";
@@ -278,8 +335,8 @@
 					echo "nouvelle valeur : ";
 					echo $cp;
 					echo '<br>';
-				}
-				echo '<br>';
+					echo '<br>';
+				}	
 				if($testadresse == 1)
 				{
 					echo "adresse modifiée";
@@ -290,8 +347,8 @@
 					echo "nouvelle valeur : ";
 					echo $adresse;
 					echo '<br>';
+					echo '<br>';
 				}
-				echo '<br>';
 				if($testfb == 1)
 				{
 					echo "lien événement modifié";
@@ -302,8 +359,8 @@
 					echo "nouvelle valeur : ";
 					echo $fb;
 					echo '<br>';
+					echo '<br>';
 				}
-				echo '<br>';
 				if($testticket == 1)
 				{
 					echo "lien billetterie modifié";
@@ -314,8 +371,8 @@
 					echo "nouvelle valeur : ";
 					echo $ticket;
 					echo '<br>';
-				}
-				echo '<br>';
+					echo '<br>';
+				}				
 				if($testartiste == 1)
 				{
 					echo "artiste modifié";
@@ -326,8 +383,8 @@
 					echo "nouvelle valeur : ";
 					echo $artiste;
 					echo '<br>';
-				}
-				echo '<br>';
+					echo '<br>';
+				}				
 				if($testsalle == 1)
 				{
 					echo "salle modifiée";

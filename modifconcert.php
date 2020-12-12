@@ -53,6 +53,8 @@
 			$date = $_POST['datepost'];
 			$heure = $_POST['heurepost'];
 			$pays = $_POST['payspost'];
+			$region = $_POST['regionpost'];
+			$departement = $_POST['departementpost'];
 			$ville = $_POST['villepost'];
 			$cp = $_POST['cppost'];
 			$salle = $_POST['sallepost'];
@@ -97,6 +99,14 @@
 						<label for="pays">Pays: </label> 
 						<input type="text" name="pays" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
 						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> > 
+						<br>
+						<label for="region">Région: </label> 
+						<input type="text" name="region" <?php echo 'placeholder="' . $region . '"' ?> id="region">
+						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> > 
+						<br>
+						<label for="departement">Département: </label> 
+						<input type="text" name="departement" <?php echo 'placeholder="' . $departement . '"' ?> id="departement">
+						<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
 						<br>
 						<label for="ville">Ville : </label> 
 						<input type="text" name="ville" <?php echo 'placeholder="' . $ville . '"' ?> id="ville">

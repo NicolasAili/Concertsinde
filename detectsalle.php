@@ -21,12 +21,12 @@
     $query = mysqli_query($con, $data);
     if(mysqli_fetch_array($query)) //si elle existe
     {
-       $pvcpa = "SELECT adresse, Pays, Ville, CP, Region FROM salle WHERE Nom_salle = '$name'"; //on récupére les informations liées à cette salle
+       $pvcpa = "SELECT * FROM salle WHERE Nom_salle = '$name'"; //on récupére les informations liées à cette salle
        $querypvcpa = mysqli_query($con, $pvcpa);
        if($row = mysqli_fetch_array($querypvcpa))
        {
           //echo("<p>" . $row['Pays'] . "</p>");
-          $response[] = array("test"=>'succes', "adresse"=>$row['adresse'], "pays"=>$row['Pays'], "ville"=>$row['Ville'], "cp"=>$row['CP'], "region"=>$row['Region']); //on renvoie ces données dans notre var "response"
+          $response[] = array("test"=>'succes', "adresse"=>$row['adresse'], "pays"=>$row['Pays'], "region"=>$row['Region'], "departement"=>$row['Departement'], "ville"=>$row['Ville'], "cp"=>$row['CP'], "region"=>$row['Region']); //on renvoie ces données dans notre var "response"
        }
        
     }

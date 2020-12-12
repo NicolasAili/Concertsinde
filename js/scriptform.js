@@ -17,6 +17,8 @@ function getleave()
                 	{
                 		$("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP/Adresse, sinon un gentil administrateur s'en chargera :D ");
                 		$("#pays").attr("placeholder", "salle non connue");
+                		$("#region").attr("placeholder", "salle non connue");
+                		$("#departement").attr("placeholder", "salle non connue");
                    	    $("#ville").attr("placeholder", "salle non connue");
                     	$("#cp").attr("placeholder", "salle non connue");
                     	$("#adresse").attr("placeholder", "salle non connue");
@@ -24,6 +26,8 @@ function getleave()
                    	else if(data[0].test == 'succes')
                    	{
                     	$("#pays").attr("placeholder", data[0].pays);
+                    	$("#region").attr("placeholder", data[0].region);
+                    	$("#departement").attr("placeholder", data[0].departement);
                     	$("#ville").attr("placeholder", data[0].ville);
                     	$("#cp").attr("placeholder", data[0].cp);
                     	$("#adresse").attr("placeholder", data[0].adresse);

@@ -5,11 +5,10 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
 		<link rel="stylesheet" type="text/css" href="css/body/ajoutconcert.css" media="screen" />	
-		<?php include("salle.php"); // on appelle le fichier?>
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
-		<?php include("concert.php"); // on appelle le fichier?>
+		<?php //include("concert.php"); // on appelle le fichier?>
 	</head>
 	<header>
 		<?php include('header.php'); ?>
@@ -17,7 +16,7 @@
 	<body>
 		<div class="indentfi">
 			 <h1>Ajout d'un concert</h1>
-			 <form method="post" class="connect">
+			 <form method="post" class="connect" action="concert.php">
 				<label for="artiste">*Nom de l'artiste ou du groupe:  </label> 
 				<input type="text" name="artiste" placeholder="Saisir l'artiste"   id="artiste" required>
 				<br>
@@ -30,14 +29,30 @@
 				<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure" required>
 				<br>
 				<br>
-				<!--<label for="pays">Pays: </label> 
-				<input type="text" name="pays" placeholder="Pays ou a lieu le concert" id="pays" required>
-				<br>-->
-				<label for="ville">*Ville : </label> 
-				<input type="text" name="ville" placeholder="Ville ou a lieu le concert" id="ville" required>
-				<br>
 				<label for="salle">Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle ou a lieu le concert" id="salle" require>
+				<input type="text" name="salle" placeholder="Salle où a lieu le concert" id="salle" require>
+				<br>
+				<div class="infos">
+					<label for="pays">Pays: </label> 
+					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays" required>
+					<br>
+					<label for="pays">Region: </label> 
+					<input type="text" name="pays" placeholder="Région où a lieu le concert" id="pays" required>
+					<br>
+					<label for="pays">Departement: </label> 
+					<input type="text" name="pays" placeholder="Département où a lieu le concert" id="pays" required>
+					<br>
+					<label for="adresse">Adresse: </label> 
+					<input type="text" name="adresse" placeholder="Adresse ou a lieu le concert" id="adresse" required>
+					<br>
+					<label for="cp">Code postal: </label> 
+					<input type="text" name="cp" placeholder="Code postal ou a lieu le concert" id="cp" required>
+					<br>
+					<br>
+					<label for="ville">*Ville : </label> 
+					<input type="text" name="ville" placeholder="Ville où a lieu le concert" id="ville" required>
+					<br>
+				</div>
 				<br>
 				<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
 				<input type="text" name="fb" placeholder="Lien de l'événement" id="fb" require>
@@ -45,13 +60,6 @@
 				<label for="ticket">Lien de la billetterie : </label> 
 				<input type="text" name="ticket" placeholder="Lien de l'événement" id="ticket" require>
 				<br>
-				<!--<label for="adresse">Adresse: </label> 
-				<input type="text" name="adresse" placeholder="Adresse ou a lieu le concert" id="adresse" required>
-				<br>
-				<label for="cp">Code postal: </label> 
-				<input type="text" name="cp" placeholder="Code postal ou a lieu le concert" id="cp" required>
-				<br>
-				<br>-->
 				<input  type="submit" value="Enregister le concert" name="concert" href="">
 			</form>
 		</div>

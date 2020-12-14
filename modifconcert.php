@@ -19,6 +19,7 @@
 		<!-- jQuery UI -->
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script> $("#salle").keyup(getdata); </script>
 		
 		<!--<script src="./js/jquery.easy-autocomplete.min.js"></script>
 
@@ -82,7 +83,7 @@
 						<br>
 						<br>
 						<label for="salle">Salle : </label> 
-						<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata();" <?php echo 'placeholder="' . $salle . '"' ?>>
+						<input type="text" name="salle" id="salle" <?php echo 'placeholder="' . $salle . '"' ?>>
 						<div id="res"> </div>
 						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
 						<br>

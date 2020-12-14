@@ -3,6 +3,7 @@
   if( isset( $_POST['search'] ) )
   {
     $name = $_POST['search'];
+    $test = $_POST['this'];
     //echo $name;
     //$name = "kini";
     $servername = 'localhost';
@@ -20,7 +21,19 @@
         echo "Erreur de connexion" .mysqli_connect_error();
       }
       //echo("succes0");
-    $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
+      if($test == 'salle')
+      {
+        echo("succes salle");
+      }
+      else if($test == 'artiste')
+      {
+        echo("succes artiste");
+      }
+      else
+      {
+        echo("erreur");
+      }
+   /* $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
     $result = mysqli_query($con, $str);
     while($row = mysqli_fetch_array($result))
     {
@@ -31,6 +44,6 @@
       $response[] = array("label"=>$row['Nom_salle']);
     }
     echo json_encode($response);
-    //echo json_encode($t);
+    //echo json_encode($t);*/
   }
 ?>

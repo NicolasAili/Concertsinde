@@ -69,11 +69,13 @@
 						<div class="heure"> <?php echo $_POST['heure']; ?> </div>
 						<div class="pacp">Pays, ville, adresse et CP</div>
 						<?php
-							$str = "SELECT adresse, pays, ville, cp FROM salle WHERE Nom_salle = '$salle'";
+							$str = "SELECT adresse, pays, ville, cp, Region, Departement FROM salle WHERE Nom_salle = '$salle'";
 							$result = mysqli_query($con, $str);
 						?> 
 						<?php $row = mysqli_fetch_array($result); ?>
 						<div class="pays"><?php	echo $row['pays']; ?> </div>
+						<div class="region"><?php	echo $row['Region']; ?> </div>
+						<div class="departement"><?php	echo $row['Departement']; ?> </div>
 						<div class="ville"> <?php echo $row['ville']; ?></div>
 						<div class="cp"> <?php echo $row['cp']; ?> </div>
 						<div class="saad">Salle et adresse</div>
@@ -83,6 +85,7 @@
 						<div class="fb"> <?php echo $_POST['fb']; ?> </div>
 						<div class="ticket"> <?php echo $_POST['ticket']; ?> </div>
 					</div>
+					<a href="allconcerts.php"> retour en arriere </a>
 				</div>
 				<?php
 			}

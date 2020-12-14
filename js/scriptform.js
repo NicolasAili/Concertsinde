@@ -47,24 +47,26 @@ function getleave()
 
 function getdata()
 {
-	$( "#salle" ).autocomplete({
+	$( this ).autocomplete({
 		source: function( request, response ) {
 			$.ajax({
 				url: "getdata.php",
 				type: 'post',
 				dataType: "json",
 				data: {
-						search: request.term
+						search: request.term,
+						this: this
 				  },
 				success: function( data ) 
 				{
 					response( data );
+					console.log(data);
 				}
 			});
 		},
 		select: function (event, ui) {
 			// Set selection
-			$('#salle').val(ui.item.label); // display the selected text
+			$( this ).val(ui.item.label); // display the selected text
 			return false;
 		}
 	});

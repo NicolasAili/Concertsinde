@@ -8,6 +8,13 @@
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
+		<script type="text/javascript" src="./js/scriptform.js"></script> 
+		<!-- Script -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		<!-- jQuery UI -->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<?php //include("concert.php"); // on appelle le fichier?>
 	</head>
 	<header>
@@ -30,17 +37,18 @@
 				<br>
 				<br>
 				<label for="salle">Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle où a lieu le concert" id="salle" require>
+				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata();" id="salle" require>
 				<br>
-				<div class="infos">
+				<div id="res"> </div>
+				<div id="infos">
 					<label for="pays">Pays: </label> 
 					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays" required>
 					<br>
-					<label for="pays">Region: </label> 
-					<input type="text" name="pays" placeholder="Région où a lieu le concert" id="pays" required>
+					<label for="region">Region: </label> 
+					<input type="text" name="pays" placeholder="Région où a lieu le concert" id="region" required>
 					<br>
-					<label for="pays">Departement: </label> 
-					<input type="text" name="pays" placeholder="Département où a lieu le concert" id="pays" required>
+					<label for="departement">Departement: </label> 
+					<input type="text" name="pays" placeholder="Département où a lieu le concert" id="departement" required>
 					<br>
 					<label for="adresse">Adresse: </label> 
 					<input type="text" name="adresse" placeholder="Adresse ou a lieu le concert" id="adresse" required>

@@ -1,6 +1,7 @@
 function getleave()
 {
 	var namesalle = $('#salle').val();
+
         if(namesalle)
         {
             $.ajax(
@@ -13,6 +14,8 @@ function getleave()
                 },
                  success: function (data)
                 {
+                	$('#infos').css('visibility', 'visible');
+                	$('#infos').css('display', 'contents');
                 	if(data[0].test == 'erreur')
                 	{
                 		$("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP/Adresse, sinon un gentil administrateur s'en chargera :D ");

@@ -21,6 +21,12 @@ form
   color: white;
 }
 
+#infos
+{
+  visibility: hidden;
+  display: none;
+}
+
 .indentfi
 {
   width: 100%;
@@ -34,12 +40,7 @@ form
   color: white;
 }
 
-.infos
-{
-  visibility: hidden;
-}
-
-select, option 
+select, option  
 {
   background-color:#F3F3F3;
   color: white;

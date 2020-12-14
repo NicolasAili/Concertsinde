@@ -33,40 +33,43 @@
 				<br>
 				<br>
 				<label for="heure">Heure : </label> 
-				<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure" required>
+				<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure">
 				<br>
+				<br>
+				<div id="ext"> Cochez la case suivante si le concert se passe en EXTERIEUR ou/et hors d'une salle de concert (festival, concert sauvage, concert en extérieur etc...):   <input type="checkbox" id="scales" name="scales" onclick="checkbox();">
 				<br>
 				<label for="salle">Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata();" id="salle" require>
+				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata();" id="salle" required>
 				<br>
 				<div id="res"> </div>
+				<br>
 				<div id="infos">
 					<label for="pays">Pays: </label> 
-					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays" required>
+					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays">
 					<br>
 					<label for="region">Region: </label> 
-					<input type="text" name="pays" placeholder="Région où a lieu le concert" id="region" required>
+					<input type="text" name="region" placeholder="Région où a lieu le concert" id="region">
 					<br>
 					<label for="departement">Departement: </label> 
-					<input type="text" name="pays" placeholder="Département où a lieu le concert" id="departement" required>
+					<input type="text" name="departement" placeholder="Département où a lieu le concert" id="departement">
 					<br>
 					<label for="adresse">Adresse: </label> 
-					<input type="text" name="adresse" placeholder="Adresse ou a lieu le concert" id="adresse" required>
+					<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
 					<br>
 					<label for="cp">Code postal: </label> 
-					<input type="text" name="cp" placeholder="Code postal ou a lieu le concert" id="cp" required>
+					<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp">
 					<br>
 					<br>
 					<label for="ville">*Ville : </label> 
-					<input type="text" name="ville" placeholder="Ville où a lieu le concert" id="ville" required>
+					<input type="text" name="ville" placeholder="Ville où a lieu le concert" id="ville">
 					<br>
 				</div>
 				<br>
 				<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
-				<input type="text" name="fb" placeholder="Lien de l'événement" id="fb" require>
+				<input type="text" name="fb" placeholder="Lien de l'événement" id="fb">
 				<br>
 				<label for="ticket">Lien de la billetterie : </label> 
-				<input type="text" name="ticket" placeholder="Lien de l'événement" id="ticket" require>
+				<input type="text" name="ticket" placeholder="Lien de l'événement" id="ticket">
 				<br>
 				<input  type="submit" value="Enregister le concert" name="concert" href="">
 			</form>

@@ -28,6 +28,7 @@ function getleave()
                 	}
                    	else if(data[0].test == 'succes')
                    	{
+                   		$("#res").html("Salle reconnue, informations récupérées. Vous pouvez corriger les informations suivantes si vous décelez une erruer, sinon ne rien modifier. ");
                     	$("#pays").attr("placeholder", data[0].pays);
                     	$("#region").attr("placeholder", data[0].region);
                     	$("#departement").attr("placeholder", data[0].departement);
@@ -67,4 +68,10 @@ function getdata()
 			return false;
 		}
 	});
+}
+
+function checkbox()
+{
+	$("#res").html("ok checkbox");
+	$("#salle").prop('required',false);
 }

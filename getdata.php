@@ -4,7 +4,7 @@
   {
     $name = $_POST['search'];
     $test = $_POST['this'];
-    //echo $name;
+    //echo $test;
     //$name = "kini";
     $servername = 'localhost';
       $username = 'root';
@@ -20,29 +20,29 @@
       {
         echo "Erreur de connexion" .mysqli_connect_error();
       }
-      //echo("succes0");
       if($test == 'salle')
       {
-        echo("succes salle");
+        $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
+        $result = mysqli_query($con, $str);
+        while($row = mysqli_fetch_array($result))
+        {
+          $response[] = array("label"=>$row['Nom_salle']);
+        }
       }
       else if($test == 'artiste')
       {
-        echo("succes artiste");
+        $str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste LIKE '%{$name}%'";
+        $result = mysqli_query($con, $str);
+        while($row = mysqli_fetch_array($result))
+        {
+          $response[] = array("label"=>$row['Nom_artiste']);
+        }
       }
       else
       {
         echo("erreur");
       }
-   /* $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
-    $result = mysqli_query($con, $str);
-    while($row = mysqli_fetch_array($result))
-    {
-      //echo("succes");
-       //$t["Var{$n}"] = $row['Nom_salle'];
-       //$t["Var"] = $row['Nom_salle'];
-      //echo json_encode($t);
-      $response[] = array("label"=>$row['Nom_salle']);
-    }
+
     echo json_encode($response);
     //echo json_encode($t);*/
   }

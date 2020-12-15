@@ -25,7 +25,7 @@
 			 <h1>Ajout d'un concert</h1>
 			 <form method="post" class="connect" action="concert.php">
 				<label for="artiste">*Nom de l'artiste ou du groupe:  </label> 
-				<input type="text" name="artiste" placeholder="Saisir l'artiste"   id="artiste" required>
+				<input type="text" name="artiste" placeholder="Saisir l'artiste" onkeyup="getdata(this.id);" id="artiste" required>
 				<br>
 				<br>
 				<label for="date">*Date : </label> 
@@ -39,7 +39,7 @@
 				<div id="ext"> Cochez la case suivante si le concert se passe en EXTERIEUR ou/et hors d'une salle de concert (festival, concert sauvage, concert en extérieur etc...):   <input type="checkbox" id="scales" name="scales" onclick="checkbox();">
 				<br>
 				<label for="salle">Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata();" id="salle" required>
+				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata(this.id);" id="salle" required>
 				<br>
 				<div id="res"> </div>
 				<br>
@@ -71,7 +71,9 @@
 				<label for="ticket">Lien de la billetterie : </label> 
 				<input type="text" name="ticket" placeholder="Lien de l'événement" id="ticket">
 				<br>
-				<input  type="submit" value="Enregister le concert" name="concert" href="">
+				<br>
+				<button type="button" id="enregistrer" onclick=""> Enregister le concert </button>
+				<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 			</form>
 		</div>
 	</body>

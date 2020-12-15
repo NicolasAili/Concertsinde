@@ -19,7 +19,7 @@
 		<!-- jQuery UI -->
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-		<script> $("#salle").keyup(getdata); </script>
+		
 		
 		<!--<script src="./js/jquery.easy-autocomplete.min.js"></script>
 
@@ -78,14 +78,14 @@
 					<h1> modifier un concert </h1>
 					<form method="post" class="connect" action="modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
-						<input type="text" name="artiste" <?php echo 'placeholder="' . $artiste . '"' ?>  id="artiste">
+						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $artiste . '"' ?>  id="artiste">
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
 						<br>
 						<br>
 						<label for="salle">Salle : </label> 
-						<input type="text" name="salle" id="salle" <?php echo 'placeholder="' . $salle . '"' ?>>
+						<input type="text" name="salle" id="salle" onkeyup="getdata(this.id);" onblur="getleave();" <?php echo 'placeholder="' . $salle . '"' ?>>
 						<div id="res"> </div>
-						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?> > 
+						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
 						<br>
 						<label for="date">Date : </label> 
 						<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
@@ -151,6 +151,7 @@
 			?>
 	</body>
 	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
+	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->
 </html>
 
 

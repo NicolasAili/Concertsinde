@@ -45,9 +45,9 @@ function getleave()
         }        
 }				
 
-function getdata()
+function getdata(identifiant)
 {
-	$( this ).autocomplete({
+	$( '#'+identifiant+'' ).autocomplete({
 		source: function( request, response ) {
 			$.ajax({
 				url: "getdata.php",
@@ -55,12 +55,11 @@ function getdata()
 				dataType: "json",
 				data: {
 						search: request.term,
-						this: this
+						this: identifiant
 				  },
 				success: function( data ) 
 				{
 					response( data );
-					console.log(data);
 				}
 			});
 		},

@@ -31,7 +31,7 @@
 			$str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$searchfield'";
 			$result = mysqli_query($con, $str);
 			?>
-				<h1> Resultat de recherche pour <?php echo $searchfield; ?> </h1> 
+				<h1> Resultat de recherche pour "<?php echo $searchfield; ?>" </h1> 
 				<h2> Artiste </h2>
 				<?php
 					if($row = mysqli_fetch_array($result))

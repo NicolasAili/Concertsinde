@@ -83,7 +83,7 @@
 						<br>
 						<br>
 						<label for="salle">Salle : </label> 
-						<input type="text" name="salle" id="salle" onkeyup="getdata(this.id);" onblur="getleave();" <?php echo 'placeholder="' . $salle . '"' ?>>
+						<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
 						<div id="res"> </div>
 						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
 						<br>

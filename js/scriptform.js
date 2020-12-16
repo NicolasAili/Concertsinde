@@ -3,7 +3,7 @@ function getleave()
 	var namesalle = $('#salle').val();
     if(!$('#salle').val())
     {
-        console.log("okif");
+        //console.log("okif");
         $('#infos').css('visibility', 'hidden');
         $('#infos').css('display', 'none');
         $("#res").html("");
@@ -34,7 +34,7 @@ function getleave()
                 	}
                    	else if(data[0].test == 'succes')
                    	{
-                   		$("#res").html("Salle reconnue, informations récupérées. Vous pouvez corriger les informations suivantes si vous décelez une erreur, sinon ne rien modifier. ");
+                   		$("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations si vous décelez une erreur, sinon ne rien modifier. ");
                     	$("#pays").attr("placeholder", data[0].pays);
                     	$("#region").attr("placeholder", data[0].region);
                     	$("#departement").attr("placeholder", data[0].departement);
@@ -72,6 +72,7 @@ function getdata(identifiant)
 		select: function (event, ui) {
 			// Set selection
 			$( this ).val(ui.item.label); // display the selected text
+            getleave();
 			return false;
 		}
 	});
@@ -136,4 +137,8 @@ function submit()
 {
     $("#valider").attr("type", "submit");
     $("#valider").trigger('click');
+}
+
+function test(){
+
 }

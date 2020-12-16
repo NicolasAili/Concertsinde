@@ -9,8 +9,7 @@ var rchidden = document.getElementById('recherche-hidden');
 setInterval(function() {
  if (window.scrollY != vertical) {
    vertical=window.scrollY;
-   //document.getElementById ("demo").innerHTML = "Vertically: " + vertical + "px";
-   console.log("window.scrollY="+vertical);
+   //console.log("window.scrollY="+vertical);
  }
  if(vertical>300)
  {
@@ -22,4 +21,4 @@ setInterval(function() {
  	rcun.style.visibility = "visible";
  	rchidden.style.visibility = "hidden";
  }
-}, 500);
+});

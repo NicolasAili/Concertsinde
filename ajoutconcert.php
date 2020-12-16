@@ -24,6 +24,9 @@
 		<div class="indentfi">
 			 <h1 class="titre">Ajout d'un concert</h1>
 			 <form method="post" class="connect" action="concert.php">
+			 	(*): champs <u>obligatoires</u>
+			 	<br>
+			 	<br>
 				<label for="artiste">*Nom de l'artiste ou du groupe:  </label> 
 				<input type="text" name="artiste" placeholder="Saisir l'artiste" onkeyup="getdata(this.id);" id="artiste" required>
 				<br>
@@ -38,7 +41,7 @@
 				<br>
 				<div id="ext"> Cochez la case suivante si le concert se passe en EXTERIEUR ou/et hors d'une salle de concert (festival, concert sauvage, concert en extérieur etc...):   <input type="checkbox" id="scales" name="scales" onclick="checkbox();">
 				<br>
-				<label for="salle">Salle : </label> 
+				<label for="salle">*Salle : </label> 
 				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata(this.id);" id="salle" required>
 				<br>
 				<div id="res"> </div>

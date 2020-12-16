@@ -1,7 +1,13 @@
 function getleave()
 {
 	var namesalle = $('#salle').val();
-
+    if(!$('#salle').val())
+    {
+        console.log("okif");
+        $('#infos').css('visibility', 'hidden');
+        $('#infos').css('display', 'none');
+        $("#res").html("");
+    }
         if(namesalle)
         {
             $.ajax(
@@ -28,7 +34,7 @@ function getleave()
                 	}
                    	else if(data[0].test == 'succes')
                    	{
-                   		$("#res").html("Salle reconnue, informations récupérées. Vous pouvez corriger les informations suivantes si vous décelez une erruer, sinon ne rien modifier. ");
+                   		$("#res").html("Salle reconnue, informations récupérées. Vous pouvez corriger les informations suivantes si vous décelez une erreur, sinon ne rien modifier. ");
                     	$("#pays").attr("placeholder", data[0].pays);
                     	$("#region").attr("placeholder", data[0].region);
                     	$("#departement").attr("placeholder", data[0].departement);
@@ -74,9 +80,7 @@ function getdata(identifiant)
 
 //verification non nul
 function popup(){
-    $("#dialog").click(function () {
-        $("#divSchedule").dialog("open"); 
-       
+        var close = 0;
         var strartiste = $("#artiste").val();
         var strdate = $("#date").val();
         var strheure = $("#heure").val();
@@ -89,6 +93,25 @@ function popup(){
         var stradresse = $("#adresse").attr("placeholder");
         var strcp = $("#cp").attr("placeholder");
         var strville = $("#ville").attr("placeholder");
+        if(strartiste.length == 0)
+        {
+            alert("Erreur le nom de l'artiste n'a pas été saisi");
+            close = 1;
+        }
+        if(strsalle.length == 0)
+        {
+            alert("Erreur le nom de la salle n'a pas été saisi");
+            close = 1;
+        }
+        if(strdate.length  == 0)
+        {
+            alert("Erreur la date n'a pas été saisie");
+            close = 1;
+        }
+        if(close == 0)
+        {
+            $("#divSchedule").dialog("open"); 
+        }
         $("#partiste").html(strartiste);
         $("#pdate").html(strdate);
         $("#pheure").html(strheure);
@@ -102,8 +125,7 @@ function popup(){
         $("#pfb").html(strfb);
         $("#pticket").html(strbilletterie);
         return false;
-    });
-}
+    }
 
 function retour()
 {

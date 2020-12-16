@@ -3,7 +3,6 @@ function getleave()
 	var namesalle = $('#salle').val();
     if(!$('#salle').val())
     {
-        //console.log("okif");
         $('#infos').css('visibility', 'hidden');
         $('#infos').css('display', 'none');
         $("#res").html("");
@@ -137,8 +136,4 @@ function submit()
 {
     $("#valider").attr("type", "submit");
     $("#valider").trigger('click');
-}
-
-function test(){
-
 }

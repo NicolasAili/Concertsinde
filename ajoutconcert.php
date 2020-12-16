@@ -22,7 +22,7 @@
 	</header>	
 	<body>
 		<div class="indentfi">
-			 <h1>Ajout d'un concert</h1>
+			 <h1 class="titre">Ajout d'un concert</h1>
 			 <form method="post" class="connect" action="concert.php">
 				<label for="artiste">*Nom de l'artiste ou du groupe:  </label> 
 				<input type="text" name="artiste" placeholder="Saisir l'artiste" onkeyup="getdata(this.id);" id="artiste" required>
@@ -66,16 +66,50 @@
 				</div>
 				<br>
 				<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
-				<input type="text" name="fb" placeholder="Lien de l'événement" id="fb">
+				<input type="text" name="fb" placeholder="" id="fb">
 				<br>
 				<label for="ticket">Lien de la billetterie : </label> 
-				<input type="text" name="ticket" placeholder="Lien de l'événement" id="ticket">
+				<input type="text" name="ticket" placeholder="" id="ticket">
 				<br>
 				<br>
-				<button type="button" id="enregistrer" onclick=""> Enregister le concert </button>
+				<button type="button" id="dialog" onclick="popup();"> Enregister le concert </button>
+				<div id="divSchedule">
+							<h1> Recapitulatif du concert </h1>
+							<div id="partiste">  </div> 
+							<div id="dahe">Date et heure</div>
+								<div id="pdate">  </div>  
+								<div id="pheure">  </div>  
+							<div id="pacp">Pays ville et CP</div>
+								<div id="ppays">  </div> 
+								<div id="pregion">  </div> 
+								<div id="pdepartement"> test </div> 
+								<div id="pville">  </div> 
+								<div id="pcp">  </div>
+							<div id="saad">Salle et adresse</div> 
+								<div id="psalle">  </div> 
+								<div id="padresse">  </div> 
+							<div id="saad">Liens relatifs a l'evenement</div>
+								<div id="pfb">  </div> 
+								<div id="pticket"> </div> 
+							<br>
+							<h3> Ces données sont-elles correctes ? </h3>
+							<div id="boutons">
+								<button type="button" id="ouisaisie" onclick="submit();"> Oui, valider ces données </button>
+								<button type="button" id="nonsaisie" onclick="retour();"> Non, modifier les données </button>
+							</div>
+				</div>
 				<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 			</form>
 		</div>
+
+
+
+</style>	
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 
+	<script>
+		$(document).ready(function(){
+    	$("#divSchedule").dialog({show: "slide", modal: true, autoOpen: false, width: 500});
+    	});
+    </script>
 </html>

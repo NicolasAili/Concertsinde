@@ -71,8 +71,47 @@ function getdata(identifiant)
 	});
 }
 
-function checkbox()
+
+//verification non nul
+function popup(){
+    $("#dialog").click(function () {
+        $("#divSchedule").dialog("open"); 
+       
+        var strartiste = $("#artiste").val();
+        var strdate = $("#date").val();
+        var strheure = $("#heure").val();
+        var strsalle = $("#salle").val();
+        var strfb = $("#fb").val();
+        var strbilletterie = $("#ticket").val();
+        var strpays = $("#pays").attr("placeholder");
+        var strregion = $("#region").attr("placeholder");
+        var strdepartement = $("#departement").attr("placeholder");
+        var stradresse = $("#adresse").attr("placeholder");
+        var strcp = $("#cp").attr("placeholder");
+        var strville = $("#ville").attr("placeholder");
+        $("#partiste").html(strartiste);
+        $("#pdate").html(strdate);
+        $("#pheure").html(strheure);
+        $("#ppays").html(strpays);
+        $("#pregion").html(strregion);
+        $("#pdepartement").html(strdepartement);
+        $("#pville").html(strville);
+        $("#psalle").html(strsalle);
+        $("#padresse").html(stradresse);
+        $("#pcp").html(strcp);
+        $("#pfb").html(strfb);
+        $("#pticket").html(strbilletterie);
+        return false;
+    });
+}
+
+function retour()
 {
-	$("#res").html("ok checkbox");
-	$("#salle").prop('required',false);
+    $("#nonsaisie").closest('.ui-dialog-content').dialog('close'); 
+}
+
+function submit()
+{
+    $("#valider").attr("type", "submit");
+    $("#valider").trigger('click');
 }

@@ -103,25 +103,12 @@
 				</div>
 				<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 			</form>
-			<button type="button" id="salut"> saluttest </button>
-		</div>
-
-
-
-</style>	
+		</div>	
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 
 	<script>
 		$(document).ready(function(){
     	$("#divSchedule").dialog({show: "slide", modal: true, autoOpen: false, width: 500});
     	});
-    </script>
-    <script>
-    /*$("#ui-id-2").click(function() {
-		console.log( "bite" );
-		});*/
-    $("ul").click(function() {
-        getleave();
-        });
     </script>
 </html>

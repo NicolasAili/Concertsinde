@@ -13,12 +13,13 @@ function getleave()
             {
                 type: 'post',
                 url: 'detectsalle.php',
-                dataType: "json",
+                dataType: 'json',
                 data: {
                      namesalle:namesalle,
                 },
-                 success: function (data)
+                 success: function ( data )
                 {
+                    alert("succesdata");
                 	$('#infos').css('visibility', 'visible');
                 	$('#infos').css('display', 'contents');
                 	if(data[0].test == 'erreur')
@@ -45,7 +46,11 @@ function getleave()
                 	{
                 		$("#res").html("erreur technique, merci de contacter l'administrateur du site");
                 	}
-                }                      
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                }
             });
         }        
 }				
@@ -71,7 +76,7 @@ function getdata(identifiant)
 		select: function (event, ui) {
 			// Set selection
 			$( this ).val(ui.item.label); // display the selected text
-            getleave();
+            //getleave();
 			return false;
 		}
 	});

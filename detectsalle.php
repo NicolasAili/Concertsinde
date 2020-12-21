@@ -25,8 +25,27 @@
        $querypvcpa = mysqli_query($con, $pvcpa);
        if($row = mysqli_fetch_array($querypvcpa))
        {
+          $pvcpz = "SELECT nom_ville, ville_departement FROM ville WHERE ville_id = '$row['id_ville']' ";
+          $querypvcpz = mysqli_query($con, $pvcpz);
+          if($rowa = mysqli_fetch_array($querypvcpz))
+          {
+            $ville = $rowa['nom_ville'];
+
+            $pvcpe = "SELECT nom_departement, id_region FROM departement WHERE numero = '$row['ville_departement']' ";
+            $querypvcpe = mysqli_query($con, $pvcpe);
+            $rowz = mysqli_fetch_array($querypvcpe);
+
+            $pvcpr = "SELECT nom_region, id_pays FROM region WHERE id = '$row['id_region']' ";
+            $querypvcpr = mysqli_query($con, $pvcpr);
+            $rowe = mysqli_fetch_array($querypvcpr);
+
+            $pvcpt = "SELECT nom_pays FROM pays WHERE id = '$row['id_pays']' ";
+            $querypvcpt = mysqli_query($con, $pvcpt);
+            $rowr = mysqli_fetch_array($querypvcpt);
+          }
+          
           //echo("<p>" . $row['Pays'] . "</p>");
-          $response[] = array("test"=>'succes', "adresse"=>$row['adresse'], "pays"=>$row['Pays'], "region"=>$row['Region'], "departement"=>$row['Departement'], "ville"=>$row['Ville'], "cp"=>$row['CP'], "region"=>$row['Region']); //on renvoie ces données dans notre var "response"
+          $response[] = array("test"=>'succes', "adresse"=>$row['adresse']); //on renvoie ces données dans notre var "response"
        }
        
     }
@@ -34,7 +53,8 @@
     {
        $response[] = array("test"=>'erreur');
     }
-
+    //$response[] = array("test"=>'succes');
+    //echo json_encode($response); //on encode en JSON
     echo json_encode($response); //on encode en JSON
   }
 ?>

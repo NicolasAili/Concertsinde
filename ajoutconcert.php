@@ -42,7 +42,7 @@
 				<div id="ext"> Cochez la case suivante si le concert se passe en EXTERIEUR ou/et hors d'une salle de concert (festival, concert sauvage, concert en extérieur etc...):   <input type="checkbox" id="scales" name="scales" onclick="checkbox();">
 				<br>
 				<label for="salle">*Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle où a lieu le concert"  onkeyup="getdata(this.id);" id="salle" required>
+				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata(this.id);" id="salle" required>
 				<br>
 				<div id="res"> </div>
 				<br>

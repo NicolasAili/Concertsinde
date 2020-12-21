@@ -38,6 +38,15 @@
           $response[] = array("label"=>$row['Nom_artiste']);
         }
       }
+      else if($test == 'ville')
+      {
+        $str = "SELECT ville_nom FROM ville WHERE ville_nom LIKE '%{$name}%'";
+        $result = mysqli_query($con, $str);
+        while($row = mysqli_fetch_array($result))
+        {
+          $response[] = array("label"=>$row['ville_nom']);
+        }
+      }
       else
       {
         echo("erreur");

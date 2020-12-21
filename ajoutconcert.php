@@ -47,24 +47,24 @@
 				<div id="res"> </div>
 				<br>
 				<div id="infos">
-					<label for="pays">Pays: </label> 
-					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays">
-					<br>
-					<label for="region">Region: </label> 
-					<input type="text" name="region" placeholder="Région où a lieu le concert" id="region">
-					<br>
-					<label for="departement">Departement: </label> 
-					<input type="text" name="departement" placeholder="Département où a lieu le concert" id="departement">
-					<br>
 					<label for="adresse">Adresse: </label> 
 					<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
+					<br>
+					<label for="ville">*Ville : </label> 
+					<input type="text" name="ville" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
 					<br>
 					<label for="cp">Code postal: </label> 
 					<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp">
 					<br>
+					<label for="departement">Departement: </label> 
+					<input type="text" name="departement" placeholder="Département où a lieu le concert" id="departement">
 					<br>
-					<label for="ville">*Ville : </label> 
-					<input type="text" name="ville" placeholder="Ville où a lieu le concert" id="ville">
+					<label for="region">Region: </label> 
+					<input type="text" name="region" placeholder="Région où a lieu le concert" id="region">
+					<br>
+					<label for="pays">Pays: </label> 
+					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays">
+					<br>
 					<br>
 				</div>
 				<br>

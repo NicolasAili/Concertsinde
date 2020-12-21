@@ -25,36 +25,18 @@
        $querypvcpa = mysqli_query($con, $pvcpa);
        if($row = mysqli_fetch_array($querypvcpa))
        {
-          $pvcpz = "SELECT nom_ville, ville_departement FROM ville WHERE ville_id = '$row['id_ville']' ";
+          $adresse = $row['adresse']; //adresse de la salle
+          $ville_id = $row['id_ville']; //cle etrangere ville_id permettant de faire le lien avec la ville où se situe la salle
+          $pvcpz = "SELECT nom_salle, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_salle = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
           $querypvcpz = mysqli_query($con, $pvcpz);
-          if($rowa = mysqli_fetch_array($querypvcpz))
-          {
-            $ville = $rowa['nom_ville'];
-
-            $pvcpe = "SELECT nom_departement, id_region FROM departement WHERE numero = '$row['ville_departement']' ";
-            $querypvcpe = mysqli_query($con, $pvcpe);
-            $rowz = mysqli_fetch_array($querypvcpe);
-
-            $pvcpr = "SELECT nom_region, id_pays FROM region WHERE id = '$row['id_region']' ";
-            $querypvcpr = mysqli_query($con, $pvcpr);
-            $rowe = mysqli_fetch_array($querypvcpr);
-
-            $pvcpt = "SELECT nom_pays FROM pays WHERE id = '$row['id_pays']' ";
-            $querypvcpt = mysqli_query($con, $pvcpt);
-            $rowr = mysqli_fetch_array($querypvcpt);
-          }
-          
-          //echo("<p>" . $row['Pays'] . "</p>");
-          $response[] = array("test"=>'succes', "adresse"=>$row['adresse']); //on renvoie ces données dans notre var "response"
+          $row = mysqli_fetch_array($querypvcpz);
+          $response[] = array("test"=>'succes', "adresse"=>$adresse, "ville"=>$row['nom_ville'], "cp"=>$row['ville_code_postal'], "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
        }
-       
     }
     else //si cette salle n'existe pas dans notre BDD
     {
        $response[] = array("test"=>'erreur');
     }
-    //$response[] = array("test"=>'succes');
-    //echo json_encode($response); //on encode en JSON
     echo json_encode($response); //on encode en JSON
   }
 ?>

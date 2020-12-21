@@ -1,6 +1,7 @@
 function getleave()
 {
 	var namesalle = $('#salle').val();
+    var ville = $('#ville').val();
     if(!$('#salle').val())
     {
         $('#infos').css('visibility', 'hidden');
@@ -19,7 +20,6 @@ function getleave()
                 },
                  success: function ( data )
                 {
-                    alert("succesdata");
                 	$('#infos').css('visibility', 'visible');
                 	$('#infos').css('display', 'contents');
                 	if(data[0].test == 'erreur')
@@ -76,7 +76,7 @@ function getdata(identifiant)
 		select: function (event, ui) {
 			// Set selection
 			$( this ).val(ui.item.label); // display the selected text
-            //getleave();
+            getleave();
 			return false;
 		}
 	});

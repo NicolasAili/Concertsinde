@@ -42,7 +42,7 @@
 				<div id="ext"> Cochez la case suivante si le concert se passe en EXTERIEUR ou/et hors d'une salle de concert (festival, concert sauvage, concert en extérieur etc...):   <input type="checkbox" id="scales" name="scales" onclick="checkbox();">
 				<br>
 				<label for="salle">*Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave();" onkeyup="getdata(this.id);" id="salle" required>
+				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);" id="salle" required>
 				<br>
 				<div id="res"> </div>
 				<br>
@@ -51,19 +51,21 @@
 					<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
 					<br>
 					<label for="ville">*Ville : </label> 
-					<input type="text" name="ville" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
+					<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
+					<br>
+					<div id="resx"> </div>
 					<br>
 					<label for="cp">Code postal: </label> 
-					<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp">
+					<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>
 					<br>
 					<label for="departement">Departement: </label> 
-					<input type="text" name="departement" placeholder="Département où a lieu le concert" id="departement">
+					<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
 					<br>
 					<label for="region">Region: </label> 
-					<input type="text" name="region" placeholder="Région où a lieu le concert" id="region">
+					<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
 					<br>
 					<label for="pays">Pays: </label> 
-					<input type="text" name="pays" placeholder="Pays où a lieu le concert" id="pays">
+					<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
 					<br>
 					<br>
 				</div>

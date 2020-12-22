@@ -40,11 +40,38 @@
       }
       else if($test == 'ville')
       {
-        $str = "SELECT ville_nom FROM ville WHERE ville_nom LIKE '%{$name}%'";
+        $str = "SELECT nom_ville FROM ville WHERE nom_ville LIKE '%{$name}%'";
         $result = mysqli_query($con, $str);
         while($row = mysqli_fetch_array($result))
         {
-          $response[] = array("label"=>$row['ville_nom']);
+          $response[] = array("label"=>$row['nom_ville']);
+        }
+      }
+      else if($test == 'departement')
+      {
+        $str = "SELECT nom_departement FROM departement WHERE nom_departement LIKE '%{$name}%'";
+        $result = mysqli_query($con, $str);
+        while($row = mysqli_fetch_array($result))
+        {
+          $response[] = array("label"=>$row['nom_departement']);
+        }
+      }
+      else if($test == 'region')
+      {
+        $str = "SELECT nom_region FROM region WHERE nom_region LIKE '%{$name}%'";
+        $result = mysqli_query($con, $str);
+        while($row = mysqli_fetch_array($result))
+        {
+          $response[] = array("label"=>$row['nom_region']);
+        }
+      }
+      else if($test == 'pays')
+      {
+        $str = "SELECT nom_pays FROM pays WHERE nom_pays LIKE '%{$name}%'";
+        $result = mysqli_query($con, $str);
+        while($row = mysqli_fetch_array($result))
+        {
+          $response[] = array("label"=>$row['nom_pays']);
         }
       }
       else

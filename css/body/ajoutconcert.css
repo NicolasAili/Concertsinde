@@ -21,6 +21,17 @@ form
   color: white;
 }
 
+#extint
+{
+  display: flex;
+}
+
+#sallediv, #extdiv
+{
+  visibility: hidden;
+  display: none;
+}
+
 #infos
 {
   visibility: hidden;

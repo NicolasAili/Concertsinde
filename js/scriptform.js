@@ -21,89 +21,93 @@ function getleave(identifiant)
                 },
                  success: function ( data )
                 {
-                	$('#infos').css('visibility', 'visible');
-                	$('#infos').css('display', 'contents');
-                    switch (identifiant)
+                    if(data[0].test != 'nodata')
                     {
-                        case "salle":
-                            if(data[0].test == 'erreur')
-                            {
-                                $('#infos').children('input').attr("placeholder", "salle non connue");
-                                $("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP, sinon un gentil administrateur s'en chargera :D ");
-                            }
-                            else if(data[0].test == 'succes')
-                            {
-                                $('#infos').children('input').val('');
-                                $("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations si vous décelez une erreur, sinon ne rien modifier. ");
-                                $("#pays").attr("placeholder", data[0].pays);
-                                $("#region").attr("placeholder", data[0].region);
-                                $("#departement").attr("placeholder", data[0].departement);
-                                $("#ville").attr("placeholder", data[0].ville);
-                                $("#cp").attr("placeholder", data[0].cp);
-                                $("#adresse").attr("placeholder", data[0].adresse);
-                            }
-                            else
-                            {
-                                $("#res").html("erreur technique, merci de contacter l'administrateur du site");
-                            }
-                        break;
-                        case "ville":
-                            if(data[0].test == 'erreur')
-                            {
-                                $("#resx").html("Cette ville n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/region/departement/CP/Adresse, sinon un gentil administrateur s'en chargera :D ");
-                                $("#pays").prop( "disabled", false );
-                                $("#pays").attr("placeholder", "ville non connue");
-                                $("#region").prop( "disabled", false );
-                                $("#region").attr("placeholder", "ville non connue");
-                                $("#departement").prop( "disabled", false );
-                                $("#departement").attr("placeholder", "ville non connue");
-                                $("#cp").prop( "disabled", false );
-                                $("#cp").attr("placeholder", "ville non connue");
-                            }
-                            else if(data[0].test == 'succes')
-                            {
-                                $("#resx").html("Ville reconnue et informations récupérées");
-                                $("#pays").attr("placeholder", data[0].pays);
-                                $("#region").attr("placeholder", data[0].region);
-                                $("#departement").attr("placeholder", data[0].departement);
-                                $("#cp").attr("placeholder", data[0].cp);
-                            }
-                        break;
-                        case "departement":
-                            if(data[0].test == 'succes')
-                            {
-                                $("#region").prop( "disabled", true );
-                                $("#region").attr("placeholder", data[0].region);
-                                $("#pays").prop( "disabled", true );
-                                $("#pays").attr("placeholder", data[0].pays);
-                            }
-                            else if(data[0].test == 'erreur')
-                            {
-                                $("#region").prop( "disabled", false );
-                                $("#region").attr("placeholder", "departement inconnu");
-                                $("#pays").prop( "disabled", false );
-                                $("#pays").attr("placeholder", "departement inconnu");
-                            }
-                        break;
-                        case "region":
-                            if(data[0].test == 'succes')
-                            {
-                                $("#pays").prop( "disabled", true );
-                                $("#pays").attr("placeholder", data[0].pays);
-                            }
-                            else if(data[0].test == 'erreur')
-                            {
-                                $("#pays").prop( "disabled", false );
-                                $("#pays").attr("placeholder", "région inconnue");
-                            }
-                        break;
-                        case "pays":
-                            //ne rien faire ici
-                        break;
-                        default:
-                        alert("erreur");
-                    }
-                	
+                    	$('#infos').css('visibility', 'visible');
+                    	$('#infos').css('display', 'contents');
+                        switch (identifiant)
+                        {
+                            case "salle":
+                                if(data[0].test == 'erreur')
+                                {
+                                    $('#infos').children('input').attr("placeholder", "salle non connue");
+                                    $('#infos').children('input').val('');
+                                    $("#ville").prop( "required", true );
+                                    $("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP, sinon un gentil administrateur s'en chargera :D ");
+                                }
+                                else if(data[0].test == 'succes')
+                                {
+                                    $('#infos').children('input').val('');
+                                    $("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations si vous décelez une erreur, sinon ne rien modifier. ");
+                                    $("#pays").val(data[0].pays);
+                                    $("#region").val(data[0].region);
+                                    $("#departement").val(data[0].departement);
+                                    $("#ville").val(data[0].ville);
+                                    $("#cp").val(data[0].cp);
+                                    $("#adresse").val(data[0].adresse);
+                                }
+                                else
+                                {
+                                    $("#res").html("erreur technique, merci de contacter l'administrateur du site");
+                                }
+                            break;
+                            case "ville":
+                                if(data[0].test == 'erreur')
+                                {
+                                    $("#resx").html("Cette ville n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/region/departement/CP/Adresse, sinon un gentil administrateur s'en chargera :D ");
+                                    $("#pays").prop( "disabled", false );
+                                    $("#pays").attr("placeholder", "ville non connue");
+                                    $("#region").prop( "disabled", false );
+                                    $("#region").attr("placeholder", "ville non connue");
+                                    $("#departement").prop( "disabled", false );
+                                    $("#departement").attr("placeholder", "ville non connue");
+                                    $("#cp").prop( "disabled", false );
+                                    $("#cp").attr("placeholder", "ville non connue");
+                                }
+                                else if(data[0].test == 'succes')
+                                {
+                                    $("#resx").html("Ville reconnue et informations récupérées");
+                                    $("#pays").val(data[0].pays);
+                                    $("#region").val(data[0].region);
+                                    $("#departement").val(data[0].departement);
+                                    $("#cp").val(data[0].cp);
+                                }
+                            break;
+                            case "departement":
+                                if(data[0].test == 'succes')
+                                {
+                                    $("#region").prop( "disabled", true );
+                                    $("#region").val(data[0].region);
+                                    $("#pays").prop( "disabled", true );
+                                    $("#pays").val(data[0].pays);
+                                }
+                                else if(data[0].test == 'erreur')
+                                {
+                                    $("#region").prop( "disabled", false );
+                                    $("#region").attr("placeholder", "departement inconnu");
+                                    $("#pays").prop( "disabled", false );
+                                    $("#pays").attr("placeholder", "departement inconnu");
+                                }
+                            break;
+                            case "region":
+                                if(data[0].test == 'succes')
+                                {
+                                    $("#pays").prop( "disabled", true );
+                                    $("#pays").val(data[0].pays);
+                                }
+                                else if(data[0].test == 'erreur')
+                                {
+                                    $("#pays").prop( "disabled", false );
+                                    $("#pays").attr("placeholder", "région inconnue");
+                                }
+                            break;
+                            case "pays":
+                                //ne rien faire ici
+                            break;
+                            default:
+                            alert("erreur");
+                        }
+                    }               	
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                         alert(xhr.status);
@@ -148,14 +152,23 @@ function popup(){
         var strdate = $("#date").val();
         var strheure = $("#heure").val();
         var strsalle = $("#salle").val();
+        var strdenom = $("#denom").val();
         var strfb = $("#fb").val();
         var strbilletterie = $("#ticket").val();
-        var strpays = $("#pays").attr("placeholder");
-        var strregion = $("#region").attr("placeholder");
-        var strdepartement = $("#departement").attr("placeholder");
-        var stradresse = $("#adresse").attr("placeholder");
-        var strcp = $("#cp").attr("placeholder");
-        var strville = $("#ville").attr("placeholder");
+        var strpays = $("#pays").val();
+        var strregion = $("#region").val();
+        var strdepartement = $("#departement").val();
+        var stradresse = $("#adresse").val();
+        var strcp = $("#cp").val();
+        var strville = $("#ville").val();
+        if( !$('input[name=checkint]').is(':checked') )
+        {
+            if( !$('input[name=checkext]').is(':checked') )
+            {
+                alert("Erreur, veuillez cocher le lieu du concert");
+                close = 1;
+            }
+        }
         if(strartiste.length == 0)
         {
             alert("Erreur le nom de l'artiste n'a pas été saisi");
@@ -163,8 +176,11 @@ function popup(){
         }
         if(strsalle.length == 0)
         {
-            alert("Erreur le nom de la salle n'a pas été saisi");
-            close = 1;
+            if($('input[name=checkint]').is(':checked'))
+            {
+                alert("Erreur le nom de la salle n'a pas été saisi");
+                close = 1;
+            }
         }
         if(strdate.length  == 0)
         {
@@ -175,6 +191,14 @@ function popup(){
         {
             $("#divSchedule").dialog("open"); 
         }
+        if($('input[name=checkint]').is(':checked')) //on est sur un concert interieur
+        {
+            $("#psalle").html(strsalle);
+        }
+        else
+        {
+            $("#psalle").html(strdenom);
+        }
         $("#partiste").html(strartiste);
         $("#pdate").html(strdate);
         $("#pheure").html(strheure);
@@ -182,7 +206,6 @@ function popup(){
         $("#pregion").html(strregion);
         $("#pdepartement").html(strdepartement);
         $("#pville").html(strville);
-        $("#psalle").html(strsalle);
         $("#padresse").html(stradresse);
         $("#pcp").html(strcp);
         $("#pfb").html(strfb);
@@ -199,4 +222,47 @@ function submit()
 {
     $("#valider").attr("type", "submit");
     $("#valider").trigger('click');
+}
+
+function checkbox(identifiant)
+{
+    switch (identifiant)
+    {
+        case "int":
+            if( $('input[name=checkint]').is(':checked') )
+            {
+                $('#sallediv').css('visibility', 'visible');
+                $('#sallediv').css('display', 'contents');
+                $('#extdiv').css('visibility', 'hidden');
+                $('#extdiv').css('display', 'none');
+                $("#ext").prop("checked", false);
+                $("#denom").prop("checked", false);
+            }
+           else 
+            {
+                $('#sallediv').css('visibility', 'hidden');
+                $('#sallediv').css('display', 'none');
+            }
+            
+        break;
+        case "ext":
+            if( $('input[name=checkext]').is(':checked') )
+            {
+                $('#extdiv').css('visibility', 'visible');
+                $('#extdiv').css('display', 'contents');
+                $('#sallediv').css('visibility', 'hidden');
+                $('#sallediv').css('display', 'none');
+                $("#int").prop("checked", false);
+                $('#infos').css('visibility', 'visible');
+                $('#infos').css('display', 'contents');
+            }
+           else 
+            {
+                $('#extdiv').css('visibility', 'hidden');
+                $('#extdiv').css('display', 'none');
+                $('#infos').css('visibility', 'hidden');
+                $('#infos').css('display', 'none');
+            }
+        break;
+    }
 }

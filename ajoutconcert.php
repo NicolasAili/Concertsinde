@@ -39,13 +39,31 @@
 				<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure">
 				<br>
 				<br>
-				<div id="ext"> Cochez la case suivante si le concert se passe en EXTERIEUR ou/et hors d'une salle de concert (festival, concert sauvage, concert en extérieur etc...):   <input type="checkbox" id="scales" name="scales" onclick="checkbox();">
-				<br>
-				<label for="salle">*Salle : </label> 
-				<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);" id="salle" required>
-				<br>
-				<div id="res"> </div>
-				<br>
+				Lieu du concert  
+				<div id="extint"> 
+					<br>
+					<input type="checkbox" id="int" name="checkint" onclick="checkbox(this.id);"> 
+					en intérieur (salle)
+					<input type="checkbox" id="ext" name="checkext" onclick="checkbox(this.id);"> 
+					en extérieur (festival, concert sauvage, rue etc...)
+				</div>
+					<br>
+				<div id="sallediv">
+					<label for="salle">*Salle : </label> 
+					<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);" id="salle" required>
+					<br>
+					<div id="res"> </div>
+					<br>
+				</div>
+				<div id="extdiv">
+					Vous pouvez indiquer un nom pour ce concert ex: garorock 
+					<br>
+					<label for="salle">Denomination : </label> 
+					<input type="text" name="salle" placeholder="Donnez un nom à ce concert" id="denom">
+					<br>
+					<div id="res"> </div>
+					<br>
+				</div>
 				<div id="infos">
 					<label for="adresse">Adresse: </label> 
 					<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
@@ -90,7 +108,7 @@
 								<div id="pdepartement"> test </div> 
 								<div id="pville">  </div> 
 								<div id="pcp">  </div>
-							<div id="saad">Salle et adresse</div> 
+							<div id="saad">Lieu et adresse</div> 
 								<div id="psalle">  </div> 
 								<div id="padresse">  </div> 
 							<div id="saad">Liens relatifs a l'evenement</div>

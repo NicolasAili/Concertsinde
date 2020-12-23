@@ -40,7 +40,6 @@
 				$cp = $_POST['cp'];
 				$departement = $_POST['departement'];
 				$region = $_POST['region'];
-				echo($salle);
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée

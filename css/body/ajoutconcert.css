@@ -26,13 +26,7 @@ form
   display: flex;
 }
 
-#sallediv, #extdiv
-{
-  visibility: hidden;
-  display: none;
-}
-
-#infos
+#sallediv, #extdiv, #infos
 {
   visibility: hidden;
   display: none;

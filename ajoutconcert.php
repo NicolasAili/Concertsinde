@@ -50,7 +50,7 @@
 					<br>
 				<div id="sallediv">
 					<label for="salle">*Salle : </label> 
-					<input type="text" name="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);" id="salle" required>
+					<input type="text" name="salle" id="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);">
 					<br>
 					<div id="res"> </div>
 					<br>
@@ -58,10 +58,10 @@
 				<div id="extdiv">
 					Vous pouvez indiquer un nom pour ce concert ex: garorock 
 					<br>
-					<label for="salle">Denomination : </label> 
-					<input type="text" name="salle" placeholder="Donnez un nom à ce concert" id="denom">
+					<label for="denom">Denomination : </label> 
+					<input type="text" name="denom" placeholder="Donnez un nom à ce concert" id="denom">
 					<br>
-					<div id="res"> </div>
+					<div id="resx"> </div>
 					<br>
 				</div>
 				<div id="infos">
@@ -109,6 +109,12 @@
 								<div id="pville">  </div> 
 								<div id="pcp">  </div>
 							<div id="saad">Lieu et adresse</div> 
+								<input type="checkbox" id="pint" name="checkint" disabled> 
+								Interieur
+								<br>
+								<input type="checkbox" id="pext" name="checkint" disabled> 
+								Exterieur
+								<br>
 								<div id="psalle">  </div> 
 								<div id="padresse">  </div> 
 							<div id="saad">Liens relatifs a l'evenement</div>

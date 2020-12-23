@@ -193,10 +193,15 @@ function popup(){
         }
         if($('input[name=checkint]').is(':checked')) //on est sur un concert interieur
         {
+            $("#pint").prop("checked", true);
+            $("#pext").prop("checked", false);
+            $("#ext").prop("checked", false);
             $("#psalle").html(strsalle);
         }
         else
         {
+            $("#pext").prop("checked", true);
+            $("#pint").prop("checked", false);
             $("#psalle").html(strdenom);
         }
         $("#partiste").html(strartiste);
@@ -222,6 +227,7 @@ function submit()
 {
     $("#valider").attr("type", "submit");
     $("#valider").trigger('click');
+    $("#dialog").attr("type", "hidden");
 }
 
 function checkbox(identifiant)
@@ -235,13 +241,21 @@ function checkbox(identifiant)
                 $('#sallediv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'hidden');
                 $('#extdiv').css('display', 'none');
-                $("#ext").prop("checked", false);
-                $("#denom").prop("checked", false);
+                $('#infos').children('input').val('');
+                if( $('input[name=checkext]').is(':checked') )
+                {
+                    $('#salle').val('');
+                    $("#ext").prop("checked", false);
+                    $('#infos').css('visibility', 'hidden');
+                    $('#infos').css('display', 'none');
+                }
             }
            else 
             {
                 $('#sallediv').css('visibility', 'hidden');
                 $('#sallediv').css('display', 'none');
+                $('#infos').css('visibility', 'hidden');
+                $('#infos').css('display', 'none');
             }
             
         break;
@@ -252,7 +266,13 @@ function checkbox(identifiant)
                 $('#extdiv').css('display', 'contents');
                 $('#sallediv').css('visibility', 'hidden');
                 $('#sallediv').css('display', 'none');
-                $("#int").prop("checked", false);
+                $('#infos').children('input').val('');
+                $('#infos').children('input').attr("placeholder", "");
+                if( $('input[name=checkint]').is(':checked') )
+                { 
+                    $("#int").prop("checked", false);
+                }
+                
                 $('#infos').css('visibility', 'visible');
                 $('#infos').css('display', 'contents');
             }

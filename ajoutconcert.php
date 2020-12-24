@@ -56,7 +56,7 @@
 					<br>
 				</div>
 				<div id="extdiv">
-					Vous pouvez indiquer un nom pour ce concert ex: garorock 
+					Vous pouvez indiquer un nom pour cet événement exemple: garorock 
 					<br>
 					<label for="denom">Denomination : </label> 
 					<input type="text" name="denom" placeholder="Donnez un nom à ce concert" id="denom">

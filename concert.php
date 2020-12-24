@@ -40,6 +40,7 @@
 				$cp = $_POST['cp'];
 				$departement = $_POST['departement'];
 				$region = $_POST['region'];
+
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée
@@ -50,17 +51,18 @@
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
 
+				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+				$query = mysqli_query($con, $idville);
+				$row = mysqli_fetch_array($query);
+				$vle = $row['ville_id'];
+
 				if($salle) //si le concert est à l'intérieur
 				{
 					$results = mysqli_query($con,"SELECT nom_salle FROM salle WHERE nom_salle = '$salle'"); //on cherche si la salle saisie existe en BDD
 					$row_cnt = mysqli_num_rows($results);
 					if($row_cnt<1) //si pas de ligne trouvée (donc pas de salle)
 					{
-						$idville = "SELECT ville_id FROM ville WHERE ville_nom = '$ville'";
-						$query = mysqli_query($con, $idville);
-						$row = mysqli_fetch_array($query);
-						$vle = $row['ville_id'];
-						$insertsalle = "INSERT INTO salle (nom_salle, adresse, id_ville) VALUES ('$salle', '$adresse', '$vle')"; //salle ajoutee à la BDD
+						$insertsalle = "INSERT INTO salle (nom_salle, adresse, id_ville, intext) VALUES ('$salle', '$adresse', '$vle', '1')"; //salle ajoutee à la BDD
 						mysqli_query($con, $insertsalle);
 					}
 					else //ici on teste l'adresse et la ville
@@ -95,20 +97,16 @@
 				}
 				else
 				{
-					$idville = "SELECT ville_id FROM ville WHERE ville_nom = '$ville'"; //récupère l'ID de la ville du concert
-					$query = mysqli_query($con, $idville);
-					$row = mysqli_fetch_array($query);
-					$vle = $row['ville_id']; 
-					$insertext = "INSERT INTO exterieur (nom_ext, adresse, id_ville) VALUES ('$denom', '$adresse', '$vle')"; //ext ajouté à la BDD
+					$insertext = "INSERT INTO salle (nom_ext, adresse, id_ville, intext) VALUES ('$denom', '$adresse', '$vle', '2')"; //ext ajouté à la BDD
 					mysqli_query($con, $insertext);
-
-					$idext = "SELECT MAX(id_ext) AS id_max FROM exterieur"; //on recupere l'ID le plus haut (dernier concert extérieur ajouté)
+					$idext = "SELECT MAX(id_salle) AS id_max FROM salle"; //on recupere l'ID le plus haut (dernier concert extérieur ajouté)
 					$query = mysqli_query($con, $idext);
 					$row = mysqli_fetch_array($query);
 					$exte = $row['id_max'];
-					$sql = "INSERT INTO concert (datec, heure, nom_artiste, fkext, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
+					$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
 					mysqli_query($con, $sql);
 				}
+
 				?>
 				<div id="recap">
 					<div class="inwhile">
@@ -121,16 +119,12 @@
 						<?php
 						if($salle)
 						{
-							$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.nom_salle = '$salle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+							$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
 							$result = mysqli_query($con, $pvcpz);
 						}
 						else
 						{
-							$idext = "SELECT MAX(id_ext) AS id_max FROM exterieur"; //on recupere l'ID le plus haut (dernier concert extérieur ajouté)
-							$query = mysqli_query($con, $idext);
-							$row = mysqli_fetch_array($query);
-							$exte = $row['id_max'];
-							$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM exterieur, ville, departement, region, pays WHERE exterieur.id_ext = '$exte' AND exterieur.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+							$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
 							$result = mysqli_query($con, $pvcpz);
 						}
 						?> 

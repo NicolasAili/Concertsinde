@@ -71,7 +71,7 @@
 							<br>
 						<div class="salle"> <?php echo  $row['nom_salle'] ?> </div> 
 						<?php
-						}
+						} 
 						else
 						{
 						?>
@@ -97,6 +97,8 @@
 							<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $row['nom_departement'] . '"' ?> > 
 							<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
 							<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
+							<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
+							<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
 							<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
 							<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
 							<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 

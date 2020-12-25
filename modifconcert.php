@@ -59,6 +59,8 @@
 			$ville = $_POST['villepost'];
 			$cp = $_POST['cppost'];
 			$salle = $_POST['sallepost'];
+			$ext = $_POST['extpost'];
+			$intext = $_POST['intextpost'];
 			$adresse = $_POST['adressepost'];
 			$fb = $_POST['fbpost'];
 			$ticket = $_POST['ticketpost'];
@@ -82,11 +84,28 @@
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
 						<br>
 						<br>
-						<label for="salle">Salle : </label> 
-						<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
-						<div id="res"> </div>
-						<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
-						<br>
+						<?php
+						if($intext == 'int')
+						{
+						?>
+							<label for="salle">Salle : </label> 
+							<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
+							<div id="res"> </div>
+							<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
+							<br>
+						<?php
+						}
+						else
+						{
+						?>
+							<label for="ext">Lieu : </label> 
+							<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
+							<div id="res"> </div>
+							<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
+							<br>
+						<?php
+						}
+						?>
 						<label for="date">Date : </label> 
 						<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
 						<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> > 
@@ -97,25 +116,25 @@
 						<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> > 
 						<br>
 						<br>
-						<label for="pays">Pays: </label> 
-						<input type="text" name="pays" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
-						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> > 
-						<br>
-						<label for="region">Région: </label> 
-						<input type="text" name="region" <?php echo 'placeholder="' . $region . '"' ?> id="region">
-						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> > 
-						<br>
-						<label for="departement">Département: </label> 
-						<input type="text" name="departement" <?php echo 'placeholder="' . $departement . '"' ?> id="departement">
-						<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
-						<br>
 						<label for="ville">Ville : </label> 
-						<input type="text" name="ville" <?php echo 'placeholder="' . $ville . '"' ?> id="ville">
+						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $ville . '"' ?> id="ville">
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<br>
 						<label for="cp">Code postal: </label> 
 						<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp">
 						<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
+						<br>
+						<label for="departement">Département: </label> 
+						<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement">
+						<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
+						<br>
+						<label for="region">Région: </label> 
+						<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region">
+						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> > 
+						<br>	
+						<label for="pays">Pays: </label> 
+						<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
+						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> > 
 						<br>
 						<br>
 						<label for="adresse">Adresse: </label> 

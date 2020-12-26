@@ -125,16 +125,16 @@
 						<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
 						<br>
 						<label for="departement">Département: </label> 
-						<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement">
+						<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement" disabled>
 						<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
 						<br>
 						<label for="region">Région: </label> 
-						<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region">
+						<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region" disabled>
 						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> > 
 						<br>	
 						<label for="pays">Pays: </label> 
 						<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
-						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> > 
+						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> disabled> 
 						<br>
 						<br>
 						<label for="adresse">Adresse: </label> 

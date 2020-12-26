@@ -54,15 +54,19 @@ function getleave(identifiant)
                             case "ville":
                                 if(data[0].test == 'erreur')
                                 {
-                                    $("#resx").html("Cette ville n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/region/departement/CP/Adresse, sinon un gentil administrateur s'en chargera :D ");
+                                    $('#cp').val('');
+                                    $('#departement').val('');
+                                    $('#region').val('');
+                                    $('#pays').val('');
+                                    $("#resv").html("Cette ville n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/region/departement/CP, sinon un (gentil) administrateur s'en chargera :D ");
                                     $("#pays").prop( "disabled", false );
-                                    $("#pays").attr("placeholder", "ville non connue");
+                                    $("#pays").attr("placeholder", "ville non connue");<
                                     $("#region").prop( "disabled", false );
                                     $("#region").attr("placeholder", "ville non connue");
                                     $("#departement").prop( "disabled", false );
                                     $("#departement").attr("placeholder", "ville non connue");
                                     $("#cp").prop( "disabled", false );
-                                    $("#cp").attr("placeholder", "ville non connue");
+                                    $("#cp").attr("placeholder", "ville non connue"); n 
                                 }
                                 else if(data[0].test == 'succes')
                                 {

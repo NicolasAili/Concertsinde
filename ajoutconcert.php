@@ -71,7 +71,7 @@
 					<label for="ville">*Ville : </label> 
 					<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
 					<br>
-					<div id="resx"> </div>
+					<div id="resv"> </div>
 					<br>
 					<label for="cp">Code postal: </label> 
 					<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>

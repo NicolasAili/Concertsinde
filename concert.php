@@ -87,7 +87,14 @@
 							mysqli_query($con, $insertville);
 						}
 					}
-					mysqli_free_result($results);
+					/*mysqli_free_result($results);
+					$results = mysqli_query($con,"SELECT nom_ville FROM ville WHERE nom_ville = '$ville'");
+					$row_cnt = mysqli_num_rows($results);
+					if($row_cnt<1) //si pas de ligne trouvée (donc pas de salle)
+					{
+						$insertvle = "INSERT INTO ville SET id_ville = '$test_id' WHERE nom_salle = '$salle'";
+					}*/
+					
 					$idsalle = "SELECT id_salle FROM salle WHERE nom_salle = '$salle'";
 					$query = mysqli_query($con, $idsalle);
 					$row = mysqli_fetch_array($query);

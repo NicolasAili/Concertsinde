@@ -121,7 +121,7 @@
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<br>
 						<label for="cp">Code postal: </label> 
-						<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp">
+						<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp" disabled>
 						<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
 						<br>
 						<label for="departement">Département: </label> 
@@ -133,8 +133,8 @@
 						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> > 
 						<br>	
 						<label for="pays">Pays: </label> 
-						<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays">
-						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?> disabled> 
+						<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
+						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?>> 
 						<br>
 						<br>
 						<label for="adresse">Adresse: </label> 
@@ -162,8 +162,9 @@
 					}
 					else
 					{
-						$sql = "DELETE FROM Concert WHERE Nom_artiste = '$artiste' AND datec = '$date' AND Nom_salle = '$salle'"; 
+						$sql = "DELETE FROM Concert WHERE nom_artiste = '$artiste' AND datec = '$date' AND id_concert = '$idconcert'"; 
 						mysqli_query($con, $sql);
+						echo("concert supprimé");
 					}
 				}
 			}

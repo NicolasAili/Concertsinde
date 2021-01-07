@@ -86,12 +86,12 @@
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée
 				{
-					$insertsalle = "INSERT INTO salle (Nom_salle) VALUES ('$salle')";
+					$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
 					mysqli_query($con, $insertsalle);
 				}
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
-				$sqlsal = "UPDATE concert SET Nom_salle = '$salle' WHERE ID_concert = $idconcert";
+				$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = $idconcert";
     			mysqli_query($con, $sqlsal);
 			}
 
@@ -154,12 +154,12 @@
 				$testville = 1;
 				if($testsalle == 1)
 				{
-					$sqlville = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$salle'";
+					$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.nom_ville = '$ville'";
     				mysqli_query($con, $sqlville);
     			}
     			else if($testsalle == 0)
 				{
-					$sqlvilleex = "UPDATE salle SET Ville = '$ville' WHERE Nom_salle = '$sallepost'";
+					$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.nom_ville = '$ville'";
     				mysqli_query($con, $sqlvilleex);
     			}
 			}
@@ -224,28 +224,49 @@
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
 		<?php
-	$str = "SELECT * FROM `concert`, `artiste`, `salle` WHERE concert.Nom_artiste = artiste.Nom_artiste AND concert.Nom_salle = salle.Nom_salle AND concert.ID_concert = $idconcert";
+	$str = "SELECT id_concert, datec, heure, lien_fb, lien_ticket, concert.nom_artiste, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM concert, artiste, salle, ville, departement, region, pays WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert";
 			$result = mysqli_query($con, $str);
 			$row = mysqli_fetch_array($result)
 			?>
 			<div id="concertsall">
 				<div class="inwhile"> 
-					<div class="artiste"> <?php echo $row['Nom_artiste'] ?> </div> 
-						<div class="dahe">Date et heure</div>
-					<div class="date"> <?php echo  $row['datec'] ?> </div>  
-					<div class="heure"> <?php echo $row['heure'] ?> </div>  
-						<div class="pacp">Pays ville et CP</div>
-					<div class="pays"> <?php echo  $row['Pays'] ?> </div> 
-					<div class="region"> <?php echo  $row['Region'] ?> </div> 
-					<div class="departement"> <?php echo  $row['Departement'] ?> </div> 
-					<div class="ville"> <?php echo $row['Ville'] ?> </div> 
-					<div class="cp"> <?php echo  $row['CP'] ?> </div>
-						<div class="saad">Salle et adresse</div> 
-					<div class="salle"> <?php echo  $row['Nom_salle'] ?> </div> 
-					<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
-					<div class="saad">Liens relatifs a l'evenement</div>
-					<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
-					<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
+						<div class="artiste"> <?php echo $row['nom_artiste'] ?> </div> 
+							<div class="dahe">Date et heure</div>
+						<div class="date"> <?php echo  $row['datec'] ?> </div>  
+						<div class="heure"> <?php echo $row['heure'] ?> </div>  
+							<div class="pacp">Pays ville et CP</div>
+						<div class="pays"> <?php echo  $row['nom_pays'] ?> </div> 
+						<div class="region"> <?php echo  $row['nom_region'] ?> </div> 
+						<div class="departement"> <?php echo  $row['nom_departement'] ?> </div> 
+						<div class="ville"> <?php echo $row['nom_ville'] ?> </div> 
+						<div class="cp"> <?php echo  $row['ville_code_postal'] ?> </div>
+						<?php
+						if($row['intext'] == 'int')
+						{
+						?>
+							<div class="saad">Salle et adresse</div> 
+							<br>
+							Concert intérieur
+							<br>
+						<div class="salle"> <?php echo  $row['nom_salle'] ?> </div> 
+						<?php
+						} 
+						else
+						{
+						?>
+							<div class="saad">Lieu et adresse</div> 
+							<br>
+							Concert extérieur
+							<br>
+						<div class="salle"> <?php echo  $row['nom_ext'] ?> </div>
+						<?php	
+						}
+						?>
+						<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
+						<div class="saad">Liens relatifs a l'evenement</div>
+						<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
+						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
+
 				</div>			
 			</div>
 			<div class="champs">

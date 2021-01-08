@@ -12,6 +12,7 @@
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
+		<link rel="stylesheet" type="text/css" href="css/body/modifconcert.css" media="screen" />	
 		<script type="text/javascript" src="./js/scriptform.js"></script> 
 		<!-- Script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -84,28 +85,6 @@
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
 						<br>
 						<br>
-						<?php
-						if($intext == 'int')
-						{
-						?>
-							<label for="salle">Salle : </label> 
-							<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
-							<div id="res"> </div>
-							<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
-							<br>
-						<?php
-						}
-						else
-						{
-						?>
-							<label for="ext">Lieu : </label> 
-							<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
-							<div id="res"> </div>
-							<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
-							<br>
-						<?php
-						}
-						?>
 						<label for="date">Date : </label> 
 						<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
 						<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> > 
@@ -116,6 +95,62 @@
 						<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> > 
 						<br>
 						<br>
+						Lieu du concert  
+						<div id="extint"> 
+							<br>
+							<?php
+							if($intext == 'int')
+							{
+							?>
+								<input type="checkbox" id="int" name="checkint" onclick="checkboxmodif(this.id);" checked disabled>
+								en intérieur (salle)
+								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);"> 
+								en extérieur (festival, concert sauvage, rue etc...)
+							<?php
+							}
+							else
+							{
+							?>
+								<input type="checkbox" id="int" name="checkint" onclick="checkboxmodif(this.id);"> 
+								en intérieur (salle)
+								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);" checked disabled> 
+								en extérieur (festival, concert sauvage, rue etc...)
+							<?php
+							}
+							?>
+						</div>
+						<?php
+						if($intext == 'int')
+						{
+						?>
+							<script type="text/javascript">
+								int();
+							</script>
+						<?php
+						}
+						else
+						{
+						?>
+							<script type="text/javascript">
+								ext(); 
+							</script>
+						<?php
+						}
+						?>
+						<div id="intdiv">
+							<label for="salle">Salle : </label> 
+							<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
+							<div id="res"> </div>
+							<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
+							<br>
+						</div>
+						<div id="extdiv">
+							<label for="ext">Lieu : </label> 
+							<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
+							<div id="res"> </div>
+							<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
+							<br>
+						</div>
 						<label for="ville">Ville : </label> 
 						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $ville . '"' ?> id="ville">
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
@@ -170,7 +205,7 @@
 			}
 			?>
 	</body>
-	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
+	
 	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->
 </html>
 

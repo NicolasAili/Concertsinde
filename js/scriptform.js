@@ -290,3 +290,45 @@ function checkbox(identifiant)
         break;
     }
 }
+
+function checkboxmodif(identifiant)
+{
+    switch (identifiant)
+    {
+        case "int":
+                $("#ext").prop("checked", false);
+                $("#int").prop("disabled", true);
+                $("#ext").prop("disabled", false);
+                $('#extdiv').css('visibility', 'hidden');
+                $('#extdiv').css('display', 'none');
+                $('#intdiv').css('visibility', 'visible');
+                $('#intdiv').css('display', 'contents');
+                console.log("appel int butt ok");
+        break;
+        case "ext":
+                $("#int").prop("checked", false);
+                $("#ext").prop("disabled", true);
+                $("#int").prop("disabled", false);
+                $('#intdiv').css('visibility', 'hidden');
+                $('#intdiv').css('display', 'none');
+                $('#extdiv').css('visibility', 'visible');
+                $('#extdiv').css('display', 'contents');
+                console.log("appel ext butt ok");
+
+        break;
+    }
+}
+
+function int()
+{
+    $('#extdiv').css('visibility', 'hidden');
+    $('#extdiv').css('display', 'none');
+    console.log("appel int ok");
+}
+
+function ext()
+{
+    $('#intdiv').css('visibility', 'hidden');
+    $('#intdiv').css('display', 'none');
+    console.log("appel ext ok");
+}

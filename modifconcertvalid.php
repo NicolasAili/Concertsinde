@@ -55,6 +55,9 @@
 			$salle = $_POST['salle'];
 			$sallepost = $_POST['sallepost'];
 			$testsalle = 0;
+			$ext = $_POST['ext'];
+			$extpost = $_POST['extpost'];
+			$testext = 0;
 			$adresse = $_POST['adresse'];
 			$adressepost = $_POST['adressepost'];
 			$testadresse = 0;
@@ -78,23 +81,33 @@
 				echo "succes heure"
 			}*/
 			
-
-			if($salle != NULL)
+			if($sallepost)
 			{
-				$testsalle = 1;
-				$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'");
-				$row_cnt = mysqli_num_rows($result);
-				if($row_cnt<1) //si pas de ligne trouvée
+				if($salle != NULL)
 				{
-					$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
-					mysqli_query($con, $insertsalle);
+					$testsalle = 1;
+					$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'");
+					$row_cnt = mysqli_num_rows($result);
+					if($row_cnt<1) //si pas de ligne trouvée
+					{
+						$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
+						mysqli_query($con, $insertsalle);
+					}
+					/* Ferme le jeu de résultats */
+					mysqli_free_result($result);
+					$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = $idconcert";
+	    			mysqli_query($con, $sqlsal);
 				}
-				/* Ferme le jeu de résultats */
-				mysqli_free_result($result);
-				$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = $idconcert";
-    			mysqli_query($con, $sqlsal);
 			}
-
+			else
+			{
+				if($ext != NULL)
+				{
+					$testext = 1;
+					$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
+					mysqli_query($con, $sqlext);
+				}
+			}
 			if($date != $datepost)
 			{
 				$testdate = 1;
@@ -415,6 +428,17 @@
 					echo '<br>';
 					echo "nouvelle valeur : ";
 					echo $salle;
+					echo '<br>';
+				}
+				if($testext == 1)
+				{
+					echo "lieu modifié";
+					echo '<br>';
+					echo "ancienne valeur : ";
+					echo $extpost;
+					echo '<br>';
+					echo "nouvelle valeur : ";
+					echo $ext;
 					echo '<br>';
 				}
 				?>

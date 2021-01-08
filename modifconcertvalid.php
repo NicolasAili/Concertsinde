@@ -28,6 +28,7 @@
 			}
 
 			$idconcert = $_POST['idpost'];
+			$intext = $_POST['intextpost'];
 			$artiste = $_POST['artiste'];
 			$artistepost = $_POST['artistepost'];
 			$testartiste = 0;
@@ -80,11 +81,17 @@
 			{
 				echo "succes heure"
 			}*/
+			echo($intext);
+			if($intext == "int")
+			{
+				echo "ok";
+			}
 			
 			if($sallepost)
 			{
 				if($salle != NULL)
 				{
+
 					$testsalle = 1;
 					$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'");
 					$row_cnt = mysqli_num_rows($result);

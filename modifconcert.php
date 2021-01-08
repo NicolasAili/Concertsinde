@@ -106,50 +106,46 @@
 								en intérieur (salle)
 								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);"> 
 								en extérieur (festival, concert sauvage, rue etc...)
+								<div id="intdiv">
+									<label for="salle">Salle : </label> 
+									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
+									<div id="res"> </div>
+									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
+									<br>
+								</div>
+								<div id="exthiddiv">
+									<label for="ext">Lieu : </label> 
+									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
+									<div id="res"> </div>
+									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
+									<br>
+								</div>
 							<?php
 							}
 							else
 							{
-							?>
+							?>	
 								<input type="checkbox" id="int" name="checkint" onclick="checkboxmodif(this.id);"> 
 								en intérieur (salle)
 								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);" checked disabled> 
 								en extérieur (festival, concert sauvage, rue etc...)
+								<div id="extdiv">
+									<label for="ext">Lieu : </label> 
+									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
+									<div id="res"> </div>
+									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
+									<br>
+								</div>
+								<div id="inthiddiv">
+									<label for="salle">Salle : </label> 
+									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
+									<div id="res"> </div>
+									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
+									<br>
+								</div>
 							<?php
 							}
 							?>
-						</div>
-						<?php
-						if($intext == 'int')
-						{
-						?>
-							<script type="text/javascript">
-								int();
-							</script>
-						<?php
-						}
-						else
-						{
-						?>
-							<script type="text/javascript">
-								ext(); 
-							</script>
-						<?php
-						}
-						?>
-						<div id="intdiv">
-							<label for="salle">Salle : </label> 
-							<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
-							<div id="res"> </div>
-							<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
-							<br>
-						</div>
-						<div id="extdiv">
-							<label for="ext">Lieu : </label> 
-							<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
-							<div id="res"> </div>
-							<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
-							<br>
 						</div>
 						<label for="ville">Ville : </label> 
 						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $ville . '"' ?> id="ville">
@@ -185,6 +181,7 @@
 						<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $ticket . '"' ?> > 
 						<br>
 						<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
+						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input  type="submit" value="Enregister le concert" name="concert" href="">
 					</form>
 				<?php

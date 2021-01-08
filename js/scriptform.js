@@ -301,9 +301,12 @@ function checkboxmodif(identifiant)
                 $("#ext").prop("disabled", false);
                 $('#extdiv').css('visibility', 'hidden');
                 $('#extdiv').css('display', 'none');
-                $('#intdiv').css('visibility', 'visible');
+                $('#exthiddiv').css('visibility', 'hidden');
+                $('#exthiddiv').css('display', 'none');
+                $('#inthiddiv').css('visibility', 'visible');
+                $('#inthiddiv').css('display', 'contents');
+                 $('#intdiv').css('visibility', 'visible');
                 $('#intdiv').css('display', 'contents');
-                console.log("appel int butt ok");
         break;
         case "ext":
                 $("#int").prop("checked", false);
@@ -311,24 +314,12 @@ function checkboxmodif(identifiant)
                 $("#int").prop("disabled", false);
                 $('#intdiv').css('visibility', 'hidden');
                 $('#intdiv').css('display', 'none');
+                $('#inthiddiv').css('visibility', 'hidden');
+                $('#inthiddiv').css('display', 'none');
+                $('#exthiddiv').css('visibility', 'visible');
+                $('#exthiddiv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'visible');
                 $('#extdiv').css('display', 'contents');
-                console.log("appel ext butt ok");
-
         break;
     }
-}
-
-function int()
-{
-    $('#extdiv').css('visibility', 'hidden');
-    $('#extdiv').css('display', 'none');
-    console.log("appel int ok");
-}
-
-function ext()
-{
-    $('#intdiv').css('visibility', 'hidden');
-    $('#intdiv').css('display', 'none');
-    console.log("appel ext ok");
 }

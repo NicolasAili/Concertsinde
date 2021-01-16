@@ -106,19 +106,21 @@
 								en intérieur (salle)
 								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);"> 
 								en extérieur (festival, concert sauvage, rue etc...)
+								<br>
 								<div id="intdiv">
 									<label for="salle">Salle : </label> 
 									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
 									<div id="res"> </div>
-									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
+									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
+									<input type="hidden" id="intext" name="intext" value="int"> 
 									<br>
 								</div>
 								<div id="exthiddiv">
 									<label for="ext">Lieu : </label> 
-									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
+									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
-									<br>
+									<input type="hidden" id="intext" name="intext" value="ext"> 
 								</div>
 							<?php
 							}
@@ -129,19 +131,22 @@
 								en intérieur (salle)
 								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);" checked disabled> 
 								en extérieur (festival, concert sauvage, rue etc...)
+								<br>
 								<div id="extdiv">
 									<label for="ext">Lieu : </label> 
 									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
+									<input type="hidden" id="intext" name="intext" value="ext"> 
 									<br>
 								</div>
 								<div id="inthiddiv">
+									<br>
 									<label for="salle">Salle : </label> 
-									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
+									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
-									<br>
+									<input type="hidden" id="intext" name="intext" value="int"> 
 								</div>
 							<?php
 							}

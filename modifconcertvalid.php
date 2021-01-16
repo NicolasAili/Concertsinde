@@ -28,7 +28,8 @@
 			}
 
 			$idconcert = $_POST['idpost'];
-			$intext = $_POST['intextpost'];
+			$intext = $_POST['intext'];
+			$intextpost = $_POST['intextpost'];
 			$artiste = $_POST['artiste'];
 			$artistepost = $_POST['artistepost'];
 			$testartiste = 0;
@@ -69,51 +70,50 @@
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
 			
-			/*echo $date;
-			echo '<br>';
-			if($date != NULL)
+			if($intext)
 			{
-				echo "succes date"
-			}
-			echo $heure;
-			echo '<br>';
-			if($heure != NULL)
-			{
-				echo "succes heure"
-			}*/
-			echo($intext);
-			if($intext == "int")
-			{
-				echo "ok";
-			}
-			
-			if($sallepost)
-			{
-				if($salle != NULL)
+				if($intext !=  $intextpost)
 				{
-
-					$testsalle = 1;
-					$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE Nom_salle = '$salle'");
-					$row_cnt = mysqli_num_rows($result);
-					if($row_cnt<1) //si pas de ligne trouvée
+					if($intext == "ext")
 					{
-						$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
-						mysqli_query($con, $insertsalle);
+						if($ville)
+						{
+							$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+						}
+						else
+						{
+							$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$villepost'";
+						}
+						$result = mysqli_query($con, $vleid);
+						$row = mysqli_fetch_array($result);
+						$idvle = $row['ville_id'];
+						$sql = "INSERT INTO salle (id_ville, adresse, nom_ext, intext) VALUES ('$idvle', '$adresse', '$ext', 'ext')";
+						mysqli_query($con, $sql);
+						$sql = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_ext = '$ext' AND ID_concert = '$idconcert'";
+						mysqli_query($con, $sql);
 					}
-					/* Ferme le jeu de résultats */
-					mysqli_free_result($result);
-					$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = $idconcert";
-	    			mysqli_query($con, $sqlsal);
 				}
 			}
-			else
+			if($salle)
 			{
-				if($ext != NULL)
+				$testsalle = 1;
+				$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE nom_salle = '$salle'");
+				$row_cnt = mysqli_num_rows($result);
+				if($row_cnt<1) //si pas de ligne trouvée
 				{
+					$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
+					mysqli_query($con, $insertsalle);
+				}
+				/* Ferme le jeu de résultats */
+				mysqli_free_result($result);
+				$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = '$idconcert'";
+    			mysqli_query($con, $sqlsal);
+			}
+			else if($ext != NULL)
+			{
 					$testext = 1;
 					$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
 					mysqli_query($con, $sqlext);
-				}
 			}
 			if($date != $datepost)
 			{
@@ -246,7 +246,7 @@
 		<?php
 	$str = "SELECT id_concert, datec, heure, lien_fb, lien_ticket, concert.nom_artiste, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM concert, artiste, salle, ville, departement, region, pays WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert";
 			$result = mysqli_query($con, $str);
-			$row = mysqli_fetch_array($result)
+			$row = mysqli_fetch_array($result);
 			?>
 			<div id="concertsall">
 				<div class="inwhile"> 
@@ -447,6 +447,17 @@
 					echo "nouvelle valeur : ";
 					echo $ext;
 					echo '<br>';
+				}
+				if($intext)
+				{
+					if($intext == "int")
+					{
+						echo "passage du concert d'exterieur en interieur";
+					}
+					else
+					{
+						echo "passage du concert d'interieur en exterieur";
+					}
 				}
 				?>
 			</div>

@@ -305,8 +305,10 @@ function checkboxmodif(identifiant)
                 $('#exthiddiv').css('display', 'none');
                 $('#inthiddiv').css('visibility', 'visible');
                 $('#inthiddiv').css('display', 'contents');
-                 $('#intdiv').css('visibility', 'visible');
+                $('#intdiv').css('visibility', 'visible');
                 $('#intdiv').css('display', 'contents');
+                $('#intext').val("int");
+                $('#ext').val("");
         break;
         case "ext":
                 $("#int").prop("checked", false);
@@ -320,6 +322,8 @@ function checkboxmodif(identifiant)
                 $('#exthiddiv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'visible');
                 $('#extdiv').css('display', 'contents');
+                $('#intext').val("ext");
+                $('#salle').val("");
         break;
     }
 }

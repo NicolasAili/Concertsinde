@@ -51,6 +51,7 @@
 				echo "Erreur de connexion" .mysqli_connect_error();
 			}
 			$idconcert = $_POST['idpost'];
+			$idsalle = $_POST['idsallepost'];
 			$artiste = $_POST['artistepost'];
 			$date = $_POST['datepost'];
 			$heure = $_POST['heurepost'];
@@ -112,15 +113,13 @@
 									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
-									<input type="hidden" id="intext" name="intext" value="int"> 
 									<br>
 								</div>
 								<div id="exthiddiv">
 									<label for="ext">Lieu : </label> 
 									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?> >
 									<div id="res"> </div>
-									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
-									<input type="hidden" id="intext" name="intext" value="ext"> 
+									<input type="hidden" id="extpost" name="extpost" value=""> 
 								</div>
 							<?php
 							}
@@ -134,19 +133,17 @@
 								<br>
 								<div id="extdiv">
 									<label for="ext">Lieu : </label> 
-									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?>>
+									<input type="text" name="ext" id="ext" <?php echo 'value="' . $ext . '"' ?>>
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
-									<input type="hidden" id="intext" name="intext" value="ext"> 
 									<br>
 								</div>
 								<div id="inthiddiv">
 									<br>
 									<label for="salle">Salle : </label> 
-									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?> >
+									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
 									<div id="res"> </div>
-									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>> 
-									<input type="hidden" id="intext" name="intext" value="int"> 
+									<input type="hidden" id="sallepost" name="sallepost" value=""> 
 								</div>
 							<?php
 							}
@@ -187,6 +184,7 @@
 						<br>
 						<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
+						<input type="hidden" id="intext" name="intext" value=""> 
 						<input  type="submit" value="Enregister le concert" name="concert" href="">
 					</form>
 				<?php

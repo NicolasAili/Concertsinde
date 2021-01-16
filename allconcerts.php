@@ -39,7 +39,7 @@
 			}
 		?>
 		<?php
-			$str = "SELECT id_concert, datec, heure, lien_fb, lien_ticket, concert.nom_artiste, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM concert, artiste, salle, ville, departement, region, pays WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+			$str = "SELECT id_concert, datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM concert, artiste, salle, ville, departement, region, pays WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
 			$result = mysqli_query($con, $str);
 			$admin = 'administateur';
 			//echo $_SESSION['pseudo'];
@@ -89,6 +89,7 @@
 						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
 						<form method="post" action="modifconcert.php" class="modif">
 							<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $row['id_concert'] . '"' ?> > 
+							<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
 							<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
 							<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 							<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 

@@ -70,6 +70,12 @@
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
 			
+			echo($intext);
+			echo('<br>');
+			echo($salle);
+			echo('<br>');
+			echo($idconcert);
+
 			if($intext)
 			{
 				if($intext !=  $intextpost)
@@ -111,9 +117,9 @@
 			}
 			else if($ext != NULL)
 			{
-					$testext = 1;
-					$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
-					mysqli_query($con, $sqlext);
+				$testext = 1;
+				$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
+				mysqli_query($con, $sqlext);
 			}
 			if($date != $datepost)
 			{
@@ -172,15 +178,23 @@
 			if($ville != NULL)
 			{
 				$testville = 1;
-				if($testsalle == 1)
+				if(!$ext)
 				{
-					$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.nom_ville = '$ville'";
-    				mysqli_query($con, $sqlville);
+					if($testsalle == 1)
+					{
+						$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.nom_ville = '$ville'";
+	    				mysqli_query($con, $sqlville);
+	    			}
+	    			else if($testsalle == 0)
+					{
+						$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.nom_ville = '$ville'";
+	    				mysqli_query($con, $sqlvilleex);
+	    			}
     			}
-    			else if($testsalle == 0)
-				{
-					$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.nom_ville = '$ville'";
-    				mysqli_query($con, $sqlvilleex);
+    			else if($ext)
+    			{
+    				$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_ext = '$ext' AND ville.nom_ville = '$ville'";
+    				mysqli_query($con, $sqlville);
     			}
 			}
 			if($cp != NULL)

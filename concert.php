@@ -39,6 +39,7 @@
 				$adresse = $_POST['adresse'];
 				$cp = $_POST['cp'];
 				$departement = $_POST['departement'];
+				$numdepartement = $_POST['numdepartement'];
 				$region = $_POST['region'];
 
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
@@ -57,6 +58,47 @@
 				$vle = $row['ville_id'];
 				if(!$vle)
 				{
+					$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'";
+					$query = mysqli_query($con, $iddpt);
+					$row = mysqli_fetch_array($query);
+					$dpt = $row['numero'];
+					if(!$dpt) //le departement n'existe pas
+					{
+						if($numdepartement)
+						{
+							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$numdepartement')";
+							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$numdepartement')"
+							mysqli_query($con, $insertdpt);
+							mysqli_query($con, $insertvle);
+						}
+						else
+						{
+
+						}
+					}
+					else //le departement existe
+					{
+						$idrgn = "SELECT id FROM region WHERE nom_region = '$region'";
+						$query = mysqli_query($con, $idrgn);
+						$row = mysqli_fetch_array($query);
+						$rgn = $row['id'];
+						if(!$rgn)
+						{
+							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')";
+							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$dpt')"
+							mysqli_query($con, $insertvle);
+							mysqli_query($con, $insertdpt);
+						}
+						else
+						{
+							$insertvle = "INSERT INTO ville (nom_ville, id_departement) VALUES ('$ville', '$dpt')";
+							$sqliddpt = "SELECT id FROM region WHERE nom_region = '$region'"
+							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$iddpt')"
+							mysqli_query($con, $insertvle);
+							mysqli_query($con, $insertdpt);
+						}
+					}
+					numero dpt
 					insert into ville blabla
 					recap dpt non renseigné blabla
 					forcer saisie pays

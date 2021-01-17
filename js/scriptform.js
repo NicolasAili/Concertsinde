@@ -28,6 +28,8 @@ function getleave(identifiant)
                     switch (identifiant)
                     {
                         case "salle":
+                              $('#nomdpt').css('visibility', 'hidden');
+                              $('#nomdpt').css('display', 'none');
                             if(data[0].test == 'erreur')
                             {
                                 $('#infos').children('input').attr("placeholder", "salle non connue");
@@ -87,6 +89,10 @@ function getleave(identifiant)
                             }
                             else if(data[0].test == 'erreur')
                             {
+                                $('#nomdpt').css('visibility', 'visible');
+                                $('#nomdpt').css('display', 'contents');
+                                $("#numdepartement").prop( "disabled", false );
+                                $("#nomdpthtml").html("Departement non reconnu, vous pouvez renseigner le numero associe à ce département. S'il n'en possède pas ou si vous ne le connaissez pas, laisser vide");
                                 $("#region").prop( "disabled", false );
                                 $("#region").attr("placeholder", "departement inconnu");
                                 $("#pays").prop( "disabled", false );

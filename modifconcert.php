@@ -103,9 +103,9 @@
 							if($intext == 'int')
 							{
 							?>
-								<input type="checkbox" id="int" name="checkint" onclick="checkboxmodif(this.id);" checked disabled>
+								<input type="checkbox" id="int" name="int" onclick="checkboxmodif(this.id);" checked disabled>
 								en intérieur (salle)
-								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);"> 
+								<input type="checkbox" id="ext" name="ext" onclick="checkboxmodif(this.id);"> 
 								en extérieur (festival, concert sauvage, rue etc...)
 								<br>
 								<div id="intdiv">
@@ -126,9 +126,9 @@
 							else
 							{
 							?>	
-								<input type="checkbox" id="int" name="checkint" onclick="checkboxmodif(this.id);"> 
+								<input type="checkbox" id="int" name="int" onclick="checkboxmodif(this.id);"> 
 								en intérieur (salle)
-								<input type="checkbox" id="ext" name="checkext" onclick="checkboxmodif(this.id);" checked disabled> 
+								<input type="checkbox" id="ext" name="ext" onclick="checkboxmodif(this.id);" checked disabled> 
 								en extérieur (festival, concert sauvage, rue etc...)
 								<br>
 								<div id="extdiv">
@@ -150,7 +150,7 @@
 							?>
 						</div>
 						<label for="ville">Ville : </label> 
-						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $ville . '"' ?> id="ville">
+						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<br>
 						<label for="cp">Code postal: </label> 

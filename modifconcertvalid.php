@@ -54,10 +54,33 @@
 			$cp = $_POST['cp'];
 			$cppost = $_POST['cppost'];
 			$testcp = 0;
-			$salle = $_POST['salle'];
+
+			if($intext == "int")
+			{
+				$salle = $_POST['salle'];
+				$ext = NULL;
+			}
+			else if($intext == "ext")
+			{
+				$ext = $_POST['extval'];
+				$salle = NULL;
+			}
+			else
+			{
+				if($intextpost == "int")
+				{
+					$salle = $_POST['salle'];
+					$ext = NULL;
+				}
+				else if($intextpost == "ext")
+				{
+					$ext = $_POST['extval'];
+					$salle = NULL;
+				}
+			}
 			$sallepost = $_POST['sallepost'];
 			$testsalle = 0;
-			$ext = $_POST['extval'];
+
 			$extpost = $_POST['extpost'];
 			$testext = 0;
 			$adresse = $_POST['adresse'];
@@ -74,30 +97,28 @@
 			echo('<br>');
 			echo($salle);
 			echo('<br>');
-			echo($idconcert);
+			echo($ext);
 
-			if($intext)
+
+			if($intext !=  $intextpost)
 			{
-				if($intext !=  $intextpost)
+				if($intext == "ext")
 				{
-					if($intext == "ext")
+					if($ville)
 					{
-						if($ville)
-						{
-							$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
-						}
-						else
-						{
-							$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$villepost'";
-						}
-						$result = mysqli_query($con, $vleid);
-						$row = mysqli_fetch_array($result);
-						$idvle = $row['ville_id'];
-						$sql = "INSERT INTO salle (id_ville, adresse, nom_ext, intext) VALUES ('$idvle', '$adresse', '$ext', 'ext')";
-						mysqli_query($con, $sql);
-						$sql = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_ext = '$ext' AND ID_concert = '$idconcert'";
-						mysqli_query($con, $sql);
+						$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 					}
+					else
+					{
+						$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$villepost'";
+					}
+					$result = mysqli_query($con, $vleid);
+					$row = mysqli_fetch_array($result);
+					$idvle = $row['ville_id'];
+					$sql = "INSERT INTO salle (id_ville, adresse, nom_ext, intext) VALUES ('$idvle', '$adresse', '$ext', 'ext')";
+					mysqli_query($con, $sql);
+					$sql = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_ext = '$ext' AND ID_concert = '$idconcert'";
+					mysqli_query($con, $sql);
 				}
 			}
 			if($salle)
@@ -115,7 +136,7 @@
 				$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = '$idconcert'";
     			mysqli_query($con, $sqlsal);
 			}
-			else if($ext != NULL)
+			else if($ext)
 			{
 				$testext = 1;
 				$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
@@ -175,7 +196,7 @@
     				mysqli_query($con, $sqldpteex);
     			}
 			}
-			if($ville != NULL)
+			if($ville != $villepost)
 			{
 				$testville = 1;
 				if(!$ext)
@@ -428,7 +449,7 @@
 					echo '<br>';
 					echo '<br>';
 				}				
-				if($testartiste == 1)
+				if($artiste != $artistepost)
 				{
 					echo "artiste modifié";
 					echo '<br>';
@@ -451,7 +472,7 @@
 					echo $salle;
 					echo '<br>';
 				}
-				if($testext == 1)
+				if($ext != $extpost)
 				{
 					echo "lieu modifié";
 					echo '<br>';

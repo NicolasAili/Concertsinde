@@ -309,6 +309,8 @@ function checkboxmodif(identifiant)
                 $('#intdiv').css('display', 'contents');
                 $('#intext').val("int");
                 $('#ext').val("");
+                $('#ext').prop( "required", false );
+                $('#salle').prop( "required", true );
         break;
         case "ext":
                 $("#int").prop("checked", false);
@@ -324,6 +326,8 @@ function checkboxmodif(identifiant)
                 $('#extdiv').css('display', 'contents');
                 $('#intext').val("ext");
                 $('#salle').val("");
+                $('#extval').prop( "required", true );
+                $('#salle').prop( "required", false );
         break;
     }
 }

@@ -82,7 +82,7 @@
 					<h1> modifier un concert </h1>
 					<form method="post" class="connect" action="modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
-						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $artiste . '"' ?>  id="artiste">
+						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste">
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
 						<br>
 						<br>
@@ -110,14 +110,14 @@
 								<br>
 								<div id="intdiv">
 									<label for="salle">Salle : </label> 
-									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $salle . '"' ?>>
+									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> required>
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
 									<br>
 								</div>
 								<div id="exthiddiv">
 									<label for="ext">Lieu : </label> 
-									<input type="text" name="ext" id="ext" <?php echo 'placeholder="' . $ext . '"' ?> >
+									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" value=""> 
 								</div>
@@ -133,7 +133,7 @@
 								<br>
 								<div id="extdiv">
 									<label for="ext">Lieu : </label> 
-									<input type="text" name="ext" id="ext" <?php echo 'value="' . $ext . '"' ?>>
+									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> required>
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
 									<br>

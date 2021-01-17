@@ -57,7 +57,7 @@
 			$salle = $_POST['salle'];
 			$sallepost = $_POST['sallepost'];
 			$testsalle = 0;
-			$ext = $_POST['ext'];
+			$ext = $_POST['extval'];
 			$extpost = $_POST['extpost'];
 			$testext = 0;
 			$adresse = $_POST['adresse'];

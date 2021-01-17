@@ -55,6 +55,12 @@
 				$query = mysqli_query($con, $idville);
 				$row = mysqli_fetch_array($query);
 				$vle = $row['ville_id'];
+				if(!$vle)
+				{
+					insert into ville blabla
+					recap dpt non renseigné blabla
+					forcer saisie pays
+				}
 
 				if($salle) //si le concert est à l'intérieur
 				{

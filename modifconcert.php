@@ -171,11 +171,11 @@
 						<br>
 						<br>
 						<label for="adresse">Adresse: </label> 
-						<input type="text" name="adresse" <?php echo 'placeholder="' . $adresse . '"' ?>id="adresse">
+						<input type="text" name="adresse" <?php echo 'value="' . $adresse . '"' ?>id="adresse">
 						<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $adresse . '"' ?> > 
 						<br>
 						<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
-						<input type="text" name="fb" <?php echo 'placeholder="' . $fb . '"' ?> id="fb">
+						<input type="text" name="fb" <?php echo 'value="' . $fb . '"' ?> id="fb">
 						<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $fb . '"' ?> > 
 						<br>
 						<label for="ticket">Lien de la billetterie : </label> 

@@ -100,7 +100,9 @@
 					}
 					$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
 					mysqli_query($con, $insertvle);
+					
 					//recap dpt non renseigné blabla
+					//code postal
 				}
 
 

@@ -28,8 +28,8 @@ function getleave(identifiant)
                     switch (identifiant)
                     {
                         case "salle":
-                              $('#nomdpt').css('visibility', 'hidden');
-                              $('#nomdpt').css('display', 'none');
+                              //$('#nomdpt').css('visibility', 'hidden');
+                              //$('#nomdpt').css('display', 'none');
                             if(data[0].test == 'erreur')
                             {
                                 $('#infos').children('input').attr("placeholder", "salle non connue");
@@ -89,10 +89,10 @@ function getleave(identifiant)
                             }
                             else if(data[0].test == 'erreur')
                             {
-                                $('#nomdpt').css('visibility', 'visible');
-                                $('#nomdpt').css('display', 'contents');
-                                $("#numdepartement").prop( "disabled", false );
-                                $("#nomdpthtml").html("Departement non reconnu, vous pouvez renseigner le numero associe à ce département. S'il n'en possède pas ou si vous ne le connaissez pas, laisser vide");
+                                //$('#nomdpt').css('visibility', 'visible');
+                                //$('#nomdpt').css('display', 'contents');
+                                //$("#numdepartement").prop( "disabled", false );
+                                //$("#nomdpthtml").html("Departement non reconnu, vous pouvez renseigner le numero associe à ce département. S'il n'en possède pas ou si vous ne le connaissez pas, laisser vide");
                                 $("#region").prop( "disabled", false );
                                 $("#region").attr("placeholder", "departement inconnu");
                                 $("#pays").prop( "disabled", false );
@@ -221,9 +221,33 @@ function popup(){
         $("#partiste").html(strartiste);
         $("#pdate").html(strdate);
         $("#pheure").html(strheure);
-        $("#ppays").html(strpays);
-        $("#pregion").html(strregion);
-        $("#pdepartement").html(strdepartement);
+        if(!strpays)
+        {
+            $("#ppays").html("pays non saisi");
+        }
+        else
+        {
+            $("#ppays").html(strpays);
+        }
+       
+        if(!strregion)
+        {
+            $("#pregion").html("region non saisi");
+        }
+        else
+        {
+            $("#pregion").html(strregion);
+        }
+        
+        if(!strdepartement)
+        {
+            $("#pdepartement").html("departement non saisi");
+        }
+        else
+        {
+            $("#pdepartement").html(strdepartement);
+        }
+        
         $("#pville").html(strville);
         $("#padresse").html(stradresse);
         $("#pcp").html(strcp);

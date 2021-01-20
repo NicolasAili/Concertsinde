@@ -43,6 +43,7 @@
 				echo($departement);
 				echo($region);
 				echo($pays);
+				echo($ville);
 
 				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 				$query = mysqli_query($con, $idville);
@@ -50,7 +51,8 @@
 				$vle = $row['ville_id'];
 				if(!$vle)
 				{
-					
+					$testvle = 1;
+
 					$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
 					$query = mysqli_query($con, $iddpt);
 					$row = mysqli_fetch_array($query);
@@ -60,9 +62,6 @@
 					$query = mysqli_query($con, $idrgn);
 					$row = mysqli_fetch_array($query);
 					$rgn = $row['id'];
-					//ajout de la ville en BDD
-					
-					$testvle = 1;
 
 					if($departement)
 					{
@@ -83,8 +82,8 @@
 								$query = mysqli_query($con, $idrgn);
 								$row = mysqli_fetch_array($query);
 								$rgn = $row['id'];
-								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' " //lien du departement avec la région
-								$query = mysqli_query($con, $updatedpt);
+								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
+								mysqli_query($con, $updatedpt);
 							}
 							$query = mysqli_query($con, $iddpt);
 							$row = mysqli_fetch_array($query);
@@ -101,7 +100,6 @@
 					$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
 					mysqli_query($con, $insertvle);
 					
-					//recap dpt non renseigné blabla
 					//code postal
 				}
 

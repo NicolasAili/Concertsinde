@@ -36,7 +36,7 @@
                 $pvcpz = "SELECT nom_salle, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
                 $querypvcpz = mysqli_query($con, $pvcpz);
                 $row = mysqli_fetch_array($querypvcpz);
-                $response[] = array("test"=>'succes', "adresse"=>$adresse, "ville"=>$row['nom_ville'], "cp"=>$row['ville_code_postal'], "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
+                $response[] = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$row['ville_code_postal'], "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
              }
           }
           else //si cette salle n'existe pas dans notre BDD

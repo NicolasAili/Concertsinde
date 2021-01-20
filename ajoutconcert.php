@@ -79,13 +79,6 @@
 					<label for="departement">Departement: </label> 
 					<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
 					<br>
-					<div id="nomdpt">
-						<div id="nomdpthtml"> </div>
-						<br>
-						<label for="numdepartement">Numero Departement: </label> 
-						<input type="text" name="numdepartement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="numero du departement" id="numdepartement" disabled>
-					</div>
-					<br>
 					<label for="region">Region: </label> 
 					<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
 					<br>

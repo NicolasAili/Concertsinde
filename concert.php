@@ -68,7 +68,7 @@
 					{
 						if(!$dpt) //le departement n'existe pas
 						{
-							$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')" //ajout département en BDD
+							$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
 							mysqli_query($con, $insertdpt);
 							if($region) //la region est renseignée
 							{
@@ -129,7 +129,7 @@
 					}
 					if($testvle == 1)
 					{
-						$updatesalle = "UPDATE salle SET id_ville = '$vle' WHERE nom_salle = '$salle' " //lien de la salle avec la ville
+						$updatesalle = "UPDATE salle SET id_ville = '$vle' WHERE nom_salle = '$salle' "; //lien de la salle avec la ville
 						$query = mysqli_query($con, $updatesalle);
 					}
 					else //ici on teste l'adresse et la ville

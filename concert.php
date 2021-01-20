@@ -39,8 +39,118 @@
 				$adresse = $_POST['adresse'];
 				$cp = $_POST['cp'];
 				$departement = $_POST['departement'];
-				$numdepartement = $_POST['numdepartement'];
+				//$numdepartement = $_POST['numdepartement'];
 				$region = $_POST['region'];
+				$pays = $_POST['pays'];
+
+				echo($departement);
+				echo($region);
+				echo($pays);
+				if(!$vle)
+				{
+					//ajout de la ville en BDD 
+					$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
+					$query = mysqli_query($con, $iddpt);
+					$row = mysqli_fetch_array($query);
+					$dpt = $row['numero'];
+
+					$idrgn = "SELECT id FROM region WHERE nom_region = '$region'"; //Verifier si la region existe
+					$query = mysqli_query($con, $idrgn);
+					$row = mysqli_fetch_array($query);
+					$rgn = $row['id'];
+					
+					if($departement)
+					{
+						if(!$dpt) //le departement n'existe pas
+						{
+							//ajout département en BDD
+							if($region) //la region est renseignée
+							{
+								if(!$rgn)
+								{
+									//ajout de la région en BDD
+									//lien de la région avec le pays
+								}
+								//lien du departement avec la région
+							}
+						}
+						//lien de la ville avec le dpt
+					}
+
+
+					
+
+
+
+
+
+
+
+
+
+					if($pays && !$rgn)
+					{
+
+					}
+					else if(!$pays) //pays non renseigne ET region non renseignee
+					{
+							if(!$dpt) //le departement n'existe pas
+							{
+								//on ajoute le departement en BDD et on lie la ville avec le département
+							}
+					}
+					else
+					{
+						echo("erreur");
+					}
+					if($departement) //si le departement est renseigne
+					{
+						$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'";
+						$query = mysqli_query($con, $iddpt);
+						$row = mysqli_fetch_array($query);
+						$dpt = $row['numero'];
+						if(!$dpt) //le departement n'existe pas
+						{
+							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$numdepartement')";
+							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$numdepartement')"
+							mysqli_query($con, $insertdpt);
+							mysqli_query($con, $insertvle);
+
+							else
+							{
+
+							}
+						}
+						else if($dpt) //le departement existe
+						{
+
+							if(!$rgn)
+							{
+								$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')";
+								$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$dpt')"
+								mysqli_query($con, $insertvle);
+								mysqli_query($con, $insertdpt);
+							}
+							else
+							{
+								$insertvle = "INSERT INTO ville (nom_ville, id_departement) VALUES ('$ville', '$dpt')";
+								$sqliddpt = "SELECT id FROM region WHERE nom_region = '$region'"
+								$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$iddpt')"
+								mysqli_query($con, $insertvle);
+								mysqli_query($con, $insertdpt);
+							}
+						}
+					}
+					else //le departement n'est pas renseigne, on rajoute juste la ville
+					{
+						$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$numdepartement')";
+					}
+					numero dpt
+					insert into ville blabla
+					recap dpt non renseigné blabla
+					forcer saisie pays
+				}
+
 
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
 				$row_cnt = mysqli_num_rows($result);
@@ -56,53 +166,6 @@
 				$query = mysqli_query($con, $idville);
 				$row = mysqli_fetch_array($query);
 				$vle = $row['ville_id'];
-				if(!$vle)
-				{
-					$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'";
-					$query = mysqli_query($con, $iddpt);
-					$row = mysqli_fetch_array($query);
-					$dpt = $row['numero'];
-					if(!$dpt) //le departement n'existe pas
-					{
-						if($numdepartement)
-						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$numdepartement')";
-							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$numdepartement')"
-							mysqli_query($con, $insertdpt);
-							mysqli_query($con, $insertvle);
-						}
-						else
-						{
-
-						}
-					}
-					else //le departement existe
-					{
-						$idrgn = "SELECT id FROM region WHERE nom_region = '$region'";
-						$query = mysqli_query($con, $idrgn);
-						$row = mysqli_fetch_array($query);
-						$rgn = $row['id'];
-						if(!$rgn)
-						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')";
-							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$dpt')"
-							mysqli_query($con, $insertvle);
-							mysqli_query($con, $insertdpt);
-						}
-						else
-						{
-							$insertvle = "INSERT INTO ville (nom_ville, id_departement) VALUES ('$ville', '$dpt')";
-							$sqliddpt = "SELECT id FROM region WHERE nom_region = '$region'"
-							$insertdpt = "INSERT INTO departement (nom_departement, numero) VALUES ('$departement', '$iddpt')"
-							mysqli_query($con, $insertvle);
-							mysqli_query($con, $insertdpt);
-						}
-					}
-					numero dpt
-					insert into ville blabla
-					recap dpt non renseigné blabla
-					forcer saisie pays
-				}
 
 				if($salle) //si le concert est à l'intérieur
 				{

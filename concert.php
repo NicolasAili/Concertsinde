@@ -48,7 +48,7 @@
 				echo($pays);
 				if(!$vle)
 				{
-					//ajout de la ville en BDD 
+					
 					$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
 					$query = mysqli_query($con, $iddpt);
 					$row = mysqli_fetch_array($query);
@@ -74,37 +74,10 @@
 								//lien du departement avec la région
 							}
 						}
+						//ajout de la ville en BDD 
 						//lien de la ville avec le dpt
 					}
 
-
-					
-
-
-
-
-
-
-
-
-
-					if($pays && !$rgn)
-					{
-
-					}
-					else if(!$pays) //pays non renseigne ET region non renseignee
-					{
-							if(!$dpt) //le departement n'existe pas
-							{
-								//on ajoute le departement en BDD et on lie la ville avec le département
-							}
-					}
-					else
-					{
-						echo("erreur");
-					}
-					if($departement) //si le departement est renseigne
-					{
 						$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'";
 						$query = mysqli_query($con, $iddpt);
 						$row = mysqli_fetch_array($query);
@@ -145,10 +118,10 @@
 					{
 						$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$numdepartement')";
 					}
-					numero dpt
-					insert into ville blabla
+					autos incréments (passage en int)
 					recap dpt non renseigné blabla
 					forcer saisie pays
+
 				}
 
 

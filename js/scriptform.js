@@ -103,6 +103,7 @@ function getleave(identifiant)
                             if(data[0].test == 'succes')
                             {
                                 $("#pays").prop( "disabled", true );
+                                $('#pays').prop( "required", true );
                                 $("#pays").val(data[0].pays);
                             }
                             else if(data[0].test == 'erreur')
@@ -112,7 +113,10 @@ function getleave(identifiant)
                             }
                         break;
                         case "pays":
-                            //ne rien faire ici
+                            if(data[0].test == 'erreur')
+                            {
+                                alert("pays non valide, merci de saisir un pays existant")
+                            }
                         break;
                         default:
                         alert("erreur");
@@ -315,6 +319,7 @@ function checkboxmodif(identifiant)
                 $('#intext').val("int");
                 $('#ext').prop( "required", false );
                 $('#salle').prop( "required", true );
+                $('#pays').prop( "required", false );
         break;
         case "ext":
                 $("#int").prop("checked", false);
@@ -331,6 +336,7 @@ function checkboxmodif(identifiant)
                 $('#intext').val("ext");
                 $('#extval').prop( "required", true );
                 $('#salle').prop( "required", false );
+                $('#pays').prop( "required", false );
         break;
     }
 }

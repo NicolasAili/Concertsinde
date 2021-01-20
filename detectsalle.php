@@ -92,6 +92,17 @@
             $response[] = array("test"=>'erreur');
           }
         break;
+        case "pays":
+          $data = "SELECT nom_pays FROM pays WHERE nom_pays = '$name'";
+          $query = mysqli_query($con, $data);
+          if($row = mysqli_fetch_array($query)) //si pays trouve
+          {
+            $response[] = array("test"=>'succes', "pays"=>$row['nom_pays']);
+          }
+          else //ville non trouvee
+          {
+            $response[] = array("test"=>'erreur');
+          }
       }
     }
     else

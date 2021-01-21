@@ -1,0 +1,5 @@
+$test = 2;
+if($test == 2)
+{
+	echo"ok";
+}

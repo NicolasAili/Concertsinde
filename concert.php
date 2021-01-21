@@ -40,6 +40,8 @@
 				$departement = $_POST['departement'];
 				$region = $_POST['region'];
 				$pays = $_POST['pays'];
+				$testvle = 0;
+
 				echo($departement);
 				echo($region);
 				echo($pays);
@@ -180,6 +182,27 @@
 					$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
 					mysqli_query($con, $sql);
 				}
+				$test = "SELECT ville_departement FROM ville WHERE ville_id = $vle"
+				$query = mysqli_query($con, $test);
+				$row = mysqli_fetch_array($query);
+				if($row['ville_departement'])
+				{
+					$test = "SELECT id_region FROM departement, ville WHERE ville_id = $vle AND ville_departement = numero"
+					$query = mysqli_query($con, $test);
+					$row = mysqli_fetch_array($query);
+					if($row['id_region'])
+					{
+						$testpacp = 2;
+					}
+					else
+					{
+						$testpacp = 1;
+					}
+				}
+				else
+				{
+					$testpacp = 0;
+				}
 
 				?>
 				<div id="recap">
@@ -191,22 +214,76 @@
 						<div class="heure"> <?php echo $_POST['heure']; ?> </div>
 						<div class="pacp">Pays, ville, adresse et CP </div>
 						<?php
-						if($salle)
+						if($testpacp == 2)
 						{
-							$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
-							$result = mysqli_query($con, $pvcpz);
+								if($salle)
+								{
+									$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+									$result = mysqli_query($con, $pvcpz);
+								}
+								else if($denom)
+								{
+									$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+									$result = mysqli_query($con, $pvcpz);
+								}
+						else if($testpacp == 1) //seulement departement saisi
+						{
+							if($salle)
+							{
+								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement FROM salle, ville, departement WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
+								$result = mysqli_query($con, $pvcpz);
+							}
+							else if($denom)
+							{
+								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement FROM salle, ville, departement WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
+								$result = mysqli_query($con, $pvcpz);
+							}
 						}
-						else
+						else if($testpacp == 0)
 						{
-							$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
-							$result = mysqli_query($con, $pvcpz);
+							if($salle)
+							{
+								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal FROM salle, ville WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id ";
+								$result = mysqli_query($con, $pvcpz);
+							}
+							else if($denom)
+							{
+								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal FROM salle, ville WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id";
+								$result = mysqli_query($con, $pvcpz);
+							}
 						}
 						?> 
-						<?php $row = mysqli_fetch_array($result); ?>
-						<div class="pays"><?php	echo $row['nom_pays']; ?> </div>
-						<div class="region"><?php	echo $row['nom_region']; ?> </div>
-						<div class="departement"><?php	echo $row['nom_departement']; ?> </div>
+						<?php $row = mysqli_fetch_array($result); 
+						if($testpacp == 2)
+						{
+						?>
+							<div class="pays"><?php	echo $row['nom_pays']; ?> </div>
+							<div class="region"><?php	echo $row['nom_region']; ?> </div>
+						<?php
+						}
+						else if($testpacp != 2)
+						{
+						?>
+							<div class="pays"> pays inconnu pour cette ville </div>
+							<div class="region">région inconnue pour cette ville </div>
+						<?php
+						}
+						if($testpacp == 2 || $testpacp == 1)
+						{
+						?>
+							<div class="departement"><?php	echo $row['nom_departement']; ?> </div>
+						}
+						<?php
+						else if (!$departement) 
+						{
+						?>
+							<div class="departement">departement inconnu pour cette ville </div>
+						}
 						<div class="ville"> <?php echo $row['nom_ville']; ?></div>
+						<?php
+						if($ville_code_postal || $row_cnt == 1)
+						{
+						?>
 						<div class="cp"> <?php echo $row['ville_code_postal']; ?> </div>
 						<?php
 						if($salle)
@@ -244,7 +321,9 @@
 					<a href="allconcerts.php"> retour en arriere </a>
 				</div>
 				<?php
+
 			}
+
 		?>
 	</body>
 	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->

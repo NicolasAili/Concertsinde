@@ -201,6 +201,11 @@ function popup(){
             alert("Erreur la date n'a pas été saisie");
             close = 1;
         }
+        if(strville.length == 0)
+        {
+            alert("Erreur la ville n'a pas été saisie");
+            close = 1;
+        }
         if(close == 0)
         {
             $("#divSchedule").dialog("open"); 
@@ -232,7 +237,7 @@ function popup(){
        
         if(!strregion)
         {
-            $("#pregion").html("region non saisi");
+            $("#pregion").html("region non saisie");
         }
         else
         {

@@ -268,24 +268,31 @@
 							<div class="region">région inconnue pour cette ville </div>
 						<?php
 						}
-						if($testpacp == 2 || $testpacp == 1)
+						if($testpacp != 0)
 						{
 						?>
 							<div class="departement"><?php	echo $row['nom_departement']; ?> </div>
 						}
 						<?php
-						else if (!$departement) 
+						else if ($testpacp == 0) 
 						{
 						?>
 							<div class="departement">departement inconnu pour cette ville </div>
 						}
 						<div class="ville"> <?php echo $row['nom_ville']; ?></div>
 						<?php
-						if($ville_code_postal || $row_cnt == 1)
+						if($testcp == 1)
 						{
 						?>
-						<div class="cp"> <?php echo $row['ville_code_postal']; ?> </div>
+							<div class="cp"> <?php echo $row['ville_code_postal']; ?> </div>
 						<?php
+						}
+						else if ($testcp == 0) 
+						{
+						?>
+							<div class="cp"> code postal non renseigné </div>
+						<?php
+						}
 						if($salle)
 						{
 						?>

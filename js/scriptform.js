@@ -8,6 +8,10 @@ function getleave(identifiant)
         $('#infos').css('display', 'none');
         $("#res").html("");
     }
+    if(!$('#ville').val())
+    {
+        
+    }
     if(identifiant)
     {
         $.ajax(
@@ -116,6 +120,7 @@ function getleave(identifiant)
                             if(data[0].test == 'erreur')
                             {
                                 alert("pays non valide, merci de saisir un pays existant")
+                                $("#pays").val('');
                             }
                         break;
                         default:
@@ -156,7 +161,7 @@ function getdata(identifiant)
 			return false;
 		}
 	});
-}
+}     
 
 
 //verification non nul
@@ -175,6 +180,7 @@ function popup(){
         var stradresse = $("#adresse").val();
         var strcp = $("#cp").val();
         var strville = $("#ville").val();
+        
         if( !$('input[name=checkint]').is(':checked') )
         {
             if( !$('input[name=checkext]').is(':checked') )
@@ -204,6 +210,11 @@ function popup(){
         if(strville.length == 0)
         {
             alert("Erreur la ville n'a pas été saisie");
+            close = 1;
+        }
+        if(strdepartement && !strpays)
+        {
+            alert("Erreur, vous devez saisir le pays dont fait partie cette région");
             close = 1;
         }
         if(close == 0)

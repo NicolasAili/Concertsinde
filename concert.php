@@ -43,9 +43,13 @@
 				$testvle = 0;
 
 				echo($departement);
+				echo "<br>";
 				echo($region);
+				echo "<br>";
 				echo($pays);
+				echo "<br>";
 				echo($ville);
+				echo "<br>";
 
 				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 				$query = mysqli_query($con, $idville);
@@ -73,13 +77,16 @@
 							mysqli_query($con, $insertdpt);
 							if($region) //la region est renseignée
 							{
-								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_idp
 								$query = mysqli_query($con, $selectpays);
 								$row = mysqli_fetch_array($query);
 								$idpays = $row['id'];
 								if(!$rgn)
 								{
+									echo("succes rgn");
+									echo("$idpays");
 									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+									mysqli_query($con, $insertrgn);
 								}
 								$query = mysqli_query($con, $idrgn);
 								$row = mysqli_fetch_array($query);
@@ -90,17 +97,40 @@
 							$query = mysqli_query($con, $iddpt);
 							$row = mysqli_fetch_array($query);
 							$nodpt = $row['numero'];
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
+							if($cp)
+							{
+								$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+							}
+							else if(!$cp)
+							{
+								$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
+							}
 							mysqli_query($con, $insertvle);
 						}
 						else if($dpt)
 						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
-							mysqli_query($con, $insertvle);
+							if($cp)
+							{
+								$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+								mysqli_query($con, $insertvle);
+							}
+							else if(!$cp)
+							{
+								$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
+								mysqli_query($con, $insertvle);
+							}
 						}
 					}
-					$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
-					mysqli_query($con, $insertvle);
+					if($cp)
+					{
+						$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+						mysqli_query($con, $insertvle);
+					}
+					else if(!$cp)
+					{
+						$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
+						mysqli_query($con, $insertvle);
+					}
 					
 					//code postal
 				}
@@ -182,12 +212,12 @@
 					$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
 					mysqli_query($con, $sql);
 				}
-				$test = "SELECT ville_departement FROM ville WHERE ville_id = $vle"
+				$test = "SELECT ville_departement FROM ville WHERE ville_id = $vle";
 				$query = mysqli_query($con, $test);
 				$row = mysqli_fetch_array($query);
 				if($row['ville_departement'])
 				{
-					$test = "SELECT id_region FROM departement, ville WHERE ville_id = $vle AND ville_departement = numero"
+					$test = "SELECT id_region FROM departement, ville WHERE ville_id = $vle AND ville_departement = numero";
 					$query = mysqli_query($con, $test);
 					$row = mysqli_fetch_array($query);
 					if($row['id_region'])
@@ -202,6 +232,18 @@
 				else
 				{
 					$testpacp = 0;
+				}
+
+				$test = "SELECT ville_code_postal FROM ville WHERE ville_id = $vle";
+				$query = mysqli_query($con, $test);
+				$row = mysqli_fetch_array($query);
+				if($row['ville_code_postal'])
+				{
+					$testcp = 1;
+				}
+				else
+				{
+					$testcp = 0;
 				}
 
 				?>
@@ -226,6 +268,7 @@
 									$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
 									$result = mysqli_query($con, $pvcpz);
 								}
+						}
 						else if($testpacp == 1) //seulement departement saisi
 						{
 							if($salle)
@@ -272,13 +315,15 @@
 						{
 						?>
 							<div class="departement"><?php	echo $row['nom_departement']; ?> </div>
-						}
 						<?php
+						}
 						else if ($testpacp == 0) 
 						{
 						?>
 							<div class="departement">departement inconnu pour cette ville </div>
+						<?php
 						}
+						?>
 						<div class="ville"> <?php echo $row['nom_ville']; ?></div>
 						<?php
 						if($testcp == 1)
@@ -328,9 +373,7 @@
 					<a href="allconcerts.php"> retour en arriere </a>
 				</div>
 				<?php
-
 			}
-
 		?>
 	</body>
 	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->

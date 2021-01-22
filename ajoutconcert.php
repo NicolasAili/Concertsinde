@@ -83,7 +83,7 @@
 					<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
 					<br>
 					<label for="pays">Pays: </label> 
-					<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
+					<input type="text" name="pays" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
 					<br>
 					<br>
 				</div>

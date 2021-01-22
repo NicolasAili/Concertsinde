@@ -44,13 +44,43 @@ function getleave(identifiant)
                             else if(data[0].test == 'succes')
                             {
                                 $('#infos').children('input').val('');
-                                $("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations si vous décelez une erreur, sinon ne rien modifier. ");
-                                $("#pays").val(data[0].pays);
-                                $("#region").val(data[0].region);
-                                $("#departement").val(data[0].departement);
+                                $("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations ou les compléter, sinon ne rien modifier. ");
+                                
+                                if(data[0].departement != 'nodata')
+                                {
+                                    $("#departement").val(data[0].departement);
+                                    if(data[0].region != 'nodata')
+                                    {
+                                        $("#region").val(data[0].region);
+                                        $("#pays").val(data[0].pays);
+                                    }
+                                    else
+                                    {
+                                        $("#region").val("région non renseignée");
+                                        $("#pays").val("pays non renseigné");
+                                    }
+                                }
+                                else
+                                {
+                                    $("#region").val("departement non renseigné");
+                                }
                                 $("#ville").val(data[0].ville);
-                                $("#cp").val(data[0].cp);
-                                $("#adresse").val(data[0].adresse);
+                                if(data[0].cp != 'nodata')
+                                {
+                                    $("#cp").val(data[0].cp);
+                                }
+                                else
+                                {
+                                    $("#cp").val("code postal non renseigné");
+                                }
+                                if(data[0].adresse != 'nodata')
+                                {
+                                    $("#adresse").val(data[0].adresse);
+                                }
+                                else
+                                {
+                                    $("#adresse").val("adresse non renseignée");
+                                }
                             }
                             else
                             {
@@ -311,6 +341,10 @@ function checkbox(identifiant)
                 $('#infos').css('visibility', 'hidden');
                 $('#infos').css('display', 'none');
             }
+            $("#cp").prop( "disabled", true );
+            $("#pays").prop( "disabled", true );
+            $("#region").prop( "disabled", true );
+            $("#departement").prop( "disabled", true );
             
         break;
         case "ext":
@@ -336,6 +370,16 @@ function checkbox(identifiant)
                 $('#infos').css('visibility', 'hidden');
                 $('#infos').css('display', 'none');
             }
+            $("#cp").prop( "disabled", true );
+            $("#pays").prop( "disabled", true );
+            $("#region").prop( "disabled", true );
+            $("#departement").prop( "disabled", true );
+            $("#cp").attr("placeholder", "renseignez la ville");
+            $("#ville").attr("placeholder", "renseignez la ville");
+            $("#pays").attr("placeholder", "renseignez la ville");
+            $("#region").attr("placeholder", "renseignez la ville");
+            $("#departement").attr("placeholder", "renseignez la ville");
+
         break;
     }
 }

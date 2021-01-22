@@ -23,6 +23,8 @@
       switch($identifiant)
       {
         case "salle":
+
+        //select code postal
           $data = "SELECT Nom_salle FROM salle WHERE Nom_salle = '$name'"; //on regarde si la var passée en paramètre existe dans notre BDD
           $query = mysqli_query($con, $data);
           if(mysqli_fetch_array($query)) //si elle existe
@@ -33,10 +35,48 @@
              {
                 $adresse = $row['adresse']; //adresse de la salle
                 $ville_id = $row['id_ville']; //cle etrangere ville_id permettant de faire le lien avec la ville où se situe la salle
-                $pvcpz = "SELECT nom_salle, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
-                $querypvcpz = mysqli_query($con, $pvcpz);
-                $row = mysqli_fetch_array($querypvcpz);
-                $response[] = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$row['ville_code_postal'], "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
+
+                $detectcp = "SELECT ville_code_postal FROM ville WHERE ville_id = '$ville_id";
+                $query = mysqli_query($con, $detectcp);
+                $rowdetectcp = mysqli_fetch_array($query);
+                $ville_cp = $rowdetectcp['ville_code_postal'];
+                if(!$ville_cp)
+                {
+                  $ville_cp = 'nodata';
+                }
+
+                $detectdpt = "SELECT ville_departement FROM ville WHERE ville_id = '$ville_id";
+                $query = mysqli_query($con, $detectdpt);
+                $rowdetectdpt = mysqli_fetch_array($query);
+                $ville_departement = $rowdetectdpt['ville_departement'];
+                if($ville_departement) //departement ok
+                {
+                  $detectrgn = "SELECT id_region FROM departement WHERE numero = '$ville_departement";
+                  $query = mysqli_query($con, $detectrgn);
+                  $rowdetectrgn = mysqli_fetch_array($query);
+                  $id_region = $rowdetectrgn['id_region'];
+                  if($id_region) //departement + region + ville
+                  {
+                    $pvcpz = "SELECT nom_salle, nom_ville, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+                    $querypvcpz = mysqli_query($con, $pvcpz);
+                    $row = mysqli_fetch_array($querypvcpz);
+                    $response[] = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
+                  }
+                  else //seulement departement
+                  {
+                    $pvcpz = "SELECT nom_salle, nom_ville, nom_departement FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
+                    $querypvcpz = mysqli_query($con, $pvcpz);
+                    $row = mysqli_fetch_array($querypvcpz);
+                    $response[] = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
+                  }
+                }
+                else //seulement ville
+                {
+                  $pvcpz = "SELECT nom_ville FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id";
+                  $querypvcpz = mysqli_query($con, $pvcpz);
+                  $row = mysqli_fetch_array($querypvcpz);
+                  $response[] = array("test"=>'succes', "adresse"=>$adresse ,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
+                }
              }
           }
           else //si cette salle n'existe pas dans notre BDD

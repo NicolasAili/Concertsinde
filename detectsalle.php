@@ -20,10 +20,12 @@
     $response = array(); //var qui contiendra nos données JSON
     if($name)
     {
+        //echo($name);
+        //echo "<br>";
+        //echo ($identifiant);
       switch($identifiant)
       {
         case "salle":
-
         //select code postal
           $data = "SELECT Nom_salle FROM salle WHERE Nom_salle = '$name'"; //on regarde si la var passée en paramètre existe dans notre BDD
           $query = mysqli_query($con, $data);
@@ -35,8 +37,9 @@
              {
                 $adresse = $row['adresse']; //adresse de la salle
                 $ville_id = $row['id_ville']; //cle etrangere ville_id permettant de faire le lien avec la ville où se situe la salle
-
-                $detectcp = "SELECT ville_code_postal FROM ville WHERE ville_id = '$ville_id";
+                //echo "<br>";
+                //echo ($ville_id);
+                $detectcp = "SELECT ville_code_postal FROM ville WHERE ville_id = '$ville_id'";
                 $query = mysqli_query($con, $detectcp);
                 $rowdetectcp = mysqli_fetch_array($query);
                 $ville_cp = $rowdetectcp['ville_code_postal'];
@@ -45,13 +48,13 @@
                   $ville_cp = 'nodata';
                 }
 
-                $detectdpt = "SELECT ville_departement FROM ville WHERE ville_id = '$ville_id";
+                $detectdpt = "SELECT ville_departement FROM ville WHERE ville_id = '$ville_id'";
                 $query = mysqli_query($con, $detectdpt);
                 $rowdetectdpt = mysqli_fetch_array($query);
                 $ville_departement = $rowdetectdpt['ville_departement'];
                 if($ville_departement) //departement ok
                 {
-                  $detectrgn = "SELECT id_region FROM departement WHERE numero = '$ville_departement";
+                  $detectrgn = "SELECT id_region FROM departement WHERE numero = '$ville_departement'";
                   $query = mysqli_query($con, $detectrgn);
                   $rowdetectrgn = mysqli_fetch_array($query);
                   $id_region = $rowdetectrgn['id_region'];

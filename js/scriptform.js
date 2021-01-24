@@ -62,7 +62,9 @@ function getleave(identifiant)
                                 }
                                 else
                                 {
-                                    $("#region").val("departement non renseigné");
+                                    $("#departement").val("departement non renseigné");
+                                    $("#region").val("région non renseignée");
+                                    $("#pays").val("pays non renseigné");
                                 }
                                 $("#ville").val(data[0].ville);
                                 if(data[0].cp != 'nodata')
@@ -107,19 +109,56 @@ function getleave(identifiant)
                             else if(data[0].test == 'succes')
                             {
                                 $("#resx").html("Ville reconnue et informations récupérées");
-                                $("#pays").val(data[0].pays);
-                                $("#region").val(data[0].region);
-                                $("#departement").val(data[0].departement);
-                                $("#cp").val(data[0].cp);
+                                if(data[0].departement != 'nodata')
+                                {
+                                    $("#departement").val(data[0].departement);
+                                    if(data[0].region != 'nodata')
+                                    {
+                                        $("#region").val(data[0].region);
+                                        $("#pays").val(data[0].pays);
+                                    }
+                                    else
+                                    {
+                                        $("#region").val("région non renseignée");
+                                        $("#pays").val("pays non renseigné");
+                                    }
+                                }
+                                else
+                                {
+                                    $("#departement").prop( "disabled", false );
+                                    $("#departement").val("departement non renseigné pour cette ville");
+                                    $("#region").val("région non renseignée pour cette ville");
+                                    $("#pays").val("pays non renseigné pour cette ville");
+                                }
+                                if(data[0].cp != 'nodata')
+                                {
+                                    $("#cp").val(data[0].cp);
+                                }
+                                else
+                                {
+                                    $("#cp").val("code postal non renseigné");
+                                    $("#cp").prop( "disabled", false );
+                                }  
                             }
                         break;
                         case "departement":
                             if(data[0].test == 'succes')
                             {
-                                $("#region").prop( "disabled", true );
-                                $("#region").val(data[0].region);
-                                $("#pays").prop( "disabled", true );
-                                $("#pays").val(data[0].pays);
+                                if(data[0].region != 'nodata')
+                                {
+                                    $("#resw").html("Département reconnu et informations récupérées");
+                                    $("#region").val(data[0].region);
+                                    $("#pays").val(data[0].pays);
+                                }
+                                else
+                                {
+                                    $("#resw").html("Département reconnu mais aucune information récupérée");
+                                    $("#region").prop( "disabled", false );
+                                    $("#region").val("région non renseignée pour ce departement");
+                                    $("#pays").val("pays non renseigné pour ce departement");
+                                    //$("#region").prop( "disabled", true );
+                                    //$("#pays").prop( "disabled", true );
+                                }
                             }
                             else if(data[0].test == 'erreur')
                             {
@@ -129,7 +168,7 @@ function getleave(identifiant)
                                 //$("#nomdpthtml").html("Departement non reconnu, vous pouvez renseigner le numero associe à ce département. S'il n'en possède pas ou si vous ne le connaissez pas, laisser vide");
                                 $("#region").prop( "disabled", false );
                                 $("#region").attr("placeholder", "departement inconnu");
-                                $("#pays").prop( "disabled", false );
+                                //$("#pays").prop( "disabled", false );
                                 $("#pays").attr("placeholder", "departement inconnu");
                             }
                         break;

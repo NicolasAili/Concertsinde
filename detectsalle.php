@@ -20,9 +20,6 @@
     $response = array(); //var qui contiendra nos données JSON
     if($name)
     {
-        //echo($name);
-        //echo "<br>";
-        //echo ($identifiant);
       switch($identifiant)
       {
         case "salle":
@@ -88,15 +85,47 @@
           }
         break;
         case "ville":
-          $data = "SELECT nom_ville FROM ville WHERE nom_ville = '$name'";
+          $data = "SELECT nom_ville, ville_code_postal, ville_id FROM ville WHERE nom_ville = '$name'";
           $query = mysqli_query($con, $data);
           if($row = mysqli_fetch_array($query)) //si ville trouvee
           {
+            $ville_id = $row['ville_id'];
+            $ville_cp = $row['ville_code_postal'];
             $numdpt = $row['nom_ville'];
-            $ville = "SELECT ville_code_postal, nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
-            $query = mysqli_query($con, $ville);
-            $row = mysqli_fetch_array($query);
-            $response[] = array("test"=>'succes', "cp"=>$row['ville_code_postal'], "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
+            if(!$ville_cp)
+            {
+              $ville_cp = 'nodata';
+            }
+            $detectdpt = "SELECT ville_departement FROM ville WHERE ville_id = '$ville_id'";
+            $query = mysqli_query($con, $detectdpt);
+            $rowdetectdpt = mysqli_fetch_array($query);
+            $ville_departement = $rowdetectdpt['ville_departement'];
+            if($ville_departement) //departement ok
+            {
+              $detectrgn = "SELECT id_region FROM departement WHERE numero = '$ville_departement'";
+              $query = mysqli_query($con, $detectrgn);
+              $rowdetectrgn = mysqli_fetch_array($query);
+              $id_region = $rowdetectrgn['id_region'];
+              if($id_region) //departement + region(+pays) + ville
+              {
+                $ville = "SELECT nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+                $query = mysqli_query($con, $ville);
+                $row = mysqli_fetch_array($query);
+                $response[] = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
+              }
+              else
+              {
+                $ville = "SELECT nom_departement FROM ville, departement WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero";
+                $query = mysqli_query($con, $ville);
+                $row = mysqli_fetch_array($query);
+                $response[] = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata');
+              }
+            }
+            else //seulement ville
+            {
+              $response[] = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata');
+            }
+            
           }
           else //ville non trouvee
           {
@@ -106,13 +135,26 @@
         case "departement":
           $data = "SELECT nom_departement FROM departement WHERE nom_departement = '$name'";
           $query = mysqli_query($con, $data);
+
           if($row = mysqli_fetch_array($query)) //si departement trouve
           {
             $dpt = $row['nom_departement'];
-            $sqldpt = "SELECT nom_region, nom_pays FROM departement, region, pays WHERE departement.nom_departement = '$dpt' AND  departement.id_region = region.id AND region.id_pays = pays.id";
-            $query = mysqli_query($con, $sqldpt);
-            $row = mysqli_fetch_array($query);
-            $response[] = array("test"=>'succes', "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
+
+            $detectrgn = "SELECT id_region FROM departement WHERE nom_departement = '$name'";
+            $query = mysqli_query($con, $detectrgn);
+            $rowdetectrgn = mysqli_fetch_array($query);
+            $id_region = $rowdetectrgn['id_region'];
+            if($id_region) //departement + region(+pays) + ville
+            {
+              $sqldpt = "SELECT nom_region, nom_pays FROM departement, region, pays WHERE departement.nom_departement = '$dpt' AND  departement.id_region = region.id AND region.id_pays = pays.id";
+              $query = mysqli_query($con, $sqldpt);
+              $row = mysqli_fetch_array($query);
+              $response[] = array("test"=>'succes', "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
+            }
+            else
+            {
+              $response[] = array("test"=>'succes', "region"=>'nodata', "pays"=>'nodata');
+            }
           }
           else //ville non trouvee
           {
@@ -155,3 +197,4 @@
     echo json_encode($response); //on encode en JSON*/
   }
 ?>
+

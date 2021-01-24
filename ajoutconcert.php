@@ -78,6 +78,7 @@
 					<br>
 					<label for="departement">Departement: </label> 
 					<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
+					<div id="resw"> </div>
 					<br>
 					<label for="region">Region: </label> 
 					<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>

@@ -56,15 +56,23 @@ function getleave(identifiant)
                                     }
                                     else
                                     {
-                                        $("#region").val("région non renseignée");
-                                        $("#pays").val("pays non renseigné");
+                                        $('#region').val('');
+                                        $('#pays').val('');
+                                        $("#region").prop( "disabled", false );
+                                        $("#region").attr("placeholder", "région non renseignée");
+                                        $("#pays").attr("placeholder", "pays non renseigné");
                                     }
                                 }
                                 else
                                 {
-                                    $("#departement").val("departement non renseigné");
-                                    $("#region").val("région non renseignée");
-                                    $("#pays").val("pays non renseigné");
+                                    $('#region').val('');
+                                    $('#pays').val('');
+                                    $('#departement').val('');
+                                    $("#departement").prop( "disabled", false );
+                                    $("#region").prop( "disabled", true );
+                                    $("#departement").attr("placeholder", "departement non renseigné");
+                                    $("#region").attr("placeholder", "région non renseignée");
+                                    $("#pays").attr("placeholder", "pays non renseigné");
                                 }
                                 $("#ville").val(data[0].ville);
                                 if(data[0].cp != 'nodata')
@@ -73,7 +81,9 @@ function getleave(identifiant)
                                 }
                                 else
                                 {
-                                    $("#cp").val("code postal non renseigné");
+                                    $("#cp").prop( "disabled", false );
+                                    $('#cp').val('');
+                                    $("#cp").attr("placeholder", "code postal non renseigné");
                                 }
                                 if(data[0].adresse != 'nodata')
                                 {
@@ -81,7 +91,8 @@ function getleave(identifiant)
                                 }
                                 else
                                 {
-                                    $("#adresse").val("adresse non renseignée");
+                                    $('#cp').val('');
+                                    $("#adresse").attr("placeholder", "adresse non renseignée");
                                 }
                             }
                             else
@@ -114,29 +125,40 @@ function getleave(identifiant)
                                     $("#departement").val(data[0].departement);
                                     if(data[0].region != 'nodata')
                                     {
+                                        $("#region").prop( "disabled", true );
+                                        $("#departement").prop( "disabled", true );
                                         $("#region").val(data[0].region);
                                         $("#pays").val(data[0].pays);
                                     }
                                     else
                                     {
-                                        $("#region").val("région non renseignée");
-                                        $("#pays").val("pays non renseigné");
+                                        $('#region').val('');
+                                        $('#pays').val('');
+                                        $("#departement").prop( "disabled", true );
+                                        $("#region").prop( "disabled", false );
+                                        $("#region").attr("placeholder", "région non renseignée");
+                                        $("#pays").attr("placeholder", "pays non renseigné"); 
                                     }
                                 }
                                 else
                                 {
+                                    $('#departement').val('');
+                                    $('#region').val('');
+                                    $('#pays').val('');
                                     $("#departement").prop( "disabled", false );
-                                    $("#departement").val("departement non renseigné pour cette ville");
-                                    $("#region").val("région non renseignée pour cette ville");
-                                    $("#pays").val("pays non renseigné pour cette ville");
+                                    $("#departement").attr("placeholder", "departement non renseigné pour cette ville");
+                                    $("#region").attr("placeholder", "région non renseignée pour cette ville");
+                                    $("#pays").attr("placeholder", "pays non renseigné pour cette ville");  
                                 }
                                 if(data[0].cp != 'nodata')
                                 {
                                     $("#cp").val(data[0].cp);
+                                    $("#cp").prop( "disabled", true );
                                 }
                                 else
                                 {
-                                    $("#cp").val("code postal non renseigné");
+                                    $('#cp').val('');
+                                    $("#cp").attr("placeholder", "code postal non renseigné"); 
                                     $("#cp").prop( "disabled", false );
                                 }  
                             }
@@ -147,6 +169,7 @@ function getleave(identifiant)
                                 if(data[0].region != 'nodata')
                                 {
                                     $("#resw").html("Département reconnu et informations récupérées");
+                                    $("#region").prop( "disabled", true );
                                     $("#region").val(data[0].region);
                                     $("#pays").val(data[0].pays);
                                 }
@@ -154,8 +177,10 @@ function getleave(identifiant)
                                 {
                                     $("#resw").html("Département reconnu mais aucune information récupérée");
                                     $("#region").prop( "disabled", false );
-                                    $("#region").val("région non renseignée pour ce departement");
-                                    $("#pays").val("pays non renseigné pour ce departement");
+                                    $('#region').val('');
+                                    $('#pays').val('');
+                                    $("#region").attr("placeholder", "région non renseignée pour ce departement");
+                                    $("#pays").attr("placeholder", "pays non renseigné pour ce departement");  
                                     //$("#region").prop( "disabled", true );
                                     //$("#pays").prop( "disabled", true );
                                 }
@@ -181,6 +206,7 @@ function getleave(identifiant)
                             }
                             else if(data[0].test == 'erreur')
                             {
+                                $('#pays').val('');
                                 $("#pays").prop( "disabled", false );
                                 $("#pays").attr("placeholder", "région inconnue");
                             }
@@ -249,7 +275,7 @@ function popup(){
         var stradresse = $("#adresse").val();
         var strcp = $("#cp").val();
         var strville = $("#ville").val();
-        
+        console.log(strdate);
         if( !$('input[name=checkint]').is(':checked') )
         {
             if( !$('input[name=checkext]').is(':checked') )
@@ -276,13 +302,15 @@ function popup(){
             alert("Erreur la date n'a pas été saisie");
             close = 1;
         }
+        if(strdate )
         if(strville.length == 0)
         {
             alert("Erreur la ville n'a pas été saisie");
             close = 1;
         }
-        if(strdepartement && !strpays)
+        if(strregion.length > 0 && !strpays)
         {
+            console.log(strdepartement);
             alert("Erreur, vous devez saisir le pays dont fait partie cette région");
             close = 1;
         }

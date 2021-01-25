@@ -42,33 +42,29 @@
 				$pays = $_POST['pays'];
 				$testvle = 0;
 
-				echo($departement);
-				echo "<br>";
-				echo($region);
-				echo "<br>";
-				echo($pays);
-				echo "<br>";
-				echo($ville);
-				echo "<br>";
+				//echo($departement);
+				//echo "<br>";
+				//echo($ville);
+				//echo "<br>";
 
 				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 				$query = mysqli_query($con, $idville);
 				$row = mysqli_fetch_array($query);
 				$vle = $row['ville_id'];
+
+				$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
+				$query = mysqli_query($con, $iddpt);
+				$row = mysqli_fetch_array($query);
+				$dpt = $row['numero'];
+
+				$idrgn = "SELECT id FROM region WHERE nom_region = '$region'"; //Verifier si la region existe
+				$query = mysqli_query($con, $idrgn);
+				$row = mysqli_fetch_array($query);
+				$rgn = $row['id'];
+
 				if(!$vle)
 				{
 					$testvle = 1;
-
-					$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
-					$query = mysqli_query($con, $iddpt);
-					$row = mysqli_fetch_array($query);
-					$dpt = $row['numero'];
-
-					$idrgn = "SELECT id FROM region WHERE nom_region = '$region'"; //Verifier si la region existe
-					$query = mysqli_query($con, $idrgn);
-					$row = mysqli_fetch_array($query);
-					$rgn = $row['id'];
-
 					if($departement)
 					{
 						if(!$dpt) //le departement n'existe pas
@@ -77,14 +73,12 @@
 							mysqli_query($con, $insertdpt);
 							if($region) //la region est renseignée
 							{
-								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_idp
+								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
 								$query = mysqli_query($con, $selectpays);
 								$row = mysqli_fetch_array($query);
 								$idpays = $row['id'];
 								if(!$rgn)
 								{
-									echo("succes rgn");
-									echo("$idpays");
 									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
 									mysqli_query($con, $insertrgn);
 								}
@@ -94,6 +88,10 @@
 								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 								mysqli_query($con, $updatedpt);
 							}
+							/*else if(!$region)
+							{
+
+							}*/
 							$query = mysqli_query($con, $iddpt);
 							$row = mysqli_fetch_array($query);
 							$nodpt = $row['numero'];
@@ -103,12 +101,35 @@
 							}
 							else if(!$cp)
 							{
+
 								$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
 							}
 							mysqli_query($con, $insertvle);
 						}
 						else if($dpt)
 						{
+							if($region)
+							{
+								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+								$query = mysqli_query($con, $selectpays);
+								$row = mysqli_fetch_array($query);
+								$idpays = $row['id'];
+								if(!$rgn)
+								{
+									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+									mysqli_query($con, $insertrgn);
+								}
+								else if($rgn) 
+								{
+									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+									mysqli_query($con, $insertrgn);
+								}
+								$query = mysqli_query($con, $idrgn);
+								$row = mysqli_fetch_array($query);
+								$rgn = $row['id'];
+								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
+								mysqli_query($con, $updatedpt);
+							}
 							if($cp)
 							{
 								$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
@@ -121,19 +142,53 @@
 							}
 						}
 					}
-					if($cp)
+					else if(!$departement)
 					{
-						$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
-						mysqli_query($con, $insertvle);
+						if($cp)
+						{
+							$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+							mysqli_query($con, $insertvle);
+						}
+						else if(!$cp)
+						{
+							$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
+							mysqli_query($con, $insertvle);
+						}
 					}
-					else if(!$cp)
-					{
-						$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
-						mysqli_query($con, $insertvle);
-					}
-					
-					//code postal
 				}
+
+				/*else if($vle) //la ville existe
+				{
+
+					if($departement) //le departement est renseigne
+					{
+						if(!$dpt) //... et il n'existe pas en BDD
+						{
+							$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
+							mysqli_query($con, $insertdpt);
+
+							$query = mysqli_query($con, $iddpt);
+							$row = mysqli_fetch_array($query);
+							$nodpt = $row['numero'];
+
+							$updatedpt = "UPDATE ville SET ville_departement = '$nodpt' WHERE ville_id = '$vle' "; 
+							mysqli_query($con, $updatedpt);
+							if($region) //la région (et le pays) sont renseignés
+							{
+
+							}
+							else //seulement le departement est renseigné
+							{
+
+							}
+						}
+						else if($dpt) //le dpt existe en BDD
+						{
+							$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
+							mysqli_query($con, $updatedpt);
+						}
+					}
+				}*/
 
 
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");

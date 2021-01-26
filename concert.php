@@ -62,6 +62,13 @@
 				$row = mysqli_fetch_array($query);
 				$rgn = $row['id'];
 
+				echo($ville);
+				echo "<br>";
+				echo($departement);
+				echo "<br>";
+				echo($region);
+				echo "<br>";
+
 				if(!$vle)
 				{
 					$testvle = 1;
@@ -119,14 +126,6 @@
 									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
 									mysqli_query($con, $insertrgn);
 								}
-								else if($rgn) 
-								{
-									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
-									mysqli_query($con, $insertrgn);
-								}
-								$query = mysqli_query($con, $idrgn);
-								$row = mysqli_fetch_array($query);
-								$rgn = $row['id'];
 								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 								mysqli_query($con, $updatedpt);
 							}
@@ -157,9 +156,8 @@
 					}
 				}
 
-				/*else if($vle) //la ville existe
+				else if($vle) //la ville existe
 				{
-
 					if($departement) //le departement est renseigne
 					{
 						if(!$dpt) //... et il n'existe pas en BDD
@@ -167,7 +165,7 @@
 							$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
 							mysqli_query($con, $insertdpt);
 
-							$query = mysqli_query($con, $iddpt);
+							$query = mysqli_query($con, $iddpt); //SELECT numero FROM departement WHERE nom_departement = '$departement'
 							$row = mysqli_fetch_array($query);
 							$nodpt = $row['numero'];
 
@@ -175,21 +173,80 @@
 							mysqli_query($con, $updatedpt);
 							if($region) //la région (et le pays) sont renseignés
 							{
-
-							}
-							else //seulement le departement est renseigné
-							{
-
+								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+								$query = mysqli_query($con, $selectpays);
+								$row = mysqli_fetch_array($query);
+								$idpays = $row['id'];
+								if(!$rgn)
+								{
+									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+									mysqli_query($con, $insertrgn);
+								}
+								$query = mysqli_query($con, $idrgn);
+								$row = mysqli_fetch_array($query);
+								$rgn = $row['id'];
+								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
+								mysqli_query($con, $updatedpt);
 							}
 						}
 						else if($dpt) //le dpt existe en BDD
 						{
-							$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
+							if($region)
+							{
+								$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
+								mysqli_query($con, $updatedpt);
+
+								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+								$query = mysqli_query($con, $selectpays);
+								$row = mysqli_fetch_array($query);
+								$idpays = $row['id'];
+
+								if(!$rgn)
+								{
+									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+									mysqli_query($con, $insertrgn);
+								}
+
+								$query = mysqli_query($con, $idrgn);
+								$row = mysqli_fetch_array($query);
+								$rgn = $row['id'];
+								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
+								mysqli_query($con, $updatedpt);
+							}
+						}
+					else if(!$departement)
+					{
+						if($region)
+						{
+							$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+							$query = mysqli_query($con, $selectpays);
+							$row = mysqli_fetch_array($query);
+							$idpays = $row['id'];
+
+							if(!$rgn)
+							{
+								$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+								mysqli_query($con, $insertrgn);
+							}
+
+							$query = mysqli_query($con, $idrgn);
+							$row = mysqli_fetch_array($query);
+							$rgn = $row['id'];
+
+							$xxx = "SELECT ville_departement FROM ville WHERE nom_ville = '$ville'";
+							$query = mysqli_query($con, $xxx);
+							$row = mysqli_fetch_array($query);
+							$yyy = $row['ville_departement'];
+
+							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE numero = '$yyy' "; //lien du departement avec la région
 							mysqli_query($con, $updatedpt);
 						}
 					}
-				}*/
-
+					if($cp)
+					{
+						$updatevle = "UPDATE ville SET ville_code_postal = '$cp' WHERE ville_id = '$vle' ";
+					}
+				}
 
 				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
 				$row_cnt = mysqli_num_rows($result);

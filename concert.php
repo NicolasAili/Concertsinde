@@ -95,10 +95,6 @@
 								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 								mysqli_query($con, $updatedpt);
 							}
-							/*else if(!$region)
-							{
-
-							}*/
 							$query = mysqli_query($con, $iddpt);
 							$row = mysqli_fetch_array($query);
 							$nodpt = $row['numero'];
@@ -191,11 +187,10 @@
 						}
 						else if($dpt) //le dpt existe en BDD
 						{
+							$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
+							mysqli_query($con, $updatedpt);
 							if($region)
 							{
-								$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
-								mysqli_query($con, $updatedpt);
-
 								$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
 								$query = mysqli_query($con, $selectpays);
 								$row = mysqli_fetch_array($query);
@@ -213,7 +208,19 @@
 								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 								mysqli_query($con, $updatedpt);
 							}
+							/*else if(!$region)
+							{
+								$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
+								$query = mysqli_query($con, $xxx);
+								$row = mysqli_fetch_array($query);
+								$yyy = $row['id'];
+								if($yyy)
+								{
+
+								}
+							}*/
 						}
+					}
 					else if(!$departement)
 					{
 						if($region)
@@ -240,6 +247,17 @@
 
 							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE numero = '$yyy' "; //lien du departement avec la région
 							mysqli_query($con, $updatedpt);
+						}
+						else if(!$region)
+						{
+							$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
+							$query = mysqli_query($con, $xxx);
+							$row = mysqli_fetch_array($query);
+							$yyy = $row['id'];
+							if($yyy)
+							{
+
+							}
 						}
 					}
 					if($cp)
@@ -357,7 +375,9 @@
 				{
 					$testcp = 0;
 				}
-
+				echo "$testpacp";
+				echo "<br>";
+				echo "$exte";
 				?>
 				<div id="recap">
 					<div class="inwhile">

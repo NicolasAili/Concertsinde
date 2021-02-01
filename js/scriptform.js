@@ -1,17 +1,7 @@
 function getleave(identifiant)
 {
     var input = $('#'+identifiant+'').val();
-    //alert(identifiant);
-    if(!$('#salle').val())
-    {
-        $('#infos').css('visibility', 'hidden');
-        $('#infos').css('display', 'none');
-        $("#res").html("");
-    }
-    if(!$('#ville').val())
-    {
-        
-    }
+
     if(identifiant)
     {
         $.ajax(
@@ -25,6 +15,12 @@ function getleave(identifiant)
             },
              success: function ( data )
             {
+                if(data[0].test == 'nodata' && identifiant == 'salle')
+                {
+                    $('#infos').css('visibility', 'hidden');
+                    $('#infos').css('display', 'none');
+                    $("#res").html("");
+                }
                 if(data[0].test != 'nodata')
                 {
                 	$('#infos').css('visibility', 'visible');
@@ -59,6 +55,7 @@ function getleave(identifiant)
                                         $('#region').val('');
                                         $('#pays').val('');
                                         $("#region").prop( "disabled", false );
+                                        $("#pays").prop( "disabled", true );
                                         $("#region").attr("placeholder", "région non renseignée");
                                         $("#pays").attr("placeholder", "pays non renseigné");
                                     }
@@ -70,6 +67,7 @@ function getleave(identifiant)
                                     $('#departement').val('');
                                     $("#departement").prop( "disabled", false );
                                     $("#region").prop( "disabled", true );
+                                    $("#pays").prop( "disabled", true );
                                     $("#departement").attr("placeholder", "departement non renseigné");
                                     $("#region").attr("placeholder", "région non renseignée");
                                     $("#pays").attr("placeholder", "pays non renseigné");
@@ -191,9 +189,11 @@ function getleave(identifiant)
                                 //$('#nomdpt').css('display', 'contents');
                                 //$("#numdepartement").prop( "disabled", false );
                                 //$("#nomdpthtml").html("Departement non reconnu, vous pouvez renseigner le numero associe à ce département. S'il n'en possède pas ou si vous ne le connaissez pas, laisser vide");
+                                $("#resw").html("Département non reconnu");
                                 $("#region").prop( "disabled", false );
                                 $("#region").attr("placeholder", "departement inconnu");
-                                //$("#pays").prop( "disabled", false );
+                                $('#region').val('');
+                                $('#pays').val('');
                                 $("#pays").attr("placeholder", "departement inconnu");
                             }
                         break;
@@ -275,10 +275,22 @@ function popup(){
         var stradresse = $("#adresse").val();
         var strcp = $("#cp").val();
         var strville = $("#ville").val();
-        console.log(strdate);
-        if( !$('input[name=checkint]').is(':checked') )
+        //strdate = strdate+1;
+        //console.log(strdate);
+        /*tt = 0;
+        if($('input[name=checkint]').prop('checked')) //on est sur un concert interieur
         {
-            if( !$('input[name=checkext]').is(':checked') )
+            tt=1;
+        }
+        else if($('input[name=checkext]').prop('checked'))
+        {
+            tt=2;
+        }
+        console.log("tttest4");
+        console.log(tt);*/
+        if(!$('input[name=checkint]').prop('checked'))
+        {
+            if(!$('input[name=checkext]').prop('checked'))
             {
                 alert("Erreur, veuillez cocher le lieu du concert");
                 close = 1;
@@ -289,11 +301,19 @@ function popup(){
             alert("Erreur le nom de l'artiste n'a pas été saisi");
             close = 1;
         }
-        if(strsalle.length == 0)
+        if(!strsalle)
         {
-            if($('input[name=checkint]').is(':checked'))
+            if($('input[name=checkint]').prop('checked'))
             {
                 alert("Erreur le nom de la salle n'a pas été saisi");
+                close = 1;
+            }
+        }
+        if(!strdenom)
+        {
+            if($('input[name=checkext]').is(':checked'))
+            {
+                alert("Erreur le nom du concert exterieur n'a pas été saisi");
                 close = 1;
             }
         }
@@ -302,76 +322,88 @@ function popup(){
             alert("Erreur la date n'a pas été saisie");
             close = 1;
         }
-        if(strdate )
+        if(strdate)
+        {
+            //
+        }
         if(strville.length == 0)
         {
-            alert("Erreur la ville n'a pas été saisie");
-            close = 1;
+            if($('input[name=checkext]').prop('checked') || $('input[name=checkint]').prop('checked'))
+            {
+                alert("Erreur la ville n'a pas été saisie");
+                close = 1;
+            }
         }
         if(strregion.length > 0 && !strpays)
         {
-            console.log(strdepartement);
             alert("Erreur, vous devez saisir le pays dont fait partie cette région");
             close = 1;
+        }
+        if(close == 1)
+        {
+            //
         }
         if(close == 0)
         {
             $("#divSchedule").dialog("open"); 
-        }
-        if($('input[name=checkint]').is(':checked')) //on est sur un concert interieur
-        {
-            $("#pint").prop("checked", true);
-            $("#pext").prop("checked", false);
-            $("#ext").prop("checked", false);
-            $("#psalle").html(strsalle);
-        }
-        else
-        {
-            $("#pext").prop("checked", true);
-            $("#pint").prop("checked", false);
-            $("#psalle").html(strdenom);
-        }
-        $("#partiste").html(strartiste);
-        $("#pdate").html(strdate);
-        $("#pheure").html(strheure);
-        if(!strpays)
-        {
-            $("#ppays").html("pays non saisi");
-        }
-        else
-        {
-            $("#ppays").html(strpays);
-        }
-       
-        if(!strregion)
-        {
-            $("#pregion").html("region non saisie");
-        }
-        else
-        {
-            $("#pregion").html(strregion);
-        }
-        
-        if(!strdepartement)
-        {
-            $("#pdepartement").html("departement non saisi");
-        }
-        else
-        {
-            $("#pdepartement").html(strdepartement);
-        }
-        
-        $("#pville").html(strville);
-        $("#padresse").html(stradresse);
-        $("#pcp").html(strcp);
-        $("#pfb").html(strfb);
-        $("#pticket").html(strbilletterie);
+            if($('input[name=checkint]').prop('checked')) //on est sur un concert interieur
+            {
+                $('#denom').val('');
+                $("#pint").prop("checked", true);
+                $("#pext").prop("checked", false);
+                $("#psalle").html(strsalle);
+            }
+            else
+            {
+                $('#salle').val('');
+                $("#pint").prop("checked", false);
+                $("#pext").prop("checked", true);
+                $("#pint").prop("checked", false);
+                $("#psalle").html(strdenom);
+            }
+
+            $("#partiste").html(strartiste);
+            $("#pdate").html(strdate);
+            $("#pheure").html(strheure);
+            if(!strpays)
+            {
+                $("#ppays").html("pays non saisi");
+            }
+            else
+            {
+                $("#ppays").html(strpays);
+            }
+           
+            if(!strregion)
+            {
+                $("#pregion").html("region non saisie");
+            }
+            else
+            {
+                $("#pregion").html(strregion);
+            }
+            
+            if(!strdepartement)
+            {
+                $("#pdepartement").html("departement non saisi");
+            }
+            else
+            {
+                $("#pdepartement").html(strdepartement);
+            }
+            
+            $("#pville").html(strville);
+            $("#padresse").html(stradresse);
+            $("#pcp").html(strcp);
+            $("#pfb").html(strfb);
+            $("#pticket").html(strbilletterie);
+        }  
         return false;
     }
 
 function retour()
-{
-    $("#nonsaisie").closest('.ui-dialog-content').dialog('close'); 
+{    
+    $("#nonsaisie").closest('.ui-dialog-content').dialog('close');
 }
 
 function submit()
@@ -393,6 +425,7 @@ function checkbox(identifiant)
                 $('#extdiv').css('visibility', 'hidden');
                 $('#extdiv').css('display', 'none');
                 $('#infos').children('input').val('');
+                $('#denom').val('');
                 if( $('input[name=checkext]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) et que le bouton ext est coché
                 {
                     $('#salle').val('');
@@ -401,8 +434,10 @@ function checkbox(identifiant)
                     $('#infos').css('display', 'none');
                 }
             }
-           else  //si le bouton interieur était déjà coché avant (si on vient de le décocher)
+           else if(!$('input[name=checkint]').prop('checked')) //si le bouton interieur était déjà coché avant (si on vient de le décocher)
             {
+                $('#salle').val('');
+                $("#res").html("");
                 $('#sallediv').css('visibility', 'hidden');
                 $('#sallediv').css('display', 'none');
                 $('#infos').css('visibility', 'hidden');

@@ -288,6 +288,25 @@ function popup(){
         }
         console.log("tttest4");
         console.log(tt);*/
+        var datesaisie = new Date(strdate).getTime()
+
+        var now = new Date();
+        var heure   = now.getHours();
+        heureinf = (heure+1)*3600000; //heure courante multipliée par le nb de ms en 1 heure
+        heuresup = 63072000000; //2 ans en milliseconde
+        
+
+        var dateinf = datesaisie + heureinf;
+        var datesup = Date.now() + heuresup;
+
+        if( (dateinf < Date.now()))
+        {
+            alert("Erreur, date saisie inférieure à la date actuelle");
+        }
+        if(datesaisie > datesup)
+        {
+            alert("Erreur, impossible de saisir des concerts plus de deux ans en avance");
+        }
         if(!$('input[name=checkint]').prop('checked'))
         {
             if(!$('input[name=checkext]').prop('checked'))

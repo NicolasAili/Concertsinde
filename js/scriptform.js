@@ -302,10 +302,12 @@ function popup(){
         if( (dateinf < Date.now()))
         {
             alert("Erreur, date saisie inférieure à la date actuelle");
+            close = 1;
         }
         if(datesaisie > datesup)
         {
             alert("Erreur, impossible de saisir des concerts plus de deux ans en avance");
+            close = 1;
         }
         if(!$('input[name=checkint]').prop('checked'))
         {

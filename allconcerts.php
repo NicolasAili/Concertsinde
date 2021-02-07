@@ -57,7 +57,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 					$row = mysqli_fetch_array($resultx);
 					if($row[ville_departement])
 					{
-						$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE oncert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
+						$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
 						$resultdpt = mysqli_query($con, $str);
 						$rowdpt = mysqli_fetch_array($resultdpt);
 						if($rowdpt[id_region])
@@ -93,7 +93,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						if($row[ville_departement])
 						{
 							?>
-							<div class="departement"> <?php echo  $row['nom_departement'] ?> </div> 
+							<div class="departement"> <?php echo  $rowdpt['nom_departement'] ?> </div> 
 							<?php
 						}
 						else

@@ -57,6 +57,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 					$row = mysqli_fetch_array($resultx);
 					if($row[ville_departement])
 					{
+						$filter = 1;
 						$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
 						$resultdpt = mysqli_query($con, $str);
 						$rowdpt = mysqli_fetch_array($resultdpt);
@@ -67,6 +68,10 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 							$rowrgn = mysqli_fetch_array($resultrgn);
 						}
 					}
+					else
+					{
+						$filter = 0;
+					}
 				?> 
 
 					<div class="inwhile"> 
@@ -76,7 +81,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						<div class="heure"> <?php echo $row['heure'] ?> </div>  
 							<div class="pacp">Pays, region, departement</div>
 						<?php
-						if($rowdpt[id_region])
+						if($rowdpt[id_region] && $filter == 1)
 						{
 							?>
 							<div class="pays"> <?php echo  $rowrgn['nom_pays'] ?> </div>

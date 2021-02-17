@@ -52,26 +52,31 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 				while($rowx = mysqli_fetch_array($result)) 
 				{
 					$idconcert = $rowx['id_concert'];
+					$row['ville_departement'] = NULL;
+					$rowdpt['id_region'] = NULL;
+					$rowdpt['nom_departement'] = NULL;
+					$rowrgn['nom_pays'] = NULL;
+					$rowrgn['nom_region'] = NULL;
 					$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
 					$resultx = mysqli_query($con, $str);
 					$row = mysqli_fetch_array($resultx);
-					if($row[ville_departement])
+					if($row['ville_departement'])
 					{
 						$filter = 1;
 						$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
 						$resultdpt = mysqli_query($con, $str);
 						$rowdpt = mysqli_fetch_array($resultdpt);
-						if($rowdpt[id_region])
+						if($rowdpt['id_region'])
 						{
 							$str = "SELECT nom_region, nom_pays FROM pays, region, departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert ";
 							$resultrgn = mysqli_query($con, $str);
 							$rowrgn = mysqli_fetch_array($resultrgn);
 						}
 					}
-					else
+					/*else
 					{
 						$filter = 0;
-					}
+					}*/
 				?> 
 
 					<div class="inwhile"> 
@@ -81,7 +86,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						<div class="heure"> <?php echo $row['heure'] ?> </div>  
 							<div class="pacp">Pays, region, departement</div>
 						<?php
-						if($rowdpt[id_region] && $filter == 1)
+						if($rowdpt['id_region'])
 						{
 							?>
 							<div class="pays"> <?php echo  $rowrgn['nom_pays'] ?> </div>
@@ -95,7 +100,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 							<div class="region"> Région non renseignée </div> 
 							<?php
 						}
-						if($row[ville_departement])
+						if($row['ville_departement'])
 						{
 							?>
 							<div class="departement"> <?php echo  $rowdpt['nom_departement'] ?> </div> 
@@ -111,7 +116,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 							<div class="villexcp"> Ville et CP </div>
 						<div class="ville"> <?php echo $row['nom_ville'] ?> </div> 
 						<?php
-						if($row[ville_code_postal])
+						if($row['ville_code_postal'])
 						{
 							?>
 							<div class="cp"> <?php echo  $row['ville_code_postal'] ?> </div>

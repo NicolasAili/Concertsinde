@@ -51,6 +51,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 				<?php
 				while($rowx = mysqli_fetch_array($result)) 
 				{
+					echo("okok");
 					$idconcert = $rowx['id_concert'];
 					$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
 					$resultx = mysqli_query($con, $str);

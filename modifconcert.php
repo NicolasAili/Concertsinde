@@ -164,7 +164,7 @@
 						else
 						{
 							?>
-							<input type="text" name="cp" placeholder="CP non renseigné pour cette ville" id="cp" disabled>
+							<input type="text" name="cp" placeholder="CP non renseigné pour cette ville" id="cp">
 							<?php
 						}?>
 						<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
@@ -180,14 +180,14 @@
 						else
 						{
 							?>
-							<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="departement non renseigne" id="departement" disabled>
+							<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="departement non renseigne" id="departement">
 						<?php
 						}
 						?>
 						<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
 						<br>
 						<?php
-						if($region)
+						if($region) //region + departement
 						{ 
 							?>
 							<label for="region">Région: </label> 
@@ -197,7 +197,17 @@
 							<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
 						<?php	
 						}
-						else
+						else if($departement && !$region) //seulement le departement
+						{
+							?>
+							<label for="region">Région: </label> 
+							<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" >							 
+							<br>	
+							<label for="pays">Pays: </label> 
+							<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" >
+						<?php
+						}
+						else //ni region ni departement
 						{
 							?>
 							<label for="region">Région: </label> 
@@ -227,7 +237,7 @@
 						<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input type="hidden" id="intext" name="intext" value=""> 
-						<input  type="submit" value="Enregister le concert" name="concert" href="">
+						<input type="button" value="Enregister le concert" id="valider" onclick="verifier();" name="concert" href="">
 					</form>
 				<?php
 				}

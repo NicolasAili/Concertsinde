@@ -547,3 +547,18 @@ function checkboxmodif(identifiant)
         break;
     }
 }
+
+function verifier()
+{
+    var strpays = $("#pays").val();
+    var strregion = $("#region").val();
+    if(strregion.length > 0 && !strpays)
+    {
+        alert("Erreur, vous devez saisir le pays dont fait partie cette région");
+    }
+    else
+    {
+        $('#valider').attr("type", "submit");
+        $('#valider').trigger('click');
+    }
+}

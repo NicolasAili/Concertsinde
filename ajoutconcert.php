@@ -10,11 +10,14 @@
 		<meta name="Description" content="Recap" />
 		<script type="text/javascript" src="./js/scriptform.js"></script> 
 		<!-- Script -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+		<script type="text/javascript" src="./jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />	
 		<!-- jQuery UI -->
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
+
 		<?php //include("concert.php"); // on appelle le fichier?>
 	</head>
 	<header>

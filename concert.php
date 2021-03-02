@@ -69,7 +69,7 @@
 				echo($region);
 				echo "<br>";
 
-				if(!$vle)
+				if(!$vle) //si la ville n'existe pas en BDD
 				{
 					$testvle = 1;
 					if($departement)

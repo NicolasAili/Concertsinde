@@ -289,11 +289,11 @@
 						$insertsalle = "INSERT INTO salle (nom_salle, adresse, id_ville, intext) VALUES ('$salle', '$adresse', '$vle', '1')"; //salle ajoutee à la BDD
 						mysqli_query($con, $insertsalle);
 					}
-					if($testvle == 1)
+					/*if($testvle == 1) //si la ville saisie n'existait pas en BDD, on la 
 					{
 						$updatesalle = "UPDATE salle SET id_ville = '$vle' WHERE nom_salle = '$salle' "; //lien de la salle avec la ville
 						$query = mysqli_query($con, $updatesalle);
-					}
+					}*/
 					else //ici on teste l'adresse et la ville
 					{
 						$test = "SELECT adresse, nom_ville FROM salle, ville WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id";
@@ -306,7 +306,7 @@
 							$insertadresse = "UPDATE salle SET adresse = '$adresse' WHERE nom_salle = '$salle'";
 							mysqli_query($con, $insertadresse);
 						}
-						if($test_ville != $ville)
+						if($test_ville != $ville) //si la ville a été modifiée
 						{
 							$test = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 							$query = mysqli_query($con, $test);
@@ -375,9 +375,6 @@
 				{
 					$testcp = 0;
 				}
-				echo "$testpacp";
-				echo "<br>";
-				echo "$exte";
 				?>
 				<div id="recap">
 					<div class="inwhile">

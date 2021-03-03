@@ -92,15 +92,13 @@
 			$ticket = $_POST['ticket'];
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
-			echo($departement);
-			echo('<br>');
-			echo($departementpost);
-			echo('<br>');
 			echo($intext);
+			echo('<br>');
+			echo($intextpost);
 			echo('<br>');
 			echo($salle);
 			echo('<br>');
-			echo($ext);
+			
 
 			$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 			$query = mysqli_query($con, $idville);
@@ -367,48 +365,6 @@
 				$testheure = 1;
 				$sqlheu = "UPDATE concert SET heure = '$heure' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqlheu);
-			}
-			if($pays != NULL)
-			{
-				$testpays = 1;
-				if($testsalle == 1)
-				{
-					$sqlpays = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$salle'";
-    				mysqli_query($con, $sqlpays);
-				}
-				else if($testsalle == 0)
-				{
-					$sqlpaysex = "UPDATE salle SET Pays = '$pays' WHERE Nom_salle = '$sallepost'";
-    				mysqli_query($con, $sqlpaysex);
-				}
-			}
-			if($region != NULL)
-			{
-				$testregion= 1;
-				if($testsalle == 1)
-				{
-					$sqlregion = "UPDATE salle SET Region = '$region' WHERE Nom_salle = '$salle'";
-    				mysqli_query($con, $sqlregion);
-    			}
-    			else if($testsalle == 0)
-				{
-					$sqlregionex = "UPDATE salle SET Region = '$region' WHERE Nom_salle = '$sallepost'";
-    				mysqli_query($con, $sqlregionex);
-    			}
-			}
-			if($departement != NULL)
-			{
-				$testdepartement = 1;
-				if($testsalle == 1)
-				{
-					$sqldpt = "UPDATE salle SET Departement = '$departement' WHERE Nom_salle = '$salle'";
-    				mysqli_query($con, $sqldpt);
-    			}
-    			else if($testsalle == 0)
-				{
-					$sqldpteex = "UPDATE salle SET Departement = '$departement' WHERE Nom_salle = '$sallepost'";
-    				mysqli_query($con, $sqldpteex);
-    			}
 			}
 			if($ville != $villepost)
 			{

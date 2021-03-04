@@ -80,7 +80,6 @@
 			}
 			$sallepost = $_POST['sallepost'];
 			$testsalle = 0;
-
 			$extpost = $_POST['extpost'];
 			$testext = 0;
 			$adresse = $_POST['adresse'];

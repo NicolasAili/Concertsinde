@@ -141,12 +141,12 @@
 					{
 						if($cp)
 						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+							$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD 
 							mysqli_query($con, $insertvle);
 						}
 						else if(!$cp)
 						{
-							$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
+							$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD 
 							mysqli_query($con, $insertvle);
 						}
 					}

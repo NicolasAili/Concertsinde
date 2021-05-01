@@ -42,10 +42,13 @@
 				$pays = $_POST['pays'];
 				$testvle = 0;
 
-				//echo($departement);
-				//echo "<br>";
-				//echo($ville);
-				//echo "<br>";
+				echo($departement);
+				echo "<br>";
+				echo($ville);
+				echo "<br>";
+				echo($ticket);
+
+
 
 				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 				$query = mysqli_query($con, $idville);
@@ -62,12 +65,12 @@
 				$row = mysqli_fetch_array($query);
 				$rgn = $row['id'];
 
-				echo($ville);
+				/*echo($ville);
 				echo "<br>";
 				echo($departement);
 				echo "<br>";
 				echo($region);
-				echo "<br>";
+				echo "<br>";*/
 
 				if(!$vle) //si la ville n'existe pas en BDD
 				{
@@ -276,7 +279,7 @@
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
 
-				$query = mysqli_query($con, $idville);
+				$query = mysqli_query($con, $idville); //"SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 				$row = mysqli_fetch_array($query);
 				$vle = $row['ville_id'];
 
@@ -301,7 +304,7 @@
 						$row = mysqli_fetch_array($query);
 						$test_adresse = $row['adresse'];
 						$test_ville = $row['nom_ville'];
-						if($test_adresse != $adresse)
+						if($test_adresse != $adresse) //si l'adresse a été modifiée
 						{
 							$insertadresse = "UPDATE salle SET adresse = '$adresse' WHERE nom_salle = '$salle'";
 							mysqli_query($con, $insertadresse);
@@ -333,9 +336,9 @@
 				}
 				else //concert en extérieur
 				{
-					$insertext = "INSERT INTO salle (nom_ext, adresse, id_ville, intext) VALUES ('$denom', '$adresse', '$vle', '2')"; //ext ajouté à la BDD
+					$insertext = "INSERT INTO salle (nom_ext, adresse, id_ville, intext) VALUES ('$denom', '$adresse', '$vle', '2')"; //lieu ext ajouté à la BDD
 					mysqli_query($con, $insertext);
-					$idext = "SELECT MAX(id_salle) AS id_max FROM salle"; //on recupere l'ID le plus haut (dernier concert extérieur ajouté)
+					$idext = "SELECT MAX(id_salle) AS id_max FROM salle"; //on recupere l'ID le plus haut (dernier lieu extérieur ajouté)
 					$query = mysqli_query($con, $idext);
 					$row = mysqli_fetch_array($query);
 					$exte = $row['id_max'];
@@ -345,9 +348,9 @@
 				$test = "SELECT ville_departement FROM ville WHERE ville_id = $vle";
 				$query = mysqli_query($con, $test);
 				$row = mysqli_fetch_array($query);
-				if($row['ville_departement'])
+				if($row['ville_departement']) //si un département est présent pour notre ville
 				{
-					$test = "SELECT id_region FROM departement, ville WHERE ville_id = $vle AND ville_departement = numero";
+					$test = "SELECT id_region FROM departement, ville WHERE ville_id = $vle AND ville_departement = numero"; //test région
 					$query = mysqli_query($con, $test);
 					$row = mysqli_fetch_array($query);
 					if($row['id_region'])
@@ -385,7 +388,7 @@
 						<div class="heure"> <?php echo $_POST['heure']; ?> </div>
 						<div class="pacp">Pays, ville, adresse et CP </div>
 						<?php
-						if($testpacp == 2)
+						if($testpacp == 2) //ville+dpt+region
 						{
 								if($salle)
 								{
@@ -411,7 +414,7 @@
 								$result = mysqli_query($con, $pvcpz);
 							}
 						}
-						else if($testpacp == 0)
+						else if($testpacp == 0) //que ville
 						{
 							if($salle)
 							{

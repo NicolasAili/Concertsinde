@@ -251,7 +251,7 @@
 							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE numero = '$yyy' "; //lien du departement avec la région
 							mysqli_query($con, $updatedpt);
 						}
-						else if(!$region)
+						/*else if(!$region)
 						{
 							$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
 							$query = mysqli_query($con, $xxx);
@@ -261,7 +261,7 @@
 							{
 
 							}
-						}
+						}*/
 					}
 					if($cp)
 					{

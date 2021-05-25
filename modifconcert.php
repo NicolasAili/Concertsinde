@@ -51,6 +51,7 @@
 				echo "Erreur de connexion" .mysqli_connect_error();
 			}
 			$idconcert = $_POST['idpost'];
+			echo($idconcert);
 			$idsalle = $_POST['idsallepost'];
 			$artiste = $_POST['artistepost'];
 			$date = $_POST['datepost'];

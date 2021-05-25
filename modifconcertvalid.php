@@ -30,7 +30,7 @@
 			$idconcert = $_POST['idpost'];
 			echo('idpost');
 			echo('<br>');
-			echo($idpost);
+			echo($idconcert);
 			echo('<br>');
 			echo('<br>');
 			$intext = $_POST['intext'];
@@ -588,50 +588,99 @@
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
 		<?php
-	$str = "SELECT id_concert, datec, heure, lien_fb, lien_ticket, concert.nom_artiste, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM concert, artiste, salle, ville, departement, region, pays WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert";
+	$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert";
 			$result = mysqli_query($con, $str);
 			$row = mysqli_fetch_array($result);
+				if($row['ville_departement'])
+			{
+				$filter = 1;
+				$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
+				$resultdpt = mysqli_query($con, $str);
+				$rowdpt = mysqli_fetch_array($resultdpt);
+				if($rowdpt['id_region'])
+				{
+					$str = "SELECT nom_region, nom_pays FROM pays, region, departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert ";
+					$resultrgn = mysqli_query($con, $str);
+					$rowrgn = mysqli_fetch_array($resultrgn);
+				}
+			}
 			?>
 			<div id="concertsall">
 				<div class="inwhile"> 
-						<div class="artiste"> <?php echo $row['nom_artiste'] ?> </div> 
-							<div class="dahe">Date et heure</div>
-						<div class="date"> <?php echo  $row['datec'] ?> </div>  
-						<div class="heure"> <?php echo $row['heure'] ?> </div>  
-							<div class="pacp">Pays ville et CP</div>
-						<div class="pays"> <?php echo  $row['nom_pays'] ?> </div> 
-						<div class="region"> <?php echo  $row['nom_region'] ?> </div> 
-						<div class="departement"> <?php echo  $row['nom_departement'] ?> </div> 
-						<div class="ville"> <?php echo $row['nom_ville'] ?> </div> 
+					<div class="artiste"> <?php echo $row['nom_artiste'] ?> </div> 
+						<div class="dahe">Date et heure</div>
+					<div class="date"> <?php echo  $row['datec'] ?> </div>  
+					<div class="heure"> <?php echo $row['heure'] ?> </div>  
+						<div class="pacp">Pays, region, departement</div>
+					<?php
+					if($rowdpt['id_region'])
+					{
+						?>
+						<div class="pays"> <?php echo  $rowrgn['nom_pays'] ?> </div>
+						<div class="region"> <?php echo  $rowrgn['nom_region'] ?> </div> 
+						<?php 
+					}
+					else
+					{
+						?>
+						<div class="pays"> Pays non renseigné </div>
+						<div class="region"> Région non renseignée </div> 
+						<?php
+					}
+					if($row['ville_departement'])
+					{
+						?>
+						<div class="departement"> <?php echo  $rowdpt['nom_departement'] ?> </div> 
+						<?php
+					}
+					else
+					{	
+						?>
+						<div class="departement"> Département non renseigné </div> 
+						<?php
+					}
+						?>
+						<div class="villexcp"> Ville et CP </div>
+					<div class="ville"> <?php echo $row['nom_ville'] ?> </div> 
+					<?php
+					if($row['ville_code_postal'])
+					{
+						?>
 						<div class="cp"> <?php echo  $row['ville_code_postal'] ?> </div>
 						<?php
-						if($row['intext'] == 'int')
-						{
+					}
+					else
+					{
 						?>
-							<div class="saad">Salle et adresse</div> 
-							<br>
-							Concert intérieur
-							<br>
-						<div class="salle"> <?php echo  $row['nom_salle'] ?> </div> 
+							<div class="cp"> Code postal non renseigné </div>
 						<?php
-						} 
-						else
-						{
-						?>
-							<div class="saad">Lieu et adresse</div> 
-							<br>
-							Concert extérieur
-							<br>
-						<div class="salle"> <?php echo  $row['nom_ext'] ?> </div>
-						<?php	
-						}
-						?>
-						<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
-						<div class="saad">Liens relatifs a l'evenement</div>
-						<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
-						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
-
-				</div>			
+					}
+					if($row['intext'] == 'int')
+					{
+					?>
+						<div class="saad">Lieu, adresse et salle</div> 
+						<br>
+						Concert intérieur
+						<br>
+					<div class="salle"> <?php echo  $row['nom_salle'] ?> </div> 
+					<?php
+					} 
+					else
+					{
+					?>
+						<div class="saad">Lieu, adresse et salle</div> 
+						<br>
+						Concert extérieur
+						<br>
+					<div class="salle"> <?php echo  $row['nom_ext'] ?> </div>
+					<?php	
+					}
+					?>
+					<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
+					<div class="saad">Liens relatifs a l'evenement</div>
+					<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
+					<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
+				</div>		
 			</div>
 			<div class="champs">
 				<h2> Champ(s) modifié(s) : </h2>

@@ -51,7 +51,6 @@
 				echo "Erreur de connexion" .mysqli_connect_error();
 			}
 			$idconcert = $_POST['idpost'];
-			echo($idconcert);
 			$idsalle = $_POST['idsallepost'];
 			$artiste = $_POST['artistepost'];
 			$date = $_POST['datepost'];
@@ -111,7 +110,7 @@
 								<br>
 								<div id="intdiv">
 									<label for="salle">Salle : </label> 
-									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> required>
+									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> required>
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
 									<br>
@@ -142,7 +141,7 @@
 								<div id="inthiddiv">
 									<br>
 									<label for="salle">Salle : </label> 
-									<input type="text" name="salle" id="salle" onblur="getleave();" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
+									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" value=""> 
 								</div>
@@ -150,72 +149,74 @@
 							}
 							?>
 						</div>
-						<label for="ville">Ville : </label> 
-						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
-						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
-						<br>
-						<label for="cp">Code postal: </label> 
-						<?php
-						if($cp)
-						{
-							?>
-							<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp" disabled>
+						<div id="infos">
+							<label for="ville">Ville : </label> 
+							<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
+							<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
+							<br>
+							<label for="cp">Code postal: </label> 
 							<?php
-						}
-						else
-						{
-							?>
-							<input type="text" name="cp" placeholder="CP non renseigné pour cette ville" id="cp">
+							if($cp)
+							{
+								?>
+								<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp" disabled>
+								<?php
+							}
+							else
+							{
+								?>
+								<input type="text" name="cp" placeholder="CP non renseigné pour cette ville" id="cp">
+								<?php
+							}?>
+							<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
+							<br>
+							<label for="departement">Département: </label>
 							<?php
-						}?>
-						<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
-						<br>
-						<label for="departement">Département: </label>
-						<?php
-						if($departement)
-						{ 
+							if($departement)
+							{ 
+								?>
+								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement" disabled>
+							<?php
+							}
+							else
+							{
+								?>
+								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="departement non renseigne" id="departement">
+							<?php
+							}
 							?>
-							<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement" disabled>
-						<?php
-						}
-						else
-						{
-							?>
-							<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="departement non renseigne" id="departement">
-						<?php
-						}
-						?>
-						<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
-						<br>
-						<?php
-						if($region) //region + departement
-						{ 
-							?>
-							<label for="region">Région: </label> 
-							<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region" disabled>							 
-							<br>	
-							<label for="pays">Pays: </label> 
-							<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
-						<?php	
-						}
-						else if($departement && !$region) //seulement le departement
-						{
-							?>
-							<label for="region">Région: </label> 
-							<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" >							 
-							<br>	
-							<label for="pays">Pays: </label> 
-							<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" >
-						<?php
-						}
-						else //ni region ni departement
-						{
-							?>
-							<label for="region">Région: </label> 
-							<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" disabled>							 
-							<br>	
-							<label for="pays">Pays: </label> 
-							<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled>
+							<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
+							<br>
+							<?php
+							if($region) //region + departement
+							{ 
+								?>
+								<label for="region">Région: </label> 
+								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region" disabled>							 
+								<br>	
+								<label for="pays">Pays: </label> 
+								<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
+							<?php	
+							}
+							else if($departement && !$region) //seulement le departement
+							{
+								?>
+								<label for="region">Région: </label> 
+								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" >							 
+								<br>	
+								<label for="pays">Pays: </label> 
+								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" >
+							<?php
+							}
+							else //ni region ni departement
+							{
+								?>
+								<label for="region">Région: </label> 
+								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" disabled>							 
+								<br>	
+								<label for="pays">Pays: </label> 
+								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled>
+						</div>
 						<?php
 						}
 						?>

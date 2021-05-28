@@ -114,6 +114,8 @@ function getleave(identifiant)
                                 $("#departement").attr("placeholder", "ville non connue");
                                 $("#cp").prop( "disabled", false );
                                 $("#cp").attr("placeholder", "ville non connue"); 
+                                $("#region").prop( "disabled", true );
+                                $("#pays").prop( "disabled", true );
                             }
                             else if(data[0].test == 'succes')
                             {

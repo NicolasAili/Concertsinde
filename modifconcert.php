@@ -116,7 +116,7 @@
 									<br>
 								</div>
 								<div id="exthiddiv">
-									<label for="ext">Lieu : </label> 
+									<label for="ext">Denomination : </label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" value=""> 
@@ -132,7 +132,7 @@
 								en extérieur (festival, concert sauvage, rue etc...)
 								<br>
 								<div id="extdiv">
-									<label for="ext">Lieu : </label> 
+									<label for="ext">Denomination : </label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> required>
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
@@ -152,7 +152,6 @@
 						<div id="infos">
 							<label for="ville">Ville : </label> 
 							<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
-							<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 							<br>
 							<label for="cp">Code postal: </label> 
 							<?php
@@ -205,7 +204,7 @@
 								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" >							 
 								<br>	
 								<label for="pays">Pays: </label> 
-								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" >
+								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled="">
 							<?php
 							}
 							else //ni region ni departement
@@ -216,10 +215,10 @@
 								<br>	
 								<label for="pays">Pays: </label> 
 								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled>
+							<?php
+							}
+							?>
 						</div>
-						<?php
-						}
-						?>
 						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> >
 						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?>> 
 						<br>
@@ -233,12 +232,13 @@
 						<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $fb . '"' ?> > 
 						<br>
 						<label for="ticket">Lien de la billetterie : </label> 
-						<input type="text" name="ticket" <?php echo 'placeholder="' . $ticket . '"' ?> id="ticket">
+						<input type="text" name="ticket" <?php echo 'value="' . $ticket . '"' ?> id="ticket">
 						<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $ticket . '"' ?> > 
 						<br>
 						<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input type="hidden" id="intext" name="intext" value=""> 
+						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<input type="button" value="Enregister le concert" id="valider" onclick="verifier();" name="concert" href="">
 					</form>
 				<?php

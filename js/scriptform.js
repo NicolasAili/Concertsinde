@@ -17,8 +17,8 @@ function getleave(identifiant)
             {
                 if(data[0].test == 'nodata' && identifiant == 'salle')
                 {
-                    $('#infos').css('visibility', 'hidden');
-                    $('#infos').css('display', 'none');
+                    $('#infosx').css('visibility', 'hidden');
+                    $('#infosx').css('display', 'none');
                     $("#res").html("");
                 }
                 if(data[0].test != 'nodata')
@@ -41,7 +41,7 @@ function getleave(identifiant)
                             {
                                 $('#infos').children('input').val('');
                                 $("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations ou les compléter, sinon ne rien modifier. ");
-                                
+                            
                                 if(data[0].departement != 'nodata')
                                 {
                                     $("#departement").val(data[0].departement);
@@ -49,6 +49,8 @@ function getleave(identifiant)
                                     {
                                         $("#region").val(data[0].region);
                                         $("#pays").val(data[0].pays);
+                                        $("#region").prop( "disabled", true );
+                                        $("#pays").prop( "disabled", true );
                                     }
                                     else
                                     {
@@ -59,6 +61,7 @@ function getleave(identifiant)
                                         $("#region").attr("placeholder", "région non renseignée");
                                         $("#pays").attr("placeholder", "pays non renseigné");
                                     }
+                                    $("#departement").prop( "disabled", true );
                                 }
                                 else
                                 {
@@ -76,6 +79,7 @@ function getleave(identifiant)
                                 if(data[0].cp != 'nodata')
                                 {
                                     $("#cp").val(data[0].cp);
+                                    $("#cp").prop( "disabled", true );
                                 }
                                 else
                                 {
@@ -89,7 +93,7 @@ function getleave(identifiant)
                                 }
                                 else
                                 {
-                                    $('#cp').val('');
+                                    $('#adresse').val('');
                                     $("#adresse").attr("placeholder", "adresse non renseignée");
                                 }
                             }
@@ -126,7 +130,6 @@ function getleave(identifiant)
                                     if(data[0].region != 'nodata')
                                     {
                                         $("#region").prop( "disabled", true );
-                                        $("#departement").prop( "disabled", true );
                                         $("#region").val(data[0].region);
                                         $("#pays").val(data[0].pays);
                                     }
@@ -134,11 +137,12 @@ function getleave(identifiant)
                                     {
                                         $('#region').val('');
                                         $('#pays').val('');
-                                        $("#departement").prop( "disabled", true );
                                         $("#region").prop( "disabled", false );
                                         $("#region").attr("placeholder", "région non renseignée");
                                         $("#pays").attr("placeholder", "pays non renseigné"); 
                                     }
+                                    $("#pays").prop( "disabled", true );
+                                    $("#departement").prop( "disabled", true );
                                 }
                                 else
                                 {
@@ -146,6 +150,8 @@ function getleave(identifiant)
                                     $('#region').val('');
                                     $('#pays').val('');
                                     $("#departement").prop( "disabled", false );
+                                    $("#region").prop( "disabled", false );
+                                    $("#pays").prop( "disabled", true );
                                     $("#departement").attr("placeholder", "departement non renseigné pour cette ville");
                                     $("#region").attr("placeholder", "région non renseignée pour cette ville");
                                     $("#pays").attr("placeholder", "pays non renseigné pour cette ville");  
@@ -181,9 +187,8 @@ function getleave(identifiant)
                                     $('#pays').val('');
                                     $("#region").attr("placeholder", "région non renseignée pour ce departement");
                                     $("#pays").attr("placeholder", "pays non renseigné pour ce departement");  
-                                    //$("#region").prop( "disabled", true );
-                                    //$("#pays").prop( "disabled", true );
                                 }
+                                $("#pays").prop( "disabled", true );
                             }
                             else if(data[0].test == 'erreur')
                             {

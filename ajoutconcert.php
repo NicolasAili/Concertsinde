@@ -67,29 +67,31 @@
 					<div id="resx"> </div>
 					<br>
 				</div>
-				<div id="infos">
-					<label for="adresse">Adresse: </label> 
-					<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
-					<br>
-					<label for="ville">*Ville : </label> 
-					<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
-					<br>
-					<div id="resv"> </div>
-					<br>
-					<label for="cp">Code postal: </label> 
-					<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>
-					<br>
-					<label for="departement">Departement: </label> 
-					<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
-					<div id="resw"> </div>
-					<br>
-					<label for="region">Region: </label> 
-					<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
-					<br>
-					<label for="pays">Pays: </label> 
-					<input type="text" name="pays" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
-					<br>
-					<br>
+				<div id=infosx>
+					<div id="infos">
+						<label for="adresse">Adresse: </label> 
+						<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
+						<br>
+						<label for="ville">*Ville : </label> 
+						<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
+						<br>
+						<div id="resv"> </div>
+						<br>
+						<label for="cp">Code postal: </label> 
+						<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>
+						<br>
+						<label for="departement">Departement: </label> 
+						<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
+						<div id="resw"> </div>
+						<br>
+						<label for="region">Region: </label> 
+						<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
+						<br>
+						<label for="pays">Pays: </label> 
+						<input type="text" name="pays" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
+						<br>
+						<br>
+					</div>
 				</div>
 				<br>
 				<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 

@@ -637,8 +637,7 @@
 					echo "lien événement modifié";
 					echo '<br>';
 					echo "ancienne valeur : ";
-					echo $fbpost;
-					echo '<br>';
+					test_empty($fbpost);
 					echo "nouvelle valeur : ";
 					echo $fb;
 					echo '<br>';
@@ -704,7 +703,7 @@
 					echo $ext;
 					echo '<br>';
 				}
-				if($intext != $intextpost)
+				if($intext != $intextpost && $intext != NULL)
 				{
 					if($intext == "int")
 					{

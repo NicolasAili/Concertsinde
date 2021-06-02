@@ -120,6 +120,25 @@
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
 
+
+			if ($artiste != $artistepost)
+			{
+				setcookie('contentMessage', 'il est interdit de modifier un artiste', time() + 30, "/");
+				header("Location: ./allconcerts.php");
+			}
+
+			if($date != $datepost)
+			{
+				if($date < date("Y-m-d"))
+				{
+					setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+				}
+				$testdate = 1;
+				$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";
+    			mysqli_query($con, $sqldat);
+			}
+
 			$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 			$query = mysqli_query($con, $idville);
 			$row = mysqli_fetch_array($query);
@@ -373,12 +392,7 @@
 				$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
 				mysqli_query($con, $sqlext);
 			}
-			if($date != $datepost)
-			{
-				$testdate = 1;
-				$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";
-    			mysqli_query($con, $sqldat);
-			}
+
 			if($heure != $heurepost)
 			{
 				$sqlheu = "UPDATE concert SET heure = '$heure' WHERE ID_concert = $idconcert";
@@ -446,12 +460,6 @@
 				$testticket = 1;
 				$sqltic = "UPDATE concert SET lien_ticket = '$ticket' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqltic);
-			}
-
-			if ($artiste != $artistepost)
-			{
-				setcookie('contentMessage', 'il est interdit de modifier un artiste', time() + 30, "/");
-				header("Location: ./allconcerts.php");
 			}
 	?>
 		<h1> Récapitulatif du concert modifié </h1>

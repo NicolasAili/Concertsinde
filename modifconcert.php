@@ -80,7 +80,7 @@
 				{
 						?>
 					<h1> modifier un concert </h1>
-					<form method="post" class="connect" action="modifconcertvalid.php">
+					<form method="post" id="connect" action="modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
 						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" >
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
@@ -259,6 +259,35 @@
 			}
 			?>
 	</body>
+	<script>
+		$('#connect').submit(function () 
+	{
+	    var strdate = $("#date").val();
+	    var datesaisie = new Date(strdate).getTime()
+
+		var now = new Date();
+        var heure   = now.getHours();
+        heureinf = (heure+1)*3600000; //heure courante multipliée par le nb de ms en 1 heure
+        heuresup = 63072000000; //2 ans en milliseconde
+        
+
+        var dateinf = datesaisie + heureinf;
+        var datesup = Date.now() + heuresup;
+
+        if(dateinf < Date.now())
+        {
+            alert("Erreur, date saisie inférieure à la date actuelle");
+            close = 1;
+            return false;
+        }
+        if(datesaisie > datesup)
+        {
+            alert("Erreur, impossible de saisir des concerts plus de deux ans en avance");
+            close = 1;
+            return false;
+        }
+    });
+     </script>
 	
 	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->
 </html>

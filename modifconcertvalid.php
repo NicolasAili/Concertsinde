@@ -133,6 +133,7 @@
 				{
 					setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 30, "/");
 					header("Location: ./allconcerts.php");
+					exit("Erreur: la date saisie est inférieure à la date courante");
 				}
 				$testdate = 1;
 				$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";

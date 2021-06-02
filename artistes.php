@@ -59,7 +59,7 @@
 						</div>
 						<div class="nbconcert">
 							<?php
-								$nbr = "SELECT COUNT(*) FROM concert WHERE Nom_artiste = '$artistecnt'";
+								$nbr = "SELECT COUNT(*) FROM concert WHERE Nom_artiste = '$artistecnt' AND datec > NOW()";
 								$resultnbr = mysqli_query($con, $nbr);
 								$rownbr = mysqli_fetch_array($resultnbr);
 								echo $rownbr[0];

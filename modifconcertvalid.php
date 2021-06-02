@@ -123,8 +123,9 @@
 
 			if ($artiste != $artistepost)
 			{
-				setcookie('contentMessage', 'il est interdit de modifier un artiste', time() + 30, "/");
+				setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 30, "/");
 				header("Location: ./allconcerts.php");
+				exit("Erreur: il est interdit de modifier un artiste");
 			}
 
 			if($date != $datepost)

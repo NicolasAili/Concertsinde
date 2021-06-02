@@ -71,11 +71,7 @@
 			$testdepartement = 0;
 			$ville = $_POST['ville'];
 			$villepost = $_POST['villepost'];
-			echo $villepost;
-			echo "<br>";
-			echo "hi";
-			echo "<br>";
-			echo $ville;
+
 
 			$testville = 0;
 			$cp = $_POST['cp'];
@@ -123,8 +119,6 @@
 			$ticket = $_POST['ticket'];
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
-
-			
 
 			$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 			$query = mysqli_query($con, $idville);
@@ -341,7 +335,7 @@
 			{
 				if($intext == "ext")
 				{
-					if($ville)
+					if($ville != $villepost)
 					{
 						$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 					}
@@ -358,7 +352,7 @@
 					mysqli_query($con, $sql);
 				}
 			}
-			if($salle != $sallepost)
+			if($salle != $sallepost && $salle != NULL)
 			{
 				$testsalle = 1;
 				$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE nom_salle = '$salle'");
@@ -456,20 +450,9 @@
 
 			if ($artiste != $artistepost)
 			{
-				echo("ok");
-				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
-				$row_cnt = mysqli_num_rows($result);
-				if($row_cnt<1) //si pas de ligne trouvée
-				{
-					$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
-					mysqli_query($con, $insertartiste);
-				}
-				/* Ferme le jeu de résultats */
-				mysqli_free_result($result);
-				$sqlart = "UPDATE concert SET Nom_artiste = '$artiste' WHERE ID_concert = $idconcert";
-    			mysqli_query($con, $sqlart);	
+				setcookie('contentMessage', 'il est interdit de modifier un artiste', time() + 30, "/");
+				header("Location: ./allconcerts.php");
 			}
-
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
 		<?php

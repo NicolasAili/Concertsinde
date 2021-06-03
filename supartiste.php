@@ -39,8 +39,9 @@
 		$artiste = $_GET['artiste'];
 		echo '<img src="./image/artiste/' . $artiste . '.jpg' . '" class="imgcadenas">';
 		echo '<h1>' . $artiste . '</h1>';
-		$sql = "SELECT description FROM artiste WHERE Nom_artiste = $artiste";
+		$sql = "SELECT description FROM artiste WHERE Nom_artiste = '$artiste' ";
 		$result = mysqli_query($con, $sql);
+		$row = mysqli_fetch_array($result);
 		if(!$row)
 		{
 			?> 

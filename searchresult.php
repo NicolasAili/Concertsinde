@@ -27,71 +27,135 @@
 			{
 				echo "Erreur de connexion" .mysqli_connect_error();
 			}
+
 			$searchfield = $_POST['searchfield'];
+			$verif = 0;
+
+
 			$str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$searchfield'";
 			$result = mysqli_query($con, $str);
 			?>
 				<h1> Resultat de recherche pour "<?php echo $searchfield; ?>" </h1> 
-				<h2> Artiste </h2>
 				<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
+							<h2> Artiste </h2>
 							<div class="artiste">  <?php
-							echo '<a href="artiste/' . $row['Nom_artiste'] . '.php">' . $row['Nom_artiste'];
+							$verif = 1;
+							echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $row['Nom_artiste'];
 							echo '</a>';
 							?>
 							</div>
 							<?php
 						} 
-						else
-						{
-							echo("pas de resultat");
-						}	
 						
-			$str = "SELECT Nom_salle, Ville, CP FROM salle WHERE Nom_salle = '$searchfield'";
+			$str = "SELECT Nom_salle, nom_ville, ville_code_postal FROM salle, ville WHERE Nom_salle = '$searchfield' AND salle.id_ville = ville.ville_id";
 			$result = mysqli_query($con, $str);	
 			?>
-				<hr/>
-				<h2> Salle </h2>
 			<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<div class="salle"> <?php echo $row['Nom_salle'] . " (" . $row['Ville'] . " " . $row['CP'] . ")";  ?> </div> <?php
-						} 
-						else
-						{
-							echo("pas de resultat");
-						}	
+							<hr/>
+							<h2> Salle </h2>
+							<div class="salle"> 
+								<?php 
+								$verif = 1;
+								echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['nom_ville'] . $row['ville_code_postal'] . ")";
+								echo '</a>';  
+							?> 
+							</div> 
+							<?php
+						} 						
 						
-			$str = "SELECT Ville, CP FROM salle WHERE Ville = '$searchfield'";
+			$str = "SELECT nom_ville, ville_code_postal FROM ville WHERE nom_ville = '$searchfield'";
 			$result = mysqli_query($con, $str);	
 			?>
-				<hr/>
-				<h2> Ville </h2>
 				<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<div class="Ville"> <?php echo $row['Ville'] . " (" . $row['CP'] . ")"; ?> </div> <?php
+							<hr/>
+							<h2> Ville </h2>
+							<div class="Ville"> 
+								<?php 
+								$verif = 1;
+								echo '<a href="allconcerts.php?ville=' . $row['nom_ville'] . '">' . $row['nom_ville'] . " (" . $row['ville_code_postal'] . ")"; 
+								echo '</a>';
+								?> 
+							</div> 
+							<?php
 						} 
-						else
-						{
-							echo("pas de resultat");
-						}	
 						
-			$str = "SELECT CP, Ville FROM salle WHERE CP = '$searchfield'";
+			$str = "SELECT ville_code_postal, nom_ville FROM ville WHERE ville_code_postal = '$searchfield'";
 			$result = mysqli_query($con, $str);	
 			?>
-				<hr/>
-				<h2> CP </h2>
 				<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<div class="CP"> <?php echo $row['CP'] . " (" . $row['Ville'] . ")";  ?> </div> <?php
-						} 
-						else
-						{
-							echo("pas de resultat");
-						}	
+							<hr/>
+							<h2> CP </h2>
+							<div class="CP"> 
+								<?php 
+								$verif = 1;
+								echo  '<a href="allconcerts.php?cp=' . $row['ville_code_postal'] . '">' . $row['ville_code_postal'] . " (" . $row['nom_ville'] . ")";  
+								echo '</a>';
+								?> 
+							</div> 
+							<?php
+						}
+
+			$str = "SELECT nom_departement, numero FROM departement WHERE nom_departement = '$searchfield'";
+			$result = mysqli_query($con, $str);	
+			if($row = mysqli_fetch_array($result))
+						{ ?>
+							<hr/>
+							<h2> Departement </h2>
+							<div class="departement"> 
+								<?php 
+								$verif = 1;
+								echo  '<a href="allconcerts.php?departement=' . $row['nom_departement'] . '">' . $row['nom_departement'] . " (" . $row['numero'] . ")";  
+								echo '</a>';
+								?> 
+							</div> 
+							<?php
+						}
+
+			$str = "SELECT nom_departement, numero FROM departement WHERE numero = '$searchfield'";
+			$result = mysqli_query($con, $str);	
+			if($row = mysqli_fetch_array($result))
+						{ ?>
+							<hr/>
+							<h2> Numero département </h2>
+							<div class="numero"> 
+								<?php 
+								$verif = 1;
+								echo  '<a href="allconcerts.php?departement=' . $row['nom_departement'] . '">' . $row['numero'] . " (" . $row['nom_departement'] . ")";  
+								echo '</a>';
+								?> 
+							</div> 
+							<?php
+						}
+
+			$str = "SELECT nom_region FROM region WHERE nom_region = '$searchfield'";
+			$result = mysqli_query($con, $str);	
+			if($row = mysqli_fetch_array($result))
+						{ ?>
+							<hr/>
+							<h2> Region </h2>
+							<div class="region"> 
+								<?php 
+								$verif = 1;
+								echo  '<a href="allconcerts.php?region=' . $row['nom_region'] . '">' . $row['nom_region'];  
+								echo '</a>';
+								?> 
+							</div> 
+							<?php
+						}
+
+			if($verif == 0)
+			{
+				echo "Aucun résultat pour votre recherche";
+			}
+
 			?>
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

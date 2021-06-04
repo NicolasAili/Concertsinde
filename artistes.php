@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />		
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php //include('header.php'); ?>
 	</header>
 	<body>
 		<h1> Artistes </h1>
@@ -33,10 +33,41 @@
 			echo "Erreur de connexion" .mysqli_connect_error();
 			}
 		?>
-
+		<div id=tri>
+			<h3>trier par...</h3>
+			<hr>
+			<?php
+			$filter = $_GET['filter'];
+			echo '<a href="artistes.php?filter=up">'; ?> ordre croissant (de a à z) <?php echo '</a>';
+			echo '<a href="artistes.php?filter=down">'; ?> ordre décroissant (de z à a) <?php echo '</a>';
+			echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';
+			?>
+			<form method="post" class="connect" action="artistes.php">
+				<input type="text" name="artiste" id="artiste" placeholder="Cherchez un artiste"  >
+				<input type="submit" value="Chercher un artiste" id="valider" name="valider" href="">
+			</form>
+		</div>
 		<?php
+			$artiste = $_POST['artiste'];
 			$cnt = 0;
-			$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
+			if($filter == 'up')
+			{
+				$str = "SELECT * FROM artiste ORDER BY Nom_artiste ASC";
+			}
+			else if($filter == 'down')
+			{
+				$str = "SELECT * FROM artiste ORDER BY Nom_artiste DESC";
+			}
+			else if($artiste)
+			{
+				$str = "SELECT * FROM artiste WHERE Nom_artiste = '$artiste'";
+			}
+			else
+			{
+				$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
+			}
+			
+			
 			$result = mysqli_query($con, $str);
 		?>
 			<div id="lesartistes">
@@ -80,6 +111,10 @@
 						</div>
 					</div>
 				<?php
+				}
+				if($artiste)
+				{
+					echo '<a href="artistes.php">'; ?> afficher tous les artistes <?php echo '</a>';
 				}
 				?>	
 			</div>

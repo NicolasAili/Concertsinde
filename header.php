@@ -7,7 +7,7 @@
 	<div class="nav">
 		<div class="uppernav">
 			<form class="searchbar" action="searchresult.php" method="post">
-					<input class="champ"  type="recherche" name="searchfield" placeholder="Artiste, Salle, Ville, ou CP">
+					<input class="champ"  type="recherche" name="searchfield" placeholder="Artiste/Salle/Festival/Ville/CP/Departement/Num departement/Région">
 					<input class="o-search-submit" name="search" type="submit">
 			</form>
 			<?php 

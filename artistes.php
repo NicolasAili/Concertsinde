@@ -40,7 +40,7 @@
 			$filter = $_GET['filter'];
 			echo '<a href="artistes.php?filter=up">'; ?> ordre croissant (de a à z) <?php echo '</a>';
 			echo '<a href="artistes.php?filter=down">'; ?> ordre décroissant (de z à a) <?php echo '</a>';
-			echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';
+			/*echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';*/
 			?>
 			<form method="post" class="connect" action="artistes.php">
 				<input type="text" name="artiste" id="artiste" placeholder="Cherchez un artiste"  >
@@ -62,6 +62,10 @@
 			{
 				$str = "SELECT * FROM artiste WHERE Nom_artiste = '$artiste'";
 			}
+			/*else if($filter == 'number')
+			{
+
+			}*/
 			else
 			{
 				$str = "SELECT * FROM artiste ORDER BY Nom_artiste";

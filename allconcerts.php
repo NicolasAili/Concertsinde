@@ -22,13 +22,144 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	<header>
 		<?php include('header.php'); ?>
 	</header>
-	<body>
-		<h1>Tous les concerts</h1>
+	<body>	
 		<?php
+		$filter = $_GET['filter'];
+		$getsalle = $_GET['salle'];
+		$getville = $_GET['ville'];
+		$getcp = $_GET['cp'];
+		$getdepartement = $_GET['departement'];
+		$getnumdepartement = $_GET['numero'];
+		$getregion = $_GET['region'];
+
+		//$get = $_GET['filtre'];
+		$string = $_SERVER['QUERY_STRING'];
 			//echo $_SESSION['pseudo'];
 			echo "</br>";
 			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			//echo $string;
+			//echo "</br>";
+			parse_str($string);
+			$finalstring = explode("&", $string);
+			//echo $finalstring[0];
+			//echo "</br>";
+			//echo $finalstring[1];
+			//echo "</br>";
 		?>
+		filtres...
+		 <form action="allconcerts.php" method="get">
+		  <label for="salle">Salle:</label>
+		  <input type="text" id="salle" name="salle" value=<?php echo "$getsalle";?>><br><br>
+		  <?php if($filter)
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+		  }
+		  else
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+		  }?>
+		  <input type="submit" value="Submit">
+		</form> 
+		<br>
+		<form action="allconcerts.php" method="get">
+		  <label for="ville">Ville:</label>
+		  <input type="text" id="ville" name="ville" value=<?php echo "$getville";?>><br><br>
+		  <?php if($filter)
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+		  }
+		  else
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+		  }?>
+		  <input type="submit" value="Submit">
+		</form>
+		<br>
+		<form action="allconcerts.php" method="get">
+		  <label for="salle">CP:</label>
+		  <input type="text" id="cp" name="cp" value=<?php echo "$getcp";?>><br><br>
+		  <?php if($filter)
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+		  }
+		  else
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+		  }?>
+		  <input type="submit" value="Submit">
+		</form> 
+		<br>
+		<form action="allconcerts.php" method="get">
+		  <label for="salle">Departement:</label>
+		  <input type="text" id="departement" name="departement" value=<?php echo "$getdepartement";?>><br><br>
+		  <?php if($filter)
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+		  }
+		  else
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+		  }?>
+		  <input type="submit" value="Submit">
+		</form> 
+		<br>
+		<form action="allconcerts.php" method="get">
+		  <label for="salle">Numero de département:</label>
+		  <input type="text" id="numero" name="numero" value=<?php echo "$getnumdepartement";?>><br><br>
+		  <?php if($filter)
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+		  }
+		  else
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+		  }?>
+		  <input type="submit" value="Submit">
+		</form> 
+		<br>
+		<form action="allconcerts.php" method="get">
+		  <label for="salle">Region:</label>
+		  <input type="text" id="region" name="region" value=<?php echo "$getregion";?>><br><br>
+		  <?php if($filter)
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+		  }
+		  else
+		  {
+		  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+		  }?>
+		  <input type="submit" value="Submit">
+		</form> 
+		<br>
+
+		<?php
+
+		echo "<br>";
+		echo '<a href="allconcerts.php?filter=reset">'; echo "Réinitialiser les filtres"; echo '</a>';
+		echo "<br>";
+		echo "<br>";
+		?>
+		trier par...
+		<?php
+		echo "<br>";
+		//} else if {$filter == "artisteup"} else{}
+
+		if($string && $filter != "artisteup" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=artisteup"; echo '">';}else if($filter == "artisteup" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=artisteup">';} if($filter == "artisteup"){echo "<strong>";}echo "nom d'artiste croissant (de a à z) - Choix par défaut"; if($filter == "artisteup"){echo "</strong>";} echo '</a>';
+		echo " ";
+		if($string && $filter != "artistedown" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=artistedown"; echo '">';}else if($filter == "artistedown" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=artistedown">';} if($filter == "artistedown"){echo "<strong>";}echo "nom d'artiste décroissant (de z à a)"; if($filter == "artistedown"){echo "</strong>";} echo '</a>';
+		echo "<br>";
+		if($string && $filter != "dateup" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=dateup"; echo '">';}else if($filter == "dateup" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=dateup">';} if($filter == "dateup"){echo "<strong>";}echo "Du plus récent au plus ancien"; if($filter == "dateup"){echo "</strong>";} echo '</a>';
+		echo " ";
+		if($string && $filter != "datedown" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=datedown"; echo '">';}else if($filter == "datedown" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=datedown">';} if($filter == "datedown"){echo "<strong>";}echo "Du plus ancien au plus récent"; if($filter == "datedown"){echo "</strong>";} echo '</a>';
+		?>
+
+		<hr>
+		<h1>Tous les concerts</h1>
 	 	<?php
 			$servername = 'localhost';
 			$username = 'root';
@@ -47,7 +178,30 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			$admin = 'administateur';
 			//echo $_SESSION['pseudo'];
 			//echo $admin;
-			$str = "SELECT id_concert FROM concert";
+			if($getsalle)
+			{
+				$str = "SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle'";
+			}
+			else if ($getville) {
+				$str = "SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'";
+			}
+			else if ($getcp) {
+				$str = "SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'";
+			}
+			else if ($getdepartement) {
+				$str = "SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'";
+			}
+			else if ($getnumdepartement) {
+				$str = "SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'";
+			}
+			else if ($getregion) {
+				$str = "SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'";
+			}
+			else
+			{
+				$str = "SELECT id_concert FROM concert";
+			}
+			
 			$result = mysqli_query($con, $str);
 			?>
 			<div id="concertsall">

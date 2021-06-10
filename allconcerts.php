@@ -46,6 +46,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			//echo "</br>";
 			parse_str($string);
 			$finalstring = explode("&", $string);
+			$filtre = " datec ASC";
 			//echo $finalstring[0];
 			//echo "</br>";
 			//echo $finalstring[1];
@@ -149,14 +150,32 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		echo "<br>";
 		//} else if {$filter == "artisteup"} else{}
 
-		if($string && $filter != "artisteup" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=artisteup"; echo '">';}else if($filter == "artisteup" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=artisteup">';} if($filter == "artisteup"){echo "<strong>";}echo "nom d'artiste croissant (de a à z) - Choix par défaut"; if($filter == "artisteup"){echo "</strong>";} echo '</a>';
+		if($string && $filter != "artisteup" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=artisteup"; echo '">';}else if($filter == "artisteup" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=artisteup">';} if($filter == "artisteup"){echo "<strong>";}echo "nom d'artiste croissant (de a à z)"; if($filter == "artisteup"){echo "</strong>";} echo '</a>';
 		echo " ";
 		if($string && $filter != "artistedown" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=artistedown"; echo '">';}else if($filter == "artistedown" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=artistedown">';} if($filter == "artistedown"){echo "<strong>";}echo "nom d'artiste décroissant (de z à a)"; if($filter == "artistedown"){echo "</strong>";} echo '</a>';
 		echo "<br>";
-		if($string && $filter != "dateup" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=dateup"; echo '">';}else if($filter == "dateup" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=dateup">';} if($filter == "dateup"){echo "<strong>";}echo "Du plus récent au plus ancien"; if($filter == "dateup"){echo "</strong>";} echo '</a>';
+		if($string && $filter != "dateup" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=dateup"; echo '">';}else if($filter == "dateup" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=dateup">';} if($filter == "dateup"){echo "<strong>";}echo "Du plus proche au plus éloigné dans le temps (par défaut)"; if($filter == "dateup"){echo "</strong>";} echo '</a>';
 		echo " ";
-		if($string && $filter != "datedown" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=datedown"; echo '">';}else if($filter == "datedown" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=datedown">';} if($filter == "datedown"){echo "<strong>";}echo "Du plus ancien au plus récent"; if($filter == "datedown"){echo "</strong>";} echo '</a>';
+		if($string && $filter != "datedown" && $finalstring[0] != "recherche=none"){echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=datedown"; echo '">';}else if($filter == "datedown" && $finalstring[0] != "recherche=none"){}else{echo '<a href="allconcerts.php?recherche=none&filter=datedown">';} if($filter == "datedown"){echo "<strong>";}echo "Du plus éloigné au plus proche dans le temps"; if($filter == "datedown"){echo "</strong>";} echo '</a>';
+
+		switch($filter)
+		{
+			case "artisteup":
+				$filtre = " nom_artiste ASC";
+				break;
+			case "artistedown":
+				$filtre = " nom_artiste DESC";
+				break;
+			case "dateup":
+				$filtre = " datec ASC";
+				break;
+			case "datedown":
+				$filtre = " datec DESC";
+				break;
+		}
 		?>
+
+
 
 		<hr>
 		<h1>Tous les concerts</h1>
@@ -180,26 +199,27 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			//echo $admin;
 			if($getsalle)
 			{
-				$str = "SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle'";
+				$str = sprintf("SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle' ORDER BY". $filtre ."");
+
 			}
 			else if ($getville) {
-				$str = "SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'";
+				$str = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville' ORDER BY". $filtre ."");
 			}
 			else if ($getcp) {
-				$str = "SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'";
+				$str = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp' ORDER BY". $filtre ."");
 			}
 			else if ($getdepartement) {
-				$str = "SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'";
+				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement' ORDER BY". $filtre ."");
 			}
 			else if ($getnumdepartement) {
-				$str = "SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'";
+				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement' ORDER BY". $filtre ."");
 			}
 			else if ($getregion) {
-				$str = "SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'";
+				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion' ORDER BY". $filtre ."");
 			}
 			else
 			{
-				$str = "SELECT id_concert FROM concert";
+				$str = sprintf("SELECT id_concert FROM concert ORDER BY". $filtre ."");
 			}
 			
 			$result = mysqli_query($con, $str);

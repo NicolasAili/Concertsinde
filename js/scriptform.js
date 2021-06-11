@@ -23,8 +23,11 @@ function getleave(identifiant)
                 }
                 if(data[0].test != 'nodata')
                 {
-                	$('#infos').css('visibility', 'visible');
-                	$('#infos').css('display', 'contents');
+                    //alert('ok2');
+                	$('#infosx').css('visibility', 'visible');
+                	$('#infosx').css('display', 'contents');
+                    $('#infos').css('visibility', 'visible');
+                    $('#infos').css('display', 'contents');
                     switch (identifiant)
                     {
                         case "salle":
@@ -567,5 +570,19 @@ function verifier()
     {
         $('#valider').attr("type", "submit");
         $('#valider').trigger('click');
+    }
+}
+
+function checkboxproblem()
+{
+    if($('input[name=mail]').is(':checked'))
+    {
+        $('#showmail').css('visibility', 'visible');
+        $('#showmail').css('display', 'contents');
+    }
+    else
+    {
+        $('#showmail').css('visibility', 'hidden');
+        $('#showmail').css('display', 'none');
     }
 }

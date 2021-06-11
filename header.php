@@ -73,6 +73,7 @@
 			<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 			<a href=".\nous.php" class="lisix">Qui sommes-nous ?</a>
 			<a href=".\mention.php" class="lisept">Mentions légales</a>
+			<a href=".\erreur.php" class="lisept">Signaler une erreur</a>
 		</div>
 	</div>
 </div>	
@@ -90,6 +91,7 @@
 		<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 		<a href=".\nous.php" class="lisix">Qui sommes-nous ?</a>
 		<a href=".\mention.php" class="lisept">Mentions légales</a>
+		<a href=".\erreur.php" class="lisept">Signaler une erreur</a>
 	</div>
 	<div class=logos>
 		<?php 

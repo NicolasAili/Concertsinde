@@ -42,12 +42,23 @@
 				$pays = $_POST['pays'];
 				$testvle = 0;
 
-				echo($departement);
+				echo($artiste);
 				echo "<br>";
-				echo($ville);
-				echo "<br>";
-				echo($ticket);
+				//echo($ville);
+				//echo "<br>";
+				//echo($ticket);
 
+				$sql = "SELECT datec FROM concert WHERE nom_artiste = '$artiste'";
+				$query = mysqli_query($con, $sql);
+				while($row = mysqli_fetch_array($query)) 
+				{
+					if($date == $row['datec'])
+					{
+						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de cliquer sur le bouton pour signaler une erreur', time() + 30, "/");
+						header("Location: ./allconcerts.php");
+						exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
+					}
+				}
 
 
 				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
@@ -273,7 +284,7 @@
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée
 				{
-					$insertartiste = "INSERT INTO artiste VALUES ('$artiste')";
+					$insertartiste = "INSERT INTO artiste (nom_artiste) VALUES ('$artiste')";
 					mysqli_query($con, $insertartiste);
 				}
 				/* Ferme le jeu de résultats */

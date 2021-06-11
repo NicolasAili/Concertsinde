@@ -234,7 +234,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 					$rowdpt['nom_departement'] = NULL;
 					$rowrgn['nom_pays'] = NULL;
 					$rowrgn['nom_region'] = NULL;
-					$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
+					$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
 					$resultx = mysqli_query($con, $str);
 					$row = mysqli_fetch_array($resultx);
 					if($row['ville_departement'])
@@ -330,6 +330,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						<div class="saad">Liens relatifs a l'evenement</div>
 						<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
 						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
+						<div class="saad">Date d'ajout du concert sur le site</div>
+						<div class="dateajout"> <?php echo  $row['date_ajout'] ?> </div> 
 						<form method="post" action="modifconcert.php" class="modif">
 							<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 							<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 

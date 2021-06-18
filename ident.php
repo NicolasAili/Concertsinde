@@ -15,27 +15,38 @@
 
 if (isset($_POST['inscription']))
 {
-    echo "bonjour";
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
-
 	if (strcmp($password, $cpassword) == 0)
 	{
         if (strlen($password) > 8 ) 
         {
             if (strlen($pseudo) < 16)
             {
-    			$sql = "SELECT pseudo FROM utilisateur WHERE pseudo = $pseudo";
+    			$sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo'";
     			$result = mysqli_query($con, $sql);
-    			if ($result == FALSE)
+                $ok = mysqli_fetch_array($result);
+    			if (!$ok)
     			{
     				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$password', NOW())";
     				mysqli_query($con, $sql);
     				header('Location: ./connexion.php');
     			}
-    			else{echo'Erreur, l\'utilisateur existe deja';}
+    			else
+                {
+                    echo'Erreur, l\'utilisateur existe deja';
+                }
+                echo "<br>";
+                echo $ok;
+                /*$sql = "SELECT pseudo FROM utilisateur";
+                $result = mysqli_query($con, $sql);
+                while()
+                {
+                    echo $ok['pseudo'];
+                }*/
+
             }
             else 
             {
@@ -50,7 +61,7 @@ if (isset($_POST['inscription']))
     }
 	else
 		{
-			header("Location: ./inscrire.php?message=Confirmation du mot de passe non valide, réessayer");
+			header("Location: ./inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer");
 		}
 }
 

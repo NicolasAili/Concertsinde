@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+?>
 <html>
 	<head>
 		<title>Recap</title>
@@ -42,8 +45,8 @@
 				$pays = $_POST['pays'];
 				$testvle = 0;
 
-				echo($artiste);
-				echo "<br>";
+				//echo($artiste);
+				//echo "<br>";
 				//echo($ville);
 				//echo "<br>";
 				//echo($ticket);
@@ -58,6 +61,15 @@
 						header("Location: ./allconcerts.php");
 						exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
 					}
+				}
+
+				if(isset($_SESSION['pseudo']))
+				{
+					$pseudo = $_SESSION['pseudo'];
+					$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+					$query = mysqli_query($con, $requestpseudo);
+					$row = mysqli_fetch_array($query);
+					$idpseudo = $row['id_user'];
 				}
 
 
@@ -342,7 +354,14 @@
 					$query = mysqli_query($con, $idsalle);
 					$row = mysqli_fetch_array($query);
 					$sle = $row['id_salle'];
-					$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$sle', NOW(), '$fb', '$ticket')";
+					if(isset($_SESSION['pseudo']))
+					{
+						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$artiste', '$sle', NOW(), '$fb', '$ticket', '$idpseudo')";
+					}
+					else
+					{
+						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$sle', NOW(), '$fb', '$ticket')";
+					}
 					mysqli_query($con, $sql);
 				}
 				else //concert en extérieur
@@ -353,7 +372,14 @@
 					$query = mysqli_query($con, $idext);
 					$row = mysqli_fetch_array($query);
 					$exte = $row['id_max'];
-					$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
+					if(isset($_SESSION['pseudo']))
+					{
+						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket', '$idpseudo')";
+					}
+					else
+					{
+						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
+					}
 					mysqli_query($con, $sql);
 				}
 				$test = "SELECT ville_departement FROM ville WHERE ville_id = $vle";

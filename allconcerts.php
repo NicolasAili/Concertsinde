@@ -24,6 +24,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	</header>
 	<body>	
 		<?php
+		$add = $_GET['add'];
+		$modif = $_GET['modif'];
 		$filter = $_GET['filter'];
 		$getsalle = $_GET['salle'];
 		$getville = $_GET['ville'];
@@ -217,6 +219,14 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			else if ($getregion) {
 				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion' ORDER BY". $filtre ."");
 			}
+			else if ($add)
+			{
+				$str = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add' ORDER BY". $filtre ."");
+			}
+			else if ($modif)
+			{
+				$str = sprintf("SELECT id_concert FROM concert WHERE user_modif = '$modif' ORDER BY". $filtre ."");
+			}
 			else
 			{
 				$str = sprintf("SELECT id_concert FROM concert ORDER BY". $filtre ."");
@@ -226,6 +236,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			?>
 			<div id="concertsall">
 				<?php
+				echo $str;
 				while($rowx = mysqli_fetch_array($result)) 
 				{
 					$idconcert = $rowx['id_concert'];
@@ -234,9 +245,21 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 					$rowdpt['nom_departement'] = NULL;
 					$rowrgn['nom_pays'] = NULL;
 					$rowrgn['nom_region'] = NULL;
-					$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
+					$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, user_ajout, user_modif, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
 					$resultx = mysqli_query($con, $str);
 					$row = mysqli_fetch_array($resultx);
+
+					$pseudoadd = $row['user_ajout'];
+					$pseudomodif= $row['user_modif'];
+
+					$str = "SELECT pseudo FROM utilisateur, concert WHERE user_ajout = '$pseudoadd' AND concert.user_ajout = utilisateur.id_user";
+					$resultx = mysqli_query($con, $str);
+					$rowadd = mysqli_fetch_array($resultx);
+
+					$str = "SELECT pseudo FROM utilisateur, concert WHERE user_modif = '$pseudomodif' AND concert.user_ajout = utilisateur.id_user";
+					$resultx = mysqli_query($con, $str);
+					$rowmodif = mysqli_fetch_array($resultx);
+
 					if($row['ville_departement'])
 					{
 						$filter = 1;
@@ -330,8 +353,10 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						<div class="saad">Liens relatifs a l'evenement</div>
 						<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
 						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
-						<div class="saad">Date d'ajout du concert sur le site</div>
+						<div class="saad">Autres infos</div>
 						<div class="dateajout"> <?php echo  $row['date_ajout'] ?> </div> 
+						<div class="ajout"> Ajouté par : <?php echo  $rowadd['pseudo'] ?> </div>
+						<div class="modif"> Dernière modification par : <?php echo  $rowmodif['pseudo'] ?> </div>
 						<form method="post" action="modifconcert.php" class="modif">
 							<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 							<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 

@@ -82,7 +82,7 @@
 					<h1> modifier un concert </h1>
 					<form method="post" id="connect" action="modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
-						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" >
+						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
 						<br>
 						<br>

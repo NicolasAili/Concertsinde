@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE html>*
+<?php
+    session_start();
+?>
 <html>
 	<head>
 		<title>Recap</title>
@@ -45,8 +48,7 @@
 			$intext = $_POST['intext'];
 			$intextpost = $_POST['intextpost'];
 
-			$artiste = $_POST['artiste'];
-			$artistepost = $_POST['artistepost'];
+			$artiste = $_POST['artistepost'];			
 
 			$testartiste = 0;
 			$date = $_POST['date'];
@@ -120,8 +122,13 @@
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
 
+			$pseudo = $_SESSION['pseudo'];
+			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+			$query = mysqli_query($con, $requestpseudo);
+			$row = mysqli_fetch_array($query);
+			$idpseudo = $row['id_user'];
 
-			if ($artiste != $artistepost)
+			if($_POST['artiste'])
 			{
 				setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 30, "/");
 				header("Location: ./allconcerts.php");
@@ -140,6 +147,11 @@
 				$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqldat);
 			}
+
+			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+			$query = mysqli_query($con, $requestpseudo);
+			$row = mysqli_fetch_array($query);
+			$idpseudo = $row['id_user'];
 
 			$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
 			$query = mysqli_query($con, $idville);
@@ -463,6 +475,11 @@
 				$sqltic = "UPDATE concert SET lien_ticket = '$ticket' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqltic);
 			}
+			echo $idpseudo;
+			echo ("<br>");
+			echo $idconcert;
+			$sql = "UPDATE concert SET user_modif = '$idpseudo' WHERE ID_concert = $idconcert";
+    		mysqli_query($con, $sql);
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
 		<?php
@@ -647,7 +664,7 @@
 					echo '<br>';
 					echo '<br>';
 				}				
-				if($artiste != $artistepost)
+				/*if($artiste != $artistepost)
 				{
 					echo "artiste modifié";
 					echo '<br>';
@@ -658,7 +675,7 @@
 					echo $artiste;
 					echo '<br>';
 					echo '<br>';
-				}				
+				}*/		
 				if($testsalle == 1 && $salle != NULL)
 				{
 					if($intext)

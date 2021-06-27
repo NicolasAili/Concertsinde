@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 <?php
     session_start();
 ?>
-<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8" />
@@ -16,6 +16,16 @@
 		<?php include('header.php'); ?>
 	</header>
 		<body>
+			<?php 
+			$servername = 'localhost';
+			$username = 'root';
+			$password = '';
+			$dbname = 'webbd';
+			//Connexion à la BDD
+			$con = mysqli_connect($servername, $username, $password, $dbname);
+			//Vérification de la connexion
+			?>
+			
 			<h1>Profil de <?php echo $_SESSION['pseudo']; ?> : </h1><hr />
 				<?php 
 				 	if(!empty($_GET['message'])) 
@@ -29,7 +39,7 @@
 			<p>Votre pseudo est : <?php echo $_SESSION['pseudo']; ?>, voulez-vous le modifier? </p>
 			</br>
 			<label for="pseudo">Nouveau pseudo:  </label> 
-			<input type="text" name="chpseudo" placeholder="Entrer nouveau pseudo"   id="pseudo" >
+			<input type="text" name="chpseudo" placeholder="Entrer nouveau pseudo"  id="pseudo" >
 			<input  type="submit" value="Modifier" name="modif_pseudo">
 			</br>
 			</br>
@@ -45,7 +55,17 @@
 			<input  type="submit" value="Modifier" name="modif_password">
 			</br>		
 			</form>
+		    <?php 
+		    $pseudo = $_SESSION['pseudo'];
+			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+			$query = mysqli_query($con, $requestpseudo);
+			$row = mysqli_fetch_array($query);
+			$idpseudo = $row['id_user'];
+			echo $idpseudo;?>
 
+			<?php echo '<a href="allconcerts.php?add='; echo $idpseudo; echo '">';?> Voir mes concerts ajoutés </a>
+			<?php echo '<a href="allconcerts.php?modif='; echo $idpseudo; echo '">';?> Voir mes concerts modifiés </a>
+			<!--<a href="allconcerts.php?filter=reset"> Voir mes concerts favoris </a>-->
 	
 		</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

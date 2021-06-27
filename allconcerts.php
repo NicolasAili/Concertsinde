@@ -355,8 +355,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
 						<div class="saad">Autres infos</div>
 						<div class="dateajout"> <?php echo  $row['date_ajout'] ?> </div> 
-						<div class="ajout"> Ajouté par : <?php echo  $rowadd['pseudo'] ?> </div>
-						<div class="modif"> Dernière modification par : <?php echo  $rowmodif['pseudo'] ?> </div>
+						<div class="ajout"> <?php if($rowadd['pseudo']){ echo "Ajouté par :"; echo  $rowadd['pseudo'];} else{echo "Ajouté par un anonyme";} ?> </div>
+						<div class="modif"><?php if($rowmodif['pseudo']){ echo "Dernière modification par :"; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> </div>
 						<form method="post" action="modifconcert.php" class="modif">
 							<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 							<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 

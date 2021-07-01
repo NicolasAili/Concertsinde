@@ -67,12 +67,24 @@
 			$fb = $_POST['fbpost'];
 			$ticket = $_POST['ticketpost'];
 			$action = $_POST['modsuppr'];
+			$pseudo = $_SESSION['pseudo'];
 			
 			if(isset($_SESSION['pseudo']) == null)
 			{
-				echo("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
-				echo ("<br />");
-				echo("Cliquez ici pour revenir à l'accueil");
+				if($action == 'Supprimer')
+				{
+					echo "Erreur: cette action est réservée aux administrateurs";
+				}
+				else if($action == 'Modifier')
+				{
+					echo("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
+					echo ("<br />");
+					echo("Cliquez ici pour revenir à l'accueil");
+				}
+				else
+				{
+					echo("Erreur inconnue, merci de contacter le support");
+				}
 			}
 			else
 			{
@@ -245,15 +257,20 @@
 				}
 				else if($action == 'Supprimer')
 				{
-					if($_SESSION['pseudo'] != 'administrateur')
-					{
-						echo "Erreur: cette action est réservée aux administrateurs";
-					}
-					else
+					$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+					$query = mysqli_query($con, $sql);
+					$row = mysqli_fetch_array($query);
+					$testadmin = $row['admin'];
+
+					if($testadmin == 1) 
 					{
 						$sql = "DELETE FROM Concert WHERE nom_artiste = '$artiste' AND datec = '$date' AND id_concert = '$idconcert'"; 
 						mysqli_query($con, $sql);
 						echo("concert supprimé");
+					}
+					else
+					{
+						echo "Erreur: cette action est réservée aux administrateurs";
 					}
 				}
 			}

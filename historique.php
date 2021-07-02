@@ -31,13 +31,22 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		_____________________________________________
 		page all concert 
 
-		(création d'un compte administrateur)
+		(création d'un compte administrateur) V
+		resoudre bug interieur>exterieur>interieur V 
 
-		1) création d'un bouton pour valider un concert + un autre pour le dévalider (réservé admin)
+		pré-requis: ajout table modif lorsque modification V
+		>detecter si rien n'a été modifié V
+
+
+
+		1) création d'un bouton pour valider un concert + un autre pour le dévalider (réservé admin)  V
+		> n'afficher les boutons que si admin/compte V
+
 		2) si concert validé > attribuer points de création et de modification 
 		> réfléchir au cas où un mec modifie une information juste
 		> réfléchir au cas des villes
 		> réfléchir au cas où la colonne modifiée l'a été par la personne qui a créé le concert
+		>comment différencier ce qui a été rentré manuellement de ce qui a été complété automatiquement comme pour la salle
 
 		3) création d'une icône pour afficher si le concert a été validé ou non
 		4) empêcher la modification d'un concert validé

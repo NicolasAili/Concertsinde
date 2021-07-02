@@ -33,10 +33,16 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		$getdepartement = $_GET['departement'];
 		$getnumdepartement = $_GET['numero'];
 		$getregion = $_GET['region'];
+		$pseudo = $_SESSION['pseudo'];
+
+		$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+		$query = mysqli_query($con, $sql);
+		$row = mysqli_fetch_array($query);
+		$testadmin = $row['admin'];
 
 		//$get = $_GET['filtre'];
 		$string = $_SERVER['QUERY_STRING'];
-			//echo $_SESSION['pseudo'];
+			
 			echo "</br>";
 			echo "</br>";
 			echo "</br>";
@@ -354,9 +360,9 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 						<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
 						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
 						<div class="saad">Autres infos</div>
-						<div class="dateajout"> <?php echo  $row['date_ajout'] ?> </div> 
-						<div class="ajout"> <?php if($rowadd['pseudo']){ echo "Ajouté par :"; echo  $rowadd['pseudo'];} else{echo "Ajouté par un anonyme";} ?> </div>
-						<div class="modif"><?php if($rowmodif['pseudo']){ echo "Dernière modification par :"; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> </div>
+						<div class="dateajout"> Concert ajouté le: <?php echo  $row['date_ajout'] ?> </div> 
+						<div class="ajout"> <?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> </div>
+						<div class="modif"><?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> </div>
 						<form method="post" action="modifconcert.php" class="modif">
 							<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 							<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
@@ -381,8 +387,22 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 								}
 							</style>
 							<div id="footer">
-								<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
-								<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
+								<?php
+								if ($pseudo)
+								{?>
+									<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+									<?php
+									if($testadmin == 1) 
+									{?>
+										<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
+										<input id="valider" type="submit" name="modsuppr" value="Valider">
+									<?php
+									}
+								}
+								else
+								{
+									echo "Vous devez être connectés afin de modifier un concert";
+								}?>
 							</div>
 						</form>
 					</div>

@@ -534,9 +534,10 @@ function checkboxmodif(identifiant)
                 $('#intdiv').css('visibility', 'visible');
                 $('#intdiv').css('display', 'contents');
                 $('#intext').val("int");
-                $('#ext').prop( "required", false );
-                $('#salle').prop( "required", true );
-                $('#pays').prop( "required", false );
+                $('#ext').prop( "required", false ); // ?
+                $('#extval').prop( "required", false ); //désactive obligation rentrer dénomination
+                $('#salle').prop( "required", true ); //salle obligée saisir
+                $('#pays').prop( "required", false ); //pays plus obligé de saisir
         break;
         case "ext":
                 $("#int").prop("checked", false);
@@ -555,21 +556,6 @@ function checkboxmodif(identifiant)
                 $('#salle').prop( "required", false );
                 $('#pays').prop( "required", false );
         break;
-    }
-}
-
-function verifier()
-{
-    var strpays = $("#pays").val();
-    var strregion = $("#region").val();
-    if(strregion.length > 0 && !strpays)
-    {
-        alert("Erreur, vous devez saisir le pays dont fait partie cette région");
-    }
-    else
-    {
-        $('#valider').attr("type", "submit");
-        $('#valider').trigger('click');
     }
 }
 

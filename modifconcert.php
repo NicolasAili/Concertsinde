@@ -50,6 +50,9 @@
 			{
 				echo "Erreur de connexion" .mysqli_connect_error();
 			}
+
+			require('php/error.php');
+
 			$idconcert = $_POST['idpost'];
 			$idsalle = $_POST['idsallepost'];
 			$artiste = $_POST['artistepost'];
@@ -68,23 +71,39 @@
 			$ticket = $_POST['ticketpost'];
 			$action = $_POST['modsuppr'];
 			$pseudo = $_SESSION['pseudo'];
+
+			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$testadmin = $row['admin'];
 			
 			if(isset($_SESSION['pseudo']) == null)
 			{
-				if($action == 'Supprimer')
+				if($action == 'Supprimer' || $action == 'Valider')
 				{
-					echo "Erreur: cette action est réservée aux administrateurs";
+					setcookie('contentMessage', 'Erreur: cette action est réservée aux administrateurs', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+					exit("Erreur: cette action est réservée aux administrateurs");
 				}
 				else if($action == 'Modifier')
 				{
-					echo("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
-					echo ("<br />");
-					echo("Cliquez ici pour revenir à l'accueil");
+					setcookie('contentMessage', 'Erreur: vous devez être connectés afin de pouvoir modifier un concert', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+					exit("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
+
 				}
 				else
 				{
-					echo("Erreur inconnue, merci de contacter le support");
+					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support, $action', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+					exit("Erreur inconnue, merci de contacter le support");
 				}
+			}
+			else if($testadmin != 1 AND $action == 'Valider' || $action == 'Supprimer')
+			{
+				setcookie('contentMessage', 'Erreur: cette action est réservée aux administrateurs', time() + 30, "/");
+				header("Location: ./allconcerts.php");
+				exit("Erreur: cette action est réservée aux administrateurs");
 			}
 			else
 			{
@@ -251,27 +270,27 @@
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input type="hidden" id="intext" name="intext" value=""> 
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
-						<input type="button" value="Enregister le concert" id="valider" onclick="verifier();" name="concert" href="">
+						<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
 					</form>
 				<?php
 				}
 				else if($action == 'Supprimer')
 				{
-					$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
-					$query = mysqli_query($con, $sql);
-					$row = mysqli_fetch_array($query);
-					$testadmin = $row['admin'];
-
-					if($testadmin == 1) 
-					{
-						$sql = "DELETE FROM Concert WHERE nom_artiste = '$artiste' AND datec = '$date' AND id_concert = '$idconcert'"; 
-						mysqli_query($con, $sql);
-						echo("concert supprimé");
-					}
-					else
-					{
-						echo "Erreur: cette action est réservée aux administrateurs";
-					}
+					$sql = "DELETE FROM Concert WHERE nom_artiste = '$artiste' AND datec = '$date' AND id_concert = '$idconcert'"; 
+					mysqli_query($con, $sql);
+					setcookie('contentMessage', 'Concert supprimé', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+					exit("Concert supprimé");
+				}
+				else if($action == 'Valider')
+				{
+					//	
+				}
+				else
+				{
+					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+					exit("Erreur inconnue, merci de contacter le support");
 				}
 			}
 			?>
@@ -279,6 +298,9 @@
 	<script>
 		$('#connect').submit(function () 
 	{
+		var strpays = $("#pays").val();
+    	var strregion = $("#region").val();
+
 	    var strdate = $("#date").val();
 	    var datesaisie = new Date(strdate).getTime()
 
@@ -294,16 +316,21 @@
         if(dateinf < Date.now())
         {
             alert("Erreur, date saisie inférieure à la date actuelle");
-            close = 1;
             return false;
         }
         if(datesaisie > datesup)
         {
             alert("Erreur, impossible de saisir des concerts plus de deux ans en avance");
-            close = 1;
             return false;
         }
-    });
+
+
+	    if(strregion.length > 0 && !strpays)
+	    {
+	        alert("Erreur, vous devez saisir le pays dont fait partie cette région");
+	        return false;
+	    }
+    	});
      </script>
 	
 	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->

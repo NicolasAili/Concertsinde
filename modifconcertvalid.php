@@ -148,6 +148,32 @@
     			mysqli_query($con, $sqldat);
 			}
 
+			$testmodif = 0;
+
+			$sql = "SELECT adresse FROM salle WHERE nom_salle = '$salle'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$modifadresse = $row['adresse'];
+
+			$sql = "SELECT nom_ville FROM ville, salle WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id ";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$modifville = $row['nom_ville'];
+
+			/*echo "_______________________";
+			echo "<br>";
+			echo $intext;
+			echo $modifadresse;
+			echo "<br>";
+			echo $adresse;
+			echo "<br>";
+			echo "<br>";
+			echo $modifville;
+			echo "<br>";
+			echo "_______________________";*/
+
+
+
 			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $requestpseudo);
 			$row = mysqli_fetch_array($query);
@@ -448,21 +474,43 @@
     				mysqli_query($con, $sqlcpex);
     			}
 			}
+
 			if($adresse != $adressepost)
 			{
 				$testadresse = 1;
-				if($testsalle == 1)
+				if($salle)
 				{
-					$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
-    				mysqli_query($con, $sqladr);
-    			}
-    			else if($testsalle == 0)
-				{
-					$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
-    				mysqli_query($con, $sqladrex);
-    			}
-
+					if($testsalle == 1)
+					{
+						$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
+	    				mysqli_query($con, $sqladr);
+	    			}
+	    			else if($testsalle == 0)
+					{
+						$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
+	    				mysqli_query($con, $sqladrex);
+	    			}
+	    		}
+	    		else
+	    		{
+	    			$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE nom_ext = '$ext'";
+	    			mysqli_query($con, $sqladr);
+	    		}
 			}
+			else if($adresse == $adressepost && $salle != $sallepost)
+			{
+					if($testsalle == 1)
+					{
+						$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
+	    				mysqli_query($con, $sqladr);
+	    			}
+	    			else if($testsalle == 0)
+					{
+						$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
+	    				mysqli_query($con, $sqladrex);
+	    			}
+			}
+
 			if($fb != $fbpost)
 			{
 				$testfb = 1;
@@ -475,10 +523,10 @@
 				$sqltic = "UPDATE concert SET lien_ticket = '$ticket' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqltic);
 			}
-			echo $idpseudo;
+			/*echo $idpseudo;
 			echo ("<br>");
-			echo $idconcert;
-			$sql = "UPDATE concert SET user_modif = '$idpseudo' WHERE ID_concert = $idconcert";
+			echo $idconcert;*/
+			$sql = "UPDATE concert SET user_modif = '$idpseudo', date_modif = NOW() WHERE id_concert = $idconcert";
     		mysqli_query($con, $sql);
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
@@ -582,6 +630,70 @@
 				<a href="allconcerts.php"> retour en arriere </a>
 				<br>
 				<?php
+				if($date == $datepost)
+				{
+					//echo "1ok";
+					if ($heure == $heurepost) 
+					{
+						//echo "2ok";
+						if ($ville == $villepost) 
+						{
+							//echo "3ok";
+							if ($testcp != 1) 
+							{
+								//echo "4ok";
+								if ($testadresse != 1) 
+								{
+									//echo "5ok";
+									if ($testfb != 1) 
+									{
+										//echo "6ok";
+										if ($ticket == $ticketpost) 
+										{
+											//echo "7ok";
+											if ($testsalle != 1) 
+											{
+												//echo "8ok";
+												if ($ext == $extpost) 
+												{
+													//echo "9ok";
+													//echo "<br>";
+													//echo $intext;
+													//echo "<br>";
+													//echo $intextpost;
+													if ($departement == $departementpost || $departement == NULL) 
+													{
+														//echo "10ok";
+														if ($region == $regionpost || $region == NULL) 
+														{
+															//echo "11ok";
+															if ($intext == $intextpost || $intext == NULL) 
+															{
+																setcookie('contentMessage', 'Erreur: aucun champ modifié', time() + 30, "/");
+																header("Location: ./allconcerts.php");
+																exit("Erreur: aucun champ modifié");
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				$sql = "INSERT INTO modification (id_concert, id_user) VALUES ('$idconcert', '$idpseudo')";
+				mysqli_query($con, $sql);
+
+
+				$sql = "SELECT MAX(id) AS id_max FROM modification"; //on recupere l'ID le plus haut 
+  				$query = mysqli_query($con, $sql);
+  				$row = mysqli_fetch_array($query);
+				$idmodif = $row['id_max'];
+
 				if($date != $datepost)
 				{
 					echo "date modifiée";
@@ -594,6 +706,8 @@
 					echo $date;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET datec = '$date' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 				if ($heure != $heurepost)
 				{
@@ -606,19 +720,26 @@
 					echo $heure;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET heurec = '$heure' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 
 				if($ville != $villepost)
 				{
-					echo "ville modifiée";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					echo $villepost;
-					echo '<br>';
-					echo "nouvelle valeur : ";
-					echo $ville;
-					echo '<br>';
-					echo '<br>';
+					if($ville != $modifville)
+					{
+						echo "ville modifiée";
+						echo '<br>';
+						echo "ancienne valeur : ";
+						echo $villepost;
+						echo '<br>';
+						echo "nouvelle valeur : ";
+						echo $ville;
+						echo '<br>';
+						echo '<br>';
+						$sql = "UPDATE modification SET ville = '$ville' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				}
 				}
 				if($testcp == 1)
 				{
@@ -630,17 +751,24 @@
 					echo $cp;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET code_postal = '$cp' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}	
-				if($testadresse == 1)
+				if($adresse != $adressepost)
 				{
-					echo "adresse modifiée";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					test_empty($adressepost);
-					echo "nouvelle valeur : ";
-					echo $adresse;
-					echo '<br>';
-					echo '<br>';
+					if($adresse != $modifadresse)
+					{
+						echo "adresse modifiée";
+						echo '<br>';
+						echo "ancienne valeur : ";
+						test_empty($adressepost);
+						echo "nouvelle valeur : ";
+						echo $adresse;
+						echo '<br>';
+						echo '<br>';
+						$sql = "UPDATE modification SET adresse = '$adresse' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				}
 				}
 				if($testfb == 1)
 				{
@@ -652,6 +780,8 @@
 					echo $fb;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET lien_fb = '$fb' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 				if($ticket != $ticketpost)
 				{
@@ -663,6 +793,8 @@
 					echo $ticket;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET lien_ticket = '$ticket' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}				
 				/*if($artiste != $artistepost)
 				{
@@ -694,6 +826,8 @@
 					echo $salle;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET salle = '$salle' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 				if($ext != $extpost && $ext != NULL)
 				{
@@ -712,17 +846,21 @@
 					echo "nouvelle valeur : ";
 					echo $ext;
 					echo '<br>';
+					$sql = "UPDATE modification SET denomination = '$ext' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 				if($intext != $intextpost && $intext != NULL)
 				{
-					if($intext == "int")
+					/*if($intext == "int")
 					{
 						echo "passage du concert d'exterieur en interieur";
 					}
 					else
 					{
 						echo "passage du concert d'interieur en exterieur";
-					}
+					}*/
+					$sql = "UPDATE modification SET intext = '$intext' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 
 				if($departement != $departementpost && $departement != NULL) //modification
@@ -748,6 +886,8 @@
 						echo '<br>';
 						echo '<br>';
 					}
+					$sql = "UPDATE modification SET departement = '$departement' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 				if($region != $regionpost && $region != NULL)
 				{
@@ -773,6 +913,8 @@
 					echo $pays;
 					echo '<br>';
 					echo '<br>';
+					$sql = "UPDATE modification SET region = '$region', pays = '$pays' WHERE id = $idmodif"; 
+   					$query = mysqli_query($con, $sql);
 				}
 				?>
 			</div>

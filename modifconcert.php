@@ -76,6 +76,11 @@
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 			$testadmin = $row['admin'];
+
+			$sql = "SELECT valide FROM concert WHERE id_concert = '$idconcert'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$valide = $row['valide'];
 			
 			if(isset($_SESSION['pseudo']) == null)
 			{
@@ -94,7 +99,7 @@
 				}
 				else
 				{
-					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support, $action', time() + 30, "/");
+					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 30, "/");
 					header("Location: ./allconcerts.php");
 					exit("Erreur inconnue, merci de contacter le support");
 				}
@@ -109,7 +114,13 @@
 			{
 				if($action == 'Modifier')
 				{
-						?>
+					if($valide == 1 && $testadmin != 1)
+					{
+						setcookie('contentMessage', 'Erreur: il est interdit de modifier un concert validé', time() + 30, "/");
+						header("Location: ./allconcerts.php");
+						exit("Erreur: il est interdit de modifier un concert validé");
+					}
+					?>
 					<h1> modifier un concert </h1>
 					<form method="post" id="connect" action="modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
@@ -271,6 +282,10 @@
 						<input type="hidden" id="intext" name="intext" value=""> 
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
+						<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
+					</form>
+					<form method="post" action="allconcerts.php">
+    					<button type="submit">Annuler</button>
 					</form>
 				<?php
 				}
@@ -284,7 +299,168 @@
 				}
 				else if($action == 'Valider')
 				{
-					//	
+					$testmodif = 0;
+
+					$sql = "SELECT user_ajout FROM concert WHERE id_concert = '$idconcert'";
+					$query = mysqli_query($con, $sql);
+  					$row = mysqli_fetch_array($query);
+					$userajout = $row['user_ajout'];
+
+					$sql = "SELECT pseudo FROM utilisateur WHERE ID_user = '$userajout'";
+					$query = mysqli_query($con, $sql);
+  					$row = mysqli_fetch_array($query);
+					$pseudoajout = $row['pseudo'];
+
+					$sql = "SELECT points_session, points FROM utilisateur WHERE ID_user = '$userajout'";
+					$query = mysqli_query($con, $sql);
+  					$row = mysqli_fetch_array($query);
+					$pointssession = $row['points_session'];
+					$points = $row['points'];
+
+					$sql = "SELECT datec, heure, intext, nom_salle, nom_ext, adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays, lien_fb, lien_ticket FROM concert, salle, ville, departement, region, pays WHERE  concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND concert.id_concert = '$idconcert'";
+					$query = mysqli_query($con, $sql);
+					$rowx = mysqli_fetch_array($query);
+
+
+					$sql = "SELECT * FROM modification WHERE id_concert = '$idconcert'";
+					$query = mysqli_query($con, $sql);
+					
+					while($row = mysqli_fetch_array($query))
+					{
+						$idpseudo = $row['id_user'];
+
+						$sqlmodif = "SELECT pseudo FROM utilisateur WHERE ID_user = '$idpseudo'";
+						$querymodif = mysqli_query($con, $sqlmodif);
+	  					$rowmodif = mysqli_fetch_array($querymodif);
+						$pseudomodif = $rowmodif['pseudo'];
+
+						$sqlpts = "SELECT points_session, points FROM utilisateur WHERE ID_user = '$idpseudo'";
+						$querypts = mysqli_query($con, $sqlpts);
+	  					$rowpts = mysqli_fetch_array($querypts);
+						$pointssession = $rowpts['points_session'];
+						$points = $rowpts['points'];
+						$pointscalcul = $pointssession;
+
+						if($idpseudo != $userajout)
+						{
+							if($rowx['datec'] == $row['datec'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['heure'] == $row['heurec'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['intext'] == $row['intext'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['nom_salle'] && $rowx['nom_salle'] == $row['salle'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['nom_ext'] && $rowx['nom_ext'] == $row['denomination'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['adresse'] == $row['adresse'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['nom_ville'] == $row['ville'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['ville_code_postal'] == $row['code_postal'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['nom_departement'] == $row['departement'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['nom_region'] == $row['region'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['nom_pays'] == $row['pays'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['lien_fb'] == $row['lien_fb'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+							if($rowx['lien_ticket'] == $row['lien_ticket'])
+							{
+								$pointssession = $pointssession + 1;
+								$points = $points + 1;
+							}
+						}
+
+						$sql = "UPDATE utilisateur SET points_session = '$pointssession', points = '$points' WHERE ID_user = '$idpseudo'";
+						$queryinspts = mysqli_query($con, $sql);
+
+						$pointscalcul = $pointssession - $pointscalcul;
+						if ($pointscalcul > 0) 
+						{
+							echo $pointscalcul;
+							echo " point(s) de modification attribué(s) à : ";
+							echo $pseudomodif;
+							echo "<br>";
+							$testmodif = 1;
+						}
+					}
+
+					if($testmodif == 0)
+					{
+						$pointssession = $pointssession + 5;
+						$points = $points + 5;
+					}
+					else
+					{
+						$pointssession = $pointssession + 3;
+						$points = $points + 3;
+					}
+
+					$sql = "UPDATE utilisateur SET points_session = '$pointssession', points = '$points' WHERE ID_user = '$userajout'";
+					$query = mysqli_query($con, $sql);
+
+					if($testmodif == 0)
+					{
+						echo "5 points d'ajout crédités à : ";
+					}
+					else
+					{
+						echo "3 points d'ajout crédités à : ";
+					}
+					echo $pseudoajout;
+					echo "<br>";
+
+					$sql = "UPDATE concert SET valide = '1' WHERE concert.id_concert = '$idconcert'";
+					$queryvld = mysqli_query($con, $sql);
+
+					?><a href="allconcerts.php"> retour en arriere </a><?php
+
+					/*setcookie('contentMessage', 'Concert validé avec succès !', time() + 30, "/");
+					header("Location: ./allconcerts.php");
+					exit("Concert validé avec succès !");*/
+				}
+				else if($action = 'probleme')
+				{
+					//
 				}
 				else
 				{

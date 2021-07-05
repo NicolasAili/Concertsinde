@@ -519,6 +519,7 @@ function checkbox(identifiant)
 
 function checkboxmodif(identifiant)
 {
+    intextpost = $("#intextpost").val();
     switch (identifiant)
     {
         case "int":
@@ -533,7 +534,14 @@ function checkboxmodif(identifiant)
                 $('#inthiddiv').css('display', 'contents');
                 $('#intdiv').css('visibility', 'visible');
                 $('#intdiv').css('display', 'contents');
-                $('#intext').val("int");
+                if (intextpost == identifiant)
+                {
+                    $('#intext').val('');
+                }
+                else
+                {
+                    $('#intext').val("int");
+                }
                 $('#ext').prop( "required", false ); // ?
                 $('#extval').prop( "required", false ); //désactive obligation rentrer dénomination
                 $('#salle').prop( "required", true ); //salle obligée saisir
@@ -550,8 +558,15 @@ function checkboxmodif(identifiant)
                 $('#exthiddiv').css('visibility', 'visible');
                 $('#exthiddiv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'visible');
-                $('#extdiv').css('display', 'contents');
-                $('#intext').val("ext");
+                $('#extdiv').css('display', 'contents')
+                if (intextpost == identifiant)
+                {
+                    $('#intext').val('');
+                }
+                else
+                {
+                    $('#intext').val("ext"); 
+                }
                 $('#extval').prop( "required", true );
                 $('#salle').prop( "required", false );
                 $('#pays').prop( "required", false );

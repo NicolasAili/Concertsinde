@@ -578,12 +578,14 @@ function checkboxproblem()
 {
     if($('input[name=mail]').is(':checked'))
     {
-        $('#showmail').css('visibility', 'visible');
-        $('#showmail').css('display', 'contents');
+        $('#showmail').css('visibility', 'hidden');
+        $('#showmail').css('display', 'none');
+        $('#mailsuivi').val("0");
     }
     else
     {
-        $('#showmail').css('visibility', 'hidden');
-        $('#showmail').css('display', 'none');
+        $('#showmail').css('visibility', 'visible');
+        $('#showmail').css('display', 'contents');
+        $('#mailsuivi').val("1");
     }
 }

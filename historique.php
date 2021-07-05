@@ -58,8 +58,6 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 		page erreur modifier
 
-		bouton pour concert validé mais erreur > page super admin > mettre les colonnes problèmes
-
 		n'afficher que les concerts à venir V
 
 		______________________________________________

@@ -27,8 +27,8 @@ form
 
 #showmail
 {
-  visibility: hidden;
-  display: none;
+  visibility: visible;
+  display: contents;
 }
 
 .input x

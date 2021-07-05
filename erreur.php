@@ -50,23 +50,24 @@
 				<legend>Rapporter un problème</legend>
 					<p>
 						<label for="probleme">Quelle est la nature du problème rencontré?</label><br />
-						<textarea name="probleme" id="probleme" cols="40" rows="5"></textarea>
+						<textarea name="probleme" id="probleme" cols="40" rows="5" required="true"></textarea>
 					</p>
 					<p>
-						<label for="non">Dans le cas d'un problème technique, pourriez-vous décrire les étapes qui ont condui à l'apparition du problème ?</label><br />
+						<label for="etapes">Dans le cas d'un problème technique, pourriez-vous décrire les étapes qui ont conduit à l'apparition du problème ?</label><br />
 						<textarea name="etapes" id="etapes" cols="40" rows="5"></textarea>
 					</p>
 					<p>
-						<label for="non">Si vous souhaitez ajouter quoi que ce soit</label><br />
+						<label for="ajout">Si vous souhaitez ajouter quoi que ce soit d'autre</label><br />
 						<textarea name="ajout" id="ajout" cols="40" rows="5"></textarea>
 					</p>
-					Cochez cette case si vous souhaitez être alertés par mail de la résolution du problème ou si vous souhaitez une réponse quant au problème rencontré
+					Cochez cette case si vous ne souhaitez <strong> pas </strong> être contactés par mail relativement à ce problème (avertissement de la résolution du problème, ou demande de détails supplémentaires ou autre...)
 					<br>
 					<input type="checkbox" id="mail" name="mail" onclick="checkboxproblem();">
 					<div id=showmail>
 						<?php if(isset($_SESSION['pseudo']) == null)
 						{
-							echo "Il semble que vous ne soyez pas connectés, saisissez votre mail ou connectez-vous";?>
+							echo "<br>";
+							echo "Il semble que vous ne soyez pas connectés, saisissez votre mail ci-dessous ou connectez-vous";?>
 							<input type="mail" name="mailinput" id="mailinput" value=""><?php
 						}
 						?>
@@ -80,7 +81,8 @@
 					{?>
 						<input type="hidden" id="pseudo" name="pseudo" value="anonyme"> <?php
 					}?>
-					
+
+					<input type="hidden" id="mailsuivi" name="mailsuivi" value="1"> 
 					
 			</fieldset>
 			<p>	

@@ -459,8 +459,57 @@
 					exit("Concert validé avec succès !");*/
 				}
 				else if($action = 'probleme')
-				{
-					//
+				{?>
+					<form action="erreursubmit.php" method="post">
+						Sur quel(s) champ(s) pensez-vous qu'il y a erreur ?
+						<input type="checkbox" id="artiste" name="artiste" value="artiste">
+						<label for="artiste">artiste</label>
+						<input type="checkbox" id="date" name="date" value="date">
+						<label for="date">date</label>
+						<input type="checkbox" id="heure" name="heure" value="heure">
+						<label for="heure">heure</label>
+						<input type="checkbox" id="salle" name="salle" value="salle/denomination">
+						<label for="salle">salle</label>
+						<input type="checkbox" id="ville" name="ville" value="ville">
+						<label for="ville">ville</label>
+						<input type="checkbox" id="cp" name="cp" value="code_postal">
+						<label for="cp">code_postal</label>
+						<input type="checkbox" id="departement" name="departement" value="departement">
+						<label for="departement">departement</label>
+						<input type="checkbox" id="region" name="region" value="region">
+						<label for="region">region</label>
+						<input type="checkbox" id="pays" name="pays" value="pays">
+						<label for="pays">pays</label>
+						<input type="checkbox" id="adresse" name="adresse" value="adresse">
+						<label for="adresse">adresse</label>
+						<input type="checkbox" id="lien_fb" name="lien_fb" value="lien de l'evenement">
+						<label for="lien_fb">lien de l'evenement</label>
+						<input type="checkbox" id="lien_ticket" name="lien_ticket" value="lien vers la billetterie">
+						<label for="lien_ticket">lien vers la billetterie</label>
+						<input type="checkbox" id="autre" name="autre" value="autre chose">
+						<label for="autre">autre</label>
+
+						<p>
+							<label for="probleme">Dans ce champ, précisez les valeurs des champs du concert que vous pensez être faux, apportez des précisions ou bien décrivez votre problème s'il n'est pas relatif aux champs du concert. N'hésitez pas à fournir le plus de détails possible</label><br />
+							<textarea name="probleme" id="probleme" cols="40" rows="5"></textarea>
+						</p>
+						<p>
+							<label for="ajout">Si vous souhaitez ajouter quoi que ce soit</label><br />
+							<textarea name="ajout" id="ajout" cols="40" rows="5"></textarea>
+						</p>
+
+						Cochez cette case si vous ne souhaitez <strong> pas </strong> être contactés par mail relativement à ce problème (avertissement de la résolution du problème, ou demande de détails supplémentaires ou autre...)
+						<br>
+						<input type="checkbox" id="mail" name="mail" onclick="checkboxproblem();">
+
+						<input type="hidden" id="idconcert" name="idconcert" <?php echo 'value="' . $idconcert . '"' ?>>
+						<input type="hidden" id="pseudo" name="pseudo" <?php echo 'value="' . $_SESSION['pseudo'] . '"' ?>>
+						<input type="hidden" id="mailsuivi" name="mailsuivi" value="1"> 
+						<input type="submit" value="Envoyer" />
+					</form>
+
+
+					<?php
 				}
 				else
 				{

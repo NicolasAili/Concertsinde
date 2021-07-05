@@ -56,7 +56,7 @@
 		{
 			echo $row[0];	
 		}
-		$sql = "SELECT id_concert FROM concert, artiste WHERE concert.nom_artiste = artiste.Nom_artiste AND artiste.Nom_artiste = '$artiste' AND concert.datec > NOW()";
+		$sql = "SELECT id_concert FROM concert, artiste WHERE concert.nom_artiste = artiste.Nom_artiste AND artiste.Nom_artiste = '$artiste' AND concert.datec >= NOW()";
 		$result = mysqli_query($con, $sql);
 		$row = mysqli_fetch_array($result);
 		?>

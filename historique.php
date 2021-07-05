@@ -42,15 +42,25 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		1) création d'un bouton pour valider un concert + un autre pour le dévalider (réservé admin)  V
 		> n'afficher les boutons que si admin/compte V
 
-		2) si concert validé > attribuer points de création et de modification 
-		> réfléchir au cas où un mec modifie une information juste
-		> réfléchir au cas des villes
-		> réfléchir au cas où la colonne modifiée l'a été par la personne qui a créé le concert
-		>comment différencier ce qui a été rentré manuellement de ce qui a été complété automatiquement comme pour la salle
+		2) si concert validé > attribuer points de création et de modification V
+		>réfléchir à la modification (si ville modifiée avec valeurs récupérées > ne pas ajouter de points) > voir problème int ext (int ext pas modifié) V
+		> réfléchir au cas où un mec modifie une information juste > SELECT la bonne réponse et attribuer points
+		> réfléchir au cas des villes > réglé
+		> réfléchir au cas où la colonne modifiée l'a été par la personne qui a créé le concert > IF de merde
+		>comment différencier ce qui a été rentré manuellement de ce qui a été complété automatiquement comme pour la salle > réglé
 
-		3) création d'une icône pour afficher si le concert a été validé ou non
-		4) empêcher la modification d'un concert validé
-		5) création d'un filtre pour afficher les concerts validés/non validés
+
+		lorsque validé, eventuellement afficher qui a gagné des points et sur quelle colonne V
+
+		4) empêcher la modification d'un concert validé V
+		3) création d'une icône pour afficher si le concert a été validé ou non V 
+		5) création d'un filtre pour afficher les concerts validés/non validés V 
+
+		page erreur modifier
+
+		bouton pour concert validé mais erreur > page super admin > mettre les colonnes problèmes
+
+		n'afficher que les concerts à venir V
 
 		______________________________________________
 		Profil:
@@ -66,6 +76,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 		1) classement session en cours (afficher session en cours)
 		2) classement général
+
+		____________________________________________________
+		bugs à régler
+		>lorsque passage int à ext puis int, ça dit "passage ext>int"
+		>lorsqu'on passe ext à int et qu'on met la même adresse, ça la prend pas en compte
 
 	</body>
 </html>

@@ -71,13 +71,13 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		____________________________________________________
 		page hall of fame:
 
-		1) classement session en cours (afficher session en cours)
-		2) classement général
+		1) classement session en cours (afficher session en cours) X
+		2) classement général X
 
 		____________________________________________________
 		bugs à régler
-		>lorsque passage int à ext puis int, ça dit "passage ext>int"
-		>lorsqu'on passe ext à int et qu'on met la même adresse, ça la prend pas en compte
+		>lorsque passage int à ext puis int, ça dit "passage ext>int" X
+		>lorsqu'on passe ext à int et qu'on met la même adresse, ça la prend pas en compte X
 
 	</body>
 </html>

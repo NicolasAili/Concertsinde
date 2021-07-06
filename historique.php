@@ -56,18 +56,17 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 		3) création d'une icône pour afficher si le concert a été validé ou non V 
 		5) création d'un filtre pour afficher les concerts validés/non validés V 
 
-		page erreur modifier
+		page erreur modifier V 
 
 		n'afficher que les concerts à venir V
 
 		______________________________________________
 		Profil:
 
-		1) voir ses points pour la session en cours
-		2) voir ses points totaux
-		3) voir ses concerts ajoutés
-		4) voir ses concerts modifiés
-		5) détail des points
+		1) voir ses points pour la session en cours X
+		2) voir ses points totaux X
+		3) voir ses concerts ajoutés V
+		4) voir ses concerts modifiés V
 
 		____________________________________________________
 		page hall of fame:

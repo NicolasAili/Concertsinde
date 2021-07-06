@@ -181,7 +181,6 @@
 									<br>
 								</div>
 								<div id="inthiddiv">
-									<br>
 									<label for="salle">Salle : </label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
 									<div id="res"> </div>
@@ -283,6 +282,8 @@
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
 						<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
+						<input type="button" value="Effacer tous les champs" onclick="erase();">
+						<input type="hidden" id="resetform">
 					</form>
 					<form method="post" action="allconcerts.php">
     					<button type="submit">Annuler</button>

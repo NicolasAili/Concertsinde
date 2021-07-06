@@ -387,7 +387,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			}
 			else
 			{
-				$str = sprintf("SELECT id_concert FROM concert ". $archivesql ." ORDER BY". $filtre ."");
+				$str = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
 			}
 			
 			$result = mysqli_query($con, $str);

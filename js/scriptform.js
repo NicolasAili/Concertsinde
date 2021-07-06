@@ -519,11 +519,13 @@ function checkbox(identifiant)
 
 function checkboxmodif(identifiant)
 {
+    console.log(identifiant);
     intextpost = $("#intextpost").val();
     switch (identifiant)
     {
         case "int":
                 $("#ext").prop("checked", false);
+                $("#int").prop("checked", true);
                 $("#int").prop("disabled", true);
                 $("#ext").prop("disabled", false);
                 $('#extdiv').css('visibility', 'hidden');
@@ -549,6 +551,7 @@ function checkboxmodif(identifiant)
         break;
         case "ext":
                 $("#int").prop("checked", false);
+                $("#ext").prop("checked", true);
                 $("#ext").prop("disabled", true);
                 $("#int").prop("disabled", false);
                 $('#intdiv').css('visibility', 'hidden');
@@ -588,4 +591,75 @@ function checkboxproblem()
         $('#showmail').css('display', 'contents');
         $('#mailsuivi').val("1");
     }
+}
+
+function reinitialiser()
+{
+    checkavant = 0;
+    checkapres = 0;
+
+    if($('input[name=int]').is(':checked'))
+    {
+        check = 1;
+    }
+    else if ($('input[name=ext]').is(':checked')) 
+    {
+        check = 2;
+    }
+    $("#resetform").attr("type", "reset");
+    $("#resetform").trigger('click');
+    $( "#salle" ).trigger( "blur" );
+    $( "#ville" ).trigger( "blur" );
+    $( "#departement" ).trigger( "blur" );
+    $( "#region" ).trigger( "blur" );
+    $("#resetform").attr("type", "hidden");
+    if($('input[name=int]').is(':checked'))
+    {
+        checkapres = 1;
+    }
+    else if ($('input[name=ext]').is(':checked')) 
+    {
+        checkapres = 2;
+    }
+
+    console.log(checkavant);
+    console.log(checkapres);
+    if(checkavant != checkapres)
+    {
+        if(checkapres == 1)
+        {
+            $("#int").trigger('click');
+        }
+        else if(checkapres == 2)
+        {
+            $("#ext").trigger('click');
+        }
+    }
+}
+
+function erase()
+{
+    $('#date').val('');
+    $('#heure').val('');
+    if($('input[name=int]').is(':checked'))
+    {
+        $('#salle').val('');
+    }
+    else if ($('input[name=ext]').is(':checked')) 
+    {
+        $('#extval').val('');
+    }
+    $('#ville').val('');
+    $('#cp').val('');
+    $('#cp').attr("placeholder", '');
+    $('#departement').val('');
+    $('#departement').attr("placeholder", '');
+    $('#region').val('');
+    $('#region').attr("placeholder", '');
+    $('#pays').val('');
+    $('#pays').attr("placeholder", '');
+    $('#ticket').val('');
+    $('#adresse').val('');
+    $('#adresse').attr("placeholder", '');
+    $('#fb').val('');
 }

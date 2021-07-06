@@ -379,11 +379,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 			}
 			else if ($add)
 			{
-				$str = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add' ORDER BY". $filtre ."");
+				$str = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'". $archivesql ."");
 			}
 			else if ($modif)
 			{
-				$str = sprintf("SELECT id_concert FROM concert WHERE user_modif = '$modif' ORDER BY". $filtre ."");
+				$str = sprintf("SELECT DISTINCT id_concert FROM modification WHERE id_user = '$modif'". $archivesql ."");
 			}
 			else
 			{

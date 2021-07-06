@@ -71,6 +71,7 @@
 			<!--<a href=".\villes.php" class="litrois">Villes</a>-->
 			<!--<a href=".\pays.php" class="liquatre">Pays</a>-->
 			<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
+			<a href=".\classement.php" class="licinq">Meilleurs contributeurs</a>
 			<a href=".\nous.php" class="lisix">Qui sommes-nous ?</a>
 			<a href=".\mention.php" class="lisept">Mentions légales</a>
 			<a href=".\erreur.php" class="lisept">Signaler une erreur</a>

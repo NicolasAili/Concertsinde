@@ -61,10 +61,29 @@
 			$query = mysqli_query($con, $requestpseudo);
 			$row = mysqli_fetch_array($query);
 			$idpseudo = $row['id_user'];
-			echo $idpseudo;?>
+			
+			$sql = "SELECT date_debut, date_fin FROM session WHERE actif = '1'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$sessiondebut = $row['date_debut'];
+			$sessionfin = $row['date_fin'];
+
+			$sql = "SELECT points_session, points FROM utilisateur WHERE ID_user = '$idpseudo'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$points_session = $row['points_session'];
+			$points = $row['points'];
+
+
+			?>
 
 			<?php echo '<a href="allconcerts.php?add='; echo $idpseudo; echo '">';?> Voir mes concerts ajoutés </a>
 			<?php echo '<a href="allconcerts.php?modif='; echo $idpseudo; echo '">';?> Voir mes concerts modifiés </a>
+			<div id="points">
+				Total des points pour la session en cours du (<?php echo $sessiondebut; echo " au "; echo $sessionfin; echo ") : "; echo $points_session; ?>
+				<br>
+				Total des points depuis la création du compte : <?php echo $points; ?>
+			</div>
 			<!--<a href="allconcerts.php?filter=reset"> Voir mes concerts favoris </a>-->
 	
 		</body>

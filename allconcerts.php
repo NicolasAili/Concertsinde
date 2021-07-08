@@ -448,7 +448,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 				?> 
 
 					<div class="inwhile"> 
-						<div class="artiste"> <?php echo $row['nom_artiste']; 
+						<div class="artiste"> 
+							<?php echo '<a href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
 							if($row['valide'] == 0)
 							{?>
 								<img src="image/invalide.png" height="50" width="50">

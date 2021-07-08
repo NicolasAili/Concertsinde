@@ -21,28 +21,31 @@
 						$message = $_GET['message'];
 						 echo '<p class="message"> '.$message.'</p>';
 					}
+					$email = $_GET['mail'];
+					$pseudo = $_GET['pseudo'];
+
 				?>
 				
 			<div class="indentfi">
 				<form action="ident.php" method="post" class="connect">
-	  			 	<label for="pseudo">Pseudo: (16 caractères maximum) </label> 
-	    			<input type="text" name="pseudo" placeholder="Entrer pseudo"   id="prenom" >
+	  			 	<label for="pseudo">Pseudo: (3 caractères minimum) </label> 
+	    			<input type="text" name="pseudo" <?php if(!$pseudo){echo 'placeholder="Entrez votre pseudo"';} else{echo 'value="' . $pseudo . '"'; }?> id="prenom" required>
 	    			<br>
 	    			<br>
 	    			<label for="email">Email:  </label> 
-	    			<input type="email" name="email" placeholder="Entrer email" id="mail" >
+	    			<input type="email" name="email" <?php if(!$email){echo 'placeholder="Entrez votre email"';} else{echo 'value="' . $email . '"'; }?> id="mail" required>
 	    			<br>
 	    			<br>
-	    			<label for="password">Mot de passe: (8 caractères minimum)</label> 
-	    			<input type="password" name="password" placeholder="Entrer mdp" id="password" >
+	    			<label for="password">Mot de passe: </label> 
+	    			<input type="password" name="password" placeholder="Mot de passe" id="password" required>
 	  				<br>
 
 	    			<br>
 	    			<label for="cpassword">Confirmez votre mot de passe:  </label> 
-	    			<input type="password" name="cpassword" placeholder="Confirmer mdp" id="password" >
+	    			<input type="password" name="cpassword" placeholder="Confirmez votre mot de passe" id="password" required>
 	    			<br>
 	    			<br>
-					<input  type="submit" value="s'inscrire" name="inscription">
+					<input  type="submit" value="Inscription" name="inscription">
 				</form>
 			</div>
 

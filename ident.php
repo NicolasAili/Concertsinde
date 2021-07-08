@@ -19,50 +19,60 @@ if (isset($_POST['inscription']))
     $email = $_POST['email'];
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
-	if (strcmp($password, $cpassword) == 0)
-	{
-        if (strlen($password) > 8 ) 
+
+    
+	
+    
+        
+            
+    if ($pseudo && strlen($pseudo) > 3)
+    {
+        $sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo'";
+        $result = mysqli_query($con, $sql);
+        $ok = mysqli_fetch_array($result);
+        if (!$ok)
         {
-            if (strlen($pseudo) < 16)
+            if($email)
             {
-    			$sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo'";
-    			$result = mysqli_query($con, $sql);
-                $ok = mysqli_fetch_array($result);
-    			if (!$ok)
-    			{
-    				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$password', NOW())";
-    				mysqli_query($con, $sql);
-    				header('Location: ./connexion.php');
-    			}
-    			else
+                if($password) 
                 {
-                    echo'Erreur, l\'utilisateur existe deja';
+                    if (strcmp($password, $cpassword) == 0)
+                    {	
+        				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$password', NOW())";
+        				mysqli_query($con, $sql);
+        				header('Location: ./connexion.php');
+                    }
+                    else
+                    {
+                        header("Location: ./inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer&mail=". $email ."&pseudo=". $pseudo ."");
+                    }
                 }
-                echo "<br>";
-                echo $ok;
-                /*$sql = "SELECT pseudo FROM utilisateur";
-                $result = mysqli_query($con, $sql);
-                while()
+                else
                 {
-                    echo $ok['pseudo'];
-                }*/
-
+                    header("Location: ./inscrire.php?message=Erreur, vous devez saisir un mot de passe&mail=". $email ."&pseudo=". $pseudo ."");
+                }
             }
-            else 
+            else
             {
-                header("Location: ./inscrire.php?message=Le pseudo ne peut pas faire plus de 16 caractères");
+                header("Location: ./inscrire.php?message=Erreur, vous devez renseigner un email valide&pseudo=". $pseudo ."");
             }
-
-		}
+        }
         else
         {
-            header("Location: ./inscrire.php?message=Le mot de passe doit faire plus de 8 caractères");
+            header("Location: ./inscrire.php?message=Erreur, ce pseudo est déjà pris&mail=". $email ."");
         }
     }
-	else
-		{
-			header("Location: ./inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer");
-		}
+    else 
+    {
+        if(!$pseudo)
+        {
+            header("Location: ./inscrire.php?message=Erreur, veuillez saisir un pseudo&mail=". $email ."");
+        }
+        else
+        {
+            header("Location: ./inscrire.php?message=Erreur, le pseudo ne peut pas faire moins de 3 caractères&mail=". $email ."");
+        }   
+    }
 }
 
 ?>

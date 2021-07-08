@@ -40,7 +40,7 @@
 			        <th scope="col">Points</th>
 			    </tr>
 			    <?php
-				$sql = "SELECT points_session, pseudo FROM utilisateur ORDER BY points_session DESC";
+				$sql = "SELECT points_session, pseudo FROM utilisateur WHERE admin = 0 ORDER BY points_session DESC";
 				$query = mysqli_query($con, $sql);
 				
 				while ($row = mysqli_fetch_array($query))
@@ -65,7 +65,7 @@
 			        <th scope="col">Points</th>
 			    </tr>
 			    <?php
-				$sql = "SELECT points, pseudo FROM utilisateur ORDER BY points DESC";
+				$sql = "SELECT points, pseudo FROM utilisateur WHERE admin = 0 ORDER BY points DESC";
 				$query = mysqli_query($con, $sql);
 				
 				while ($row = mysqli_fetch_array($query))

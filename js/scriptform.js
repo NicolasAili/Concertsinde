@@ -641,14 +641,8 @@ function erase()
 {
     $('#date').val('');
     $('#heure').val('');
-    if($('input[name=int]').is(':checked'))
-    {
-        $('#salle').val('');
-    }
-    else if ($('input[name=ext]').is(':checked')) 
-    {
-        $('#extval').val('');
-    }
+    $('#salle').val('');
+    $('#extval').val('');
     $('#ville').val('');
     $('#cp').val('');
     $('#cp').attr("placeholder", '');

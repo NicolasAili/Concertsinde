@@ -19,5 +19,5 @@
 
     $sql = "UPDATE artiste SET description = '$description' WHERE Nom_artiste = '$artiste' ";
     $query = mysqli_query($con, $sql);
-    header("Location: supartiste.php?artiste='$artiste'");
+    header("Location: supartiste.php?artiste=". $artiste ."");
   }

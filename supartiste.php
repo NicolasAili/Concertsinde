@@ -42,11 +42,11 @@
 		$sql = "SELECT description FROM artiste WHERE Nom_artiste = '$artiste' ";
 		$result = mysqli_query($con, $sql);
 		$row = mysqli_fetch_array($result);
-		if(!$row)
+		if($row[0] == NULL)
 		{
 			?> 
 			<form method="post" class="connect" action="adddescr.php">
-				<input type="text" name="description" id="description" placeholder="Il n'existe pas de description pour cet artiste, vous pouvez en ajouter une"  >
+				<textarea cols="40" rows="5" name="description" id="description" placeholder="Il n'existe pas de description pour cet artiste, vous pouvez en ajouter une"></textarea> 
 				<input type="hidden" id="artiste" name="artiste" <?php echo 'value="' . $artiste . '"' ?> > 
 				<input type="submit" value="Enregister la description" id="valider" name="concert" href="">
 			</form>
@@ -54,6 +54,8 @@
 		}
 		else
 		{
+			echo "salut";
+			echo "<br>";
 			echo $row[0];	
 		}
 		$sql = "SELECT id_concert FROM concert, artiste WHERE concert.nom_artiste = artiste.Nom_artiste AND artiste.Nom_artiste = '$artiste' AND concert.datec >= NOW()";

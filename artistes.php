@@ -1,5 +1,7 @@
 <?php
     session_start();
+    ini_set('display_errors', 0);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,10 +13,13 @@
 		<meta name="Description" content="Artistes" />
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/body/artiste.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />		
+		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
+		<script type="text/javascript" src="./jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />		
 	</head>
 	<header>
-		<?php //include('header.php'); ?>
+		<?php include('header.php'); ?>
 	</header>
 	<body>
 		<h1> Artistes </h1>
@@ -32,6 +37,15 @@
 			if(mysqli_connect_errno($con)){
 			echo "Erreur de connexion" .mysqli_connect_error();
 			}
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
 		?>
 		<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
 				Ajouter un artiste
@@ -131,6 +145,7 @@
 				}
 				?>	
 			</div>
+			<?php require "./messages.php"; ?> 
 	</body>
 	<?php include('footer.html'); ?>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

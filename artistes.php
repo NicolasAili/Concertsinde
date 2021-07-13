@@ -33,6 +33,15 @@
 			echo "Erreur de connexion" .mysqli_connect_error();
 			}
 		?>
+		<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
+				Ajouter un artiste
+				<form method="post" class="connect" action="addartist.php">
+					<input type="text" name="artisteajout" id="artisteajout" placeholder="Ajoutez un artiste">
+					<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
+					<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
+				</form>
+		</div>
+
 		<div id=tri>
 			<h3>trier par...</h3>
 			<hr>

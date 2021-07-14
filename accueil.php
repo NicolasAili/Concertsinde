@@ -19,33 +19,50 @@
 	<body>
 		<div class="maintxt">
 			<div class="blocun">
-				<h1> Objectifs du site </h1>
-				<p> L'objectif de notre site web est de permettre aux fans de rap indépendant de pouvoir être facilement au courant des concerts futurs au sein de ce milieu.</p>
-				<p>Ce site a pour car actéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs.</p>
-				<p>Nous vous invitons néanmoins à créer un compte, cela vous permettra de modifier les annonces qui ont déjà été passées mais qui comportent des erreurs. </p>
-				<p>Bien que le site soit administré, nous faisons entièrement confiance à la communauté. 
-				</p>
+				<h1> Objectif du site </h1>
+				<p> L'objectif de ce site web est de permettre au public de rap indépendant de pouvoir être facilement au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite. </p>
+				<p>Ce site a pour car caractéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs. Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier les concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs. </p>
+				<p>En étant connectés, vous pouvez en outre gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site (plus de détails dans l'onglet « présentation et fonctionnement »).</p>
 			</div>
 			<div class="blocdeux"> 				
-				<h1>Fonctionnement du site</h1> 
-				<h2>Informations sur un concert</h2> 
-				<p>Depuis la page d'accueil (mais pas que) vous pouvez vous balader sur les différentes rubriques du site, comme afficher les concerts par ville, par pays, par artiste, ou par date.</p> 
-				<h2>Consulter tous les concerts</h2>
-				<p>Vous pouvez aussi accéder à la page "Tous les concerts", qui, comme son nom l'indique, fait référence à tous les concerts qui ont été ajoutés par la communauté. </p>
+				<h1>D’où vient l’idée/pourquoi ce site</h1>
+				<p>Me rendant régulièrement à des concerts de rap indépendant, j’ai remarqué qu’il n’existait pas de plateforme recensant tous les concerts. Il y a bien le site « info concert » (par exemple) mais plusieurs concerts de rap indépendant n’y apparaissent pas, à l'instar de concerts de petite taille</p>
+				<p>
+					De ce fait le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit de suivre assidument les pages d’organisateur ou bien les pages des artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations.
+				</p>
+				<p>
+					Le fait aussi que ce milieu dispose de peu de moyens rend la communication souvent légère, voire inexistante. En conséquence, de nombreux concerts se retrouvent en "sous-effectif" du fait que l'ensemble du public n’est pas forcément mis au courant des différents concerts.
+				</p>
+				<p>
+					Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent participer librement à l’expansion du rap indépendant au plus grand nombre.
+				</p>
 			</div>
 			<div class="bloctrois">
-				<h2>Comment ajouter un concert</h2>
-				<p>Pour ajouter un concert il suffit de cliquer sur le bouton du même nom dans la barre en haut du site. Vous serez redirigés vers un formulaire qui vous permettra d'ajouter un concert en renseignant les informations souhaitées</p>
-				<h2>Inscription et connexion au site</h2>
-				<p> L'inscription est simple: il vous suffit de cliquer sur le bouton inscription et remplir le formulaire demandé en respectant les paramètres (exemple : le mot de passe doit contenir au moins 8 caractères). <br>Une fois inscrits, vous serez redirigés vers la page de connexion et il vous suffira alors de vous connecter avec les informations renseignées précédemment.
-				Si vous êtes déjà inscrits, cliquez sur le bouton "connexion" et entrez vos identifiants. </p>
+				<h1>Fonctionnement général du site</h1> 
+				<p>
+				Le fonctionnement du site est assez simple avec trois principales utilisations :
+				</p>
+				<p>
+				-	Consulter la liste des concerts
+				</p>
+				<p>
+				-	Ajouter un concert
+				</p>
+				<p>
+				-	Modifier un concert
+				</p>
+				<p>
+				Une fois un concert ajouté, les utilisateurs peuvent le modifier et lorsque toutes informations d'un concert ont été vérifiées (et éventuellement corrigées) par un administrateur, le concert est validé et n’est plus modifiable. Des points sont attribués aux utilisateurs ayant participé au renseignement du concert (ajout et modifications).
+				</p>
+				<p>
+				Pour plus de détails sur le fonctionnement et sur le système de points, consultez l'onglet <a href="./presentation.php"> « présentation et fonctionnement ». </a>
+				</p>
 			</div>	
-			<div class="blocquatre">
-				<h2> A savoir </h2>
-				<p> Seul une personne connectée pourra supprimer des concerts qui ont été annulés, repportés, ou seulement mal référencés.</p>
-			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 
 	<?php include('footer.html'); ?>
 </html>
+
+
+

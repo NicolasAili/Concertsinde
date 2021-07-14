@@ -16,6 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
 		<script type="text/javascript" src="./jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="./js/scriptform.js"></script> 
 		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />		
 	</head>
 	<header>
@@ -66,7 +67,7 @@
 			/*echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';*/
 			?>
 			<form method="post" class="connect" action="artistes.php">
-				<input type="text" name="artiste" id="artiste" placeholder="Cherchez un artiste"  >
+				<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
 				<input type="submit" value="Chercher un artiste" id="valider" name="valider" href="">
 			</form>
 		</div>

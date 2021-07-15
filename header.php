@@ -11,6 +11,24 @@
 					<input class="o-search-submit" name="search" type="submit">
 			</form>
 			<?php 
+
+			$servername = 'localhost';
+			$username = 'root';
+			$password = '';
+			$dbname = 'webbd';
+
+			//Connexion à la BDD
+			$con = mysqli_connect($servername, $username, $password, $dbname);
+
+			//Vérification de la connexion
+			if(mysqli_connect_errno($con)){
+			echo "Erreur de connexion" .mysqli_connect_error();
+			}
+		
+			$pseudo = $_SESSION['pseudo'];
+			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+			$result = mysqli_query($con ,$sql);
+			$row = mysqli_fetch_array($result);
 				if (isset($_SESSION['pseudo']) == null)
 				{
 					?>
@@ -23,7 +41,7 @@
 						<div class="memberspace">
 							<div class="space">							
 								<img src="./image/cadenas.png" class="imgcadenas">
-								<a href="./connexion.php" class="spacelink" role="button">Mon espace</a>
+								<a href="./connexion.php" class="spacelink" role="button">Connexion</a>
 							</div>
 							<div class="inscription">
 								<div class="mv"></div>
@@ -72,7 +90,18 @@
 			<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 			<a href=".\classement.php" class="licinq">Meilleurs contributeurs</a>
 			<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
-			<a href=".\erreur.php" class="lisept">Signaler une erreur</a>
+			
+			<?php 
+			if($row['admin'] == 2)
+			{?>
+				<a href="superadmin\saccueil.php" class="lisept">Signaler une erreur</a>
+			<?php
+			}
+			else
+			{?>
+				<a href=".\erreur.php" class="lisept">Signaler une erreur</a>
+			<?php
+			}?>
 			<div class="reseaux">
 				<a href="facebook.com"><img class="imgfb" src="./image/facebook.png"></a>
 				<a href="instagram.com"><img class="imgig" src="./image/instagram.png"></a>
@@ -92,7 +121,7 @@
 		<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 		<a href=".\classement.php" class="licinq">Meilleurs contributeurs</a>
 		<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
-		<a href=".\erreur.php" class="lisept">Signaler une erreur</a>
+		<a  href=".\erreur.php" class="lisept">Signaler une erreur</a>
 		<div class="reseaux-hidden">
 			<a href="facebook.com"><img class="imgfb" src="./image/facebook.png"></a>
 			<a href="instagram.com"><img class="imgig" src="./image/instagram.png"></a>

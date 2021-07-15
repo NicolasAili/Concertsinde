@@ -26,12 +26,12 @@
 			</div>
 			<div class="blocdeux"> 				
 				<h1>D’où vient l’idée/pourquoi ce site</h1>
-				<p>Me rendant régulièrement à des concerts de rap indépendant, j’ai remarqué qu’il n’existait pas de plateforme recensant tous les concerts. Il y a bien le site « info concert » (par exemple) mais plusieurs concerts de rap indépendant n’y apparaissent pas, à l'instar de concerts de petite taille</p>
+				<p>Me rendant régulièrement à des concerts de rap indépendant, j’ai remarqué qu’il n’existait pas de plateforme recensant tous les concerts. Il y a bien le site « info concert » (par exemple) mais plusieurs concerts de rap indépendant n’y apparaissent pas, à l'instar de concerts de petite taille.</p>
 				<p>
-					De ce fait le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit de suivre assidument les pages d’organisateur ou bien les pages des artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations.
+					De ce fait le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit de suivre assidument les pages des organisateurs ou bien les pages des artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations.
 				</p>
 				<p>
-					Le fait aussi que ce milieu dispose de peu de moyens rend la communication souvent légère, voire inexistante. En conséquence, de nombreux concerts se retrouvent en "sous-effectif" du fait que l'ensemble du public n’est pas forcément mis au courant des différents concerts.
+					Le fait aussi que ce milieu dispose de peu de moyens rend la communication souvent légère, voire parfois inexistante. En conséquence, de nombreux concerts se retrouvent en "sous-effectif" du fait que l'ensemble du public n’est pas forcément mis au courant des différents concerts.
 				</p>
 				<p>
 					Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent participer librement à l’expansion du rap indépendant au plus grand nombre.

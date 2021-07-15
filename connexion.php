@@ -37,6 +37,8 @@
 					</div>
 				</form>
 			</div>
+			<br>
+			Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
 		</body>
 		<script type="text/javascript" src="./js/scrollnav.js"></script> 
 	</html>

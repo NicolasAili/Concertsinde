@@ -19,30 +19,23 @@
 	echo 'Connexion réussie';
 	}
 
-if (isset($_POST['modif_pseudo']))
-{
-	$chpseudo = $_POST['chpseudo'];
-	$pseudo = $_SESSION['pseudo'];
-	$sql = "UPDATE utilisateur SET pseudo = '$chpseudo' WHERE pseudo = '$pseudo'";
-	$result = mysqli_query($con ,$sql);
-	$_SESSION['pseudo']=$chpseudo;
-	header('Location: ./accueil.php');
-}
 if (isset($_POST['modif_password']))
 	$password = $_POST['password'];
 	$newpassword = $_POST['newpassword'];
 	$cnewpassword = $_POST['cnewpassword'];
 	$pass = $_SESSION['password'];
+	$user = $_SESSION['pseudo']
+
+	$passwordh = hash('sha512', $newpassword);
 
 	if ($password == $pass ) 
 	{
 		if ($newpassword == $cnewpassword)
 		{
-			$sql = "UPDATE utilisateur SET password = '$newpassword' WHERE password = '$pass'";
+			$sql = "UPDATE utilisateur SET password = '$passwordh' WHERE pseudo = '$user'";
 			$result = mysqli_query($con ,$sql);
 			$_SESSION['password']=$newpassword;
 			header('Location: ./accueil.php');
-
 		}
 		else 
 		{	

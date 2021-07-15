@@ -22,9 +22,12 @@
 	if ( isset($_POST['connexion'])) {
 		$pseudo = $_POST['pseudo'];
 		$password = $_POST['password'];
-		$sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo' AND password = '$password'";
+		$passwordh = hash('sha512', $password);
+		$sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo' AND password = '$passwordh'";
 		$result = mysqli_query($con ,$sql);
 		$row = mysqli_fetch_assoc($result);
+
+		//echo $passwordh;
 
 	    if ($row['pseudo'] != null )
     	{

@@ -18,6 +18,7 @@ if (isset($_POST['inscription']))
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $passwordh = hash('sha512', $_POST['password']);
     $cpassword = $_POST['cpassword'];
 
     
@@ -38,7 +39,7 @@ if (isset($_POST['inscription']))
                 {
                     if (strcmp($password, $cpassword) == 0)
                     {	
-        				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$password', NOW())";
+        				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$passwordh', NOW())";
         				mysqli_query($con, $sql);
         				header('Location: ./connexion.php');
                     }

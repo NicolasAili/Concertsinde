@@ -36,13 +36,6 @@
 				?>
 
 			<form action="modif.php" method="post" class="connect">
-			<p>Votre pseudo est : <?php echo $_SESSION['pseudo']; ?>, voulez-vous le modifier? </p>
-			</br>
-			<label for="pseudo">Nouveau pseudo:  </label> 
-			<input type="text" name="chpseudo" placeholder="Entrer nouveau pseudo"  id="pseudo" >
-			<input  type="submit" value="Modifier" name="modif_pseudo">
-			</br>
-			</br>
 			<p>Souhaitez vous modifier votre mot de passe ? </p>
 			<label for="password">Mot de passe actuel:  </label> 
 			<input type="password" name="password" placeholder="Mot de passe actuel"   id="password" >

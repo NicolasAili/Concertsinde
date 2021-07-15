@@ -519,7 +519,6 @@ function checkbox(identifiant)
 
 function checkboxmodif(identifiant)
 {
-    console.log(identifiant);
     intextpost = $("#intextpost").val();
     switch (identifiant)
     {
@@ -656,4 +655,32 @@ function erase()
     $('#adresse').val('');
     $('#adresse').attr("placeholder", '');
     $('#fb').val('');
+}
+
+function usermodif(identifiant)
+{
+    switch (identifiant)
+    {
+        case "admin":
+            if($('input[name=admin]').is(':checked'))
+            {
+                $('#admincheck').val("1");
+            }
+            else
+            {
+                console.log("ok");
+                $('#admincheck').val("0");
+            }
+        break;
+        case "banni":
+            if($('input[name=banni]').is(':checked'))
+            {
+                $('#bannicheck').val("1");
+            }
+            else
+            {
+                $('#bannicheck').val("0");
+            }
+        break;
+    }
 }

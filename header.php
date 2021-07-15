@@ -85,11 +85,11 @@
 		</div>
 		<div class="lowernav">
 			<a href=".\accueil.php" class="liun"><img class="imgmaison" src="./image/maison.png"></a>
+			<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
 			<a href=".\news.php" class="licinq">Nouveautés/Actualités</a>
 			<a href=".\artistes.php" class="lideux">Tous les artistes</a>
 			<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 			<a href=".\classement.php" class="licinq">Meilleurs contributeurs</a>
-			<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
 			
 			<?php 
 			if($row['admin'] == 2)
@@ -116,11 +116,11 @@
 		</a>
 	</div>
 	<div class="lowernav-hidden">
+		<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
 		<a href=".\news.php" class="licinq">Nouveautés/Actualités</a>
 		<a href=".\artistes.php" class="lideux">Tous les artistes</a>
 		<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
 		<a href=".\classement.php" class="licinq">Meilleurs contributeurs</a>
-		<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
 		<a  href=".\erreur.php" class="lisept">Signaler une erreur</a>
 		<div class="reseaux-hidden">
 			<a href="facebook.com"><img class="imgfb" src="./image/facebook.png"></a>

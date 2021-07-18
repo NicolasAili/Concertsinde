@@ -27,6 +27,8 @@
 		$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
 		$result = mysqli_query($con ,$sql);
 		$row = mysqli_fetch_array($result);
+
+		$count = 0;
 		if($row['admin'] == 2)
 		{
 			$pseudoget = $_GET['pseudoget'];
@@ -66,13 +68,12 @@
 				        <th scope="row"><?php echo $row['pseudo']; ?></th>
 				        <td><input type="text" name="points" <?php echo 'value="' . $row['points'] . '"' ?> id="points"></td>
 				        <td><input type="text" name="points_session" <?php echo 'value="' . $row['points_session'] . '"' ?> id="points_session"></td>
-				        <td><input type="checkbox" id="admin" name="admin" onclick="usermodif(this.id);" <?php if($row['admin'] == 1){echo "checked";} ?>> </td>
-				        <td><input type="checkbox" id="banni" name="banni" onclick="usermodif(this.id);" <?php if($row['banni'] == 1){echo "checked";} ?>> </td>
-				        <input type="hidden" id="pseudo" name="pseudo" <?php echo 'value="' . $row['pseudo'] . '"' ?> >
-				        <input type="hidden" id="admincheck" name="admincheck" <?php echo 'value="' . $row['admin'] . '"' ?> >
-				        <input type="hidden" id="bannicheck" name="bannicheck" <?php echo 'value="' . $row['banni'] . '"' ?> >
-				        <td><input type="submit" value="Valider" id="valider" name="valider" href=""></td>
-				        <!--IDEE : METTRE DES CLASSES + UN COMPTEUR ET MODIFIER CLASS[COMPTEUR] DANS JS-->
+				        <td><input type="checkbox" class="admin" name="admin" <?php if($row['admin'] == 1){echo "checked";} ?>> </td>
+				        <td><input type="checkbox" class="banni" name="banni" <?php if($row['banni'] == 1){echo "checked";} ?>> </td>
+				        <input type="hidden" class="pseudo" name="pseudo" <?php echo 'value="' . $row['pseudo'] . '"' ?> >
+				        <input type="hidden" class="admincheck" name="admincheck" <?php echo 'value="' . $row['admin'] . '"' ?> >
+				        <input type="hidden" class="bannicheck" name="bannicheck" <?php echo 'value="' . $row['banni'] . '"' ?> >
+				        <td><input type="submit" value="Valider" class="valider" name="valider" href=""></td>
 		    			</tr>
 		    		</form>
 	    		<?php
@@ -86,8 +87,48 @@
 			echo "accès non autorisé";
 		}
 		?>
-
-
-
 	</body>
 </html>
+
+<script type="text/javascript">
+	$(".admin").on("click", function() 
+	{
+		var par = $(this).closest("tr").index();
+		par = par/2;
+		par = par-1;
+		if($('.admincheck').eq(par).val() != 2)
+		{
+			if($('.admin').eq(par).is(':checked'))
+			{
+			    $('.admincheck').eq(par).val("1");
+			}
+			else
+			{
+			    $('.admincheck').eq(par).val("0");
+			}
+		}
+		else
+		{
+			alert("superadmin, fais gaffe mon pote");
+		}
+	});
+
+
+	$(".banni").on("click", function() 
+	{
+		var par = $(this).closest("tr").index();
+		par = par/2;
+		par = par-1;
+		if($('.banni').eq(par).is(':checked'))
+		{
+		    $('.bannicheck').eq(par).val("1");
+		}
+		else
+		{
+		    $('.bannicheck').eq(par).val("0");
+		}
+	});
+</script>
+
+	
+

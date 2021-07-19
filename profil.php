@@ -67,6 +67,8 @@
 			$points_session = $row['points_session'];
 			$points = $row['points'];
 
+			$count = 0;
+
 
 			?>
 
@@ -78,7 +80,23 @@
 				Total des points depuis la création du compte : <?php echo $points; ?>
 			</div>
 			<!--<a href="allconcerts.php?filter=reset"> Voir mes concerts favoris </a>-->
-	
+			<hr>
+			<?php 
+				$sql = "SELECT message, id FROM message WHERE utilisateur = '$idpseudo' ORDER BY date_envoi DESC";
+				$query = mysqli_query($con, $sql);
+
+				while ($row = mysqli_fetch_array($query)) 
+				{
+					$id = $row['id'];
+					echo $count;
+					echo " : ";
+					echo $row['message'];
+					echo "<br>";
+					$count++;
+					$sql = "UPDATE message SET lu = 1 WHERE id = '$id'";
+					$querylu = mysqli_query($con, $sql);
+				}
+			?>
 		</body>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 
 </html>

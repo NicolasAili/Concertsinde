@@ -14,9 +14,46 @@
 		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php 
+			include('header.php'); 
+			require('php/database.php');
+		?>
 	</header>
 	<body>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br><br>
+
+		<?php
+			$pseudo = $_SESSION['pseudo'];
+			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+			$query = mysqli_query($con, $requestpseudo);
+			$row = mysqli_fetch_array($query);
+			$idpseudo = $row['id_user'];
+
+			$sql = "SELECT message FROM message, utilisateur WHERE message.utilisateur = utilisateur.ID_user AND utilisateur = '$idpseudo' AND alerte = 0";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$message = $row['message'];
+			
+			if($message)
+			{
+				echo "<script> alert('Nouveau(x) message(s) disponible(s), consultez votre profil pour les afficher'); </script>";
+			}
+
+			$sql = "UPDATE message, utilisateur SET alerte = '1' WHERE message.utilisateur = utilisateur.ID_user AND utilisateur = '$idpseudo' AND alerte = 0";
+			$query = mysqli_query($con, $sql);
+		?>
 		<div class="maintxt">
 			<div class="blocun">
 				<h1> Objectif du site </h1>

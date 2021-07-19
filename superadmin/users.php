@@ -73,7 +73,8 @@
 				        <input type="hidden" class="pseudo" name="pseudo" <?php echo 'value="' . $row['pseudo'] . '"' ?> >
 				        <input type="hidden" class="admincheck" name="admincheck" <?php echo 'value="' . $row['admin'] . '"' ?> >
 				        <input type="hidden" class="bannicheck" name="bannicheck" <?php echo 'value="' . $row['banni'] . '"' ?> >
-				        <td><input type="submit" value="Valider" class="valider" name="valider" href=""></td>
+				        <td><input type="submit" value="Valider" class="valider" name="modsuppr" href=""></td>
+				        <td><input class="message" type="submit" name="modsuppr" value="Message"></td>
 		    			</tr>
 		    		</form>
 	    		<?php

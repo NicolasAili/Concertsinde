@@ -28,15 +28,45 @@
 		$row = mysqli_fetch_array($result);
 		if($row['admin'] == 2)
 		{
-			echo "succès";
+			$count = 0;
+
+			$sql = "SELECT id, date_envoi, resolu, lu, pseudo FROM probleme, utilisateur WHERE utilisateur=ID_user";
+			$query = mysqli_query($con ,$sql);?>
+			
+			<caption>Utilisateurs</caption>
+	    		<tr>
+	    		<th scope="col">Numero</th>
+		        <th scope="col">Messages</th>
+		        <th scope="col">Utilisateur</th>
+		        <th scope="col">date_soummission</th>
+		        <th scope="col">resolu</th>
+   				</tr><?php
+   				while($row = mysqli_fetch_array($query))
+				{
+					$count++;
+					$pseudo = $row['pseudo'];
+
+					if($row['lu'] == 0){echo "<strong>";}
+					?>
+					<form method="post" id="connect" action="contactmodif.php">
+						<tr>
+							<th scope="row"><?php echo $count; ?></th>
+							<th>Message <?php echo $count; ?></th>
+							<th> <?php echo $pseudo; ?></th>
+							<th> <?php echo $row['date_envoi']; ?></th>
+							<th> <?php if($row['resolu'] == 0){echo "non";}else if($row['resolu'] == 1){echo "en cours";}else{echo "oui";}?> </th>
+							<input type="hidden" class="idcheck" name="idcheck" <?php echo 'value="' . $row['id'] . '"' ?> >
+							<td><input type="submit" value="Afficher" class="valider" name="modsuppr" href=""></td>
+						</tr>
+					</form>
+				<?php
+					if($row['lu'] == 0){echo "</strong>";}
+				}
 		}
 		else
 		{
 			echo "accès non autorisé";
 		}
 		?>
-
-
-
 	</body>
 </html>

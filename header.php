@@ -26,9 +26,19 @@
 			}
 		
 			$pseudo = $_SESSION['pseudo'];
-			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+			$sql = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
 			$result = mysqli_query($con ,$sql);
 			$row = mysqli_fetch_array($result);
+			$pseudoid = $row['id_user'];
+
+			$count = 0;
+			$sql = "SELECT id FROM message WHERE utilisateur = '$pseudoid' AND lu = 0";
+			$querymsg = mysqli_query($con, $sql);
+			while ($rowmsg = mysqli_fetch_array($querymsg)) 
+			{
+				$count++;
+			}						
+
 				if (isset($_SESSION['pseudo']) == null)
 				{
 					?>
@@ -72,6 +82,22 @@
 							<div class="inscription">
 								<div class="mv"></div>
 								<a href="./profil.php" class="inscrlink" role="button">Mon profil</a>
+								<?php
+								switch ($count) {
+									case '0':
+										# rien à faire
+										break;
+									case '1':
+										?> <img src="./image/notifun.png" id="notifun"> <?php
+										break;
+									case '2':
+										?> <img src="./image/notifdeux.png" id="notifun"> <?php
+										break;					
+									default:
+										?> <img src="./image/notiftroisplus.png" id="notifun"> <?php
+										break;
+								}?>
+								
 							</div>
 							<div class=contactimg>
 								<img src="./image/bulle.png" class="imgbulle">

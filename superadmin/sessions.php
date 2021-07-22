@@ -56,12 +56,12 @@
 					?>
 					<form method="post" id="connect" action="sessionmodif.php">
 						<tr>
-				        <th scope="row"><?php echo $row['id']; ?></th>
-				        <td><?php echo  $row['date_debut']; ?> </td>
-				        <td><?php echo  $row['date_fin']; ?> </td>
-				        <td><input type="checkbox" class="actif" name="actif" <?php if($row['actif'] == 1){echo "checked "; echo "disabled";} else{echo "required";} ?> > </td>
-				        <input type="hidden" class="idcheck" name="idcheck" <?php echo 'value="' . $row['id'] . '"' ?> >
-				        <?php if($row['actif'] == 0){?><td><input type="submit" value="valider" class="valider" name="modsuppr" href=""></td><?php } ?>
+					        <th scope="row"><?php echo $row['id']; ?></th>
+					        <td><?php echo  $row['date_debut']; ?> </td>
+					        <td><?php echo  $row['date_fin']; ?> </td>
+					        <td><input type="checkbox" class="actif" name="actif" <?php if($row['actif'] == 1){echo "checked "; echo "disabled";} else{echo "required";} ?> > </td>
+					        <input type="hidden" class="idcheck" name="idcheck" <?php echo 'value="' . $row['id'] . '"' ?> >
+					        <?php if($row['actif'] == 0){?><td><input type="submit" value="valider" class="valider" name="modsuppr" href=""></td><?php } ?>
 		    			</tr>
 		    		</form>
 	    		<?php

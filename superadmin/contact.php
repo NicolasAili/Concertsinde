@@ -28,10 +28,46 @@
 		$row = mysqli_fetch_array($result);
 		if($row['admin'] == 2)
 		{
+			$hide = $_GET['hide'];
 			$count = 0;
-
-			$sql = "SELECT id, date_envoi, resolu, lu, pseudo FROM probleme, utilisateur WHERE utilisateur=ID_user";
+			if(!$hide || $hide == 'no')
+			{
+				$sql = "SELECT id, date_envoi, resolu, lu, pseudo FROM probleme, utilisateur WHERE utilisateur=ID_user";
+			}
+			else
+			{
+				$sql = "SELECT id, date_envoi, resolu, lu, pseudo FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2";
+			}
+			
 			$query = mysqli_query($con ,$sql);?>
+
+
+			<input type="checkbox" onclick='window.location.assign(<?php echo '"'; echo 'contact.php?';
+			if($hide == 'yes')
+			{
+				echo 'hide=no';
+			}
+			else if($hide == 'no')
+			{
+				echo 'hide=yes';
+			}
+			else
+			{
+				echo 'hide=yes';
+			}
+			?>
+			")'
+			<?php
+			if($hide == 'yes')
+			{
+				echo "checked";
+			}
+			?>
+			>
+			Cacher les problèmes résolus
+
+			<br>
+			<br>
 			
 			<caption>Utilisateurs</caption>
 	    		<tr>

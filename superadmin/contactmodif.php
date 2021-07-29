@@ -30,4 +30,4 @@ switch($row['type'])
 3) afficher les différents champs en fonction du type
 4) permettre de mettre en résolu 
 5) permettre d'envoyer un mail ou un msg au choix
-6) aligner champs page précédente
+6) aligner champs page précédente */

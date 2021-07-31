@@ -34,6 +34,17 @@
 				?>
 				<input type="hidden" id="type" name="type" value="3"> 
 			</fieldset>
+			<p>
+					<div id=showmail>
+						<?php if(isset($_SESSION['pseudo']) == null)
+						{
+							echo "<br>";
+							echo "Il semble que vous ne soyez pas connectés, saisissez votre mail ci-dessous ou connectez-vous";?>
+							<input type="mail" name="mailinput" id="mailinput" value=""><?php
+						}
+						?>
+					</div> 
+			</p>
 			<p>	
 				Merci pour votre contribution <br />
 			</p>

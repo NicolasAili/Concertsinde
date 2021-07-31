@@ -15,6 +15,7 @@
 	if(mysqli_connect_errno($con)){
 	echo "Erreur de connexion" .mysqli_connect_error();
 	}
+	$type = $_POST['type'];
 
 	$pseudo = $_POST['pseudo'];
 	$probleme = $_POST['probleme'];
@@ -51,13 +52,11 @@
 	$row = mysqli_fetch_array($result);
 	$idpseudo = $row['ID_user'];
 
-	$insert = "INSERT INTO probleme (id_concert, probleme, etapes, ajout, utilisateur, mail, suivi_mail, date_envoi, artiste, date, heure, salle, ville, cp, departement, region, pays, adresse, lien_fb, lien_ticket, autre) VALUES ('$idconcert', '$probleme', '$etapes', '$ajout', '$idpseudo', '$mail', '$mailsuivi', NOW(), '$artiste', '$date', '$heure', '$salle', '$ville', '$cp', '$departement', '$region', '$pays', '$adresse', '$lien_fb', '$lien_ticket', '$autre')"; 
+	$insert = "INSERT INTO probleme (type, id_concert, probleme, etapes, ajout, utilisateur, mail, suivi_mail, date_envoi, artiste, date, heure, salle, ville, cp, departement, region, pays, adresse, lien_fb, lien_ticket, autre) VALUES ('$type', '$idconcert', '$probleme', '$etapes', '$ajout', '$idpseudo', '$mail', '$mailsuivi', NOW(), '$artiste', '$date', '$heure', '$salle', '$ville', '$cp', '$departement', '$region', '$pays', '$adresse', '$lien_fb', '$lien_ticket', '$autre')"; 
 	mysqli_query($con, $insert);
 
-
-
-	/*setcookie('contentMessage', 'Merci pour votre contribution. Votre aide est très précieuse', time() + 30, "/");
+	setcookie('contentMessage', 'Merci pour votre contribution. Votre aide est très précieuse', time() + 30, "/");
 	header("Location: ./allconcerts.php");
-	exit("Merci pour votre contribution. Votre aide est très précieuse");*/
+	exit("Merci pour votre contribution. Votre aide est très précieuse");
 			
 

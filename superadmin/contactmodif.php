@@ -25,9 +25,9 @@ switch($row['type'])
 
 /* A faire:
 
-1) ajouter champ type en BDD
-2) modifier cas report erreur afin mettre champ
-3) afficher les différents champs en fonction du type
+1) ajouter champ type en BDD X
+2) modifier cas report erreur afin mettre champ (1 erreur concert, 2 erreur ,3 contact) X
+3) afficher les différents champs en fonction du typed
 4) permettre de mettre en résolu 
 5) permettre d'envoyer un mail ou un msg au choix
 6) aligner champs page précédente */

@@ -83,6 +83,7 @@
 					}?>
 
 					<input type="hidden" id="mailsuivi" name="mailsuivi" value="1"> 
+					<input type="hidden" id="type" name="type" value="1"> 
 					
 			</fieldset>
 			<p>	

@@ -126,10 +126,10 @@ if(!$idcheckmodif)
 
 	<form action="contactmodif.php" method="get">
 		<label for="resolu"> Resolu : </label> 
-		<input type="text" id="resolu" name="resolu" value="<?php echo $resolu;?>"> 
+		<input type="text" id="resolu" name="resolu" value="<?php echo $resolu;?>"> //0 = non résolu, 1 = en cours, 2 = résolu
 		<br>
 		<label for="commentaire"> commentaire : </label> 
-		<input type="text" id="commentaire" name="commentaire" value="<?php echo $commentaire;?>">
+		<textarea name="commentaire" id="commentaire" cols="40" rows="5"> <?php echo $commentaire; ?> </textarea>
 		<input type="hidden" id="idcheckmodif" name="idcheckmodif" value="<?php echo $idcheck;?>">
 		<br> 
 		<input type="submit" value="Mise à jour">
@@ -142,21 +142,7 @@ else
 	$resolu = $_GET['resolu'];
 	$sql = "UPDATE probleme SET commentaire = '$commentaire', resolu = '$resolu' WHERE id = '$idcheckmodif'";
 	$query = mysqli_query($con, $sql);
+	echo $commentaire;
 	header("Location: ./contact.php");
 }
 
-
-//gestion des mails si non connecté
-
-/* A faire:
-
-1) ajouter champ type en BDD X
-2) modifier cas report erreur afin mettre champ (1 erreur concert, 2 erreur ,3 contact) X
-X) Contact > mail si pas connecté X 
-3) afficher les différents champs en fonction du type X
-4) permettre de mettre en résolu 
-5) permettre d'envoyer un mail ou un msg au choix X
-6) aligner champs page précédente 
-7) commentaire pour suivi X
-8) afficher type dans contact.php 
-9) afficher mail dans page utilisateur */

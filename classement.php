@@ -31,7 +31,7 @@
 
 		<h1> Classement des utilisateurs </h1>
 		<div id="main">
-			<h2> Classement pour la session en cours du (<?php echo $sessiondebut; echo " au "; echo $sessionfin; echo ") : "?> </h2>
+			<h2> Classement pour la session en cours (du <?php echo $sessiondebut; echo " au "; echo $sessionfin; echo ") : "?> </h2>
 
 			<table>
 			    <caption>Points session</caption>

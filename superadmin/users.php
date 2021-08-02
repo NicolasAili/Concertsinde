@@ -41,11 +41,11 @@
 			<?php
 			if(!$pseudoget)
 			{
-				$sql = "SELECT pseudo, points, points_session, admin, banni FROM utilisateur";
+				$sql = "SELECT pseudo, email, date_inscription, points, points_session, admin, banni FROM utilisateur";
 			}
 			else
 			{
-				$sql = "SELECT pseudo, points, points_session, admin, banni FROM utilisateur WHERE pseudo = '$pseudoget'";
+				$sql = "SELECT pseudo, email, date_inscription, points, points_session, admin, banni FROM utilisateur WHERE pseudo = '$pseudoget'";
 			}
 			
 			$query = mysqli_query($con, $sql);
@@ -55,6 +55,8 @@
 	    		<caption>Utilisateurs</caption>
 	    		<tr>
 		        <th scope="col">pseudo</th>
+		        <th scope="col">mail</th>
+		        <th scope="col">date_inscription</th>
 		        <th scope="col">points</th>
 		        <th scope="col">points_session</th>
 		        <th scope="col">admin</th>
@@ -66,6 +68,8 @@
 					<form method="post" id="connect" action="usermodif.php">
 						<tr>
 				        <th scope="row"><?php echo $row['pseudo']; ?></th>
+				        <th scope="row"><?php echo $row['email']; ?></th>
+				        <th scope="row"><?php echo $row['date_inscription']; ?></th>
 				        <td><input type="text" name="points" <?php echo 'value="' . $row['points'] . '"' ?> id="points"></td>
 				        <td><input type="text" name="points_session" <?php echo 'value="' . $row['points_session'] . '"' ?> id="points_session"></td>
 				        <td><input type="checkbox" class="admin" name="admin" <?php if($row['admin'] == 1){echo "checked";} ?>> </td>

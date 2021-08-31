@@ -1,4 +1,9 @@
-<?php 
+<?php
+/*
+	Utilité : Connexion au serveur
+	Emplacement : php
+	Affiliations : Aucune
+*/
 	$servername = 'localhost';
 	$username = 'root';
 	$password = '';

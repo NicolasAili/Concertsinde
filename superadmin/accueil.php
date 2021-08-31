@@ -1,4 +1,12 @@
 <?php
+/*
+	Utilité : Accueil de la page superadmin
+	Emplacement : Superadmin
+	Affiliations : 
+*/
+?>
+
+<?php
     session_start();
     ini_set('display_errors', 0);
 	error_reporting(E_ERROR | E_WARNING | E_PARSE); 

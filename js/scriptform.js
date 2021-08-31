@@ -621,8 +621,6 @@ function reinitialiser()
         checkapres = 2;
     }
 
-    console.log(checkavant);
-    console.log(checkapres);
     if(checkavant != checkapres)
     {
         if(checkapres == 1)

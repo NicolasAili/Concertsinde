@@ -1,4 +1,13 @@
 <?php
+/*
+  Type fichier : 
+  Fonction : 
+  Emplacement : 
+  Connexion à la BDD :  
+  Contenu HTML : 
+  JS+JQuery : 
+  CSS : 
+*/
   header('Content-type: application/json');
   if( isset( $_POST['artiste'] ) )
   {

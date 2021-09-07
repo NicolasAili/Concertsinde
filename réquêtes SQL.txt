@@ -1,9 +1,0 @@
-SELECT ID_concert 
-FROM concert
-	INNER JOIN artiste 
-	ON concert.Nom_artiste = artiste.Nom_artiste 
-    WHERE artiste.Nom_artiste = 'Lacraps' 
-
-0,0011
-
-SELECT ID_concert FROM concert, artiste WHERE concert.Nom_artiste = artiste.Nom_artiste AND artiste.Nom_artiste = 'Lacraps'  0,0012 seconde

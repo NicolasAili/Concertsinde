@@ -1,3 +1,14 @@
+<?php
+/*
+    Type fichier : 
+    Fonction : 
+    Emplacement : 
+    Connexion à la BDD :  
+    Contenu HTML : 
+    JS+JQuery : 
+    CSS : 
+*/
+?>
 <?php if (isset($_COOKIE['contentMessage'])) { ?>
 
     <!-- Boite modale de message (erreur ou validation) -->

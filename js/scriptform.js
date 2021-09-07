@@ -1,3 +1,11 @@
+/*
+    Type fichier : JS
+    Fonction : Fichier de script principal
+    Emplacement : js
+    Contenu HTML : n
+    JS+JQuery : n
+    CSS : n
+*/
 function getleave(identifiant)
 {
     var input = $('#'+identifiant+'').val();

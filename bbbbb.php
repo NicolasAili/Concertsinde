@@ -1,3 +1,15 @@
+<?php
+/*
+	Type fichier : 
+	Fonction : 
+	Emplacement : 
+	Connexion à la BDD :  
+	Contenu HTML : 
+	JS+JQuery : 
+	CSS : 
+*/
+?>
+
 <?php 
 
 $osef = $_POST['osef']; 

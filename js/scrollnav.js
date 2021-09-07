@@ -1,7 +1,11 @@
-/*let elt = document.getElementById('test');
-elt.innerHTML = "<ul><li>Elément 1</li><li>Elément 2</li></ul>";
-var somme = 1 + 2;
-elt.innerHTML = somme;*/
+/*
+	Type fichier : JS
+	Fonction : Gestion du header lors du scroll
+	Emplacement : js
+	Contenu HTML : n
+	JS+JQuery : n
+	CSS : n
+*/
 
 var vertical=-1;
 var rcun = document.getElementById('recherche');

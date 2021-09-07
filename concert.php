@@ -1,3 +1,14 @@
+<?php
+/*
+	Type fichier : 
+	Fonction : 
+	Emplacement : 
+	Connexion à la BDD :  
+	Contenu HTML : 
+	JS+JQuery : 
+	CSS : 
+*/
+?>
 <!DOCTYPE html>
 <?php
     session_start();

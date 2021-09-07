@@ -1,8 +1,21 @@
 <?php
 /*
-	Utilité : Accueil de la page superadmin
-	Emplacement : Superadmin
-	Affiliations : 
+	Type fichier : js
+	Fonction : page accueil superadmin
+	Emplacement : superadmin
+	Connexion à la BDD : oui
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : non
+*/
+/*
+	Type fichier : 
+	Fonction : 
+	Emplacement : 
+	Connexion à la BDD :  
+	Contenu HTML : 
+	JS+JQuery : 
+	CSS : 
 */
 ?>
 

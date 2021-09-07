@@ -1,4 +1,13 @@
 <?php
+/*
+	Type fichier : 
+	Fonction : 
+	Emplacement : 
+	Connexion à la BDD :  
+	Contenu HTML : 
+	JS+JQuery : 
+	CSS : 
+*/
 require('../php/database.php');
 
 $action = $_POST['modsuppr'];

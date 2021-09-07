@@ -1,8 +1,11 @@
 <?php
 /*
-	Utilité : Connexion au serveur
+	Type fichier : php 
+	Fonction : Connexion au serveur
 	Emplacement : php
-	Affiliations : Aucune
+	Contenu HTML : n
+	JS+JQuery : n
+	CSS : n
 */
 	$servername = 'localhost';
 	$username = 'root';

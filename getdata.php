@@ -1,4 +1,15 @@
 <?php
+/*
+  Type fichier : 
+  Fonction : 
+  Emplacement : 
+  Connexion à la BDD :  
+  Contenu HTML : 
+  JS+JQuery : 
+  CSS : 
+*/
+?>
+<?php
   header('Content-type: application/json');
   if( isset( $_POST['search'] ) )
   {

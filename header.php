@@ -27,10 +27,11 @@
 			$username = 'root';
 			$password = '';
 			$dbname = 'webbd';
-			$port = '1337';
+			//$port = '1337';
+			//, $port
 
 			//Connexion à la BDD
-			$con = mysqli_connect($servername, $username, $password, $dbname, $port);
+			$con = mysqli_connect($servername, $username, $password, $dbname);
 
 			if (mysqli_connect_errno()) 
 			{

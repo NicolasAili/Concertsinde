@@ -24,7 +24,7 @@
 	</head>
 	<header>
 		<?php 
-			//include('header.php'); 
+			include('header.php'); 
 			require('php/database.php');
 		?>
 	</header>

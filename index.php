@@ -42,9 +42,8 @@
 		<br>
 		<br>
 		<br><br>
-		hééééééééééhoooooooooooooo
+
 		<?php
-		echo "coucouc";
 			$pseudo = $_SESSION['pseudo'];
 			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $requestpseudo);
@@ -107,7 +106,7 @@
 			</div>	
 		</div>
 	</body>
-	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
+	<script type="text/javascript" src="./js/scrollnav.js"></script> 
 	<?php include('footer.html'); ?>
 </html>
 

@@ -53,7 +53,7 @@
 			<br>
 			<br>
 			<table>
-	    		<caption>Utilisateurs</caption>
+	    		<caption>Sessions</caption>
 	    		<tr>
 	    		<th scope="col">Num</th>
 		        <th scope="col">Du</th>

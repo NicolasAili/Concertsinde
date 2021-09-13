@@ -28,6 +28,9 @@ if($action == 'Valider')
 {
 	$sql = "UPDATE utilisateur SET points = '$points', points_session = '$points_session', admin = '$admincheck', banni = '$bannicheck' WHERE pseudo = '$pseudo' ";
 	$query = mysqli_query($con ,$sql);
+	echo "action effectuée avec succès";
+	echo "<br>";
+	echo "<a href=users.php> retour </a>";
 }
 else if($action == 'Message')
 {
@@ -50,9 +53,5 @@ else
 {
 	echo "erreur";
 }
-
-
-	
-
 
 ?>

@@ -71,14 +71,12 @@
 						<label for="ajout">Si vous souhaitez ajouter quoi que ce soit d'autre</label><br />
 						<textarea name="ajout" id="ajout" cols="40" rows="5"></textarea>
 					</p>
-					Cochez cette case si vous ne souhaitez <strong> pas </strong> être contactés par mail relativement à ce problème (avertissement de la résolution du problème, ou demande de détails supplémentaires ou autre...)
-					<br>
-					<input type="checkbox" id="mail" name="mail" onclick="checkboxproblem();">
 					<div id=showmail>
 						<?php if(isset($_SESSION['pseudo']) == null)
 						{
 							echo "<br>";
-							echo "Il semble que vous ne soyez pas connectés, saisissez votre mail ci-dessous ou connectez-vous";?>
+							echo "Il semble que vous ne soyez pas connecté, saisissez votre mail ci-dessous ou connectez-vous";
+							echo "<br>";?>
 							<input type="mail" name="mailinput" id="mailinput" value=""><?php
 						}
 						?>
@@ -92,8 +90,6 @@
 					{?>
 						<input type="hidden" id="pseudo" name="pseudo" value="anonyme"> <?php
 					}?>
-
-					<input type="hidden" id="mailsuivi" name="mailsuivi" value="1"> 
 					<input type="hidden" id="type" name="type" value="1"> 
 					
 			</fieldset>

@@ -215,7 +215,7 @@
 		}
 		?>
 		>
-		Aficher les concerts archivés (cochez ou décochez)
+		Afficher les concerts archivés (cochez ou décochez)
 
 		<?php
 		if(!$add && !$modif)
@@ -576,7 +576,7 @@
 								<?php
 								if ($pseudo)
 								{
-									if($row['valide'] == 0 || $testadmin == 1)
+									if($row['valide'] == 0 || $testadmin > 0)
 									{?>
 										<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
 									<?php
@@ -586,7 +586,7 @@
 										echo "Concert validé, il n'est plus modifiable";
 										?><input id="probleme" type="submit" name="probleme" value="Signaler un probleme sur ce concert"> <?php
 									}
-									if($testadmin == 1) 
+									if($testadmin > 0) 
 									{?>
 										<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
 										<?php 

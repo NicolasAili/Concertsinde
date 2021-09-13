@@ -50,7 +50,7 @@
 						<?php if(isset($_SESSION['pseudo']) == null)
 						{
 							echo "<br>";
-							echo "Il semble que vous ne soyez pas connectés, saisissez votre mail ci-dessous ou connectez-vous";?>
+							echo "Il semble que vous ne soyez pas connecté, saisissez votre mail ci-dessous ou connectez-vous";?>
 							<input type="mail" name="mailinput" id="mailinput" value=""><?php
 						}
 						?>

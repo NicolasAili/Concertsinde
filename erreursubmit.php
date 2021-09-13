@@ -33,12 +33,13 @@
 	$etapes = $_POST['etapes'];
 	$ajout = $_POST['ajout'];
 	$mail = $_POST['mailinput'];
-	$mailsuivi = $_POST['mailsuivi'];
+	//$mailsuivi = $_POST['mailsuivi'];
 
 	$idconcert = $_POST['idconcert'];
 
 	$artiste = $_POST['artiste'];
 	$date = $_POST['date'];
+	echo $date;
 	$heure = $_POST['heure'];
 	$salle = $_POST['salle'];
 	$ville = $_POST['ville'];
@@ -55,15 +56,13 @@
 	{
 		$mail = "NULL";
 	}
-	$pseudo = $_POST['pseudo'];
-
 
 	$sql = "SELECT ID_user FROM utilisateur WHERE pseudo = '$pseudo'";
 	$result = mysqli_query($con, $sql);
 	$row = mysqli_fetch_array($result);
 	$idpseudo = $row['ID_user'];
 
-	$insert = "INSERT INTO probleme (type, id_concert, probleme, etapes, ajout, utilisateur, mail, suivi_mail, date_envoi, artiste, date, heure, salle, ville, cp, departement, region, pays, adresse, lien_fb, lien_ticket, autre) VALUES ('$type', '$idconcert', '$probleme', '$etapes', '$ajout', '$idpseudo', '$mail', '$mailsuivi', NOW(), '$artiste', '$date', '$heure', '$salle', '$ville', '$cp', '$departement', '$region', '$pays', '$adresse', '$lien_fb', '$lien_ticket', '$autre')"; 
+	$insert = "INSERT INTO probleme (type, id_concert, probleme, etapes, ajout, utilisateur, mail, date_envoi, artiste, date, heure, salle, ville, cp, departement, region, pays, adresse, lien_fb, lien_ticket, autre) VALUES ('$type', '$idconcert', '$probleme', '$etapes', '$ajout', '$idpseudo', '$mail', NOW(), '$artiste', '$date', '$heure', '$salle', '$ville', '$cp', '$departement', '$region', '$pays', '$adresse', '$lien_fb', '$lien_ticket', '$autre')"; 
 	mysqli_query($con, $insert);
 
 	setcookie('contentMessage', 'Merci pour votre contribution. Votre aide est très précieuse', time() + 30, "/");

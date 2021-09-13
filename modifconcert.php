@@ -106,7 +106,6 @@
 					setcookie('contentMessage', 'Erreur: vous devez être connectés afin de pouvoir modifier un concert', time() + 30, "/");
 					header("Location: ./allconcerts.php");
 					exit("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
-
 				}
 				else
 				{
@@ -115,7 +114,7 @@
 					exit("Erreur inconnue, merci de contacter le support");
 				}
 			}
-			else if($testadmin != 1 AND $action == 'Valider' || $action == 'Supprimer')
+			else if($testadmin < 1 AND $action == 'Valider' || $action == 'Supprimer')
 			{
 				setcookie('contentMessage', 'Erreur: cette action est réservée aux administrateurs', time() + 30, "/");
 				header("Location: ./allconcerts.php");
@@ -125,7 +124,7 @@
 			{
 				if($action == 'Modifier')
 				{
-					if($valide == 1 && $testadmin != 1)
+					if($valide == 1 && $testadmin < 1)
 					{
 						setcookie('contentMessage', 'Erreur: il est interdit de modifier un concert validé', time() + 30, "/");
 						header("Location: ./allconcerts.php");
@@ -500,7 +499,6 @@
 						<label for="lien_ticket">lien vers la billetterie</label>
 						<input type="checkbox" id="autre" name="autre" value="autre chose">
 						<label for="autre">autre</label>
-
 						<p>
 							<label for="probleme">Dans ce champ, précisez les valeurs des champs du concert que vous pensez être faux, apportez des précisions ou bien décrivez votre problème s'il n'est pas relatif aux champs du concert. N'hésitez pas à fournir le plus de détails possible</label><br />
 							<textarea name="probleme" id="probleme" cols="40" rows="5"></textarea>
@@ -510,18 +508,12 @@
 							<textarea name="ajout" id="ajout" cols="40" rows="5"></textarea>
 						</p>
 
-						Cochez cette case si vous ne souhaitez <strong> pas </strong> être contactés par mail relativement à ce problème (avertissement de la résolution du problème, ou demande de détails supplémentaires ou autre...)
-						<br>
-						<input type="checkbox" id="mail" name="mail" onclick="checkboxproblem();">
-
 						<input type="hidden" id="idconcert" name="idconcert" <?php echo 'value="' . $idconcert . '"' ?>>
 						<input type="hidden" id="pseudo" name="pseudo" <?php echo 'value="' . $_SESSION['pseudo'] . '"' ?>>
 						<input type="hidden" id="mailsuivi" name="mailsuivi" value="1"> 
 						<input type="hidden" id="type" name="type" value="2"> 
 						<input type="submit" value="Envoyer" />
 					</form>
-
-
 					<?php
 				}
 				else

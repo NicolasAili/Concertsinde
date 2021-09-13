@@ -584,7 +584,7 @@ function checkboxmodif(identifiant)
     }
 }
 
-function checkboxproblem()
+/*function checkboxproblem()
 {
     if($('input[name=mail]').is(':checked'))
     {
@@ -598,7 +598,7 @@ function checkboxproblem()
         $('#showmail').css('display', 'contents');
         $('#mailsuivi').val("1");
     }
-}
+}*/
 
 function reinitialiser()
 {

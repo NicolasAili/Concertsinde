@@ -27,13 +27,15 @@
 			$username = 'root';
 			$password = '';
 			$dbname = 'webbd';
+			$port = '3306';
 
 			//Connexion à la BDD
-			$con = mysqli_connect($servername, $username, $password, $dbname);
+			$con = mysqli_connect($servername, $username, $password, $dbname, $port);
 
-			//Vérification de la connexion
-			if(mysqli_connect_errno($con)){
-			echo "Erreur de connexion" .mysqli_connect_error();
+			if (mysqli_connect_errno()) 
+			{
+    			printf("Échec de la connexion : %s\n", mysqli_connect_error());
+    			exit();
 			}
 		
 			$pseudo = $_SESSION['pseudo'];

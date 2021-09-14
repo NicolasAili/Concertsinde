@@ -19,9 +19,13 @@
 		<meta name="Description" content="connexion" />
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
 		<link rel="stylesheet" type="text/css" href="css/body/connexion.css" media="screen" />
+		<script type="text/javascript" src="./jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />		
 	</head>
 	<header>
 		<?php include('header.php'); ?>
+		<?php require "./messages.php"; ?> 	
 	</header>
 	<body>
 	</body>

@@ -52,7 +52,10 @@ if (isset($_POST['inscription']))
                     {	
         				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$passwordh', NOW())";
         				mysqli_query($con, $sql);
-        				header('Location: ./connexion.php');
+        				
+                        setcookie('contentMessage', 'Votre inscription a été effectuée avec succès !', time() + 30, "/");
+                        header('Location: ./connexion.php');
+                        exit("Votre inscription a été effectuée avec succès !");
                     }
                     else
                     {

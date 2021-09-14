@@ -57,7 +57,7 @@
 					</div> 
 			</p>
 			<p>	
-				Merci pour votre contribution <br />
+				Merci pour votre contribution <br/>
 			</p>
 			<p>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Envoyer" />

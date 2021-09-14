@@ -48,6 +48,7 @@ else if($message)
 {
 	$sql = "INSERT INTO message (message, utilisateur) VALUES ('$message', '$idpseudo')";
 	$query = mysqli_query($con ,$sql);
+	echo "<a href=users.php> retour </a>";
 }
 else
 {

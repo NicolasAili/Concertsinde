@@ -510,8 +510,7 @@
 
 						<input type="hidden" id="idconcert" name="idconcert" <?php echo 'value="' . $idconcert . '"' ?>>
 						<input type="hidden" id="pseudo" name="pseudo" <?php echo 'value="' . $_SESSION['pseudo'] . '"' ?>>
-						<input type="hidden" id="mailsuivi" name="mailsuivi" value="1"> 
-						<input type="hidden" id="type" name="type" value="2"> 
+						<input type="hidden" id="type" name="type" value="1"> 
 						<input type="submit" value="Envoyer" />
 					</form>
 					<?php

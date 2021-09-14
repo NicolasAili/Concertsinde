@@ -90,7 +90,7 @@
 					{?>
 						<input type="hidden" id="pseudo" name="pseudo" value="anonyme"> <?php
 					}?>
-					<input type="hidden" id="type" name="type" value="1"> 
+					<input type="hidden" id="type" name="type" value="2"> 
 					
 			</fieldset>
 			<p>	

@@ -34,7 +34,7 @@
 		$pseudo = $_POST['pseudo'];
 		$password = $_POST['password'];
 		$passwordh = hash('sha512', $password);
-		$sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo' AND password = '$passwordh'";
+		$sql = "SELECT pseudo, banni FROM utilisateur WHERE pseudo = '$pseudo' AND password = '$passwordh'";
 		$result = mysqli_query($con ,$sql);
 		$row = mysqli_fetch_assoc($result);
 
@@ -42,25 +42,28 @@
 
 	    if ($row['pseudo'] != null )
     	{
-			echo " Bonjour ";		
-			echo $row['pseudo'];
-			echo " ! ";
-			$admin = 'administrateur';
-			$_SESSION['pseudo'] = $row['pseudo'];
-			$sql = "SELECT password FROM utilisateur WHERE pseudo = '$pseudo'";
-			$result = mysqli_query($con, $sql);
-			$row = mysqli_fetch_assoc($result);
-			$_SESSION['password'] = $row['password'];
-			header('Location: ./accueil.php');
-
-
+    		if($row['banni'] == 1)
+    		{
+    			header("Location: ./connexion.php?message=Votre compte a été banni");
+    		}
+    		else
+    		{
+				echo " Bonjour ";		
+				echo $row['pseudo'];
+				echo " ! ";
+				$admin = 'administrateur';
+				$_SESSION['pseudo'] = $row['pseudo'];
+				$sql = "SELECT password FROM utilisateur WHERE pseudo = '$pseudo'";
+				$result = mysqli_query($con, $sql);
+				$row = mysqli_fetch_assoc($result);
+				$_SESSION['password'] = $row['password'];
+				header('Location: ./accueil.php');
+			}
 		}
 	else 
 		{		
     		header("Location: ./connexion.php?message=Pseudo ou Mot de Passe incorrect");
 		}
-
-
 }
 ?>		
 

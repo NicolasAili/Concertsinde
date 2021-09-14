@@ -108,7 +108,7 @@
 										?> <img src="./image/notifdeux.png" id="notifun"> <?php
 										break;					
 									default:
-										?> <img src="./image/notiftroisplus.png" id="notifun"> <?php
+										?> <img src="./image/notiftrois.png" id="notifun"> <?php
 										break;
 								}?>
 								

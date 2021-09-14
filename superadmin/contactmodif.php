@@ -29,8 +29,8 @@ if(!$idcheckmodif)
 	$mail = $row['mail'];
 	$resolu = $row['resolu'];
 	$commentaire = $row['commentaire'];
-
-	echo $commentaire;
+	$concert = $row['id_concert'];
+	
 
 	$sql = "SELECT pseudo, email FROM utilisateur WHERE ID_user = '$userid'";
 	$result = mysqli_query($con, $sql);
@@ -38,8 +38,18 @@ if(!$idcheckmodif)
 	$pseudo = $rowx['pseudo'];
 	$email = $rowx['email'];
 
+	if($concert)
+	{
+		$sql = "SELECT nom_artiste, datec FROM concert WHERE id_concert = '$concert'";
+		echo $sql;
+		$result = mysqli_query($con, $sql);
+		$rowc = mysqli_fetch_array($result);
+		$artiste = $rowc['nom_artiste'];
+		$datec = $rowc['datec'];
+	}
+
 	echo "Utilisateur : "; ?> <a href="users.php?pseudoget=<?php echo $pseudo; ?>" > <?php echo $pseudo; ?> </a> <?php echo "<br>";
-	echo "Email : "; echo $mail; echo $email; echo "<br>";
+	echo "Email : "; if($mail != 'NULL'){echo $mail;} if($email){echo $email;} echo "<br>";
 	echo "Date d'émission :"; echo $row['date_envoi']; echo "<br>";
 	echo "Statut : "; if($row['resolu'] == 0){echo "non résolu";} else if($row['resolu'] == 1){echo "en attente";} else if($row['resolu'] == 2){echo "resolu";} echo "<br>";
 	echo "Type : "; if($row['type'] == 1){echo "Probleme concert";} else if($row['type'] == 2){echo "Probleme site";} else if($row['type'] == 3){echo "Contact";} echo "<br>";
@@ -48,7 +58,7 @@ if(!$idcheckmodif)
 	switch($row['type'])
 	{
 		case "1":
-			echo "concert concerné : "; // à faire
+			echo "concert concerné : "; echo $artiste; echo " le "; echo $datec;
 			echo "<br>";
 		?>
 				<input type="checkbox" id="artiste" name="artiste" value="artiste" <?php if($row['artiste']){echo "checked";}?>>

@@ -41,7 +41,6 @@ if(!$idcheckmodif)
 	if($concert)
 	{
 		$sql = "SELECT nom_artiste, datec FROM concert WHERE id_concert = '$concert'";
-		echo $sql;
 		$result = mysqli_query($con, $sql);
 		$rowc = mysqli_fetch_array($result);
 		$artiste = $rowc['nom_artiste'];

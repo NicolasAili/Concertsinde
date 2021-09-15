@@ -64,7 +64,7 @@
 		<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
 				Ajouter un artiste
 				<form method="post" class="connect" action="addartist.php">
-					<input type="text" name="artisteajout" id="artisteajout" placeholder="Ajoutez un artiste">
+					<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
 					<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
 					<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
 				</form>
@@ -81,7 +81,7 @@
 			?>
 			<form method="post" class="connect" action="artistes.php">
 				<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
-				<input type="submit" value="Chercher un artiste" id="valider" name="valider" href="">
+				<input type="submit" value="Valider" id="valider" name="valider" href="">
 			</form>
 		</div>
 		<?php

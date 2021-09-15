@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : affiche un probleme en particulier
+	Emplacement : superadmin
+	Connexion à la BDD :  oui
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : non
 */
 require('../php/database.php');
 

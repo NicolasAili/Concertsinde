@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : modifier points, points sessions, admin, banni d'un user + envoi de msg
+	Emplacement : superadmin
+	Connexion à la BDD : oui
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : non
 */
 require('../php/database.php');
 $points = $_POST['points'];

@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : mettre une session en actif ou ajouter une session
+	Emplacement : superadmin
+	Connexion à la BDD : oui
+	Contenu HTML : non
+	JS+JQuery : non
+	CSS : non
 */
 require('../php/database.php');
 

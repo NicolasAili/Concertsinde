@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : connecte l'utilisateur
+	Emplacement : action
+	Connexion à la BDD : oui  
+	Contenu HTML : non
+	JS+JQuery : non
+	CSS : non
 */
 ?>
 <?php
@@ -48,10 +48,6 @@
     		}
     		else
     		{
-				echo " Bonjour ";		
-				echo $row['pseudo'];
-				echo " ! ";
-				$admin = 'administrateur';
 				$_SESSION['pseudo'] = $row['pseudo'];
 				$sql = "SELECT password FROM utilisateur WHERE pseudo = '$pseudo'";
 				$result = mysqli_query($con, $sql);

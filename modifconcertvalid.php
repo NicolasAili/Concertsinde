@@ -1,15 +1,15 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : permet de modifier un concert
+	Emplacement : action
+	Connexion à la BDD : oui  
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : oui
 */
 ?>
-<!DOCTYPE html>*
+<!DOCTYPE html>
 <?php
     session_start();
 ?>

@@ -1,12 +1,12 @@
 <?php
 /*
-  Type fichier : 
-  Fonction : 
-  Emplacement : 
-  Connexion à la BDD :  
-  Contenu HTML : 
-  JS+JQuery : 
-  CSS : 
+  Type fichier : php
+  Fonction : ajouter une description à un artiste
+  Emplacement : action
+  Connexion à la BDD : oui  
+  Contenu HTML : non
+  JS+JQuery : non
+  CSS : non
 */
   header('Content-type: application/json');
   if( isset( $_POST['artiste'] ) )

@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : présentation du site
+	Emplacement : /
+	Connexion à la BDD :  non
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : oui
 */
 ?>
 <!DOCTYPE html>
@@ -149,28 +149,20 @@ Sur la page d’un artiste, vous pouvez lire sa description (ou l’ajouter si e
 Vous pouvez également ajouter un artiste s’il n’existe pas dans la base de données.<br><br><br>
 
 <h1>Economie du site</h1><br><br>
-Le site est entièrement libre, gratuit, sans publicités et cela le restera tant que le site existe. Tous les frais (hébergement du site, récompenses, publicité etc...) sont entièrement pris en charge par moi-même.<br>
-Si d'aventure cela revenait trop cher, je penserai peut-être à mettre en place un système de dons pour ceux souhaitant soutenir le site.<br>
-De plus je pense peut-être à faire dans le futur des partenariats avec des acteurs de la scène indépendante afin éventuellement de financer les récompenses dans une optique de soutien mutuel. Je pense par exemple à des entités comme Stoemp, lebonson, shoptonhiphop, scred connexion, give me 5 etc... <br>
-Tout ceci n'est pour l'instant qu'extrapolation, pour l'instant je finance tout tout seul et tant que j'en ai les moyens cela n'est pas voué à changer. Dans le cas contraire je serai bien entendu totalement transparent sur les dépenses du site et les revenus des dons et éventuellement partenariats. <br>
-Enfin, et c'est le plus important, retenez bien que ce site n'a aucunement pour but de générer un quelconque revenu, et ce ne sera <u> jamais le cas </u>. <br>
+Le site est entièrement libre, gratuit, sans publicité et cela le restera. Tous les frais (hébergement du site, récompenses, publicité etc...) sont entièrement pris en charge par moi-même.<br>
+Dans tous les cas, et c'est le plus important, retenez bien que ce site n'a aucunement pour but de générer un quelconque revenu, et ce ne sera <u> jamais le cas </u>. <br>
 Le but est simplement de proposer au plus grand nombre un outil, gratuit, libre, interactif, communautaire, indépendant, à but non lucratif dans l'unique optique de faire progresser la scéne hip-hop, pour le public et pour les artistes. <br><br>
 
 Faire de cette musique que nous aimons tant un moyen d'émancipation et de libre expression.<br><br><br>
 
 <h1>Contact</h1><br><br>
 N’hésitez pas à me contacter si vous avez la moindre question ou une idée d’amélioration. Vous pouvez également me contacter via facebook.
-<br><br><br>
-FAQ<br><br>
-Comment ajouter un concert ?<br>
-Comment modifier un concert ?<br>
-
-
-
+<a href="contact.php"> Contactez-moi !</a>
+<br>
 
 <h1>Qui suis-je ?</h1>
 <br><br>
-Etudiant en école d’ingénieur, j’écoute du rap français (principalement indépendant) depuis de nombreuses années. J’ai eu l’occasion de me rendre à de nombreux concerts dans ma ville et cette ferveur au sein de ce milieu m’a donné envie d’y apporter ma modeste contribution au travers de ce site.
+Etudiant en école d’ingénieur, j’écoute du rap français (principalement indépendant) depuis de nombreuses années. J’ai eu l’occasion de me rendre à de nombreux concerts dans ma ville et la ferveur au sein de ce milieu m’a donné envie d’y apporter ma modeste contribution au travers de ce site.
 <br><br><br>
 <h1>Historique du site</h1>
 <br><br>

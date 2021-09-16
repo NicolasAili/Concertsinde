@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php 
+	Fonction : inscription utilisateur
+	Emplacement : /
+	Connexion à la BDD :  non
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : oui
 */
 ?>
 <!DOCTYPE html>

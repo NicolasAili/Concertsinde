@@ -1,12 +1,12 @@
 <?php
 /*
-  Type fichier : 
-  Fonction : 
-  Emplacement : 
-  Connexion à la BDD :  
-  Contenu HTML : 
-  JS+JQuery : 
-  CSS : 
+  Type fichier : php
+  Fonction : ajouter un artiste
+  Emplacement : action
+  Connexion à la BDD : oui  
+  Contenu HTML : non
+  JS+JQuery : non
+  CSS : non
 */
 session_start();
 

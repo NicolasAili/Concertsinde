@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
+	Type fichier : php
+	Fonction : ajoute un concert
+	Emplacement : /
 	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Contenu HTML : oui
+	JS+JQuery : oui
+	CSS : oui
 */
 ?>
 <!DOCTYPE html>

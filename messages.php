@@ -1,12 +1,12 @@
 <?php
 /*
-    Type fichier : 
-    Fonction : 
-    Emplacement : 
-    Connexion à la BDD :  
-    Contenu HTML : 
-    JS+JQuery : 
-    CSS : 
+    Type fichier : php
+    Fonction : permet d'afficher boîte de dialogue lorsque header
+    Emplacement : action
+    Connexion à la BDD : non  
+    Contenu HTML : oui
+    JS+JQuery : oui (pas jquery)
+    CSS : non
 */
 ?>
 <?php if (isset($_COOKIE['contentMessage'])) { ?>

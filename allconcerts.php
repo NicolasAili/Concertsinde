@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : afficher tous les concerts
+	Emplacement : /
+	Connexion à la BDD :  oui
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : oui
 */
 ?>
 
@@ -26,7 +26,6 @@
 		<script type="text/javascript" src="./jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />		
-		<?php include("supprimer.php"); // on appelle le fichier?>
 		<meta name="Author" content="BUSQUET_TOURNU" />
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />

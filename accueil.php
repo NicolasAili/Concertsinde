@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : page accueil
+	Emplacement : /
+	Connexion à la BDD :  oui
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : oui
 */
     session_start();
 ?>
@@ -64,6 +64,7 @@
 			$query = mysqli_query($con, $sql);
 		?>
 		<div class="maintxt">
+			<?php echo __FILE__; ?>
 			<div class="blocun">
 				<h1> Objectif du site </h1>
 				<p> L'objectif de ce site web est de permettre au public de rap indépendant de pouvoir être facilement au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite. </p>

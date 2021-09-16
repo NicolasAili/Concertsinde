@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : Traitement de l'ajout d'un concert
+	Emplacement : action
+	Connexion à la BDD : oui  
+	Contenu HTML : oui
+	JS+JQuery : non
+	CSS : oui
 */
 ?>
 <!DOCTYPE html>

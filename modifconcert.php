@@ -1,12 +1,12 @@
 <?php
 /*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
+	Type fichier : php
+	Fonction : supprimer, valider ou modifier un concert
+	Emplacement : /
+	Connexion à la BDD : oui
+	Contenu HTML : oui
+	JS+JQuery : oui
+	CSS : oui
 */
 ?>
 <?php

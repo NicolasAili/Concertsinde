@@ -9,6 +9,7 @@
 	CSS : oui
 */
 ?>
+<link rel="stylesheet" type="text/css" href="css/header.css">
 <div id="recherche">
 	<div class="logo">
 		<a href="./accueil.php">
@@ -143,8 +144,8 @@
 			<?php
 			}?>
 			<div class="reseaux">
-				<a href="facebook.com"><img class="imgfb" src="./image/facebook.png"></a>
-				<a href="instagram.com"><img class="imgig" src="./image/instagram.png"></a>
+				<a href="http://facebook.com"><img class="imgfb" src="./image/facebook.png"></a>
+				<a href="http://instagram.com"><img class="imgig" src="./image/instagram.png"></a>
 			</div>
 		</div>
 	</div>

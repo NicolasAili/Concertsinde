@@ -11,21 +11,20 @@
     session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<meta charset="UTF-8" />
-		<title>Mon site web concert</title>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="page d'acceuil" />
-		<link rel="stylesheet" type="text/css" href="css/header.css" />	
-		<link rel="stylesheet" type="text/css" href="css/body/accueil.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
+		<?php
+			include 'contenu/base.php'; 
+			include 'contenu/css.php'; 
+			include 'contenu/js.php'; 
+				
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/accueil.css">
 	</head>
 	<header>
 		<?php 
 			include('header.php'); 
-			require('php/database.php');
 		?>
 	</header>
 	<body>
@@ -64,11 +63,10 @@
 			$query = mysqli_query($con, $sql);
 		?>
 		<div class="maintxt">
-			<?php echo __FILE__; ?>
 			<div class="blocun">
 				<h1> Objectif du site </h1>
 				<p> L'objectif de ce site web est de permettre au public de rap indépendant de pouvoir être facilement au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite. </p>
-				<p>Ce site a pour car caractéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs. Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier les concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs. </p>
+				<p>Ce site a pour caractéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs. Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier les concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs. </p>
 				<p>En étant connectés, vous pouvez en outre gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site (plus de détails dans l'onglet « présentation et fonctionnement »).</p>
 			</div>
 			<div class="blocdeux"> 				

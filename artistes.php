@@ -13,8 +13,6 @@
 
 <?php
     session_start();
-    ini_set('display_errors', 0);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,18 +37,7 @@
 		<h1> Artistes </h1>
 
 		<?php
-			$servername = 'localhost';
-			$username = 'root';
-			$password = '';
-			$dbname = 'webbd';
-
-			//Connexion à la BDD
-			$con = mysqli_connect($servername, $username, $password, $dbname);
-
-			//Vérification de la connexion
-			if(mysqli_connect_errno($con)){
-			echo "Erreur de connexion" .mysqli_connect_error();
-			}
+			require('php/database.php');
 			echo "</br>";
 			echo "</br>";
 			echo "</br>";

@@ -15,80 +15,67 @@
   {
     $name = $_POST['search'];
     $test = $_POST['this'];
-    //echo $test;
-    //$name = "kini";
-    $servername = 'localhost';
-      $username = 'root';
-      $password = '';
-      $dbname = 'webbd';
-      //Connexion à la BDD
-      $con = mysqli_connect($servername, $username, $password, $dbname);
-      $response = array();
-      $n = 0;
-      //Vérification de la connexion
-      
-      if(mysqli_connect_errno($con))
+    
+    require('php/database.php');
+    
+    if($test == 'salle')
+    {
+      $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
       {
-        echo "Erreur de connexion" .mysqli_connect_error();
+        $response[] = array("label"=>$row['Nom_salle']);
       }
-      if($test == 'salle')
+    }
+    else if($test == 'artiste')
+    {
+      $str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
       {
-        $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
-        $result = mysqli_query($con, $str);
-        while($row = mysqli_fetch_array($result))
-        {
-          $response[] = array("label"=>$row['Nom_salle']);
-        }
+        $response[] = array("label"=>$row['Nom_artiste']);
       }
-      else if($test == 'artiste')
+    }
+    else if($test == 'ville')
+    {
+      $str = "SELECT nom_ville FROM ville WHERE nom_ville LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
       {
-        $str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste LIKE '%{$name}%'";
-        $result = mysqli_query($con, $str);
-        while($row = mysqli_fetch_array($result))
-        {
-          $response[] = array("label"=>$row['Nom_artiste']);
-        }
+        $response[] = array("label"=>$row['nom_ville']);
       }
-      else if($test == 'ville')
+    }
+    else if($test == 'departement')
+    {
+      $str = "SELECT nom_departement FROM departement WHERE nom_departement LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
       {
-        $str = "SELECT nom_ville FROM ville WHERE nom_ville LIKE '%{$name}%'";
-        $result = mysqli_query($con, $str);
-        while($row = mysqli_fetch_array($result))
-        {
-          $response[] = array("label"=>$row['nom_ville']);
-        }
+        $response[] = array("label"=>$row['nom_departement']);
       }
-      else if($test == 'departement')
+    }
+    else if($test == 'region')
+    {
+      $str = "SELECT nom_region FROM region WHERE nom_region LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
       {
-        $str = "SELECT nom_departement FROM departement WHERE nom_departement LIKE '%{$name}%'";
-        $result = mysqli_query($con, $str);
-        while($row = mysqli_fetch_array($result))
-        {
-          $response[] = array("label"=>$row['nom_departement']);
-        }
+        $response[] = array("label"=>$row['nom_region']);
       }
-      else if($test == 'region')
+    }
+    else if($test == 'pays')
+    {
+      $str = "SELECT nom_pays FROM pays WHERE nom_pays LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
       {
-        $str = "SELECT nom_region FROM region WHERE nom_region LIKE '%{$name}%'";
-        $result = mysqli_query($con, $str);
-        while($row = mysqli_fetch_array($result))
-        {
-          $response[] = array("label"=>$row['nom_region']);
-        }
+        $response[] = array("label"=>$row['nom_pays']);
       }
-      else if($test == 'pays')
-      {
-        $str = "SELECT nom_pays FROM pays WHERE nom_pays LIKE '%{$name}%'";
-        $result = mysqli_query($con, $str);
-        while($row = mysqli_fetch_array($result))
-        {
-          $response[] = array("label"=>$row['nom_pays']);
-        }
-      }
-      else
-      {
-        echo("erreur");
-      }
+    }
+    else
+    {
+      echo("erreur");
+    }
 
     echo json_encode($response);
     //echo json_encode($t);*/

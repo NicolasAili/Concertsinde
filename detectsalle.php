@@ -16,18 +16,8 @@
     $identifiant = $_POST['identifiant']; //variable envoyée grâce à la méthode "post" par notre script JQuery
     $name = $_POST['input'];
 
-    $servername = 'localhost';
-      $username = 'root';
-      $password = '';
-      $dbname = 'webbd';
-      //Connexion à la BDD
-      $con = mysqli_connect($servername, $username, $password, $dbname);
-      //Vérification de la connexion
-       
-      if(mysqli_connect_errno($con))
-      {
-        echo "Erreur de connexion" .mysqli_connect_error();
-      }
+    require('php/database.php');
+    
     $response = array(); //var qui contiendra nos données JSON
     if($name)
     {

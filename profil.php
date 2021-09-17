@@ -28,13 +28,7 @@
 	</header>
 		<body>
 			<?php 
-			$servername = 'localhost';
-			$username = 'root';
-			$password = '';
-			$dbname = 'webbd';
-			//Connexion à la BDD
-			$con = mysqli_connect($servername, $username, $password, $dbname);
-			//Vérification de la connexion
+			require('php/database.php');
 			?>
 			
 			<h1>Profil de <?php echo $_SESSION['pseudo']; ?> : </h1><hr />

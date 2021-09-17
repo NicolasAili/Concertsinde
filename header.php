@@ -24,21 +24,7 @@
 			</form>
 			<?php 
 
-			$servername = 'localhost';
-			$username = 'root';
-			$password = '';
-			$dbname = 'webbd';
-			//$port = '1337';
-			//, $port
-
-			//Connexion à la BDD
-			$con = mysqli_connect($servername, $username, $password, $dbname);
-
-			if (mysqli_connect_errno()) 
-			{
-    			printf("Échec de la connexion : %s\n", mysqli_connect_error());
-    			exit();
-			}
+			require('php/database.php');
 		
 			$pseudo = $_SESSION['pseudo'];
 			$sql = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";

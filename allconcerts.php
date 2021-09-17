@@ -12,8 +12,6 @@
 
 <?php
     session_start();
-    ini_set('display_errors', 0);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,6 +33,8 @@
 	</header>
 	<body>	
 		<?php
+		require('php/database.php');
+		
 		$add = $_GET['add'];
 		$modif = $_GET['modif'];
 		$filter = $_GET['filter'];
@@ -360,20 +360,6 @@
 		<img src="image/valide.png" height="50" width="50"> = Concert validé (non modifiable)
 		<br>
 		<img src="image/invalide.png" height="50" width="50"> = Concert non validé (modifiable)
-	 	<?php
-			$servername = 'localhost';
-			$username = 'root';
-			$password = '';
-			$dbname = 'webbd';
-
-			//Connexion à la BDD
-			$con = mysqli_connect($servername, $username, $password, $dbname);
-
-			//Vérification de la connexion
-			if(mysqli_connect_errno($con)){
-			echo "Erreur de connexion" .mysqli_connect_error();
-			}
-		?>
 		<?php
 			$admin = 'administateur';
 			//echo $_SESSION['pseudo'];

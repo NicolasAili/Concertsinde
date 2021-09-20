@@ -29,20 +29,6 @@
 		?>
 	</header>
 	<body>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br><br>
-
 		<?php
 			$pseudo = $_SESSION['pseudo'];
 			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";

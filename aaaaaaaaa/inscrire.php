@@ -10,18 +10,18 @@
 */
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<meta charset="UTF-8" />
-		<title>Inscription</title>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="inscription" />
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/inscrire.css" media="screen" />
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/inscrire.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>
 		<body>
 			 <h1>Inscription</h1>  

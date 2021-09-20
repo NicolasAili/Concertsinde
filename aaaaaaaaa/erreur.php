@@ -13,24 +13,18 @@
     session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<meta charset="UTF-8" />
-				<title>Erreur</title>
-				<meta name="Author" content="BUSQUET_TOURNU" />
-				<meta name="Keywords" content="ConcertAll" />
-				<meta name="Description" content="Ereur" />
-				<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-				<link rel="stylesheet" type="text/css" href="css/body/erreur.css" media="screen" />	
-				<script type="text/javascript" src="js/scriptform.js"></script> 	
-				<!-- Script -->
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-						<!-- jQuery UI -->
-				<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-				<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/erreur.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>	
 	<body>
 		<?php			

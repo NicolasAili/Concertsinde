@@ -3,36 +3,25 @@
 	Type fichier : php
 	Fonction : ajoute un concert
 	Emplacement : /
-	Connexion à la BDD :  
+	Connexion à la BDD : non
 	Contenu HTML : oui
 	JS+JQuery : oui
 	CSS : oui
 */
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<title>Recap</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/ajoutconcert.css" media="screen" />	
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
-		<script type="text/javascript" src="js/scriptform.js"></script> 
-		<!-- Script -->
-		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-		<script type="text/javascript" src="jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" media="screen" />	
-		<!-- jQuery UI -->
-		<!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
-
-		<?php //include("concert.php"); // on appelle le fichier?>
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+			include 'php/js.php'; 
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/ajoutconcert.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>	
 	<body>
 		<div class="indentfi">

@@ -11,23 +11,18 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<title>Tous les concerts</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
-		<script type="text/javascript" src="jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" media="screen" />		
-		<?php include("supprimer.php"); // on appelle le fichier?>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/classement.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>
 	<body>	
 

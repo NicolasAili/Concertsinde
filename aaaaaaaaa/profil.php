@@ -13,18 +13,18 @@
 <?php
     session_start();
 ?>
-<html>
+<html lang="fr">
 	<head>
-		<meta charset="UTF-8" />
-		<title>Profil</title>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="profil" />
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/body/profil.css" media="screen" />	
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/profil.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>
 		<body>
 			<?php 

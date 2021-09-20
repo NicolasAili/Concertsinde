@@ -10,19 +10,18 @@
 */
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<title>Recap</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/concert.css" media="screen" />		
-		<titleC></title>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/searchresult.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>
 	<body>
 		<?php	      

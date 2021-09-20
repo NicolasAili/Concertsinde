@@ -6,28 +6,25 @@
 	Connexion à la BDD :  oui
 	Contenu HTML : oui
 	JS+JQuery : non
-	CSS : non
+	CSS : oui
 */
 ?>
 <?php
     session_start();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
-		<meta charset="UTF-8" />
-		<title>Artistes</title>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Artistes" />
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/body/artiste.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css" media="screen" />	
-		<script type="text/javascript" src="js/scriptform.js"></script> 
+		<?php
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+
+			require('php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/superartiste.css">
 	</head>
 	<header>
-		<?php include('contenu/header.php'); ?>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</header>
 	<body>
 		<h1> Artistes </h1>

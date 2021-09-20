@@ -24,7 +24,7 @@
 		<link rel="stylesheet" type="text/css" href="css/body/artiste.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
 		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css" media="screen" />	
-		<script type="text/javascript" src="./js/scriptform.js"></script> 
+		<script type="text/javascript" src="js/scriptform.js"></script> 
 	</head>
 	<header>
 		<?php /*include('header.php'); */?>
@@ -37,7 +37,7 @@
 		?>
 		<?php
 		$artiste = $_GET['artiste'];
-		echo '<img src="./image/artiste/' . $artiste . '.jpg' . '" class="imgcadenas">';
+		echo '<img src="image/artiste/' . $artiste . '.jpg' . '" class="imgcadenas">';
 		echo '<h1>' . $artiste . '</h1>';
 		$sql = "SELECT description FROM artiste WHERE Nom_artiste = '$artiste' ";
 		$result = mysqli_query($con, $sql);
@@ -319,5 +319,5 @@
 			}
  		?>	
 		</div>
-<?php require "./action/messages.php"; ?> 
+<?php require "action/messages.php"; ?> 
 	</body>

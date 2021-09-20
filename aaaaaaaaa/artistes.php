@@ -25,10 +25,10 @@
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/body/artiste.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
-		<script type="text/javascript" src="./jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="./js/scriptform.js"></script> 
-		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />		
+		<script type="text/javascript" src="jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/scriptform.js"></script> 
+		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" media="screen" />		
 	</head>
 	<header>
 		<?php include('header.php'); ?>
@@ -111,7 +111,7 @@
 						<div class="artiste">
 							<?php 
 								$artistecnt = $row['Nom_artiste'];
-								echo '<img src="./image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">';
+								echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">';
 								echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
 								echo '</a>';
 							?>
@@ -146,8 +146,8 @@
 				}
 				?>	
 			</div>
-			<?php require "./action/messages.php"; ?> 
+			<?php require "action/messages.php"; ?> 
 	</body>
 	<?php include('footer.html'); ?>
-	<script type="text/javascript" src="./js/scrollnav.js"></script> 
+	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>

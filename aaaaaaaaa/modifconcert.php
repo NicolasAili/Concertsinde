@@ -24,7 +24,7 @@
 		<meta name="Keywords" content="ConcertAll" />
 		<meta name="Description" content="Recap" />
 		<link rel="stylesheet" type="text/css" href="css/body/modifconcert.css" media="screen" />	
-		<script type="text/javascript" src="./js/scriptform.js"></script> 
+		<script type="text/javascript" src="js/scriptform.js"></script> 
 		<!-- Script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -33,13 +33,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		
 		
-		<!--<script src="./js/jquery.easy-autocomplete.min.js"></script>
+		<!--<script src="js/jquery.easy-autocomplete.min.js"></script>
 
 		
-		<link rel="stylesheet" href="./js/easy-autocomplete.min.css">
+		<link rel="stylesheet" href="js/easy-autocomplete.min.css">
 
 		
-		<link rel="stylesheet" href="./js/easy-autocomplete.themes.min.css">-->
+		<link rel="stylesheet" href="js/easy-autocomplete.themes.min.css">-->
 			
 
 
@@ -87,26 +87,26 @@
 				if($action == 'Supprimer' || $action == 'Valider')
 				{
 					setcookie('contentMessage', 'Erreur: cette action est réservée aux administrateurs', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: allconcerts.php");
 					exit("Erreur: cette action est réservée aux administrateurs");
 				}
 				else if($action == 'Modifier')
 				{
 					setcookie('contentMessage', 'Erreur: vous devez être connectés afin de pouvoir modifier un concert', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: allconcerts.php");
 					exit("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
 				}
 				else
 				{
 					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: allconcerts.php");
 					exit("Erreur inconnue, merci de contacter le support");
 				}
 			}
 			else if($testadmin < 1 AND $action == 'Valider' || $action == 'Supprimer')
 			{
 				setcookie('contentMessage', 'Erreur: cette action est réservée aux administrateurs', time() + 30, "/");
-				header("Location: ./allconcerts.php");
+				header("Location: allconcerts.php");
 				exit("Erreur: cette action est réservée aux administrateurs");
 			}
 			else
@@ -116,7 +116,7 @@
 					if($valide == 1 && $testadmin < 1)
 					{
 						setcookie('contentMessage', 'Erreur: il est interdit de modifier un concert validé', time() + 30, "/");
-						header("Location: ./allconcerts.php");
+						header("Location: allconcerts.php");
 						exit("Erreur: il est interdit de modifier un concert validé");
 					}
 					?>
@@ -294,7 +294,7 @@
 					$sql = "DELETE FROM Concert WHERE nom_artiste = '$artiste' AND datec = '$date' AND id_concert = '$idconcert'"; 
 					mysqli_query($con, $sql);
 					setcookie('contentMessage', 'Concert supprimé', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: allconcerts.php");
 					exit("Concert supprimé");
 				}
 				else if($action == 'Valider')
@@ -455,7 +455,7 @@
 					?><a href="allconcerts.php"> retour en arriere </a><?php
 
 					/*setcookie('contentMessage', 'Concert validé avec succès !', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: allconcerts.php");
 					exit("Concert validé avec succès !");*/
 				}
 				else if($action = 'probleme')
@@ -507,7 +507,7 @@
 				else
 				{
 					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: allconcerts.php");
 					exit("Erreur inconnue, merci de contacter le support");
 				}
 			}

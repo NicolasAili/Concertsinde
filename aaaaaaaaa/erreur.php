@@ -22,7 +22,7 @@
 				<meta name="Description" content="Ereur" />
 				<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
 				<link rel="stylesheet" type="text/css" href="css/body/erreur.css" media="screen" />	
-				<script type="text/javascript" src="./js/scriptform.js"></script> 	
+				<script type="text/javascript" src="js/scriptform.js"></script> 	
 				<!-- Script -->
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 						<!-- jQuery UI -->
@@ -92,6 +92,6 @@
 			</p>
 		</form>
 	</body>
-	<script type="text/javascript" src="./js/scrollnav.js"></script> 
+	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>
 

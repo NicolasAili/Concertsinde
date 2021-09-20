@@ -99,7 +99,7 @@
 				Une fois un concert ajouté, les utilisateurs peuvent le modifier et lorsque toutes informations d'un concert ont été vérifiées (et éventuellement corrigées) par un administrateur, le concert est validé et n’est plus modifiable. Des points sont attribués aux utilisateurs ayant participé au renseignement du concert (ajout et modifications).
 				</p>
 				<p>
-				Pour plus de détails sur le fonctionnement et sur le système de points, consultez l'onglet <a href="./presentation.php"> « présentation et fonctionnement ». </a>
+				Pour plus de détails sur le fonctionnement et sur le système de points, consultez l'onglet <a href="presentation.php"> « présentation et fonctionnement ». </a>
 				</p>
 			</div>	
 		</div>

@@ -7,6 +7,8 @@
 	Contenu HTML : oui
 	JS+JQuery : non
 	CSS : oui
+
+	a mettre: scrollnav et header
 */
     session_start();
 ?>
@@ -106,6 +108,6 @@
 	</body>
 	<?php include('contenu/footer.html'); ?>
 </html>
-<script type="text/javascript" src="js/scrollnav.js"></script> 
+<script src="js/scrollnav.js"></script> 
 
 

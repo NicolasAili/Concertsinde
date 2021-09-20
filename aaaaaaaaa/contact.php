@@ -24,7 +24,7 @@
 				<link rel="stylesheet" type="text/css" href="css/body/contact.css" media="screen" />		
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>	
 	<body>
 		<h1> Contactez nous ! </h1>
@@ -65,5 +65,5 @@
 			</p>
 		</form>
 	</body>
-	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>
+<script src="js/scrollnav.js"></script> 

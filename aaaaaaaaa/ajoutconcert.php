@@ -32,7 +32,7 @@
 		<?php //include("concert.php"); // on appelle le fichier?>
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>	
 	<body>
 		<div class="indentfi">
@@ -149,7 +149,7 @@
 		</div>	
 	</body>
 	<?php include('contenu/footer.html'); ?>
-	<script type="text/javascript" src="js/scrollnav.js"></script> 
+	<script src="js/scrollnav.js"></script> 
 	<script>
 		$(document).ready(function(){
     	$("#divSchedule").dialog({show: "slide", modal: true, autoOpen: false, width: 500});

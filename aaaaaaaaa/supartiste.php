@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="js/scriptform.js"></script> 
 	</head>
 	<header>
-		<?php /*include('header.php'); */?>
+		<?php include('contenu/header.php'); ?>
 	</header>
 	<body>
 		<h1> Artistes </h1>
@@ -319,5 +319,7 @@
 			}
  		?>	
 		</div>
-<?php require "action/messages.php"; ?> 
+	<?php require "action/messages.php"; ?> 
 	</body>
+</html>
+<script src="js/scrollnav.js"></script> 

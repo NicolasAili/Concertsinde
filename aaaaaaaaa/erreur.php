@@ -30,7 +30,7 @@
 				<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>	
 	<body>
 		<?php			
@@ -92,6 +92,6 @@
 			</p>
 		</form>
 	</body>
-	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>
+<script src="js/scrollnav.js"></script> 
 

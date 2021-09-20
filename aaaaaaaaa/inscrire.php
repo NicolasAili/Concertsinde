@@ -21,7 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="css/body/inscrire.css" media="screen" />
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>
 		<body>
 			 <h1>Inscription</h1>  
@@ -61,5 +61,5 @@
 			</div>
 
 		</body>
-	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>
+<script src="js/scrollnav.js"></script> 

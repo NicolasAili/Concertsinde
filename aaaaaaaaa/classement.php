@@ -27,7 +27,7 @@
 		<meta name="Description" content="Recap" />
 	</head>
 	<header>
-		<?php //include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>
 	<body>	
 
@@ -92,3 +92,6 @@
 				?>
 			</table>
 		</div>
+	</body>
+</html>
+<script src="js/scrollnav.js"></script> 

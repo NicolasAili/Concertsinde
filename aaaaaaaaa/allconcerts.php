@@ -29,7 +29,7 @@
 		<meta name="Description" content="Recap" />
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>
 	<body>	
 		<?php
@@ -596,7 +596,7 @@
 			<?php require "action/messages.php"; ?> 
 	</body>
 	<?php include('footer.html'); ?>
-	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>
+<script src="js/scrollnav.js"></script> 
 
 

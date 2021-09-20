@@ -24,36 +24,34 @@
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" media="screen" />		
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 		<?php require "action/messages.php"; ?> 	
 	</header>
 	<body>
+		 <h1>Connexion</h1> 
+			 <?php 
+			 	if(!empty($_GET['message'])) 
+			 	{
+					$message = $_GET['message'];
+					 echo '<p class="message"> '.$message.'</p>';
+				}
+			?>
+		<div class="formin">
+			<form action="action/connect.php" method="post" class="form-example">
+  				<div class="form">
+	  			 	<label for="name">Pseudo : </label> 
+	    			<input type="text" name="pseudo" placeholder="Entrer pseudo"   id="prenom" required>
+	    			<br>
+	    			<br>
+	    			<label for="name">Mot de passe : </label> 
+	    			<input type="password" name="password" placeholder="Entrer mdp" id="password" required>
+      				<br>
+					<div class="connexion"> <input class="bouton" type="submit" value="Connexion" name="connexion"> </div>
+				</div>
+			</form>
+		</div>
+		<br>
+		Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
 	</body>
-		<body>
-			 <h1>Connexion</h1> 
-				 <?php 
-				 	if(!empty($_GET['message'])) 
-				 	{
-						$message = $_GET['message'];
-						 echo '<p class="message"> '.$message.'</p>';
-					}
-				?>
-			<div class="formin">
-				<form action="action/connect.php" method="post" class="form-example">
-	  				<div class="form">
-		  			 	<label for="name">Pseudo : </label> 
-		    			<input type="text" name="pseudo" placeholder="Entrer pseudo"   id="prenom" required>
-		    			<br>
-		    			<br>
-		    			<label for="name">Mot de passe : </label> 
-		    			<input type="password" name="password" placeholder="Entrer mdp" id="password" required>
-	      				<br>
-						<div class="connexion"> <input class="bouton" type="submit" value="Connexion" name="connexion"> </div>
-					</div>
-				</form>
-			</div>
-			<br>
-			Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
-		</body>
-		<script type="text/javascript" src="js/scrollnav.js"></script> 
-	</html>
+</html>
+<script src="js/scrollnav.js"></script> 

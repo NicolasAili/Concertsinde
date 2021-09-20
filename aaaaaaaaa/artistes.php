@@ -31,7 +31,7 @@
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" media="screen" />		
 	</head>
 	<header>
-		<?php include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>
 	<body>
 		<h1> Artistes </h1>
@@ -149,5 +149,5 @@
 			<?php require "action/messages.php"; ?> 
 	</body>
 	<?php include('footer.html'); ?>
-	<script type="text/javascript" src="js/scrollnav.js"></script> 
 </html>
+<script src="js/scrollnav.js"></script> 

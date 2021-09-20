@@ -45,7 +45,7 @@
 
 	</head>
 	<!--<header>
-		<?php //include('header.php'); ?>
+		<?php include('contenu/header.php'); ?>
 	</header>-->
 	<body>
 		<?php	      
@@ -553,6 +553,7 @@
 	
 	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->
 </html>
+<script src="js/scrollnav.js"></script> 
 
 
 

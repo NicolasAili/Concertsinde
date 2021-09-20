@@ -37,7 +37,7 @@
 	<body>
 		<div class="indentfi">
 			 <h1 class="titre">Ajout d'un concert</h1>
-			 <form method="post" class="connect" action="concert.php">
+			 <form method="post" class="connect" action="action/concert.php">
 			 	(*): champs <u>obligatoires</u>
 			 	<br>
 			 	<br>

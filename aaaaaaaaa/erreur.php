@@ -46,7 +46,7 @@
 		<br>
 		<br>
 		<h1> Contactez nous ! </h1>
-		<form action="erreursubmit.php" method="post">
+		<form action="action/erreursubmit.php" method="post">
 			<fieldset>
 				<legend>Rapporter un problème</legend>
 					<p>

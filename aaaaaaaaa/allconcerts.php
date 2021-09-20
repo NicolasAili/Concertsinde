@@ -593,7 +593,7 @@
 	 			}
 	 			?>
 			</div>
-			<?php require "./messages.php"; ?> 
+			<?php require "./action/messages.php"; ?> 
 	</body>
 	<?php include('footer.html'); ?>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

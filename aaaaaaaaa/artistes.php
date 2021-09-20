@@ -50,7 +50,7 @@
 		?>
 		<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
 				Ajouter un artiste
-				<form method="post" class="connect" action="addartist.php">
+				<form method="post" class="connect" action="action/addartiste.php">
 					<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
 					<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
 					<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
@@ -146,7 +146,7 @@
 				}
 				?>	
 			</div>
-			<?php require "./messages.php"; ?> 
+			<?php require "./action/messages.php"; ?> 
 	</body>
 	<?php include('footer.html'); ?>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 

@@ -25,7 +25,7 @@
 	</head>
 	<header>
 		<?php include('header.php'); ?>
-		<?php require "./messages.php"; ?> 	
+		<?php require "./action/messages.php"; ?> 	
 	</header>
 	<body>
 	</body>
@@ -39,7 +39,7 @@
 					}
 				?>
 			<div class="formin">
-				<form action="connect.php" method="post" class="form-example">
+				<form action="action/connect.php" method="post" class="form-example">
 	  				<div class="form">
 		  			 	<label for="name">Pseudo : </label> 
 		    			<input type="text" name="pseudo" placeholder="Entrer pseudo"   id="prenom" required>

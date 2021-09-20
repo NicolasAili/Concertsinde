@@ -40,7 +40,7 @@
 					}
 				?>
 
-			<form action="modif.php" method="post" class="connect">
+			<form action="action/modif.php" method="post" class="connect">
 			<p>Souhaitez vous modifier votre mot de passe ? </p>
 			<label for="password">Mot de passe actuel:  </label> 
 			<input type="password" name="password" placeholder="Mot de passe actuel"   id="password" >

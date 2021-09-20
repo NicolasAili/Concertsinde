@@ -45,7 +45,7 @@
 		if($row[0] == NULL)
 		{
 			?> 
-			<form method="post" class="connect" action="adddescr.php">
+			<form method="post" class="connect" action="action/adddescr.php">
 				<textarea cols="40" rows="5" name="description" id="description" placeholder="Il n'existe pas de description pour cet artiste, vous pouvez en ajouter une"></textarea> 
 				<input type="hidden" id="artiste" name="artiste" <?php echo 'value="' . $artiste . '"' ?> > 
 				<input type="submit" value="Enregister la description" id="valider" name="concert" href="">
@@ -319,5 +319,5 @@
 			}
  		?>	
 		</div>
-<?php require "./messages.php"; ?> 
+<?php require "./action/messages.php"; ?> 
 	</body>

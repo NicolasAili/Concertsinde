@@ -38,7 +38,7 @@
 				?>
 				
 			<div class="indentfi">
-				<form action="ident.php" method="post" class="connect">
+				<form action="action/ident.php" method="post" class="connect">
 	  			 	<label for="pseudo">Pseudo: (3 caractères minimum) </label> 
 	    			<input type="text" name="pseudo" <?php if(!$pseudo){echo 'placeholder="Entrez votre pseudo"';} else{echo 'value="' . $pseudo . '"'; }?> id="prenom" required>
 	    			<br>

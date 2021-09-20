@@ -121,7 +121,7 @@
 					}
 					?>
 					<h1> modifier un concert </h1>
-					<form method="post" id="connect" action="modifconcertvalid.php">
+					<form method="post" id="connect" action="action/modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
 						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
@@ -460,7 +460,7 @@
 				}
 				else if($action = 'probleme')
 				{?>
-					<form action="erreursubmit.php" method="post">
+					<form action="action/erreursubmit.php" method="post">
 						Sur quel(s) champ(s) pensez-vous qu'il y a erreur ?
 						<input type="checkbox" id="artiste" name="artiste" value="artiste">
 						<label for="artiste">artiste</label>

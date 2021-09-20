@@ -28,7 +28,7 @@
 	</header>	
 	<body>
 		<h1> Contactez nous ! </h1>
-		<form action="erreursubmit.php" method="post">
+		<form action="action/erreursubmit.php" method="post">
 			<fieldset>
 				<legend>Contact</legend>
 				<label for="non">De quoi souhaitez-vous nous faire part ?</label><br />

@@ -179,5 +179,4 @@
 			<a href="#top"><img src="./image/up.png" class="up-hidden"></a>
 		</div>
 	</div>
-	<script type="text/javascript" src="../js/scrollnav.js"></script> 
 </div>

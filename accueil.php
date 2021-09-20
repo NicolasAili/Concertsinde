@@ -104,9 +104,8 @@
 			</div>	
 		</div>
 	</body>
-	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
 	<?php include('contenu/footer.html'); ?>
 </html>
-
+<script type="text/javascript" src="js/scrollnav.js"></script> 
 
 

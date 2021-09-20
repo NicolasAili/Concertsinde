@@ -23,9 +23,6 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="../css/body/modifconcertvalid.css">
 	</head>
-	<header>
-		<?php include('../contenu/header.php'); ?>
-	</header>
 	<body>
 		<?php	
 		function test_empty($input)

@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <div id="recherche">
 	<div class="logo">
-		<a href="./accueil.php">
+		<a href="accueil.php">
 			<img src="./image/logo.png" class="imglogo">
 		</a>
 	</div>
@@ -78,7 +78,7 @@
 						<div class="memberspace">
 							<div class="space">							
 								<img src="./image/cadenasopen.png" class="imgcadenas">
-								<a href="./deconnexion.php" class="spacelink" role="button">Deconnexion</a>
+								<a href="action/deconnexion.php" class="spacelink" role="button">Deconnexion</a>
 							</div>
 							<div class="inscription">
 								<div class="mv"></div>

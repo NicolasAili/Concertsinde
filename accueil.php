@@ -14,9 +14,8 @@
 <html lang="fr">
 	<head>
 		<?php
-			include 'contenu/base.php'; 
-			include 'contenu/css.php'; 
-			include 'contenu/js.php'; 
+			include 'php/base.php'; 
+			include 'php/css.php'; 
 				
 			require('php/database.php');
 		?>
@@ -24,7 +23,7 @@
 	</head>
 	<header>
 		<?php 
-			include('header.php'); 
+			include('contenu/header.php'); 
 		?>
 	</header>
 	<body>
@@ -106,7 +105,7 @@
 		</div>
 	</body>
 	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
-	<?php include('footer.html'); ?>
+	<?php include('contenu/footer.html'); ?>
 </html>
 
 

@@ -15,16 +15,16 @@
 ?>
 <html>
 	<head>
-		<title>Recap</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/concert.css" media="screen" />		
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+			include '../php/base.php'; 
+			include '../php/css.php'; 
+				
+			require('../php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="../css/body/modifconcertvalid.css">
 	</head>
 	<header>
-		<?php //include('header.php'); ?>
+		<?php include('../contenu/header.php'); ?>
 	</header>
 	<body>
 		<?php	
@@ -40,8 +40,8 @@
 			}
 			echo '<br>';
 		}      
-			require('php/database.php');
-			require('php/error.php');
+			require('../php/database.php');
+			require('../php/error.php');
 			
 			$idconcert = $_POST['idpost'];
 
@@ -131,7 +131,7 @@
 			if($_POST['artiste'])
 			{
 				setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 30, "/");
-				header("Location: ./allconcerts.php");
+				header("Location: ../allconcerts.php");
 				exit("Erreur: il est interdit de modifier un artiste");
 			}
 
@@ -140,7 +140,7 @@
 				if($date < date("Y-m-d"))
 				{
 					setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 30, "/");
-					header("Location: ./allconcerts.php");
+					header("Location: ../allconcerts.php");
 					exit("Erreur: la date saisie est inférieure à la date courante");
 				}
 				$testdate = 1;
@@ -627,7 +627,7 @@
 			</div>
 			<div class="champs">
 				<h2> Champ(s) modifié(s) : </h2>
-				<a href="allconcerts.php"> retour en arriere </a>
+				<a href="../allconcerts.php"> retour en arriere </a>
 				<br>
 				<?php
 				if($date == $datepost)

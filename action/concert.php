@@ -15,20 +15,17 @@
 ?>
 <html>
 	<head>
-		<title>Recap</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/concert.css" media="screen" />		
-		<title></title>
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+			include '../php/base.php'; 
+			include '../php/css.php'; 
+				
+			require('../php/database.php');
+		?>
+		<link rel="stylesheet" type="text/css" href="../css/body/concert.css">
 	</head>
 	
 	<body>
 		<?php	      
-			require('php/database.php');
-			
 			if (isset($_POST['concert']))
 			{
 				$artiste = $_POST['artiste'];
@@ -46,12 +43,6 @@
 				$pays = $_POST['pays'];
 				$testvle = 0;
 
-				//echo($artiste);
-				//echo "<br>";
-				//echo($ville);
-				//echo "<br>";
-				//echo($ticket);
-
 				$sql = "SELECT datec FROM concert WHERE nom_artiste = '$artiste'";
 				$query = mysqli_query($con, $sql);
 				while($row = mysqli_fetch_array($query)) 
@@ -59,7 +50,7 @@
 					if($date == $row['datec'])
 					{
 						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de cliquer sur le bouton pour signaler une erreur', time() + 30, "/");
-						header("Location: ./allconcerts.php");
+						header("Location: ../allconcerts.php");
 						exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
 					}
 				}
@@ -540,7 +531,7 @@
 						<div class="fb"> <?php echo $_POST['fb']; ?> </div>
 						<div class="ticket"> <?php echo $_POST['ticket']; ?> </div>
 					</div>
-					<a href="allconcerts.php"> retour en arriere </a>
+					<a href="../allconcerts.php"> retour en arriere </a>
 				</div>
 				<?php
 			}

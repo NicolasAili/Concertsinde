@@ -13,9 +13,9 @@
     session_start();
  ?>
 <?php      
-	require('php/database.php');
+	require('../php/database.php');
 ?>
 <?php
     unset($_SESSION['pseudo']);
-    header('Location: ./accueil.php');
+    header('Location: ../accueil.php');
 ?>

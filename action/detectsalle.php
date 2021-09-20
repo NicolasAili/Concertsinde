@@ -16,7 +16,7 @@
     $identifiant = $_POST['identifiant']; //variable envoyée grâce à la méthode "post" par notre script JQuery
     $name = $_POST['input'];
 
-    require('php/database.php');
+    require('../php/database.php');
     
     $response = array(); //var qui contiendra nos données JSON
     if($name)

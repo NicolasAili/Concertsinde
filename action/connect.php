@@ -14,7 +14,7 @@
 ?>
 <?php
 		      
-	require('php/database.php');
+	require('../php/database.php');
 
 	if ( isset($_POST['connexion'])) {
 		$pseudo = $_POST['pseudo'];
@@ -30,7 +30,7 @@
     	{
     		if($row['banni'] == 1)
     		{
-    			header("Location: ./connexion.php?message=Votre compte a été banni");
+    			header("Location: ../connexion.php?message=Votre compte a été banni");
     		}
     		else
     		{
@@ -39,12 +39,12 @@
 				$result = mysqli_query($con, $sql);
 				$row = mysqli_fetch_assoc($result);
 				$_SESSION['password'] = $row['password'];
-				header('Location: ./accueil.php');
+				header('Location: ../accueil.php');
 			}
 		}
 	else 
 		{		
-    		header("Location: ./connexion.php?message=Pseudo ou Mot de Passe incorrect");
+    		header("Location: ../connexion.php?message=Pseudo ou Mot de Passe incorrect");
 		}
 }
 ?>		

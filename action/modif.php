@@ -14,7 +14,7 @@
 ?>
 <?php
 		      
-	require('php/database.php');
+	require('../php/database.php');
 
 if (isset($_POST['modif_password']))
 	$password = $_POST['password'];
@@ -32,16 +32,16 @@ if (isset($_POST['modif_password']))
 			$sql = "UPDATE utilisateur SET password = '$passwordh' WHERE pseudo = '$user'";
 			$result = mysqli_query($con ,$sql);
 			$_SESSION['password']=$newpassword;
-			header('Location: ./accueil.php');
+			header('Location: ../accueil.php');
 		}
 		else 
 		{	
-			header("Location: ./profil.php?message=Confirmation du mot de passe non valide, réessayer");
+			header("Location: ../profil.php?message=Confirmation du mot de passe non valide, réessayer");
 		}
 	}
 	else 
 	{ 
-		header("Location: ./profil.php?message=Votre mot de passe actuel n'est pas correct");
+		header("Location: ../profil.php?message=Votre mot de passe actuel n'est pas correct");
 	}
 ?>
 

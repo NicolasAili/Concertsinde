@@ -14,7 +14,7 @@
 ?>
 <?php
 		      
-	require('php/database.php');
+	require('../php/database.php');
 	
 	$type = $_POST['type'];
 
@@ -56,7 +56,7 @@
 	mysqli_query($con, $insert);
 
 	setcookie('contentMessage', 'Merci pour votre contribution. Votre aide est très précieuse', time() + 30, "/");
-	header("Location: ./allconcerts.php");
+	header("Location: ../allconcerts.php");
 	exit("Merci pour votre contribution. Votre aide est très précieuse");
 			
 

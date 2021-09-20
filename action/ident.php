@@ -11,7 +11,7 @@
 ?>
 <?php
 
-    require('php/database.php');
+    require('../php/database.php');
 
 if (isset($_POST['inscription']))
 {
@@ -48,33 +48,33 @@ if (isset($_POST['inscription']))
                     }
                     else
                     {
-                        header("Location: ./inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer&mail=". $email ."&pseudo=". $pseudo ."");
+                        header("Location: ../inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer&mail=". $email ."&pseudo=". $pseudo ."");
                     }
                 }
                 else
                 {
-                    header("Location: ./inscrire.php?message=Erreur, vous devez saisir un mot de passe&mail=". $email ."&pseudo=". $pseudo ."");
+                    header("Location: ../inscrire.php?message=Erreur, vous devez saisir un mot de passe&mail=". $email ."&pseudo=". $pseudo ."");
                 }
             }
             else
             {
-                header("Location: ./inscrire.php?message=Erreur, vous devez renseigner un email valide&pseudo=". $pseudo ."");
+                header("Location: ../inscrire.php?message=Erreur, vous devez renseigner un email valide&pseudo=". $pseudo ."");
             }
         }
         else
         {
-            header("Location: ./inscrire.php?message=Erreur, ce pseudo est déjà pris&mail=". $email ."");
+            header("Location: ../inscrire.php?message=Erreur, ce pseudo est déjà pris&mail=". $email ."");
         }
     }
     else 
     {
         if(!$pseudo)
         {
-            header("Location: ./inscrire.php?message=Erreur, veuillez saisir un pseudo&mail=". $email ."");
+            header("Location: ../inscrire.php?message=Erreur, veuillez saisir un pseudo&mail=". $email ."");
         }
         else
         {
-            header("Location: ./inscrire.php?message=Erreur, le pseudo ne peut pas faire moins de 3 caractères&mail=". $email ."");
+            header("Location: ../inscrire.php?message=Erreur, le pseudo ne peut pas faire moins de 3 caractères&mail=". $email ."");
         }   
     }
 }

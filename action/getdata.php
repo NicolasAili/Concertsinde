@@ -16,7 +16,7 @@
     $name = $_POST['search'];
     $test = $_POST['this'];
     
-    require('php/database.php');
+    require('../php/database.php');
     
     if($test == 'salle')
     {

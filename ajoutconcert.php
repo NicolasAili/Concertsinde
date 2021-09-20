@@ -148,6 +148,7 @@
 			</form>
 		</div>	
 	</body>
+	<?php include('contenu/footer.html'); ?>
 	<script type="text/javascript" src="./js/scrollnav.js"></script> 
 	<script>
 		$(document).ready(function(){

@@ -42,9 +42,19 @@
 		$getregion = $_GET['region'];
 		$pseudo = $_SESSION['pseudo'];
 		$archive = $_GET['archive'];
+
+		$page = $_POST['page'];
+		$sqlquery = $_POST['sqlquery'];
+		$i = 0; //compteur pour les pages
+
 		if(!$archive)
 		{
 			$archive = 'no';
+		}
+
+		if(!$page)
+		{
+			$page = 1;
 		}
 
 
@@ -53,7 +63,6 @@
 		$row = mysqli_fetch_array($query);
 		$testadmin = $row['admin'];
 
-		//$get = $_GET['filtre'];
 		$string = $_SERVER['QUERY_STRING'];
 			
 			echo "</br>";
@@ -65,16 +74,12 @@
 			echo "</br>";
 			echo "</br>";
 			echo "</br>";
-			//echo $string;
-			//echo "</br>";
+
 			parse_str($string);
 			$finalstring = explode("&", $string);
 			$filtre = " datec ASC";
 			$archivesql = " AND concert.datec >= NOW()";
-			//echo $finalstring[0];
-			//echo "</br>";
-			//echo $finalstring[1];
-			//echo "</br>";
+
 
 		if(!$add && !$modif)
 		{
@@ -358,240 +363,266 @@
 		<img src="image/invalide.png" height="50" width="50"> = Concert non validé (modifiable)
 		<?php
 			$admin = 'administateur';
-			//echo $_SESSION['pseudo'];
-			//echo $admin;
 			if($getsalle)
 			{
-				$str = sprintf("SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle'". $archivesql ." ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle'". $archivesql ." ORDER BY". $filtre ."");
 
 			}
 			else if ($getville) {
-				$str = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'. $archivesql .ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'. $archivesql .ORDER BY". $filtre ."");
 			}
 			else if ($getcp) {
-				$str = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'. $archivesql .ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'. $archivesql .ORDER BY". $filtre ."");
 			}
 			else if ($getdepartement) {
-				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'. $archivesql .ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'. $archivesql .ORDER BY". $filtre ."");
 			}
 			else if ($getnumdepartement) {
-				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'. $archivesql .ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'. $archivesql .ORDER BY". $filtre ."");
 			}
 			else if ($getregion) {
-				$str = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'. $archivesql .ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'. $archivesql .ORDER BY". $filtre ."");
 			}
 			else if ($add)
 			{
-				$str = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'". $archivesql ."");
+				$strf = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'". $archivesql ."");
 			}
 			else if ($modif)
 			{
-				$str = sprintf("SELECT DISTINCT id_concert FROM modification WHERE id_user = '$modif'". $archivesql ."");
+				$strf = sprintf("SELECT DISTINCT id_concert FROM modification WHERE id_user = '$modif'". $archivesql ."");
+			}
+			else if($sqlquery)
+			{
+				$strf = $sqlquery;
 			}
 			else
 			{
-				$str = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
+				$strf = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
 			}
 			
-			$result = mysqli_query($con, $str);
+			$result = mysqli_query($con, $strf);
 			?>
 			<div id="concertsall">
 				<?php
-				echo $str;
+
 				while($rowx = mysqli_fetch_array($result)) 
 				{
-					$idconcert = $rowx['id_concert'];
-					$row['ville_departement'] = NULL;
-					$rowdpt['id_region'] = NULL;
-					$rowdpt['nom_departement'] = NULL;
-					$rowrgn['nom_pays'] = NULL;
-					$rowrgn['nom_region'] = NULL;
-					$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
-					$resultx = mysqli_query($con, $str);
-					$row = mysqli_fetch_array($resultx);
-
-					$pseudoadd = $row['user_ajout'];
-					$pseudomodif= $row['user_modif'];
-
-					$str = "SELECT pseudo FROM utilisateur, concert WHERE user_ajout = '$pseudoadd' AND concert.user_ajout = utilisateur.id_user";
-					$resultx = mysqli_query($con, $str);
-					$rowadd = mysqli_fetch_array($resultx);
-
-					$str = "SELECT pseudo FROM utilisateur, concert WHERE user_modif = '$pseudomodif' AND concert.user_ajout = utilisateur.id_user";
-					$resultx = mysqli_query($con, $str);
-					$rowmodif = mysqli_fetch_array($resultx);
-
-					if($row['ville_departement'])
+					if($i >= $page*15-15 && $i<$page*15) 
 					{
-						$filter = 1;
-						$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
-						$resultdpt = mysqli_query($con, $str);
-						$rowdpt = mysqli_fetch_array($resultdpt);
-						if($rowdpt['id_region'])
-						{
-							$str = "SELECT nom_region, nom_pays FROM pays, region, departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert ";
-							$resultrgn = mysqli_query($con, $str);
-							$rowrgn = mysqli_fetch_array($resultrgn);
-						}
-					}
-					/*else
-					{
-						$filter = 0;
-					}*/
-				?> 
+						$idconcert = $rowx['id_concert'];
+						$row['ville_departement'] = NULL;
+						$rowdpt['id_region'] = NULL;
+						$rowdpt['nom_departement'] = NULL;
+						$rowrgn['nom_pays'] = NULL;
+						$rowrgn['nom_region'] = NULL;
+						$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
+						$resultx = mysqli_query($con, $str);
+						$row = mysqli_fetch_array($resultx);
 
-					<div class="inwhile"> 
-						<div class="artiste"> 
-							<?php echo '<a href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
-							if($row['valide'] == 0)
-							{?>
-								<img src="image/invalide.png" height="50" width="50">
-							<?php
-							}
-							else
-							{?>
-								<img src="image/valide.png" height="50" width="50">
-							<?php
-							}?> 
-						</div> 
-							<div class="dahe">Date et heure</div>
-						<div class="date"> <?php echo  $row['datec'] ?> </div>  
-						<div class="heure"> <?php echo $row['heure'] ?> </div>  
-							<div class="pacp">Pays, region, departement</div>
-						<?php
-						if($rowdpt['id_region'])
-						{
-							?>
-							<div class="pays"> <?php echo  $rowrgn['nom_pays'] ?> </div>
-							<div class="region"> <?php echo  $rowrgn['nom_region'] ?> </div> 
-							<?php 
-						}
-						else
-						{
-							?>
-							<div class="pays"> Pays non renseigné </div>
-							<div class="region"> Région non renseignée </div> 
-							<?php
-						}
+						$pseudoadd = $row['user_ajout'];
+						$pseudomodif= $row['user_modif'];
+
+						$str = "SELECT pseudo FROM utilisateur, concert WHERE user_ajout = '$pseudoadd' AND concert.user_ajout = utilisateur.id_user";
+						$resultx = mysqli_query($con, $str);
+						$rowadd = mysqli_fetch_array($resultx);
+
+						$str = "SELECT pseudo FROM utilisateur, concert WHERE user_modif = '$pseudomodif' AND concert.user_ajout = utilisateur.id_user";
+						$resultx = mysqli_query($con, $str);
+						$rowmodif = mysqli_fetch_array($resultx);
+
 						if($row['ville_departement'])
 						{
-							?>
-							<div class="departement"> <?php echo  $rowdpt['nom_departement'] ?> </div> 
-							<?php
+							$filter = 1;
+							$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
+							$resultdpt = mysqli_query($con, $str);
+							$rowdpt = mysqli_fetch_array($resultdpt);
+							if($rowdpt['id_region'])
+							{
+								$str = "SELECT nom_region, nom_pays FROM pays, region, departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert ";
+								$resultrgn = mysqli_query($con, $str);
+								$rowrgn = mysqli_fetch_array($resultrgn);
+							}
 						}
-						else
-						{	
-							?>
-							<div class="departement"> Département non renseigné </div> 
-							<?php
-						}
-							?>
-							<div class="villexcp"> Ville et CP </div>
-						<div class="ville"> <?php echo $row['nom_ville'] ?> </div> 
-						<?php
-						if($row['ville_code_postal'])
+						/*else
 						{
-							?>
-							<div class="cp"> <?php echo  $row['ville_code_postal'] ?> </div>
-							<?php
-						}
-						else
-						{
-							?>
-								<div class="cp"> Code postal non renseigné </div>
-							<?php
-						}
-						if($row['intext'] == 'int')
-						{
-						?>
-							<div class="saad">Lieu, adresse et salle</div> 
-							<br>
-							Concert intérieur
-							<br>
-						<div class="salle"> <?php echo  $row['nom_salle'] ?> </div> 
-						<?php
-						} 
-						else
-						{
-						?>
-							<div class="saad">Lieu, adresse et salle</div> 
-							<br>
-							Concert extérieur
-							<br>
-						<div class="salle"> <?php echo  $row['nom_ext'] ?> </div>
-						<?php	
-						}
-						?>
-						<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
-						<div class="saad">Liens relatifs a l'evenement</div>
-						<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
-						<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
-						<div class="saad">Autres infos</div>
-						<div class="dateajout"> Concert ajouté le: <?php echo  $row['date_ajout'] ?> </div> 
-						<div class="ajout"> <?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> </div>
-						<div class="modif"><?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> </div>
-						<form method="post" action="modifconcert.php" class="modif">
-							<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
-							<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-							<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
-							<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
-							<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-							<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
-							<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
-							<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
-							<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
-							<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
-							<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
-							<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
-							<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
-							<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
-							<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
-							<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
-							<style type="text/css">
-								#footer 
-								{
-								  display:flex;
-								}
-							</style>
-							<div id="footer">
+							$filter = 0;
+						}*/
+					?> 
+
+						<div class="inwhile"> 
+							<div class="artiste"> 
+								<?php echo '<a href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
+								if($row['valide'] == 0)
+								{?>
+									<img src="image/invalide.png" height="50" width="50">
 								<?php
-								if ($pseudo)
-								{
-									if($row['valide'] == 0 || $testadmin > 0)
-									{?>
-										<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+								}
+								else
+								{?>
+									<img src="image/valide.png" height="50" width="50">
+								<?php
+								}?> 
+							</div> 
+								<div class="dahe">Date et heure</div>
+							<div class="date"> <?php echo  $row['datec'] ?> </div>  
+							<div class="heure"> <?php echo $row['heure'] ?> </div>  
+								<div class="pacp">Pays, region, departement</div>
+							<?php
+							if($rowdpt['id_region'])
+							{
+								?>
+								<div class="pays"> <?php echo  $rowrgn['nom_pays'] ?> </div>
+								<div class="region"> <?php echo  $rowrgn['nom_region'] ?> </div> 
+								<?php 
+							}
+							else
+							{
+								?>
+								<div class="pays"> Pays non renseigné </div>
+								<div class="region"> Région non renseignée </div> 
+								<?php
+							}
+							if($row['ville_departement'])
+							{
+								?>
+								<div class="departement"> <?php echo  $rowdpt['nom_departement'] ?> </div> 
+								<?php
+							}
+							else
+							{	
+								?>
+								<div class="departement"> Département non renseigné </div> 
+								<?php
+							}
+								?>
+								<div class="villexcp"> Ville et CP </div>
+							<div class="ville"> <?php echo $row['nom_ville'] ?> </div> 
+							<?php
+							if($row['ville_code_postal'])
+							{
+								?>
+								<div class="cp"> <?php echo  $row['ville_code_postal'] ?> </div>
+								<?php
+							}
+							else
+							{
+								?>
+									<div class="cp"> Code postal non renseigné </div>
+								<?php
+							}
+							if($row['intext'] == 'int')
+							{
+							?>
+								<div class="saad">Lieu, adresse et salle</div> 
+								<br>
+								Concert intérieur
+								<br>
+							<div class="salle"> <?php echo  $row['nom_salle'] ?> </div> 
+							<?php
+							} 
+							else
+							{
+							?>
+								<div class="saad">Lieu, adresse et salle</div> 
+								<br>
+								Concert extérieur
+								<br>
+							<div class="salle"> <?php echo  $row['nom_ext'] ?> </div>
+							<?php	
+							}
+							?>
+							<div class="adresse"> <?php echo $row['adresse'] ?> </div> 
+							<div class="saad">Liens relatifs a l'evenement</div>
+							<div class="fb"> <?php echo  $row['lien_fb'] ?> </div> 
+							<div class="ticket"> <?php echo  $row['lien_ticket'] ?> </div> 
+							<div class="saad">Autres infos</div>
+							<div class="dateajout"> Concert ajouté le: <?php echo  $row['date_ajout'] ?> </div> 
+							<div class="ajout"> <?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> </div>
+							<div class="modif"><?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> </div>
+							<form method="post" action="modifconcert.php" class="modif">
+								<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
+								<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
+								<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
+								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
+								<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
+								<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
+								<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
+								<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
+								<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
+								<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
+								<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
+								<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
+								<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
+								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
+								<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
+								<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
+								<style type="text/css">
+									#footer 
+									{
+									  display:flex;
+									}
+								</style>
+								<div id="footer">
 									<?php
+									if ($pseudo)
+									{
+										if($row['valide'] == 0 || $testadmin > 0)
+										{?>
+											<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+										<?php
+										}
+										else
+										{
+											echo "Concert validé, il n'est plus modifiable";
+											?><input id="probleme" type="submit" name="probleme" value="Signaler un probleme sur ce concert"> <?php
+										}
+										if($testadmin > 0) 
+										{?>
+											<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
+											<?php 
+											if($row['valide'] == 0)
+											{?>
+												<input id="valider" type="submit" name="modsuppr" value="Valider">
+											<?php
+											}
+										}
 									}
 									else
 									{
-										echo "Concert validé, il n'est plus modifiable";
-										?><input id="probleme" type="submit" name="probleme" value="Signaler un probleme sur ce concert"> <?php
+										echo "Vous devez être connectés afin de modifier un concert";
 									}
-									if($testadmin > 0) 
-									{?>
-										<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
-										<?php 
-										if($row['valide'] == 0)
-										{?>
-											<input id="valider" type="submit" name="modsuppr" value="Valider">
-										<?php
-										}
-									}
-								}
-								else
-								{
-									echo "Vous devez être connectés afin de modifier un concert";
-								}?>
-							</div>
-						</form>
-					</div>
-				<?php
+									echo $i;
+									?>
+								</div>
+							</form>
+						</div>
+						<?php
+					}
+					$i++;
 	 			}
 	 			?>
+ 				<form method="post" action="allconcerts.php" class="page" style="display: flex;">
+ 				
+ 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>">
+ 					<?php if($i>14)
+ 					{
+ 						?>
+ 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;}?>">
+ 						<?php
+ 					}
+ 					if($i>29)
+ 					{
+ 						?>
+ 						<input id="trois" type="submit" name="page" value="<?php if($page == 1){echo '3';}else{echo $page+1;}?>">
+ 						<?php
+ 					}?>
+ 					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
+ 				</form>
+ 				<?php //a faire: mettre en gras la page actuelle, ne pas afficher la page n+1 s'il n'y a plus de concerts?>
 			</div>
 			<?php require "action/messages.php"; ?> 
 	</body>
-	<?php include('footer.html'); ?>
+	<?php include('contenu/footer.html'); ?>
 </html>
 <script src="js/scrollnav.js"></script> 
 

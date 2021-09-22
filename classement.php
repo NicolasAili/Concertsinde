@@ -34,6 +34,10 @@
 		$sessiondebut = $row['date_debut'];
 		$sessionfin = $row['date_fin'];
 
+		$i = 0;
+		$rank = 0;
+		$rang = 0;
+		$pt_user = 0;
 
 		?>
 
@@ -44,24 +48,56 @@
 			<table>
 			    <caption>Points session</caption>
 			    <tr>
+			    	<th scope="col">Rang</th>
 			        <th scope="col">Pseudo</th>
 			        <th scope="col">Points</th>
 			    </tr>
 			    <?php
-				$sql = "SELECT points_session, pseudo FROM utilisateur WHERE admin = 0 ORDER BY points_session DESC";
+				$sql = "SELECT points_session, pseudo FROM utilisateur WHERE admin = 0 AND banni = 0 ORDER BY points_session DESC";
 				$query = mysqli_query($con, $sql);
 				
 				while ($row = mysqli_fetch_array($query))
-				{?>
-				    <tr>
-						<th scope="row"> <?php echo $row['pseudo']; ?> </th>
-				        <td><?php echo $row['points_session']; ?></td>
+				{
+					if($i < 10)
+					{?>
+						<tr>
+							<th scope="row"> <?php echo $i+1; ?> </th>
+							<td> <?php echo $row['pseudo']; ?> </td>
+					        <td><?php echo $row['points_session']; ?></td>
+					        <?php if($row['pseudo'] == $_SESSION['pseudo']){$rank = 1;} ?>
+				    	</tr>
+				    	<?php
+					}
+					if($row['pseudo'] == $_SESSION['pseudo'] && $i > 9)
+					{
+						$rang = $i+1;
+						$pt_user = $row['points_session'];
+					}
+					$i++;
+				}
+				if($rank == 0 && $_SESSION['pseudo'])
+				{
+					?>
+					<tr>
+						<td> ... </td>
+						<td> ... </td>
+				        <td> ... </td>
 				    </tr>
-
-				<?php
+					<tr>
+						<th scope="row"> <?php echo $rang; ?> </th>
+						<td> <?php echo $_SESSION['pseudo']; ?> </td>
+				        <td><?php echo $pt_user; ?></td>
+				    </tr>
+				    <?php
 				}
 				?>
 			</table>
+			<?php
+				$i = 0;
+				$rang = 0;
+				$rank = 0;
+				$pt_user = 0;
+			?>
 
 
 			<h2> Classement depuis la création du site </h2>
@@ -73,17 +109,42 @@
 			        <th scope="col">Points</th>
 			    </tr>
 			    <?php
-				$sql = "SELECT points, pseudo FROM utilisateur WHERE admin = 0 ORDER BY points DESC";
+				$sql = "SELECT points, pseudo FROM utilisateur WHERE admin = 0 AND banni = 0 ORDER BY points DESC";
 				$query = mysqli_query($con, $sql);
 				
 				while ($row = mysqli_fetch_array($query))
-				{?>
-				    <tr>
-						<th scope="row"> <?php echo $row['pseudo']; ?> </th>
-				        <td><?php echo $row['points']; ?></td>
+				{
+					if($i < 10)
+					{?>
+						<tr>
+							<th scope="row"> <?php echo $i+1; ?> </th>
+							<td> <?php echo $row['pseudo']; ?> </td>
+					        <td><?php echo $row['points']; ?></td>
+					        <?php if($row['pseudo'] == $_SESSION['pseudo']){$rank = 1;} ?>
+				    	</tr>
+				    	<?php
+					}
+					if($row['pseudo'] == $_SESSION['pseudo'] && $i > 9)
+					{
+						$rang = $i+1;
+						$pt_user = $row['points'];
+					}
+					$i++;
+				}
+				if($rank == 0 && $_SESSION['pseudo'])
+				{
+					?>
+					<tr>
+						<td> ... </td>
+						<td> ... </td>
+				        <td> ... </td>
 				    </tr>
-
-				<?php
+					<tr>
+						<th scope="row"> <?php echo $rang; ?> </th>
+						<td> <?php echo $_SESSION['pseudo']; ?> </td>
+				        <td><?php echo $pt_user; ?></td>
+				    </tr>
+				    <?php
 				}
 				?>
 			</table>

@@ -591,7 +591,6 @@
 									{
 										echo "Vous devez être connectés afin de modifier un concert";
 									}
-									echo $i;
 									?>
 								</div>
 							</form>
@@ -602,22 +601,27 @@
 	 			}
 	 			?>
  				<form method="post" action="allconcerts.php" class="page" style="display: flex;">
- 				
- 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>">
+ 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo 'style="font-weight: bold;"';;} ?>>
  					<?php if($i>14)
  					{
  						?>
- 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;}?>">
+ 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo 'style="font-weight: bold;"';;} ?>>
  						<?php
  					}
  					if($i>29)
  					{
- 						?>
- 						<input id="trois" type="submit" name="page" value="<?php if($page == 1){echo '3';}else{echo $page+1;}?>">
- 						<?php
+ 						if($page == 1 && $i > 29)
+ 						{?>
+ 							<input id="trois" type="submit" name="page" value="3"> <?php
+ 						}
+ 						else if($i >= $page*15 && $page > 1)
+ 						{?>
+ 							<input id="trois" type="submit" name="page" value="<?php echo($page+1); ?>"> <?php
+ 						}
  					}?>
  					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
  				</form>
+
  				<?php //a faire: mettre en gras la page actuelle, ne pas afficher la page n+1 s'il n'y a plus de concerts, les footers bugués?>
 			</div>
 			<?php require "action/messages.php"; ?> 

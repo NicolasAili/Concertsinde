@@ -42,6 +42,14 @@
 			echo "</br>";
 			echo "</br>";
 			echo "</br>";
+
+			$page = $_POST['page'];
+			$sqlquery = $_POST['sqlquery'];
+			$i = 0; //compteur pour les pages
+			if(!$page)
+			{
+				$page = 1;
+			}
 		?>
 		<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
 				Ajouter un artiste
@@ -85,6 +93,10 @@
 			{
 
 			}*/
+			else if ($sqlquery) 
+			{
+				$str = $sqlquery;
+			}
 			else
 			{
 				$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
@@ -97,47 +109,74 @@
 				<?php
 				while($row = mysqli_fetch_array($result)) 
 				{
-				?>
-					<div class = "inwhile">
+					if($i >= $page*15-15 && $i<$page*15) 
+					{
+					?>
+						<div class = "inwhile">
+							<?php
+								echo $i;
+							?>
+							<div class="artiste">
+								<?php 
+									$artistecnt = $row['Nom_artiste'];
+									echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">';
+									echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
+									echo '</a>';
+								?>
+							</div>
+							<div class="nbconcert">
+								<?php
+									$nbr = "SELECT COUNT(*) FROM concert WHERE Nom_artiste = '$artistecnt' AND datec > NOW()";
+									$resultnbr = mysqli_query($con, $nbr);
+									$rownbr = mysqli_fetch_array($resultnbr);
+									echo $rownbr[0];
+									mysqli_free_result($resultnbr);
+									if($rownbr[0]>1)
+									{
+								?>
+									concerts à venir
+								<?php
+									}
+									else 
+									{
+								?>	
+									concert à venir
+								<?php		
+									}
+								?>
+							</div>
+						</div>
 						<?php
-							echo $cnt;
-							$cnt++;
-						?>
-						<div class="artiste">
-							<?php 
-								$artistecnt = $row['Nom_artiste'];
-								echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">';
-								echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
-								echo '</a>';
-							?>
-						</div>
-						<div class="nbconcert">
-							<?php
-								$nbr = "SELECT COUNT(*) FROM concert WHERE Nom_artiste = '$artistecnt' AND datec > NOW()";
-								$resultnbr = mysqli_query($con, $nbr);
-								$rownbr = mysqli_fetch_array($resultnbr);
-								echo $rownbr[0];
-								mysqli_free_result($resultnbr);
-								if($rownbr[0]>1)
-								{
-							?>
-								concerts à venir
-							<?php
-								}
-								else 
-								{
-							?>	
-								concert à venir
-							<?php		
-								}
-							?>
-						</div>
-					</div>
-				<?php
+					}
+					$i++;
 				}
 				if($artiste)
 				{
 					echo '<a href="artistes.php">'; ?> afficher tous les artistes <?php echo '</a>';
+				}
+				else
+				{?>
+					<form method="post" action="artistes.php" class="page" style="display: flex;">
+ 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo 'style="font-weight: bold;"';;} ?>>
+ 					<?php if($i>14)
+ 					{
+ 						?>
+ 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo 'style="font-weight: bold;"';;} ?>>
+ 						<?php
+ 					}
+ 					if($i>29)
+ 					{
+ 						if($page == 1 && $i > 29)
+ 						{?>
+ 							<input id="trois" type="submit" name="page" value="3"> <?php
+ 						}
+ 						else if($i >= $page*15 && $page > 1)
+ 						{?>
+ 							<input id="trois" type="submit" name="page" value="<?php echo($page+1); ?>"> <?php
+ 						}
+ 					}?>
+ 					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $str . '"' ?> >
+ 					</form><?php
 				}
 				?>	
 			</div>

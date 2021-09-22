@@ -166,6 +166,7 @@
 		X X 2021 – Mise en ligne du site en version bêta (version 1.0.0)<br>
 		X X 2021 – Ajout…<br>
 	</body>
+	<?php include('contenu/footer.html'); ?>
 </html>
 <script src="js/scrollnav.js"></script> 
 

@@ -529,7 +529,7 @@
 	    }
     	});
      </script>
-	
+	<?php include('contenu/footer.html'); ?>
 	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->
 </html>
 <script src="js/scrollnav.js"></script> 

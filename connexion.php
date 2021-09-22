@@ -50,5 +50,6 @@
 		<br>
 		Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
 	</body>
+	<?php include('contenu/footer.html'); ?>
 </html>
 <script src="js/scrollnav.js"></script> 

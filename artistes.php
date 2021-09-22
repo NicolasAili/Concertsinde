@@ -143,6 +143,6 @@
 			</div>
 			<?php require "action/messages.php"; ?> 
 	</body>
-	<?php include('footer.html'); ?>
+	<?php include('contenu/footer.html'); ?>
 </html>
 <script src="js/scrollnav.js"></script> 

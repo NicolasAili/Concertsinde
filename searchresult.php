@@ -158,5 +158,6 @@
 
 			?>
 	</body>
+	<?php include('contenu/footer.html'); ?>
 </html>
 <script src="js/scrollnav.js"></script> 

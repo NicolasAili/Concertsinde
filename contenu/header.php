@@ -111,12 +111,12 @@
 			?>
 		</div>
 		<div class="lowernav">
-			<a href=".\accueil.php" class="liun"><img class="imgmaison" src="./image/maison.png"></a>
-			<a href=".\presentation.php" class="lisix">Présentation/Fonctionnement</a>
-			<a href=".\news.php" class="licinq">Nouveautés/Actualités</a>
-			<a href=".\artistes.php" class="lideux">Tous les artistes</a>
-			<a href=".\allconcerts.php" class="licinq">Tous les concerts</a>
-			<a href=".\classement.php" class="licinq">Meilleurs contributeurs</a>
+			<a href="accueil.php" class="liun"><img class="imgmaison" src="./image/maison.png"></a>
+			<a href="presentation.php" class="lisix">Présentation/Fonctionnement</a>
+			<a href="news.php" class="licinq">Nouveautés/Actualités</a>
+			<a href="artistes.php" class="lideux">Tous les artistes</a>
+			<a href="allconcerts.php" class="licinq">Tous les concerts</a>
+			<a href="classement.php" class="licinq">Meilleurs contributeurs</a>
 			
 			<?php 
 			if($row['admin'] == 2)

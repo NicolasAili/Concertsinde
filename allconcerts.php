@@ -621,8 +621,6 @@
  					}?>
  					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
  				</form>
-
- 				<?php //a faire: mettre en gras la page actuelle, ne pas afficher la page n+1 s'il n'y a plus de concerts, les footers bugués?>
 			</div>
 			<?php require "action/messages.php"; ?> 
 	</body>

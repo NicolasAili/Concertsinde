@@ -14,30 +14,20 @@
 	<head>
 		<?php
 			include 'php/base.php'; 
-			include 'php/css.php'; 
+			//include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
 			session_start();
 		?>
+		<script src="js/scrollnav.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/body/presentation.css">
-	</head>
-	<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</header>
-	<body>	
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+
 		
+	</head>
+	<body>	
+		<header>
+			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</header>
 		<h1>+ Présentation</h1>
 		<div id="presentation">
 			<br>
@@ -205,20 +195,17 @@
 			X X 2021 – Mise en ligne du site en version bêta (version 1.0.0)<br>
 			X X 2021 – Ajout…<br>
 		</div>
+		<?php include('contenu/footer.html'); ?>
 	</body>
-	<?php include('contenu/footer.html'); ?>
 </html>
-<script src="js/scrollnav.js"></script> 
+
+
 
 <script>
-$( "h1" ).click(function() 
-{
-	//$(this).closest("div").slideToggle( "slow", function() 
-	//$("#presentation").slideToggle( "slow", function()
-	$(this).next().slideToggle( "slow", function()
+	$( "h1" ).click(function() 
 	{
-   		// Animation complete.
-  	});
-});
+		$(this).next().slideToggle( "slow", function()
+		{
+	  	});
+	});
 </script>
-

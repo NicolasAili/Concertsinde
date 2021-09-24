@@ -15,7 +15,7 @@ function getleave(identifiant)
         $.ajax(
         {
             type: 'post',
-            url: 'detectsalle.php',
+            url: 'action/detectsalle.php',
             dataType: 'json',
             data: {
                  identifiant:identifiant,
@@ -254,7 +254,7 @@ function getdata(identifiant)
 	$( '#'+identifiant+'' ).autocomplete({
 		source: function( request, response ) {
 			$.ajax({
-				url: "getdata.php",
+				url: "action/getdata.php",
 				type: 'post',
 				dataType: "json",
 				data: {

@@ -23,88 +23,91 @@
 			include 'php/js.php'; 
 			require('php/database.php');
 		?>
+		<script src="js/scrollnav.js"></script> 
 		<link rel="stylesheet" type="text/css" href="css/body/artistes.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</header>
+	
 	<body>
-		<h1> Artistes </h1>
+		<header>
+		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</header>
+		<div id="main">
+			<h1> Artistes </h1>
 
-		<?php
-			require('php/database.php');
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-
-			$page = $_POST['page'];
-			$sqlquery = $_POST['sqlquery'];
-			$i = 0; //compteur pour les pages
-			if(!$page)
-			{
-				$page = 1;
-			}
-		?>
-		<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
-				Ajouter un artiste
-				<form method="post" class="connect" action="action/addartiste.php">
-					<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
-					<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
-					<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
-				</form>
-		</div>
-
-		<div id=tri>
-			<h3>trier par...</h3>
-			<hr>
 			<?php
-			$filter = $_GET['filter'];
-			echo '<a href="artistes.php?filter=up">'; ?> ordre croissant (de a à z) <?php echo '</a>';
-			echo '<a href="artistes.php?filter=down">'; ?> ordre décroissant (de z à a) <?php echo '</a>';
-			/*echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';*/
-			?>
-			<form method="post" class="connect" action="artistes.php">
-				<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
-				<input type="submit" value="Valider" id="valider" name="valider" href="">
-			</form>
-		</div>
-		<?php
-			$artiste = $_POST['artiste'];
-			$cnt = 0;
-			if($filter == 'up')
-			{
-				$str = "SELECT * FROM artiste ORDER BY Nom_artiste ASC";
-			}
-			else if($filter == 'down')
-			{
-				$str = "SELECT * FROM artiste ORDER BY Nom_artiste DESC";
-			}
-			else if($artiste)
-			{
-				$str = "SELECT * FROM artiste WHERE Nom_artiste = '$artiste'";
-			}
-			/*else if($filter == 'number')
-			{
+				require('php/database.php');
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
+				echo "</br>";
 
-			}*/
-			else if ($sqlquery) 
-			{
-				$str = $sqlquery;
-			}
-			else
-			{
-				$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
-			}
-			
-			
-			$result = mysqli_query($con, $str);
-		?>
+				$page = $_POST['page'];
+				$sqlquery = $_POST['sqlquery'];
+				$i = 0; //compteur pour les pages
+				if(!$page)
+				{
+					$page = 1;
+				}
+			?>
+			<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
+					Ajouter un artiste
+					<form method="post" class="connect" action="action/addartiste.php">
+						<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
+						<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
+						<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
+					</form>
+			</div>
+
+			<div id=tri>
+				<h3>trier par...</h3>
+				<hr>
+				<?php
+				$filter = $_GET['filter'];
+				echo '<a href="artistes.php?filter=up">'; ?> ordre croissant (de a à z) <?php echo '</a>';
+				echo '<a href="artistes.php?filter=down">'; ?> ordre décroissant (de z à a) <?php echo '</a>';
+				/*echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';*/
+				?>
+				<form method="post" class="connect" action="artistes.php">
+					<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
+					<input type="submit" value="Valider" id="valider" name="valider" href="">
+				</form>
+			</div>
+			<?php
+				$artiste = $_POST['artiste'];
+				$cnt = 0;
+				if($filter == 'up')
+				{
+					$str = "SELECT * FROM artiste ORDER BY Nom_artiste ASC";
+				}
+				else if($filter == 'down')
+				{
+					$str = "SELECT * FROM artiste ORDER BY Nom_artiste DESC";
+				}
+				else if($artiste)
+				{
+					$str = "SELECT * FROM artiste WHERE Nom_artiste = '$artiste'";
+				}
+				/*else if($filter == 'number')
+				{
+
+				}*/
+				else if ($sqlquery) 
+				{
+					$str = $sqlquery;
+				}
+				else
+				{
+					$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
+				}
+				
+				
+				$result = mysqli_query($con, $str);
+			?>
 			<div id="lesartistes">
 				<?php
 				while($row = mysqli_fetch_array($result)) 
@@ -181,7 +184,7 @@
 				?>	
 			</div>
 			<?php require "action/messages.php"; ?> 
+		</div>
+		<?php include('contenu/footer.html'); ?>
 	</body>
-	<?php include('contenu/footer.html'); ?>
 </html>
-<script src="js/scrollnav.js"></script> 

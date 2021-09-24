@@ -10,7 +10,9 @@ h1
 body
 {
 	text-align:center;
+  height: 100%;
 }
+
 form 
 {  
   margin-top: auto;

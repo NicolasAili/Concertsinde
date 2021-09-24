@@ -19,13 +19,15 @@
 			require('php/database.php');
 			session_start();
 		?>
+		<script src="js/scrollnav.js"></script> 
 		<link rel="stylesheet" type="text/css" href="css/body/searchresult.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</header>
 	<body>
-		<?php	      
+		<header>
+			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</header>
+		<div id="main">
+			<?php	      
 			require('php/database.php');
 
 			$searchfield = $_POST['searchfield'];
@@ -157,7 +159,8 @@
 			}
 
 			?>
-	</body>
-	<?php include('contenu/footer.html'); ?>
+		</div>
+		<?php include('contenu/footer.html'); ?>
+	</body>	
 </html>
-<script src="js/scrollnav.js"></script> 
+

@@ -18,13 +18,18 @@
 
 			require('php/database.php');
 		?>
+		<script src="js/scrollnav.js"></script> 
 		<link rel="stylesheet" type="text/css" href="css/body/inscrire.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</header>
-		<body>
-			 <h1>Inscription</h1>  
+	<body>
+		<header>
+			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</header>
+		<div id="main">
+			<header>
+				<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			</header>
+			<h1>Inscription</h1>  
 
 				 <?php 
 				 	if(!empty($_GET['message'])) 
@@ -59,8 +64,7 @@
 					<input  type="submit" value="Inscription" name="inscription">
 				</form>
 			</div>
-
-		</body>
+		</div>
 		<?php include('contenu/footer.html'); ?>
+	</body>
 </html>
-<script src="js/scrollnav.js"></script> 

@@ -21,13 +21,17 @@
 			include 'php/js.php'; 
 			require('php/database.php');
 		?>
+		<script src="js/scrollnav.js"></script> 
+		<script src="js/verifmodifconcert.js"></script> 
+		
 		<link rel="stylesheet" type="text/css" href="css/body/modifconcert.css">
 	</head>
-	<<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</header>
 	<body>
-		<?php	      
+		<header>
+			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</header>
+		<div id="main">
+			<?php	      
 			require('php/database.php');
 
 			require('php/error.php');
@@ -491,48 +495,11 @@
 				}
 			}
 			?>
+		</div>
+		<?php include('contenu/footer.html'); ?>
 	</body>
-	<script>
-		$('#connect').submit(function () 
-	{
-		var strpays = $("#pays").val();
-    	var strregion = $("#region").val();
-
-	    var strdate = $("#date").val();
-	    var datesaisie = new Date(strdate).getTime()
-
-		var now = new Date();
-        var heure   = now.getHours();
-        heureinf = (heure+1)*3600000; //heure courante multipliée par le nb de ms en 1 heure
-        heuresup = 63072000000; //2 ans en milliseconde
-        
-
-        var dateinf = datesaisie + heureinf;
-        var datesup = Date.now() + heuresup;
-
-        if(dateinf < Date.now())
-        {
-            alert("Erreur, date saisie inférieure à la date actuelle");
-            return false;
-        }
-        if(datesaisie > datesup)
-        {
-            alert("Erreur, impossible de saisir des concerts plus de deux ans en avance");
-            return false;
-        }
-
-
-	    if(strregion.length > 0 && !strpays)
-	    {
-	        alert("Erreur, vous devez saisir le pays dont fait partie cette région");
-	        return false;
-	    }
-    	});
-     </script>
-	<?php include('contenu/footer.html'); ?>
-	<!--<script> $("#salle").keyup(getdata(this.id)); </script>-->
 </html>
-<script src="js/scrollnav.js"></script> 
+
 
 
 

@@ -21,12 +21,14 @@
 
 			require('php/database.php');
 		?>
+		<script src="js/scrollnav.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/body/profil.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</header>
-		<body>
+	<body>
+		<header>
+			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		</header>
+		<div id="main">
 			<?php 
 			require('php/database.php');
 			?>
@@ -102,7 +104,8 @@
 					$querylu = mysqli_query($con, $sql);
 				}
 			?>
-		</body>
+		</div>
 		<?php include('contenu/footer.html'); ?>
+	</body>
 </html>
-<script src="js/scrollnav.js"></script> 
+

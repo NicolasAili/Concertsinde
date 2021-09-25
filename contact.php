@@ -21,12 +21,12 @@
 
 			require('php/database.php');
 		?>
-		<script src="js/scrollnav.js"></script> 
 		<link rel="stylesheet" type="text/css" href="css/body/contact.css">
 	</head>	
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<?php include('contenu/header.php'); ?>
+			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<h1> Contactez nous ! </h1>

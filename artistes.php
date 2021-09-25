@@ -23,28 +23,19 @@
 			include 'php/js.php'; 
 			require('php/database.php');
 		?>
-		<script src="js/scrollnav.js"></script> 
+		 
 		<link rel="stylesheet" type="text/css" href="css/body/artistes.css">
 	</head>
 	
 	<body>
 		<header>
-		<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<?php include('contenu/header.php'); ?>
+			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<h1> Artistes </h1>
 
 			<?php
-				require('php/database.php');
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
-				echo "</br>";
 
 				$page = $_POST['page'];
 				$sqlquery = $_POST['sqlquery'];
@@ -160,11 +151,11 @@
 				else
 				{?>
 					<form method="post" action="artistes.php" class="page" style="display: flex;">
- 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo 'style="font-weight: bold;"';;} ?>>
+ 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
  					<?php if($i>14)
  					{
  						?>
- 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo 'style="font-weight: bold;"';;} ?>>
+ 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';;} ?>>
  						<?php
  					}
  					if($i>29)
@@ -188,3 +179,4 @@
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>
+

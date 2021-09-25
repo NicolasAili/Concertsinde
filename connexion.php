@@ -18,13 +18,13 @@
 
 			require('php/database.php');
 		?>
-		<script src="js/scrollnav.js"></script> 
 		<link rel="stylesheet" type="text/css" href="css/body/connexion.css">
 	</head>
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<?php require "action/messages.php"; ?> 	
+			<?php include('contenu/header.php'); ?>
+			<?php require "action/messages.php"; ?> 
+			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<h1>Connexion</h1> 

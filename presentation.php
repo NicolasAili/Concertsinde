@@ -19,14 +19,14 @@
 			require('php/database.php');
 			session_start();
 		?>
-		<script src="js/scrollnav.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/body/presentation.css">
 
 		
 	</head>
 	<body>	
 		<header>
-			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<?php include('contenu/header.php'); ?>
+			<script src="js/scrollnav.js"></script> 
 		</header>
 		<h1>+ Présentation</h1>
 		<div id="presentation">

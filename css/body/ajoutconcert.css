@@ -1,13 +1,13 @@
 
 h1.titre
 {
-  margin-top: 200px;
+  margin-top: 90px;
 	text-align:center;
   font-family: Georgia, serif;
   margin-bottom: 30px;
 }
 
-form 
+.connect
 {  
   display: inline-block;
   margin-top: auto;

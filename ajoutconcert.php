@@ -18,16 +18,17 @@
 			include 'php/js.php'; 
 			require('php/database.php');
 			session_start();
+			require('php/error.php');
 		?>
-		<script src="js/popupaddconcert.js"></script>
-		<script src="js/scrollnav.js"></script> 
+		<script src="js/popupaddconcert.js"></script> 
 
 		<link rel="stylesheet" type="text/css" href="css/body/ajoutconcert.css">
 	</head>
 	
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?> 
+			<?php include('contenu/header.php'); ?>
+			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<div class="indentfi">

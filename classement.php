@@ -20,12 +20,12 @@
 			require('php/database.php');
 			session_start();
 		?>
-		<script src="js/scrollnav.js"></script> 
 		<link rel="stylesheet" type="text/css" href="css/body/classement.css">
 	</head>
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<?php include('contenu/header.php'); ?>
+			<script src="js/scrollnav.js"></script> 
 		</header>	
 		<div id="main">
 			<?php 

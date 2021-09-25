@@ -20,22 +20,20 @@
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
+
+			require('php/error.php');
 		?>
-		<script src="js/scrollnav.js"></script> 
 		<script src="js/verifmodifconcert.js"></script> 
 		
 		<link rel="stylesheet" type="text/css" href="css/body/modifconcert.css">
 	</head>
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?> <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<?php include('contenu/header.php'); ?>
+			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<?php	      
-			require('php/database.php');
-
-			require('php/error.php');
-
 			$idconcert = $_POST['idpost'];
 			$idsalle = $_POST['idsallepost'];
 			$artiste = $_POST['artistepost'];

@@ -1,5 +1,10 @@
+ul, li
+{
+	list-style-type: none;
+}
+
 #filtres{
-    width: 100%;
+    width: 25%;
     margin: 0 auto;
     background-color: white;
     position: sticky;
@@ -8,13 +13,15 @@
 
 #filtres ul{
     list-style-type: none;
+    padding: 0;
 }
 
 #filtres ul li{
     /*float: left;*/
-    width: 25%;
+    /*width: 25%;*/
     text-align: center;
     position: relative;
+    padding: 0;
 }
 
 #filtres ul::after{
@@ -70,6 +77,21 @@
 	margin-top: 80px;
 	margin-left: 40%;
 	width: 20%;
+}
+
+#main
+{
+	margin-top: 60px;
+}
+
+.ul > li{
+	display: none;
+	cursor: pointer;
+}
+
+.formsalledepth > li, .formvilledepth > li, .formcpdepth > li, .formdptdepth > li, .formnumdptdepth > li, .formrgndepth > li
+{
+	display: none;
 }
 
 .inwhile

@@ -19,7 +19,7 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
-
+			include 'php/js.php';
 			require('php/database.php');
 			require('php/error.php');
 		?>
@@ -77,99 +77,137 @@
 			if(!$add && !$modif)
 			{
 				?>
-				filtres...
-				
-						 <form action="allconcerts.php" method="get">
-						  <label for="salle">Salle:</label>
-						  <input type="text" id="salle" name="salle" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required><br><br>
-						  <?php if($filter)
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
-						  }
-						  else
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="none">';
-						  }
-						  ?> 
-						  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-						  <input type="submit" value="Filtrer">
-						</form> 
+				<a class="filterresult" href="#" onclick="displayconcert();"> filtrer les résultats </a>
+				<div class="container">
+					<ul class="ul">
+						<li>
+							<div class="formsalle"> Salle </div>
+							<ul class="formsalledepth">
+								<li>
+									<form action="allconcerts.php" method="get">
+									  <input type="text" id="salle" name="salle" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required><br><br>
+									  <?php if($filter)
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+									  }
+									  else
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+									  }
+									  ?> 
+									  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+									  <input type="submit" value="Filtrer">
+									</form>
+								<li>
+							</ul>
+						</li>
 						<br>
-						<form action="allconcerts.php" method="get">
-						  <label for="ville">Ville:</label>
-						  <input type="text" id="ville" name="ville" <?php if($getville){echo 'value='; echo "$getville";}?> required><br><br>
-						  <?php if($filter)
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
-						  }
-						  else
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="none">';
-						  }?>
-						  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-						  <input type="submit" value="Filtrer">
-						</form>
+						<li>
+							<div class="formville">Ville</div>
+							<ul class="formvilledepth">
+								<li>
+									<form action="allconcerts.php" method="get">
+									  <input type="text" id="ville" name="ville" <?php if($getville){echo 'value='; echo "$getville";}?> required><br><br>
+									  <?php if($filter)
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+									  }
+									  else
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+									  }?>
+									  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+									  <input type="submit" value="Filtrer">
+									</form>
+								</li>
+							</ul>
+						</li>
 						<br>
-						<form action="allconcerts.php" method="get">
-						  <label for="cp">CP:</label>
-						  <input type="text" id="cp" name="cp" <?php if($getcp){echo 'value='; echo "$getcp";}?> required><br><br>
-						  <?php if($filter)
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
-						  }
-						  else
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="none">';
-						  }?>
-						  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-						  <input type="submit" value="Filtrer">
-						</form> 
+						<li>
+							<div class="formcp">Code postal</div>
+							<ul class="formcpdepth">
+								<li>
+									<form action="allconcerts.php" method="get">
+									  <input type="text" id="cp" name="cp" <?php if($getcp){echo 'value='; echo "$getcp";}?> required><br><br>
+									  <?php if($filter)
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+									  }
+									  else
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+									  }?>
+									  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+									  <input type="submit" value="Filtrer">
+									</form>
+								</li>
+							</ul>
+						</li>
 						<br>
-						<form action="allconcerts.php" method="get">
-						  <label for="departement">Departement:</label>
-						  <input type="text" id="departement" name="departement" <?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required><br><br>
-						  <?php if($filter)
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
-						  }
-						  else
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="none">';
-						  }?>
-						  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-						  <input type="submit" value="Filtrer">
-						</form> 
+						<li>
+							<div class="formdpt">Département</div>
+							<ul class="formdptdepth">
+								<li>
+									<form action="allconcerts.php" method="get">
+									  <input type="text" id="departement" name="departement" <?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required><br><br>
+									  <?php if($filter)
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+									  }
+									  else
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+									  }?>
+									  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+									  <input type="submit" value="Filtrer">
+									</form>
+								</li>
+							</ul>
+						</li>
 						<br>
-						<form action="allconcerts.php" method="get">
-						  <label for="numero">Numero de département:</label>
-						  <input type="text" id="numero" name="numero" <?php if($getnumdepartement){echo 'value='; echo "$getnumdepartement";}?> required><br><br>
-						  <?php if($filter)
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
-						  }
-						  else
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="none">';
-						  }?>
-						  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-						  <input type="submit" value="Filtrer">
-						</form> 
+						<li>
+							<div class="formnumdpt">Numero de département</div>
+							<ul class="formnumdptdepth">
+								<li>
+									<form action="allconcerts.php" method="get">
+									  <input type="text" id="numero" name="numero" <?php if($getnumdepartement){echo 'value='; echo "$getnumdepartement";}?> required><br><br>
+									  <?php if($filter)
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+									  }
+									  else
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+									  }?>
+									  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+									  <input type="submit" value="Filtrer">
+									</form>
+								</li>
+							</ul> 
+						</li>
 						<br>
-						<form action="allconcerts.php" method="get">
-						  <label for="region">Region:</label>
-						  <input type="text" id="region" name="region" <?php if($getregion){echo 'value='; echo "$getregion";}?> required><br><br>
-						  <?php if($filter)
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
-						  }
-						  else
-						  {
-						  	echo '<input type="hidden" id="filter" name="filter" value="none">';
-						  }?>
-						  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-						  <input type="submit" value="Filtrer">
-						</form> 
-
+						<li>
+							<div class="formrgn">Region</div>
+							<ul class="formrgndepth">
+								<li>
+									<form action="allconcerts.php" method="get">
+									  <input type="text" id="region" name="region" <?php if($getregion){echo 'value='; echo "$getregion";}?> required><br><br>
+									  <?php if($filter)
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+									  }
+									  else
+									  {
+									  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+									  }?>
+									  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+									  <input type="submit" value="Filtrer">
+									</form>
+								</li>
+							</ul>
+						</li>
+					</ul> 
+				</div>
 	
 				<br>
 			<?php
@@ -654,5 +692,88 @@
 	</body>
 </html>
 
+<script>
+	function displayconcert()
+	{
+		
 
+		/*if($(".ul").children().css("display") == "block")
+		{
+			$( "ul.ul" ).children().css( "display", "none" );
+			console.log("ok1");
+		}
+		else
+		{*/
+			$( "ul.ul" ).children().slideToggle( "slow", function()
+		{
+	  	});
+		/*}*/
+	}
+
+	/*function displayform()
+	{
+		var className = $(this).attr('class');
+      	console.log(className);
+		/*$(".depthtwo").children().slideToggle( "slow", function()
+		{
+	  	});
+	}*/
+</script>
+
+<script>
+        $(document).ready(function () {
+            $(".formsalle, .formville, .formcp, .formdpt, .formnumdpt, .formrgn").click(function () {
+                var getClass = this.className;
+                var getClassdepth = getClass + "depth";
+
+                if($(".formsalledepth").children().css("display") == "list-item" && getClassdepth != 'formsalledepth')
+                {
+                	$(".formsalledepth").children().slideToggle( "slow", function()
+					{
+
+			  		});
+                }
+                if($(".formvilledepth").children().css("display") == "list-item" && getClassdepth != 'formvilledepth')
+                {
+                	$(".formvilledepth").children().slideToggle( "slow", function()
+					{
+
+			  		});
+                } 
+                if($(".formcpdepth").children().css("display") == "list-item" && getClassdepth != 'formcpdepth')
+                {
+                	$(".formcpdepth").children().slideToggle( "slow", function()
+					{
+
+			  		});
+                } 
+                if($(".formdptdepth").children().css("display") == "list-item" && getClassdepth != 'formdptdepth')
+                {
+                	$(".formdptdepth").children().slideToggle( "slow", function()
+					{
+
+			  		});
+                } 
+                if($(".formnumdptdepth").children().css("display") == "list-item" && getClassdepth != 'formnumdptdepth')
+                {
+                	$(".formnumdptdepth").children().slideToggle( "slow", function()
+					{
+
+			  		});
+                } 
+                if($(".formrgndepth").children().css("display") == "list-item" && getClassdepth != 'formrgndepth')
+                {
+                	$(".formrgndepth").children().slideToggle( "slow", function()
+					{
+
+			  		});
+                }    
+
+            	$("."+getClass+"depth").children().slideToggle( "slow", function()
+				{
+
+			  	});
+		});
+    });
+</script>
 

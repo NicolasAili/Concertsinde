@@ -49,6 +49,7 @@
 			$page = $_POST['page'];
 			$sqlquery = $_POST['sqlquery'];
 			$i = 0; //compteur pour les pages
+			$n = 15;
 
 			if(!$archive)
 			{
@@ -417,7 +418,29 @@
 					break;
 			}
 			?>
-
+			<div id="pages">
+				<ul>
+					<li> <a href="#"><?php switch (variable) {
+						case 'value':
+							# code...
+							break;
+						
+						default:
+							echo "10 (par défaut)";
+							break;
+					}?>
+						
+						<ul>
+							<li>
+								25
+							</li>
+							<li>
+								50
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 
 
 			<hr>
@@ -471,7 +494,7 @@
 
 				while($rowx = mysqli_fetch_array($result)) 
 				{
-					if($i >= $page*15-15 && $i<$page*15) 
+					if($i >= $page*$n-$n && $i<$page*$n) 
 					{
 						$idconcert = $rowx['id_concert'];
 						$row['ville_departement'] = NULL;
@@ -666,19 +689,19 @@
 	 			?>
  				<form method="post" action="allconcerts.php" class="page" style="display: flex;">
  					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo 'style="font-weight: bold;"';;} ?>>
- 					<?php if($i>14)
+ 					<?php if($i>$n-1)
  					{
  						?>
  						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo 'style="font-weight: bold;"';;} ?>>
  						<?php
  					}
- 					if($i>29)
+ 					if($i>2*$n-1)
  					{
- 						if($page == 1 && $i > 29)
+ 						if($page == 1 && $i > 2*$n-1)
  						{?>
  							<input id="trois" type="submit" name="page" value="3"> <?php
  						}
- 						else if($i >= $page*15 && $page > 1)
+ 						else if($i >= $page*$n && $page > 1)
  						{?>
  							<input id="trois" type="submit" name="page" value="<?php echo($page+1); ?>"> <?php
  						}

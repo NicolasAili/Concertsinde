@@ -3,7 +3,7 @@ ul, li
 	list-style-type: none;
 }
 
-#filtres{
+.filtres{
     width: 25%;
     margin: 0 auto;
     background-color: white;
@@ -11,12 +11,12 @@ ul, li
     top: 0px;
 }
 
-#filtres ul{
+.filtres ul{
     list-style-type: none;
     padding: 0;
 }
 
-#filtres ul li{
+.filtres ul li{
     /*float: left;*/
     /*width: 25%;*/
     text-align: center;
@@ -24,13 +24,13 @@ ul, li
     padding: 0;
 }
 
-#filtres ul::after{
+.filtres ul::after{
     content: "";
     display: table;
     clear: both;
 }
 
-#filtres a{
+.filtres a{
     display: block;
     text-decoration: none;
     color: black;
@@ -38,7 +38,7 @@ ul, li
     padding: 10px 0px;
 }
 
-#filtres a:hover{
+.filtres a:hover{
     color: orange;
     border-bottom: 2px solid gold;
 }
@@ -51,7 +51,7 @@ ul, li
     width: 100%;
     z-index: 1000;
 }
-#filtres > ul li:hover .sous{
+.filtres > ul li:hover .sous{
     display: block;
 }
 .sous li{

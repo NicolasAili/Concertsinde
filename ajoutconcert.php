@@ -13,7 +13,7 @@
 <html lang="fr">
 	<head>
 		<?php
-			include 'php/base.php'; 
+			include 'php/base.php';
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');

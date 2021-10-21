@@ -119,8 +119,7 @@
 			$page = $_POST['page'];
 			$sqlquery = $_POST['sqlquery'];
 			$i = 0; //compteur pour les pages
-			//$n = 15; //nb à afficher par page
-			$n = $_POST['n'];
+			$n = $_POST['n']; //nb concerts à afficher par page
 			if(!$n)
 			{
 				$n = $_GET['n'];;

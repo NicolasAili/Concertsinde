@@ -16,15 +16,15 @@
 <html>
 	<head>
 		<?php
-			include '../php/base.php'; 
-			include '../php/css.php'; 
+			/*include '../php/base.php'; 
+			include '../php/css.php'; */
 				
 			require('../php/database.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="../css/body/concert.css">
 	</head>
 	
-	<body>
+	<body style="background-color: #DBCDC6";>
 		<?php	      
 			if (isset($_POST['concert']))
 			{
@@ -49,9 +49,26 @@
 				{
 					if($date == $row['datec'])
 					{
-						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de cliquer sur le bouton pour signaler une erreur', time() + 30, "/");
+						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de le signaler', time() + 30, "/");
 						header("Location: ../allconcerts.php");
 						exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
+					}
+				}
+				$sql = "SELECT heure FROM concert, salle WHERE salle.nom_salle = '$salle' AND concert.datec = '$date'";
+				$query = mysqli_query($con, $sql);
+				echo $heure;
+				echo "<br>";
+				echo $heure+2;
+				echo "<br>";
+				echo $heure-2;
+				echo "<br>";
+				while($row = mysqli_fetch_array($query)) 
+				{
+					if($heure+2 > $row['heure'] && $heure-2 < $row['heure'])
+					{
+						setcookie('contentMessage', 'Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés. Vérifiez les concerts. Si vous pensez que cela est dû à une erreur, merci de le signaler', time() + 30, "/");
+						header("Location: ../allconcerts.php");
+						exit("Erreur: COncert déjà saisi (même artiste et même date)");
 					}
 				}
 
@@ -531,7 +548,7 @@
 						<div class="fb"> <?php echo $_POST['fb']; ?> </div>
 						<div class="ticket"> <?php echo $_POST['ticket']; ?> </div>
 					</div>
-					<a href="../allconcerts.php"> retour en arriere </a>
+					<a href="../allconcerts.php"> Retour au site </a>
 				</div>
 				<?php
 			}

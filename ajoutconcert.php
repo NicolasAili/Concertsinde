@@ -46,7 +46,7 @@
 					<br>
 					<br>
 					<label for="heure">Heure : </label> 
-					<input type="time" name="heure" placeholder="Saisir l'heure du concert" id="heure">
+					<input type="time" name="heure" id="heure">
 					<br>
 					<br>
 					Lieu du concert  

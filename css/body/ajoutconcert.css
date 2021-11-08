@@ -1,7 +1,6 @@
 
 h1.titre
 {
-  margin-top: 90px;
 	text-align:center;
   font-family: Georgia, serif;
   margin-bottom: 30px;
@@ -10,9 +9,10 @@ h1.titre
 .connect
 {  
   display: inline-block;
-  margin-top: auto;
-  margin-left: auto; 
-  margin-right: auto;
+  width: 50%;
+  max-width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
   padding: 10px;
   border-radius: 15px;
   box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.7),
@@ -172,4 +172,9 @@ input.bouton
 #nomdpt
 {
 
+}
+
+#res, #resx, #resv, #resw
+{
+  font-style: italic;
 }

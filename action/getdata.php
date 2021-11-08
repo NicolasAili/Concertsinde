@@ -38,7 +38,7 @@
     }
     else if($test == 'ville')
     {
-      $str = "SELECT nom_ville FROM ville WHERE nom_ville LIKE '%{$name}%'";
+      $str = "SELECT nom_ville FROM ville WHERE nom_ville LIKE '%{$name}%' LIMIT 20";
       $result = mysqli_query($con, $str);
       while($row = mysqli_fetch_array($result))
       {

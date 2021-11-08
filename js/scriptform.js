@@ -41,6 +41,7 @@ function getleave(identifiant)
                         case "salle":
                               //$('#nomdpt').css('visibility', 'hidden');
                               //$('#nomdpt').css('display', 'none');
+                            $("#resv").html('');
                             if(data[0].test == 'erreur')
                             {
                                 $('#infos').children('input').attr("placeholder", "salle non connue");
@@ -134,7 +135,7 @@ function getleave(identifiant)
                             }
                             else if(data[0].test == 'succes')
                             {
-                                $("#resx").html("Ville reconnue et informations récupérées");
+                                $("#resv").html("Ville reconnue et informations récupérées");
                                 if(data[0].departement != 'nodata')
                                 {
                                     $("#departement").val(data[0].departement);
@@ -457,6 +458,10 @@ function checkbox(identifiant)
     switch (identifiant)
     {
         case "int":
+            $("#res").html('');
+            $("#resv").html('');
+            $("#resw").html('');
+            $("#resx").html('');
             if( $('input[name=checkint]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) 
             {
                 $('#sallediv').css('visibility', 'visible');
@@ -489,6 +494,10 @@ function checkbox(identifiant)
             
         break;
         case "ext":
+            $("#res").html('');
+            $("#resv").html('');
+            $("#resw").html('');
+            $("#resx").html('');
             if( $('input[name=checkext]').is(':checked') )
             {
                 $('#extdiv').css('visibility', 'visible');
@@ -501,6 +510,8 @@ function checkbox(identifiant)
                 { 
                     $("#int").prop("checked", false);
                 }
+                $('#infosx').css('visibility', 'visible');
+                $('#infosx').css('display', 'contents');
                 $('#infos').css('visibility', 'visible');
                 $('#infos').css('display', 'contents');
             }

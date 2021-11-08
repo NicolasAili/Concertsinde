@@ -7,6 +7,18 @@
 	Contenu HTML : oui
 	JS+JQuery : non
 	CSS : oui
+	
+	<?php 
+		if($row['admin'] == 2)
+		{?>
+			<a href="superadmin\saccueil.php" class="li"><div class="txtlierr">Signaler une erreur</div></a>
+		<?php
+		}
+		else
+		{?>
+			<a href=".\erreur.php" class="li"><div class="txtli">Signaler une erreur</div></a>
+		<?php
+		}
 */
 ?>
 <!DOCTYPE html>

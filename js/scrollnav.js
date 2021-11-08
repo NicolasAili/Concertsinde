@@ -7,7 +7,7 @@
 	CSS : n
 */
 
-var vertical=-1;
+/*var vertical=-1;
 var rcun = document.getElementById('recherche');
 var rchidden = document.getElementById('recherche-hidden');
 setInterval(function() {
@@ -15,14 +15,28 @@ setInterval(function() {
    vertical=window.scrollY;
    //console.log("window.scrollY="+vertical);
  }
- if(vertical>300)
+ if(vertical>300 && $("#recherche").is(":visible"))
  {
  	rcun.style.visibility = "hidden";
  	rchidden.style.visibility = "visible";
  }
- else
+ else if(vertical<300 && $("#recherche-hidden").is(":visible"))
  {
  	rcun.style.visibility = "visible";
  	rchidden.style.visibility = "hidden";
  }
-});
+});*/
+
+function recherche()
+{
+	$('#recherche').css('visibility', 'hidden');
+    $('#bar').css('visibility', 'visible');
+    //$('#bar').css('display', 'contents');
+}
+
+function fermer()
+{
+	var scroll = $(window).scrollTop();
+	$('#bar').css('visibility', 'hidden');
+	$('#recherche').css('visibility', 'visible');
+}

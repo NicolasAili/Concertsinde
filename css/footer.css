@@ -15,3 +15,34 @@ footer
 {
 	color: #ff0000;
 }
+.reseaux
+{
+	margin-left: 1%; 
+	margin-right: 1%; 
+	width: 10%;
+	max-height: 100%;
+	display: flex;
+}
+
+.imgreseaux
+{
+	width: 50%;
+}
+
+.imgfb, .imgig
+{
+	width: 94%;
+	position: relative;
+	top: 25%;
+	height: 50%;
+}
+.imgig
+{
+	padding-left: 25%;
+	padding-right: 2%
+}
+.imgfb
+{
+	padding-left: 2%;
+	padding-right: 25%;
+}

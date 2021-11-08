@@ -26,32 +26,42 @@
 			<?php require "action/messages.php"; ?> 
 			<script src="js/scrollnav.js"></script> 
 		</header>
-		<div id="main">
-			<h1>Connexion</h1> 
-				 <?php 
-				 	if(!empty($_GET['message'])) 
-				 	{
-						$message = $_GET['message'];
-						 echo '<p class="message"> '.$message.'</p>';
-					}
-				?>
-			<div class="formin">
-				<form action="action/connect.php" method="post" class="form-example">
-	  				<div class="form">
-		  			 	<label for="name">Pseudo : </label> 
-		    			<input type="text" name="pseudo" placeholder="Entrer pseudo"   id="prenom" required>
-		    			<br>
-		    			<br>
-		    			<label for="name">Mot de passe : </label> 
-		    			<input type="password" name="password" placeholder="Entrer mdp" id="password" required>
-	      				<br>
-						<div class="connexion"> <input class="bouton" type="submit" value="Connexion" name="connexion"> </div>
-					</div>
-				</form>
+		<?php
+		if(isset($_SESSION['pseudo']) == null)
+		{?>
+			<div id="main">
+				<h1>Connexion</h1> 
+					 <?php 
+					 	if(!empty($_GET['message'])) 
+					 	{
+							$message = $_GET['message'];
+							 echo '<p class="message"> '.$message.'</p>';
+						}
+					?>
+				<div class="formin">
+					<form action="action/connect.php" method="post" class="form-example">
+		  				<div class="form">
+			  			 	<label for="name">Pseudo : </label> 
+			    			<input type="text" name="pseudo" placeholder="Entrer pseudo"   id="prenom" required>
+			    			<br>
+			    			<br>
+			    			<label for="name">Mot de passe : </label> 
+			    			<input type="password" name="password" placeholder="Entrer mdp" id="password" required>
+		      				<br>
+							<div class="connexion"> <input class="bouton" type="submit" value="Connexion" name="connexion"> </div>
+						</div>
+					</form>
+				</div>
+				<br>
+				Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
 			</div>
-			<br>
-			Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
-		</div>
-		<?php include('contenu/footer.html'); ?>
+		<?php 
+		}
+		else
+		{
+			header("Location: profil.php");
+		}
+
+		include('contenu/footer.html'); ?>
 	</body>	
 </html>

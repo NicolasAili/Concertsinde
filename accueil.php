@@ -1,4 +1,4 @@
-<?php
+bloc<?php
 /*
 	Type fichier : php
 	Fonction : page accueil
@@ -18,11 +18,13 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
-				
+			include 'php/js.php';
 			require('php/database.php');
 			require('php/error.php');
-
 		?>
+		<script>
+			//alert($(window).width());
+		</script>
 		<link rel="stylesheet" type="text/css" href="css/body/accueil.css">
 	</head>
 	<body>
@@ -52,13 +54,13 @@
 				$query = mysqli_query($con, $sql);
 			?>
 			<div class="maintxt">
-				<div class="blocun">
-					<h1> Objectif du site </h1>
+				<div class="bloc">
+					<h1 id="unhun"> Objectif du site </h1>
 					<p> L'objectif de ce site web est de permettre au public de rap indépendant de pouvoir être facilement au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite. </p>
 					<p>Ce site a pour caractéristique principale d'être communautaire. Cela signifie que ce sont les fans qui font vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs. Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier des concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs ou des omissions. </p>
-					<p>En étant connecté, vous pouvez en outre gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site (plus de détails dans l'onglet <a href="presentation.php"> « présentation et fonctionnement ». </a></p>
+					<p>En étant connecté, vous pouvez en outre gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site (plus de détails dans l'onglet <a href="presentation.php"> « fonctionnement »). </a></p>
 				</div>
-				<div class="blocdeux"> 				
+				<div class="bloc"> 				
 					<h1>D’où vient l’idée/pourquoi ce site</h1>
 					<p>Me rendant régulièrement à des concerts de rap indépendant, j’ai remarqué qu’il n’existait pas de plateforme recensant tous les concerts. Il y a bien le site « info concert » (par exemple) mais il n'est pas rare que les concerts de rap indépendant n’y apparaissent pas, à l'instar de concerts de petite taille.</p>
 					<p>
@@ -71,7 +73,7 @@
 						Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent participer librement à l’expansion du rap indépendant au plus grand nombre.
 					</p>
 				</div>
-				<div class="bloctrois">
+				<div class="bloc">
 					<h1>Fonctionnement général du site</h1> 
 					<p>
 					Le fonctionnement du site est assez simple avec trois principales utilisations :

@@ -1,11 +1,79 @@
+h1
+{
+	background: rgb(58,1,1);
+	background: linear-gradient(90deg, rgba(58,1,1,1) 50%, rgba(58,1,1,0) 100%);
+	color: white;
+	font-size: 4em;
+	padding-left: 2%;
+}
+
+#hrun
+{
+	background: #3a0101;
+	height: 15px;
+}
+
+#hrdeux
+{
+	background: #3a0101;
+	height: 4px;
+}
+
+
 ul, li
 {
 	list-style-type: none;
 }
 
+.ul
+{
+	padding-left: 0;
+}
+
+#reset
+{
+	width: 18%;
+	margin-right: 5%;
+	/*margin-right: 3%;*/
+}
+
+#txtreset
+{
+	position: relative;
+	top: 35%;
+}
+
+.trier
+{
+	display: flex;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+.trier:nth-of-type(2n)
+{
+	
+}
+
+.trier:nth-of-type(3n)
+{
+	
+}
+
+.filterresult, #txtreset
+{
+	color: #3a0101;
+}
+
+#triertxtun, #triertxtdeux
+{
+	position: relative;
+	top: 33%;
+}
+
 .filtres{
-    width: 25%;
-    margin: 0 auto;
+	margin-left: 15px;
+	border: 2px solid #3a0101;
     background-color: white;
     position: sticky;
     top: 0px;
@@ -72,6 +140,17 @@ ul, li
     font-size: 12px;
 }
 
+.deroulant
+{
+	position: relative;
+	top: 35%;
+}
+
+.txtderoulant
+{
+	padding: 0;
+}
+
 #concertsall
 {
 	margin-top: 80px;
@@ -79,9 +158,14 @@ ul, li
 	width: 20%;
 }
 
+
 #main
 {
-	margin-top: 60px;
+	width: 70%;
+	margin-right: 15%;
+	margin-left: 15%;
+	background-color: white;
+	border: 2px solid grey;
 }
 
 .ul > li{
@@ -92,6 +176,46 @@ ul, li
 .formsalledepth > li, .formvilledepth > li, .formcpdepth > li, .formdptdepth > li, .formnumdptdepth > li, .formrgndepth > li
 {
 	display: none;
+}
+
+#filteroneone
+{
+	display: block;
+	width: 25%;
+	margin-right: 25%;
+}
+
+.container
+{
+	width: 120%;
+	color: #3a0101;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.formsalle, .formville, .formcp, .formdpt, .formnumdpt, .formrgn
+{
+	border: bottom 1px solid #404040;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#checkboxdiv
+{
+	width: 50%;
+	position: relative;
+	right: 0;
+}
+#mainfilter
+{
+	height: 100px;
+	font-size: 0.8em;
+}
+#filterone, #filtertwo
+{
+	display: flex;
+	height: 50%;
+	width: 100%;
 }
 
 .inwhile

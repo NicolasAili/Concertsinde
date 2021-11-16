@@ -673,4 +673,3 @@ function erase()
     $('#adresse').attr("placeholder", '');
     $('#fb').val('');
 }
-

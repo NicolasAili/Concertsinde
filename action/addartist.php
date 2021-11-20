@@ -10,12 +10,16 @@
 */
 session_start();
 
+$artiste = $_POST['artisteajout'];
+$description = $_POST['description'];
+
+$artiste = ucfirst($artiste);
 
 if(isset($_SESSION['pseudo']) == null)
 {
-  setcookie('contentMessage', 'Erreur: vous devez être connectés afin de pouvoir modifier un concert', time() + 30, "/");
+  setcookie('contentMessage', 'Erreur: vous devez être connectés afin de pouvoir ajouter un artiste', time() + 30, "/");
   header("Location: ../artistes.php");
-  exit("Erreur: vous devez être connectés afin de pouvoir modifier un concert");
+  exit("Erreur: vous devez être connectés afin de pouvoir ajouter un artiste");
 }
 
 if( isset( $_POST['artisteajout'] ) )

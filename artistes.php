@@ -33,8 +33,7 @@
 			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
-			<h1> Artistes </h1>
-
+			<h2> Liste des artistes </h2>
 			<?php
 
 				$page = $_POST['page'];
@@ -45,28 +44,33 @@
 					$page = 1;
 				}
 			?>
-			<div id = "ajoutartiste" style="position: fixed; top: 50%; left: 75%;">
+			<div id = "ajoutartiste">
 					Ajouter un artiste
-					<form method="post" class="connect" action="action/addartiste.php">
+					<form method="post" class="connect" action="action/addartist.php">
 						<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
 						<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
 						<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
 					</form>
 			</div>
-
+			<h3 onclick="displayfilter();">Filtres ▼</h3>
 			<div id=tri>
-				<h3>trier par...</h3>
-				<hr>
 				<?php
 				$filter = $_GET['filter'];
-				echo '<a href="artistes.php?filter=up">'; ?> ordre croissant (de a à z) <?php echo '</a>';
-				echo '<a href="artistes.php?filter=down">'; ?> ordre décroissant (de z à a) <?php echo '</a>';
-				/*echo '<a href="artistes.php?filter=number">'; ?> nombre de concerts futurs <?php echo '</a>';*/
 				?>
-				<form method="post" class="connect" action="artistes.php">
-					<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
-					<input type="submit" value="Valider" id="valider" name="valider" href="">
-				</form>
+				<div id="tripar"><?php
+					echo "<h4> Trier par </h4>";
+					echo '<a href="artistes.php?filter=up">'; ?> ordre croissant <?php echo '</a>';
+					echo "<br>";
+					echo '<a href="artistes.php?filter=down">'; ?> ordre décroissant <?php echo '</a>';
+				?>
+				</div>
+				<div id="filtrepar">
+					<h4> Filtrer </h4>
+					<form method="post" class="connect" action="artistes.php">
+						<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
+						<input type="submit" value="Valider" id="valider" name="valider" href="">
+					</form>
+				</div>
 			</div>
 			<?php
 				$artiste = $_POST['artiste'];
@@ -107,13 +111,10 @@
 					{
 					?>
 						<div class = "inwhile">
-							<?php
-								echo $i;
-							?>
 							<div class="artiste">
 								<?php 
 									$artistecnt = $row['Nom_artiste'];
-									echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgcadenas">';
+									echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgartiste">';
 									echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
 									echo '</a>';
 								?>
@@ -179,4 +180,17 @@
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>
+<script>
+	function displayfilter()
+	{
+		$("#tri").slideToggle( "slow", function()
+		{
+			if($("#tri").css("display") != "none")
+			{
+				$("#tri").css('display', 'flex');
+			}
+			$("h3").css('margin-bottom', '10');
+		});
+	}
+</script>
 

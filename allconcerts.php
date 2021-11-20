@@ -720,7 +720,8 @@
 								<img class="infologo" src="image/infos.png" height="50" width="50">
 								<div class="infos hidden">
 									<div class="dateajout"> 
-										Concert ajouté le: <?php echo  $row['date_ajout'] ?> 
+										<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
+										Concert ajouté le: <?php echo $newDate ?> 
 									</div> 
 									<div class="ajout"> 
 										<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 

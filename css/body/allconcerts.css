@@ -440,6 +440,12 @@ ul, li
 }
 
 
+#modifier:hover, #probleme:hover, #supprimer:hover, #valider:hover
+{
+	font-size: 150%;
+	cursor: pointer;
+}
+
 .supprimer
 {
 	position: fixed;

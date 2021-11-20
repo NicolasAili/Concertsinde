@@ -29,6 +29,7 @@
 			if (isset($_POST['concert']))
 			{
 				$artiste = $_POST['artiste'];
+				$artiste = ucfirst($artiste); //met la première lettre en capitale
 				$date = $_POST['date'];
 				$heure = $_POST['heure'];
 				$ville = $_POST['ville'];

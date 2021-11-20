@@ -90,7 +90,7 @@
 
 
 			?>
-
+			<a href="action/deconnexion.php"> Deconnexion </a>
 			<?php echo '<a href="allconcerts.php?add='; echo $idpseudo; echo '">';?> Voir mes concerts ajoutés </a>
 			<?php echo '<a href="allconcerts.php?modif='; echo $idpseudo; echo '">';?> Voir mes concerts modifiés </a>
 			<div id="points">

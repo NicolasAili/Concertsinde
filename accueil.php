@@ -1,4 +1,4 @@
-bloc<?php
+<?php
 /*
 	Type fichier : php
 	Fonction : page accueil

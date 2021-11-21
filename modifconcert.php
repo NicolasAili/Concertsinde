@@ -102,7 +102,7 @@
 						exit("Erreur: il est interdit de modifier un concert validé");
 					}
 					?>
-					<h1> modifier un concert </h1>
+					<h1 class="titre"> Modifier un concert </h1>
 					<form method="post" id="connect" action="action/modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
 						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
@@ -119,7 +119,7 @@
 						<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> > 
 						<br>
 						<br>
-						Lieu du concert  
+						Lieu du concert :
 						<div id="extint"> 
 							<br>
 							<?php
@@ -261,9 +261,11 @@
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input type="hidden" id="intext" name="intext" value=""> 
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
-						<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
-						<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
-						<input type="button" value="Effacer tous les champs" onclick="erase();">
+						<div id="submit">
+							<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
+							<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
+							<input type="button" value="Effacer tous les champs" onclick="erase();">
+						</div>
 						<input type="hidden" id="resetform">
 					</form>
 					<form method="post" action="allconcerts.php">

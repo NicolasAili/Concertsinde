@@ -30,7 +30,7 @@
 		if(isset($_SESSION['pseudo']) == null)
 		{?>
 			<div id="main">
-				<h1>Connexion</h1> 
+				<h2>Connexion à votre espace membre</h2> 
 					 <?php 
 					 	if(!empty($_GET['message'])) 
 					 	{
@@ -53,7 +53,29 @@
 					</form>
 				</div>
 				<br>
-				Pas encore inscrit? <a href=inscrire.php> Inscrivez-vous maintenant ! </a>
+				<div id="inscription">
+					<div id="notmember"> 
+						Vous n'êtes pas encore membre ? 
+					</div>
+					<div id="notmemberunder">
+						Créez gratuitement votre compte  et bénéficiez de nouvelles fonctionnalités ! 
+						<br>
+						<a href=inscrire.php> Inscrivez-vous maintenant ! </a>
+					</div>
+					<br>
+					<div id="bref">
+						En créant votre profil vous pourrez accéder à toute une gamme de services :
+					  	<ul>
+						    <li>
+						    	modifier des concerts
+						    </li>
+						    <li>
+						    	gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site
+						    </li>
+						</ul>
+						Rejoignez dès maintenant la communauté afin d'aider la scène du rap indé :)
+					</div>
+				</div>
 			</div>
 		<?php 
 		}

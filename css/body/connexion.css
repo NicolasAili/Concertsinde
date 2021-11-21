@@ -1,10 +1,13 @@
-
-h1
+#main
 {
-  margin-top: 180px;
-	text-align:center;
-  font-family: Georgia, serif;
+  margin-left: 12%;
+}
+
+h2
+{
+  font-family: Montserrat,sans-serif;
   margin-bottom: 30px;
+  color: #6c6c6c;
 }
 
 form 
@@ -19,12 +22,12 @@ form
   2px 4px 40px rgba(255, 255, 255, 0.6) inset;
   background-color:#5c0000;
   color: white;
+  width: 40%;
 }
 
 .formin
 {
   width: 100%;
-  text-align: center;
 }
 
 .input x
@@ -54,7 +57,7 @@ input.bouton
 { 
   width: 100px;
   height: 30px;
-  color: white;
+  color: #3a0101;
   text-align: center;
   font-weight: bold;
   padding: 5px;
@@ -71,4 +74,36 @@ input.bouton
 {
   margin-left: 15px;
   margin-right: 15px;
+}
+
+#inscription
+{
+  background-color: #e3d5cd;
+  width: 60%;
+  color: #6c6c6c;
+}
+
+#notmemberunder
+{
+  margin-top: 15px;
+  line-height: 2em;
+}
+
+#notmember
+{
+  font-size: 1.7em;
+}
+
+#inscription a
+{
+  font-size: 1.3em;
+  background-color: #420101;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+#bref
+{
+  margin-top: 30px;
 }

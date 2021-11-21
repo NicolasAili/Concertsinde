@@ -30,6 +30,7 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
+			include 'contenu/reseaux.php';
 
 			require('php/database.php');
 		?>

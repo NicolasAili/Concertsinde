@@ -19,6 +19,7 @@
 			require('php/database.php');
 			session_start();
 			require('php/error.php');
+			include 'contenu/reseaux.php';
 		?>
 		<script src="js/popupaddconcert.js"></script> 
 

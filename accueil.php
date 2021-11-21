@@ -21,6 +21,7 @@
 			include 'php/js.php';
 			require('php/database.php');
 			require('php/error.php');
+			include 'contenu/reseaux.php';
 		?>
 		<script>
 			//alert($(window).width());

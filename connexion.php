@@ -15,7 +15,7 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
-
+			include 'contenu/reseaux.php';
 			require('php/database.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/connexion.css">

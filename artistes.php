@@ -22,6 +22,7 @@
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
+			include 'contenu/reseaux.php';
 		?>
 		 
 		<link rel="stylesheet" type="text/css" href="css/body/artistes.css">

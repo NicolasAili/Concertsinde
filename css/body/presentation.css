@@ -1,4 +1,37 @@
-body > div
+#main > div:not(#reseaux)
 {
 	display: none;
 }
+
+#main
+{
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 15%;
+	font-family: wf_segoe-ui_normal,'Segoe UI',Segoe,'Segoe WP',Tahoma,Verdana,Arial,sans-serif;
+}
+
+#main div
+{
+	margin-bottom: 10%;
+	line-height: 1.3em;
+}
+
+h1
+{
+	border-bottom: 1px solid grey;
+	color: #3a0101;
+	cursor: pointer;
+	font-size: 1.5em;
+}
+
+h1:hover
+{
+	background-color: #c5947b;
+}
+
+p
+{
+	margin-bottom: 40px;
+}
+

@@ -1,5 +1,6 @@
 <?php
 /*
+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
 	Type fichier : php
 	Fonction : page accueil
 	Emplacement : /

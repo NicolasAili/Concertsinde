@@ -576,7 +576,7 @@
 					}
 					else if ($modif)
 					{
-						$strf = sprintf("SELECT DISTINCT id_concert FROM modification WHERE id_user = '$modif'". $archivesql ."");
+						$strf = sprintf("SELECT DISTINCT modification.id_concert FROM modification, concert WHERE id_user = '$modif'". $archivesql ."");
 					}
 					else if($sqlquery)
 					{

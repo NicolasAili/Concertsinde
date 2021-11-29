@@ -41,39 +41,17 @@
 			<?php include('contenu/header.php'); ?>
 			<script src="js/scrollnav.js"></script> 
 		</header>
-		<div id="main">
-			<?php 
+		<?php
+		if(isset($_SESSION['pseudo']))
+		{
 			require('php/database.php');
-			?>
-			
-			<h1>Profil de <?php echo $_SESSION['pseudo']; ?> : </h1><hr />
-				<?php 
-				 	if(!empty($_GET['message'])) 
-				 	{
-						$message = $_GET['message'];
-						 echo '<p class="message"> '.$message.'</p>';
-					}
-				?>
 
-			<form action="action/modif.php" method="post" class="connect">
-			<p>Souhaitez vous modifier votre mot de passe ? </p>
-			<label for="password">Mot de passe actuel:  </label> 
-			<input type="password" name="password" placeholder="Mot de passe actuel"   id="password" >
-			</br>
-			<label for="password">Nouveau mot de passe :  </label> 
-			<input type="password" name="newpassword" placeholder="Nouveau mot de passe"   id="newpassword" >
-			</br>
-			<label for="password">Confirmer nouveau mot de passe :  </label> 
-			<input type="password" name="cnewpassword" placeholder="Confirmer ouveau mot de passe"   id="cnewpassword" >
-			<input  type="submit" value="Modifier" name="modif_password">
-			</br>		
-			</form>
-		    <?php 
 		    $pseudo = $_SESSION['pseudo'];
-			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+			$requestpseudo = "SELECT id_user, date_inscription FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $requestpseudo);
 			$row = mysqli_fetch_array($query);
 			$idpseudo = $row['id_user'];
+			$dateregister = $row['date_inscription'];
 			
 			$sql = "SELECT date_debut, date_fin FROM session WHERE actif = '1'";
 			$query = mysqli_query($con, $sql);
@@ -87,37 +65,70 @@
 			$points_session = $row['points_session'];
 			$points = $row['points'];
 
-			$count = 0;
+			$sql = "SELECT COUNT(user_ajout) AS useraddsession FROM concert, session WHERE user_ajout = '$idpseudo' AND date_ajout > session.date_debut AND date_ajout < session.date_fin AND actif = 1";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$nbconcertsession = $row['useraddsession'];
 
+			$sql = "SELECT COUNT(user_ajout) AS useradd FROM concert WHERE user_ajout = '$idpseudo'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$nbconcert = $row['useradd'];
 
+			$sql = "SELECT COUNT(id_user) AS modifaddsession FROM modification, session WHERE id_user = '$idpseudo' AND datetime > session.date_debut AND datetime < session.date_fin AND actif = 1";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$modifaddsession = $row['modifaddsession'];
+
+			$sql = "SELECT COUNT(id_user) AS modifadd FROM modification WHERE id_user = '$idpseudo'";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$modifadd = $row['modifadd'];
 			?>
-			<a href="action/deconnexion.php"> Deconnexion </a>
-			<?php echo '<a href="allconcerts.php?add='; echo $idpseudo; echo '">';?> Voir mes concerts ajoutés </a>
-			<?php echo '<a href="allconcerts.php?modif='; echo $idpseudo; echo '">';?> Voir mes concerts modifiés </a>
-			<div id="points">
-				Total des points pour la session en cours du (<?php echo $sessiondebut; echo " au "; echo $sessionfin; echo ") : "; echo $points_session; ?>
-				<br>
-				Total des points depuis la création du compte : <?php echo $points; ?>
+
+			<div id="profil">
+				<div id="top">
+					<img src="image/profil.png">
+					<h1>Profil de <?php echo $_SESSION['pseudo']; ?> : </h1>
+				</div>
+				<?php 
+				 	if(!empty($_GET['message'])) 
+				 	{
+						$message = $_GET['message'];
+						 echo '<p class="message"> '.$message.'</p>';
+					}
+				?>
 			</div>
-			<!--<a href="allconcerts.php?filter=reset"> Voir mes concerts favoris </a>-->
-			<hr>
-			<?php 
-				$sql = "SELECT message, id FROM message WHERE utilisateur = '$idpseudo' ORDER BY date_envoi DESC";
-				$query = mysqli_query($con, $sql);
 
-				while ($row = mysqli_fetch_array($query)) 
-				{
-					$id = $row['id'];
-					echo $count;
-					echo " : ";
-					echo $row['message'];
-					echo "<br>";
-					$count++;
-					$sql = "UPDATE message SET lu = 1 WHERE id = '$id'";
-					$querylu = mysqli_query($con, $sql);
-				}
-			?>
-		</div>
+			<div id="main">
+				<div id="content">
+					<div id="infos">
+						<h2> Infos </h2>
+						<?php
+						//$createtime = new DateTime($dateregister);
+						$newDate = date("d-m-Y", strtotime($dateregister));?>
+						<h3>Membre depuis le : </h3> <?php echo $newDate; ?> <br>
+						<h3>Nombre de concerts ajoutés cette session : </h3><?php echo $nbconcertsession; ?><br>
+						<h3>Nombre de concerts totaux ajoutés : </h3><?php echo $nbconcert; ?><br>
+						<h3>Nombre de concerts modifiés cette session : </h3><?php echo $modifaddsession; ?><br>
+						<h3>Nombre de concerts totaux modifiés : </h3><?php echo $modifadd; ?><br>
+					</div>
+					<div id="pts">
+						<h2> Points et concerts </h2>
+						<h3><?php echo '<a href="allconcerts.php?add='; echo $idpseudo; echo '">';?> Voir mes concerts ajoutés </a></h3> <br>
+						<h3><?php echo '<a href="allconcerts.php?modif='; echo $idpseudo; echo '">';?> Voir mes concerts modifiés </a></h3> <br>
+						<div id="points">
+							<h3>Total des points pour la session en cours : </h3><?php echo $points_session; ?><br>
+							<h3>Total des points depuis la création du compte : </h3><?php echo $points; ?> <br>
+						</div>
+					</div>
+				</div>
+			</div><?php
+		}
+		else
+		{
+			echo("erreur, vous n'êtes pas connecté");
+		}?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

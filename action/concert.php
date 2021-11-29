@@ -57,12 +57,6 @@
 				}
 				$sql = "SELECT heure FROM concert, salle WHERE salle.nom_salle = '$salle' AND concert.datec = '$date'";
 				$query = mysqli_query($con, $sql);
-				echo $heure;
-				echo "<br>";
-				echo $heure+2;
-				echo "<br>";
-				echo $heure-2;
-				echo "<br>";
 				while($row = mysqli_fetch_array($query)) 
 				{
 					if($heure+2 > $row['heure'] && $heure-2 < $row['heure'])
@@ -97,13 +91,6 @@
 				$query = mysqli_query($con, $idrgn);
 				$row = mysqli_fetch_array($query);
 				$rgn = $row['id'];
-
-				/*echo($ville);
-				echo "<br>";
-				echo($departement);
-				echo "<br>";
-				echo($region);
-				echo "<br>";*/
 
 				if(!$vle) //si la ville n'existe pas en BDD
 				{
@@ -302,7 +289,8 @@
 					}
 				}
 
-				$result = mysqli_query($con, "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'");
+				$sql = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste'";
+				$result = mysqli_query($con, $sql);
 				$row_cnt = mysqli_num_rows($result);
 				if($row_cnt<1) //si pas de ligne trouvée
 				{

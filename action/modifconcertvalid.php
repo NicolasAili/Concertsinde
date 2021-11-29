@@ -120,10 +120,6 @@
 			$testticket = 0;
 
 			$pseudo = $_SESSION['pseudo'];
-			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
-			$query = mysqli_query($con, $requestpseudo);
-			$row = mysqli_fetch_array($query);
-			$idpseudo = $row['id_user'];
 
 			if($_POST['artiste'])
 			{
@@ -520,9 +516,7 @@
 				$sqltic = "UPDATE concert SET lien_ticket = '$ticket' WHERE ID_concert = $idconcert";
     			mysqli_query($con, $sqltic);
 			}
-			/*echo $idpseudo;
-			echo ("<br>");
-			echo $idconcert;*/
+			
 			$sql = "UPDATE concert SET user_modif = '$idpseudo', date_modif = NOW() WHERE id_concert = $idconcert";
     		mysqli_query($con, $sql);
 	?>
@@ -682,7 +676,7 @@
 					}
 				}
 
-				$sql = "INSERT INTO modification (id_concert, id_user) VALUES ('$idconcert', '$idpseudo')";
+				$sql = "INSERT INTO modification (id_concert, id_user, datetime) VALUES ('$idconcert', '$idpseudo', NOW())";
 				mysqli_query($con, $sql);
 
 

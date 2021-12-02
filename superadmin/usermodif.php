@@ -9,6 +9,7 @@
 	CSS : non
 */
 require('../php/database.php');
+session_start();
 $points = $_POST['points'];
 $points_session = $_POST['points_session'];
 $pseudo = $_POST['pseudo'];
@@ -17,6 +18,14 @@ $bannicheck = $_POST['bannicheck'];
 $action = $_POST['modsuppr'];
 
 $message = $_POST['message'];
+$topic = $_POST['topic'];
+
+$sender = $_SESSION['pseudo'];
+
+$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$sender'";
+$query = mysqli_query($con, $requestpseudo);
+$row = mysqli_fetch_array($query);
+$sender = $row['id_user'];
 
 
 $requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
@@ -34,10 +43,14 @@ if($action == 'Valider')
 }
 else if($action == 'Message')
 {
-	echo "message à ";
+	echo "Nouveau fil de discussion avec ";
 	echo $pseudo;
 	?>
 	<form  method="post" id="connect" action="usermodif.php">
+			<input name="topic" id="topic" placeholder="objet du fil">
+			<br>
+			Message : 
+			<br>
 			<textarea name="message" id="message" cols="40" rows="5"></textarea>
 			<input type="hidden" class="pseudo" name="pseudo" <?php echo 'value="' . $pseudo . '"' ?> >
 			<input id="envoimsg" type="submit" name="envoimsg" value="Envoi">
@@ -46,8 +59,19 @@ else if($action == 'Message')
 }
 else if($message)
 {
-	$sql = "INSERT INTO message (message, utilisateur) VALUES ('$message', '$idpseudo')";
+	$sql = "INSERT INTO topic (objet, date_creation, sender, receiver) VALUES ('$topic', NOW(), $sender, $idpseudo)";
 	$query = mysqli_query($con ,$sql);
+	echo $sql;
+	echo "<br>";
+
+	$sql = "SELECT MAX(id) AS id_max FROM topic"; //on recupere l'ID le plus haut 
+	$query = mysqli_query($con, $sql);
+	$row = mysqli_fetch_array($query);
+	$idtopicmax = $row['id_max'];
+
+	$sql = "INSERT INTO message (message, utilisateur, id_topic) VALUES ('$message', '$sender', $idtopicmax)";
+	$query = mysqli_query($con ,$sql);
+	echo $sql;
 	echo "<a href=users.php> retour </a>";
 }
 else

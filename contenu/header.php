@@ -9,10 +9,29 @@
 	CSS : oui
 */
 ?>
+<?php
+require('php/database.php');
+	
+$pseudo = $_SESSION['pseudo'];
+$sql = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+$result = mysqli_query($con ,$sql);
+$row = mysqli_fetch_array($result);
+$pseudoid = $row['id_user'];
+$admin = $row['admin'];
+?>
+
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <div id="recherche">
 	<div class="nav">
-		<a href="accueil.php" id="logo">
+		<?php 
+		if($admin == 2)
+		{?>
+			<a href="superadmin/saccueil.php" id="logo"><?php
+		}
+		else
+		{?>
+			<a href="accueil.php" id="logo"><?php
+		}?>
 			<img src="./image/logo.png" class="imglogo">
 		</a>
 		<a href="presentation.php" class="li"><div class="txtli">Fonctionnement</div></a>
@@ -28,14 +47,6 @@
 			<img src="./image/loupe.png" id="loupeimg" onclick="recherche();">
 		</div>
 		<?php
-
-		require('php/database.php');
-	
-		$pseudo = $_SESSION['pseudo'];
-		$sql = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
-		$result = mysqli_query($con ,$sql);
-		$row = mysqli_fetch_array($result);
-		$pseudoid = $row['id_user'];
 
 		$count = 0;
 		$sql = "SELECT id FROM message WHERE utilisateur = '$pseudoid' AND lu = 0";

@@ -20,38 +20,83 @@
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
+			require('php/database.php');
+			require('php/error.php');
 
 			require('php/database.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inbox.css">
 	</head>
-</html>
-<?php 
-		    $pseudo = $_SESSION['pseudo'];
-			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
-			$query = mysqli_query($con, $requestpseudo);
-			$row = mysqli_fetch_array($query);
-			$idpseudo = $row['id_user'];
-$sql = "SELECT message, id FROM message WHERE utilisateur = '$idpseudo' ORDER BY date_envoi DESC";
-				$query = mysqli_query($con, $sql);
+	<header>
+		<?php include('contenu/header.php'); ?>
+	</header>
+	<?php
+	if (isset($_SESSION['pseudo']) == null)
+	{
+		echo "erreur, vous devez être connecté pour accéder à ce contenu";
+	}
+	else
+	{
 
-				while ($row = mysqli_fetch_array($query)) 
+		$pseudo = $_SESSION['pseudo'];
+		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+		$query = mysqli_query($con, $requestpseudo);
+		$row = mysqli_fetch_array($query);
+		$idpseudo = $row['id_user'];
+
+		$lu = 0;
+
+		$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+		$query = mysqli_query($con, $sql);
+
+		?>
+		<table>
+    		<caption>Liste des fils de discussion</caption>
+    		<tr>
+	        	<th scope="col">Message de</th>
+	       		<th scope="col">Sujet</th>
+	        	<th scope="col">Date</th>
+			</tr><?php
+			while($row = mysqli_fetch_array($query))
+			{
+				$lu = 0;
+				$idtopic = $row['id'];
+				$pseudosender = $row['sender'];
+
+				$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic' AND utilisateur != '$idpseudo'";
+				$querylu = mysqli_query($con, $sql);
+				while($rowl = mysqli_fetch_array($querylu))
 				{
-					$id = $row['id'];
-					echo $count;
-					echo " : ";
-					echo $row['message'];
-					echo "<br>";
-					$count++;
-					$sql = "UPDATE message SET lu = 1 WHERE id = '$id'";
-					$querylu = mysqli_query($con, $sql);
+					if($rowl['lu'] == 0)
+					{
+						$lu = 1;
+					}
 				}
+				$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudosender'";
+				$querypseudo = mysqli_query($con, $requestpseudo);
+				$rowp = mysqli_fetch_array($querypseudo);
+				$pseudosender = $rowp['pseudo'];
+			?>
+			<form method="post" id="connect" action="usermodif.php">
+				<tr>
+					<td scope="row"><?php echo $pseudosender; ?></td>
+					<td scope="row"><?php echo '<a href="inboxmsg.php?idtopic='; echo $idtopic; echo '">'; if($lu == 1){echo "<strong>";} echo $row['objet']; if($lu == 1){echo "</strong>";} echo '</a>' ?></td> 
+					<td scope="row"><?php echo $row['date_creation']; ?></td>
+				</tr>
+			</form><?php			
+			}?>
+		</table><?php		
+	}?>
+</html>
 
+<?php 
 /* 
-1) empêcher l'accès à cette page si non connecté
-2) sélectionner tous les topics avec pour receiver le current session
-3) faire des forms get sur chaque topic pour arriver sur la page messages
-4) récupếrer l'id du topic et les messages associés
-5) champ pour ajouter un message au topic
-6) création de topic depuis l'interface d'admin (insert into msg ctrl f)
-*/
+ 
+1) trier les topics par nouveaux messages x
+2) mettre en gras si un topic comporte des messages non lus x
+3) mettre en lu lors du clic sur le topic x
+4) vérifier que les nouveauxmessages s'affichent bien sur le profil du header
+5) vérifier la lecture des messages depuis admin
+6) bouton pour nouveau topic admin dans les MP
+
+*/?>

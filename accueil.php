@@ -31,8 +31,7 @@ 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
 	</head>
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?>
-			<script src="js/scrollnav.js"></script> 
+			<?php include('contenu/header.php'); ?> 
 		</header>
 		<div id="main">
 			<?php

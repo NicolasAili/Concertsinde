@@ -673,3 +673,13 @@ function erase()
     $('#adresse').attr("placeholder", '');
     $('#fb').val('');
 }
+
+function off() 
+{
+    $('#off').attr('src', 'image/offwhite.png');
+}
+
+function offleave() 
+{
+    $('#off').attr('src', 'image/off.png');
+}

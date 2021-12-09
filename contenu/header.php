@@ -11,6 +11,7 @@
 ?>
 <?php
 require('php/database.php');
+include 'php/js.php';
 	
 $pseudo = $_SESSION['pseudo'];
 $sql = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
@@ -22,39 +23,46 @@ $admin = $row['admin'];
 
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <div id="recherche">
-	<div class="nav">
+	<div id="nav">
 		<?php 
 		if($admin == 2)
 		{?>
-			<a href="superadmin/saccueil.php" id="logo"><?php
+			<a href="superadmin/saccueil.php" id="logo"> Arpenid.com </a><?php
 		}
 		else
 		{?>
-			<a href="accueil.php" id="logo"><?php
+			<h1> <a href="accueil.php" id="logo"> Arpenid <div id="com">.com</div></a> </h1><?php
 		}?>
-			<img src="./image/logo.png" class="imglogo">
-		</a>
+			
 		<a href="presentation.php" class="li"><div class="txtli">Fonctionnement</div></a>
 		<a href="news.php" class="li"><div class="txtli">Actualités</div></a>
 		<a href="artistes.php" class="li"><div class="txtli">Artistes</div></a>
 		<a href="allconcerts.php" class="li"><div class="txtli">Concerts</div></a>
 		<a href="classement.php" class="li"><div class="txtli">Contributeurs</div></a>
+	</div>
+	<div id="side">
 		<div class="ajoutconcert">
 			<a href="./ajoutconcert.php" class="button" role="button">Ajouter un concert</a>
 		</div>
-		
-		<div id="loupe">
-			<img src="./image/loupe.png" id="loupeimg" onclick="recherche();">
-		</div>
-		<?php
-
-		$count = 0;
-		$sql = "SELECT id FROM message WHERE utilisateur = '$pseudoid' AND lu = 0";
-		$querymsg = mysqli_query($con, $sql);
-		while ($rowmsg = mysqli_fetch_array($querymsg)) 
-		{
-			$count++;
-		}						
+		<div id="sidetwo">
+			<div id="loupe">
+				<img src="./image/loupe.png" id="loupeimg"  width= "20px" onclick="recherche();">
+			</div>
+			<?php
+			$count = 0;
+			if ($admin == 2) 
+			{
+				$sql = $sql = "SELECT message.id FROM message, topic WHERE utilisateur != '$pseudoid' AND lu = 0 AND sender = '$pseudoid' AND message.id_topic = topic.id";
+			}
+			else
+			{
+				$sql = "SELECT message.id FROM message, topic WHERE utilisateur != '$pseudoid' AND lu = 0 AND receiver = '$pseudoid' AND message.id_topic = topic.id";
+			}
+			$querymsg = mysqli_query($con, $sql);
+			while ($rowmsg = mysqli_fetch_array($querymsg)) 
+			{
+				$count++;
+			}						
 			if (isset($_SESSION['pseudo']) == null)
 			{
 				?>
@@ -69,7 +77,7 @@ $admin = $row['admin'];
 				?>
 				<div class="barre"></div>
 				<div class="space">							
-					<a href="./profil.php" class="spacelink" role="button"><img src="./image/cadenasopen.png" class="imgcadenas"> <div id="txtspace">Profil</div></a>
+					<a class="spacelinkco" role="button"><img src="./image/cadenasopen.png" class="imgcadenas"> <div id="txtspace">Profil</div></a>
 				</div>
 				<?php
 				switch ($count) {
@@ -86,9 +94,19 @@ $admin = $row['admin'];
 						?> <img src="./image/notiftrois.png" id="notifun"> <?php
 						break;
 				}?>
+				<div id="dropdown">
+					<a href="./profil.php" class="fonction"> ♟ Profil </a>
+					<a href="./inbox.php" class="fonction"> ✉ Messages </a>
+					<a href="./resetpassword.php" class="fonction"> ⚒ Paramètres </a>
+					<a href="./action/deconnexion.php" class="fonction" onmouseover="off()" onmouseleave="offleave()"> 
+						<img src="image/off.png" alt="deconnexion" id="off" height="10px" width="11px"/>
+						Déconnexion 
+					</a>
+				</div>
 				<?php
 			}
-		?>
+			?>
+		</div>
 	</div>
 </div>	
 <!--<div id=recherche-hidden>
@@ -140,3 +158,44 @@ $admin = $row['admin'];
 		<img src="./image/close.png" id="closebar" onclick="fermer();">
 	</div>
 </div>
+
+<script>
+	/*$("html").not("#txtspace, .spacelinkco, .space").click(function() 
+	{
+		
+	});*/
+
+function handler( event ) {
+  var target = $( event.target );
+  value = $("#dropdown").css("display");
+  console.log(target);
+  if ( target.is( "#txtspace" ) || target.is( ".spacelinkco" ) || target.is( ".imgcadenas" )) 
+  {
+  	height = $('#recherche').height();
+  	if(value == "none")
+	{
+	    $('#dropdown').css('visibility', 'visible');
+	    $('#dropdown').css('display', 'block');
+	    $('#dropdown').css('width', '225px');
+	    $('#dropdown').css('position', 'absolute');
+	    $('#dropdown').css('right', '0');
+	    $('#dropdown').css('top', '' + height + 'px');
+	    $('#dropdown').css('right', '0');
+	}
+	else if(value == "block")
+	{
+		$('#dropdown').css('visibility', 'hidden');
+		$('#dropdown').css('display', 'none');
+	}
+  }
+  else
+  {
+	if(value == "block")
+	{
+		$('#dropdown').css('visibility', 'hidden');
+		$('#dropdown').css('display', 'none');
+	}
+  }
+}
+$( "*" ).click( handler );
+</script>

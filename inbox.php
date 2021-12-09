@@ -39,14 +39,25 @@
 	{
 
 		$pseudo = $_SESSION['pseudo'];
-		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+		$requestpseudo = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
 		$query = mysqli_query($con, $requestpseudo);
 		$row = mysqli_fetch_array($query);
 		$idpseudo = $row['id_user'];
+		$admin = $row['admin'];
 
 		$lu = 0;
 
-		$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+		if ($admin == 2) 
+		{
+			$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.sender = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+			?>
+			<a href=superadmin/users.php> créer un nouveau sujet </a> <?php
+		}
+		else
+		{
+			$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+		}
+		
 		$query = mysqli_query($con, $sql);
 
 		?>
@@ -88,15 +99,3 @@
 		</table><?php		
 	}?>
 </html>
-
-<?php 
-/* 
- 
-1) trier les topics par nouveaux messages x
-2) mettre en gras si un topic comporte des messages non lus x
-3) mettre en lu lors du clic sur le topic x
-4) vérifier que les nouveauxmessages s'affichent bien sur le profil du header
-5) vérifier la lecture des messages depuis admin
-6) bouton pour nouveau topic admin dans les MP
-
-*/?>

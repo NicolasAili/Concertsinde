@@ -22,7 +22,7 @@
 			require('php/database.php');
 			require('php/error.php');
 		?>
-		<link rel="stylesheet" type="text/css" href="css/body/inbox.css">
+		<link rel="stylesheet" type="text/css" href="css/body/inboxmsg.css">
 	</head>
 	<header>
 		<?php include('contenu/header.php'); ?>
@@ -53,26 +53,57 @@
 			$sql = "UPDATE message SET lu='1' WHERE id_topic = $idtopic AND utilisateur != '$idpseudo'";
 			$query = mysqli_query($con, $sql);
 
-			$sql = "SELECT message, id, utilisateur, date_envoi FROM message WHERE id_topic = $idtopic ORDER BY date_envoi ASC";
+			$sql = "SELECT objet FROM topic where id = $idtopic";
 			$query = mysqli_query($con, $sql);
-			while($row = mysqli_fetch_array($query)) 
-			{
-				$pseudop = $row['utilisateur'];
-				$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudop'";
+			$row = mysqli_fetch_array($query);
+			$objettopic = $row['objet'];
 
-				$querytest = mysqli_query($con, $requestpseudo);
-				$rowp = mysqli_fetch_array($querytest);
-				$pseudop = $rowp['pseudo'];
-				echo $pseudop;
-				echo $row['date_envoi'];
-				echo $row['message'];
-				echo "<br>";
-			}?>
-			<form action="inboxmsg.php" method="post">
-				<textarea name="message" id="message" cols="40" rows="5"> </textarea>
-				<input type="hidden" id="idtopic" name="idtopic" <?php echo 'value='; echo $idtopic;?>>
-				<input type="submit" value="Envoyer">
-			</form><?php
+			$sql = "SELECT message, id, utilisateur, date_envoi FROM message WHERE id_topic = $idtopic ORDER BY date_envoi ASC";
+			$query = mysqli_query($con, $sql);?>
+			<div id="top">
+				Arpenid.com > messages > <strong> <?php echo $objettopic; ?> </strong>
+			</div>
+			<div id="main">
+				<div class="retour">
+					<a href="inbox.php"> ⏎ Retour liste des messages </a>
+				</div>
+				<h1>
+					<?php echo $objettopic; ?> 
+				</h1>
+				<div id="fil"> <?php
+					while($row = mysqli_fetch_array($query)) 
+					{?>
+						<div class="msg"><?php
+							$pseudop = $row['utilisateur'];
+							$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudop'";
+
+							$querytest = mysqli_query($con, $requestpseudo);
+							$rowp = mysqli_fetch_array($querytest);
+							$pseudop = $rowp['pseudo'];?>
+							<div class="head">
+								<div class="pseudo"><?php echo $pseudop;?></div>
+								<div class="dateenvoi"><?php echo $row['date_envoi'];?></div>
+							</div>
+							<div class="message">
+								<pre> <?php echo $row['message']; ?> </pre> <?php
+								echo "<br>";?>
+							</div>
+						</div><?php
+					}?>
+					<div class="retour">
+						<a href="inbox.php"> ⏎ Retour liste des messages </a>
+					</div>
+					<div id="repondre">
+						Répondre
+					</div>
+					<form action="inboxmsg.php" method="post">
+						<textarea name="message" id="messageinput" placeholder="Entrez votre message, soyez respecteux et courtois"></textarea>
+						<input type="hidden" id="idtopic" name="idtopic" <?php echo 'value='; echo $idtopic;?>>
+						<br>
+						<input type="submit" id="envoi" value="Envoyer">
+					</form>
+				</div>
+			</div><?php
 		}?>
 	</body>
 </html>

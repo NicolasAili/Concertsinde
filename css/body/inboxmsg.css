@@ -1,0 +1,140 @@
+body
+{
+	margin: 0;
+	display: block;
+}
+
+#main
+{
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 15%;
+	background-color: #f2f2f2;;
+	height: 100%;
+	color: #555;
+	padding: 5%;
+	padding-top: 2%;
+}
+
+#top
+{
+	margin-left: 15%;
+}
+
+.retour
+{
+	height: 1.875rem;
+	line-height: 1.875rem;
+	background: #e5e5e5;
+	border-radius: 0;
+	padding: 0 .9375rem;
+	font-size: .75rem;
+	font-weight: bold;
+	text-align: left;
+	border: 0;
+	display: inline-block;
+	margin-bottom: 22px;
+}
+
+.retour a
+{
+	color: #666;
+	text-decoration: none;
+}
+
+.retour a:hover
+{
+	color: #3f3f3f;
+}
+
+#main h1
+{
+	color: white;
+	background-color: #3a0101;
+	font-size: 1.9rem;
+	margin: 0 0 1.25rem 0;
+	padding-left: .5rem;
+	padding-right: .5rem;
+	padding-top: .9rem;
+	padding-bottom: .9rem;
+	font-family: "robotoboldcondensed",Arial,Helvetica,sans-serif;
+	line-height: 1.375rem;
+	font-weight: bold;
+}
+
+.msg
+{
+	background-color: white;
+	border: 1px solid grey;
+	margin-bottom: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 10px;
+}
+
+.head
+{
+	line-height: 27px;
+	border-bottom: 1px solid #b9b6b6;
+}
+
+.pseudo
+{
+	font-weight: normal;
+	max-width: 12.5rem;
+	font-size: 1.5rem;
+	line-height: 1em;;
+	top: 0.75rem;
+	color: #000;
+	height: 1.375rem;
+	font-family: "robotoboldcondensed",Arial,Helvetica,sans-serif;
+	font-weight: bold;
+}
+
+.message
+{
+	color: #7a7a7a;
+	padding-top: 28px;
+	padding-bottom: 28px;
+}
+
+.dateenvoi
+{
+	color: #7a7a7a;
+	font-size: .6875rem;
+	font-family: Tahoma,"DejaVu Sans Condensed",Arial,Helvetica,sans-serif;
+}
+
+#repondre
+{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: black;
+}
+
+form
+{
+	display: block;
+}
+
+textarea
+{
+	width: 100%;
+	height: 6.875rem;
+}
+
+#envoi
+{
+	cursor: pointer;
+	background: #ff3c00;
+	font-family: "robotoboldcondensed",Arial,Helvetica,sans-serif;
+	color: white;
+	font-size: 0.9rem;
+	border-radius: 0.25rem;
+	height: 2rem;
+	padding: 0 2.5rem;
+	text-align: center;
+	font-weight: bold;
+}

@@ -1,0 +1,75 @@
+body
+{
+	margin: 0;
+	display: block;
+}
+
+table
+{
+	width: 66%;
+	margin-left: 17%;
+	margin-right: 17%;
+	background-color: white;
+	height: 100%;
+	color: #555;
+}
+
+#intro
+{
+	display: flex;
+	justify-content: space-between;
+	text-align: left;
+	margin-bottom: 1%;	
+}
+
+/*caption a
+{
+	margin-left: 100px;
+}*/
+
+th
+{
+	background-color: #3a0101;
+	color: white;
+	border: 1px solid white;
+	margin: 0;
+	padding: 0;
+}
+
+td
+{
+	border-bottom: 20px solid transparent;	
+}
+
+a
+{
+	text-decoration: none;
+	color: #555;
+}
+
+a:hover
+{
+	color: #ff4000;
+}
+
+#message
+{
+	width: 25%;
+
+}
+
+#sujet
+{
+	width: 50%;
+}
+
+#date
+{
+	width: 25%;
+}
+
+#message, #sujet, #date
+{
+	height: 35px;
+	text-align: left;
+}

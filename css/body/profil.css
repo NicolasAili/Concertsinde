@@ -20,6 +20,11 @@
 #top h1
 {
   margin-left: 5%;
+  font-size: 2.25rem;
+  font-family: "robotoboldcondensed",Arial,Helvetica,sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 
 body
@@ -75,10 +80,10 @@ body
 h2
 {
   border-bottom: 1px solid black;
-  margin-top: 5px;
-  margin-bottom: 15px;
+  padding-bottom: 10px;
   text-align: left;
   padding-left: 15px;
+  color: #ff4000;
 }
 
 a

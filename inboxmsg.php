@@ -18,6 +18,7 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
+			include 'php/js.php';
 			include 'contenu/reseaux.php';
 			require('php/database.php');
 			require('php/error.php');
@@ -48,6 +49,14 @@
 				$message = $_POST['message'];
 				$sql = "INSERT INTO message (utilisateur, message, id_topic) VALUES ('$idpseudo', '$message', '$idtopic')";
 				$query = mysqli_query($con, $sql);
+				?>
+				<script>
+					$(document).ready(function() {
+               			$("html, body").animate({
+                    		scrollTop: $('html, body').get(0).scrollHeight
+                    	}, 2000);
+        			});
+				</script><?php
 			}
 
 			$sql = "UPDATE message SET lu='1' WHERE id_topic = $idtopic AND utilisateur != '$idpseudo'";
@@ -72,7 +81,10 @@
 				</h1>
 				<div id="fil"> <?php
 					while($row = mysqli_fetch_array($query)) 
-					{?>
+					{
+						$dateenvoi = $row['date_envoi'];
+						$dateenvoi = date("d-m-Y G:i:s", strtotime($dateenvoi));
+						?>
 						<div class="msg"><?php
 							$pseudop = $row['utilisateur'];
 							$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudop'";
@@ -82,11 +94,10 @@
 							$pseudop = $rowp['pseudo'];?>
 							<div class="head">
 								<div class="pseudo"><?php echo $pseudop;?></div>
-								<div class="dateenvoi"><?php echo $row['date_envoi'];?></div>
+								<div class="dateenvoi"><?php echo $dateenvoi;?></div>
 							</div>
 							<div class="message">
-								<pre> <?php echo $row['message']; ?> </pre> <?php
-								echo "<br>";?>
+								<?php echo nl2br($row['message']); ?>
 							</div>
 						</div><?php
 					}?>

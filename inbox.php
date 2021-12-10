@@ -74,7 +74,7 @@
 	    		<tr>
 		        	<th scope="col" id="message">Message de</th>
 		       		<th scope="col" id="sujet">Sujet</th>
-		        	<th scope="col" id="date">Date</th>
+		        	<th scope="col" id="date">Dernier message</th>
 				</tr><?php
 				while($row = mysqli_fetch_array($query))
 				{
@@ -91,7 +91,7 @@
 							$lu = 1;
 						}
 					}
-					$sql = "SELECT MAX(id) AS id FROM message WHERE id_topic = '$idtopic' AND utilisateur != '$idpseudo'";
+					$sql = "SELECT MAX(id) AS id FROM message WHERE id_topic = '$idtopic'";
 					$queryid = mysqli_query($con, $sql);
 					$rowm = mysqli_fetch_array($queryid);
 					$idmessage = $rowm['id'];

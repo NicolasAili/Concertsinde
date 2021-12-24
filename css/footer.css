@@ -9,6 +9,8 @@ footer
 	font-size: 150%;
 	text-decoration: none;
 	padding-top: 20px;
+	position: fixed;
+	bottom: 0;
 }
 
 .x, .x:visited

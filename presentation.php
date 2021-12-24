@@ -118,15 +118,15 @@
 			<h1>+ Validation d’un concert</h1>
 			<div id="validation">
 				<br><br>
-				Lorsque tous les champs d’un concert sont corrects, un administrateur peut valider le concert. A la validation d’un concert, les points sont distribués aux utilisateurs ayant participé au renseignement du concert (voir section « système de points »).<br><br><br>
+				Lorsque tous les champs d’un concert sont corrects, un administrateur peut valider le concert. A la validation d’un concert, les points sont distribués aux utilisateurs ayant participé au renseignement et à la modification du concert (voir la section suivante, « système de points »).<br><br><br>
 			</div>
 
 			<h1>+ Système de points</h1>
 			<div id="points">
 				<br><br>
-				Si vous avez un compte et que vous participez à l’activité du site, vous avez la possibilité de gagner des points. Ces points vous permettront de gagner des récompenses à la fin d’une « session ». <br>
-				Une session correspond à une certaine durée de temps. A la fin d’une session, les utilisateurs qui ont le plus de points se verront gagner des récompenses (cd, places de concert, vêtements, bons d’achat etc…) pour les remercier de leur contribution.<br><br>
-				L’attribution des points se fait lorsqu’un concert est validé par un administrateur, elle se fait de la manière suivante :<br>
+				Si vous avez un compte et que vous participez à l’activité du site, vous avez la possibilité de gagner des points. Ces points vous permettront d'obtenir des récompenses à la fin d’une « session ». <br>
+				Une session correspond à une certaine durée de temps. A la fin d’une session, les utilisateurs qui ont le plus de points se verront remettre des récompenses (cd, places de concert, vêtements, bons d’achat etc…) pour les remercier de leur contribution.<br><br>
+				L’attribution des points se fait lorsqu’un concert est validé par un administrateur. Cette attribution se fait de la manière suivante :<br>
 				Ajout d'un concert : +5 points si aucun champ modifié, +3 points si un ou plusieurs champs ont été modifiés après l'ajout.<br>
 				Modification d'un concert: +1 point par champ modifié et validé<br><br>
 				Si vous avez modifié un champ mais qu’il n’est pas correct, ou que vous avez ajouté un concert inexistant, vous ne gagnerez aucun point.<br><br><br>
@@ -187,7 +187,7 @@
 			<div id="qui">
 				<br><br>
 				Etudiant en école d’ingénieur, j’écoute du rap français (principalement indépendant) depuis de nombreuses années. J’ai eu l’occasion de me rendre à de nombreux concerts dans ma ville et la ferveur au sein de ce milieu m’a donné envie d’y apporter ma modeste contribution au travers de ce site.
-				<br><br><br>
+				<br><br>
 			</div>
 
 			<h1>+ Historique du site</h1>
@@ -205,11 +205,21 @@
 
 
 <script>
-	$( "h1" ).click(function() 
+	var disp;
+	$(document).on("click", "h1", function()
 	{
+		ceci = (this.textContent).substring(2);
 		$(this).next().slideToggle( "slow", function()
 		{
-			
+			console.log(this);
+			if($(this).css("display") == "block")
+			{
+				$(this).prev().replaceWith( "<h1> - " + ceci + "</h1>");
+			}
+			else
+			{
+				$(this).prev().replaceWith( "<h1> + " + ceci + "</h1>");
+			}
 	  	});
 	});
 </script>

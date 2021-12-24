@@ -133,6 +133,10 @@
 			{
 				$filter = $tri;
 			}
+			else
+			{
+				$tri = $filter;
+			}
 
 			if($postfiltre)
 			{
@@ -466,12 +470,12 @@
 												{
 													echo '<a href="allconcerts.php?recherche=none&filter=dateup&'; echo $archivestring; echo "&n="; echo "$n"; echo '">';
 												} 
-												if($filter == "dateup" || $tri == "dateup" || $filter == 'none' || !$filter || !$tri)
+												if($filter == "dateup" || $tri == "dateup" || $filter == 'none' || !$filter || !$tri || $filter == 'reset')
 												{
 													echo "<strong>";
 												}
 												echo "Date (du plus proche, par défaut)";
-												if($filter == "dateup" || $tri == "dateup" || $filter == 'none' || !$filter || !$tri)
+												if($filter == "dateup" || $tri == "dateup" || $filter == 'none' || !$filter || !$tri || $filter == 'reset')
 												{
 													echo "</strong>";
 												} 
@@ -536,9 +540,19 @@
 					switch ($_GET['archive']) 
 					{
 						case 'yes':
-							$archivesql = "";
+							$archivesql = " AND concert.datec <= NOW()";
+							if($filter != "artisteup" && $filter != "artistedown")
+							{
+								if($filtre == " datec ASC")
+								{
+									$filtre = " datec DESC";
+								}
+								else
+								{
+									$filtre = " datec ASC";
+								}
+							}
 							break;
-						
 						case 'no':
 							$archivesql = " AND concert.datec >= NOW()";
 							break;
@@ -586,7 +600,6 @@
 					{
 						$strf = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
 					}
-					
 					$result = mysqli_query($con, $strf);
 					?>
 
@@ -653,9 +666,25 @@
 				</div>
 			</div>
 			<hr id="hrdeux">
-			<img src="image/valide.png" height="50" width="50"> = Concert validé (non modifiable)
-			<br>
-			<img src="image/invalide.png" height="50" width="50"> = Concert non validé (modifiable)
+			<div class="indication">
+				<img src="image/valide.png" height="50" width="50">
+				<span>
+					= Concert validé (non modifiable)
+				</span>
+			</div>
+			<div class="indication">
+				<img src="image/invalide.png" height="50" width="50"> 
+				<span>
+					= Concert non validé (modifiable)
+				</span>
+			</div>
+			<div class="indication">
+				<img src="image/archive.png" height="50" width="50"> 
+				<span>
+					= Concert archivé
+				</span>
+			</div>
+				
 			<div id="concertsall">
 				<?php
 
@@ -697,24 +726,27 @@
 								$rowrgn = mysqli_fetch_array($resultrgn);
 							}
 						}
-						/*else
-						{
-							$filter = 0;
-						}*/
 						?> 
-
 						<div class="inwhile"> 
 							<div class="artiste"> 
 								<?php 
-								if($row['valide'] == 0)
+								if($archive == 'yes')
 								{?>
-									<img class="image" src="image/invalide.png" height="50" width="50">
+									<img class="image" src="image/archive.png" height="50" width="50">
 								<?php
 								}
 								else
-								{?>
-									<img class="image" src="image/valide.png" height="50" width="50">
-								<?php
+								{
+									if($row['valide'] == 0)
+									{?>
+										<img class="image" src="image/invalide.png" height="50" width="50">
+									<?php
+									}
+									else
+									{?>
+										<img class="image" src="image/valide.png" height="50" width="50">
+									<?php
+									}
 								}
 								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
 								?> 
@@ -888,9 +920,11 @@
 							</div> 
 							<div class="links">
 								<div class="fb"> 
+									<img src="image/evenement.png">
 									<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 								</div> 
 								<div class="ticket">
+									<img src="image/billetterie.png">
 									<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 								</div> 
 							</div>
@@ -911,37 +945,38 @@
 								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
 								<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
 								<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
-
-								<div class="footer">
-									<?php
-									if ($pseudo)
-									{
-										if($row['valide'] == 0 || $testadmin > 0)
-										{?>
-											<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
-										<?php
+								<?php
+								if($archivesql == " AND concert.datec >= NOW()")
+								{?>
+									<div class="footer"><?php
+										if ($pseudo)
+										{
+											if($row['valide'] == 0 || $testadmin > 0)
+											{?>
+												<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+											<?php
+											}
+											else
+											{
+												?><input id="probleme" type="submit" name="probleme" value="Signaler une erreur"> <?php
+											}
+											if($testadmin > 0) 
+											{?>
+												<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
+												<?php 
+												if($row['valide'] == 0)
+												{?>
+													<input id="valider" type="submit" name="modsuppr" value="Valider">
+												<?php
+												}
+											}
 										}
 										else
 										{
-											?><input id="probleme" type="submit" name="probleme" value="Signaler une erreur"> <?php
-										}
-										if($testadmin > 0) 
-										{?>
-											<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
-											<?php 
-											if($row['valide'] == 0)
-											{?>
-												<input id="valider" type="submit" name="modsuppr" value="Valider">
-											<?php
-											}
-										}
-									}
-									else
-									{
-										echo "Vous devez être connecté afin de modifier un concert";
-									}
-									?>
-								</div>
+											echo "Vous devez être connecté afin de modifier un concert";
+										}?>
+									</div><?php
+								}?>
 							</form>
 						</div>
 						<?php
@@ -1163,8 +1198,6 @@
 		$(this).next('.infos').removeClass('hidden');
 		$(this).next('.infos').css('left', position.left-230 + "px");
 		$(this).next('.infos').css('top', position.top-30 + "px");
-		console.log(position.left);
-		console.log(position.top);
 	});
 
 	$(document).delegate('.infologo', 'mouseleave',function(){

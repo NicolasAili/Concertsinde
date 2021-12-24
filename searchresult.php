@@ -42,8 +42,8 @@
 				<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<h2> Artiste </h2>
-							<div class="artiste">  <?php
+							<h2> Artistes </h2>
+							<div class="result">  <?php
 							$verif = 1;
 							echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $row['Nom_artiste'];
 							echo '</a>';
@@ -58,9 +58,8 @@
 			<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<hr/>
 							<h2> Salle </h2>
-							<div class="salle"> 
+							<div class="result"> 
 								<?php 
 								$verif = 1;
 								echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['nom_ville'] . $row['ville_code_postal'] . ")";
@@ -76,9 +75,8 @@
 				<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<hr/>
 							<h2> Ville </h2>
-							<div class="Ville"> 
+							<div class="result"> 
 								<?php 
 								$verif = 1;
 								echo '<a href="allconcerts.php?ville=' . $row['nom_ville'] . '">' . $row['nom_ville'] . " (" . $row['ville_code_postal'] . ")"; 
@@ -94,9 +92,8 @@
 				<?php
 					if($row = mysqli_fetch_array($result))
 						{ ?>
-							<hr/>
 							<h2> CP </h2>
-							<div class="CP"> 
+							<div class="result"> 
 								<?php 
 								$verif = 1;
 								echo  '<a href="allconcerts.php?cp=' . $row['ville_code_postal'] . '">' . $row['ville_code_postal'] . " (" . $row['nom_ville'] . ")";  
@@ -110,9 +107,8 @@
 			$result = mysqli_query($con, $str);	
 			if($row = mysqli_fetch_array($result))
 						{ ?>
-							<hr/>
 							<h2> Departement </h2>
-							<div class="departement"> 
+							<div class="result"> 
 								<?php 
 								$verif = 1;
 								echo  '<a href="allconcerts.php?departement=' . $row['nom_departement'] . '">' . $row['nom_departement'] . " (" . $row['numero'] . ")";  
@@ -126,9 +122,8 @@
 			$result = mysqli_query($con, $str);	
 			if($row = mysqli_fetch_array($result))
 						{ ?>
-							<hr/>
 							<h2> Numero département </h2>
-							<div class="numero"> 
+							<div class="result"> 
 								<?php 
 								$verif = 1;
 								echo  '<a href="allconcerts.php?departement=' . $row['nom_departement'] . '">' . $row['numero'] . " (" . $row['nom_departement'] . ")";  
@@ -142,9 +137,8 @@
 			$result = mysqli_query($con, $str);	
 			if($row = mysqli_fetch_array($result))
 						{ ?>
-							<hr/>
 							<h2> Region </h2>
-							<div class="region"> 
+							<div class="result"> 
 								<?php 
 								$verif = 1;
 								echo  '<a href="allconcerts.php?region=' . $row['nom_region'] . '">' . $row['nom_region'];  
@@ -153,7 +147,6 @@
 							</div> 
 							<?php
 						}
-
 			if($verif == 0)
 			{
 				echo "Aucun résultat pour votre recherche";

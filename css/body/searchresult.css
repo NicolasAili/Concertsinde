@@ -1,0 +1,39 @@
+#main
+{
+	margin-left: 10%;
+	color: #6c6c6c;
+}
+
+h1, h2
+{
+	font-family: Montserrat,sans-serif;
+	font-weight: normal;
+}
+
+h1
+{
+	margin-bottom: 80px;
+}
+
+h2
+{
+	margin-bottom: 30px;
+}
+
+h2, .result
+{
+	text-transform: uppercase;
+}
+
+.result
+{
+	margin-bottom: 50px;
+	font-size: 1.1em;
+}
+
+.result a
+{
+	color: #da1e2c;
+	font-family: Lato,sans-serif;
+	text-decoration: none;
+}

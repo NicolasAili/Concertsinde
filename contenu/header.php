@@ -27,7 +27,7 @@ $admin = $row['admin'];
 		<?php 
 		if($admin == 2)
 		{?>
-			<a href="superadmin/saccueil.php" id="logo"> Arpenid.com </a><?php
+			<h1> <a href="superadmin/saccueil.php" id="logo"> Arpenid.com </a> </h1><?php
 		}
 		else
 		{?>
@@ -168,7 +168,6 @@ $admin = $row['admin'];
 function handler( event ) {
   var target = $( event.target );
   value = $("#dropdown").css("display");
-  console.log(target);
   if ( target.is( "#txtspace" ) || target.is( ".spacelinkco" ) || target.is( ".imgcadenas" )) 
   {
   	height = $('#recherche').height();

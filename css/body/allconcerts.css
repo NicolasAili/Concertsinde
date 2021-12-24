@@ -15,8 +15,21 @@
 
 #hrdeux
 {
+	display: block;
 	background: #3a0101;
 	height: 4px;
+}
+
+.indication
+{
+	display: flex;
+}
+
+.indication > span
+{
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
 }
 
 
@@ -214,13 +227,6 @@ ul, li
 
 
 
-
-
-
-
-
-
-
 #concertsall
 {
 	margin-top: 80px;
@@ -366,22 +372,30 @@ ul, li
 	border-left: 2px solid black;
 }
 
-.flag
-{
-
-}
-
 .links
 {
 	display: flex;
 	border-bottom: 1px solid #c2c2d6;
 	line-height: 1.1em;
+	overflow: hidden;
+	justify-content: space-between;
+}
+
+.fb > img, .ticket > img
+{
+	width: 35px;
+	height: 35px;
+	margin-right: 5px;
 }
 
 .fb, .ticket
 {
-	padding-left: 15%;
-	padding-right: 15%;
+	display: flex;
+	position: relative;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-bottom: 2%;
+	align-items: center;
 }
 
 .links a
@@ -410,35 +424,12 @@ ul, li
 	border-radius: 12px;
 }
 
-.page
-{
-	text-align: center;
-}
-
-.dahe
-{
-	background-color: #440303;
-	color: #fff;
-	font-size: 1.5em;
-	text-decoration: underline;
-}
-
-
-.pacp, .villexcp
-{
-	background-color: #9f0505;
-	color: #fff;
-	font-size: 1.5em;
-	text-decoration: underline;
-}
-
 .pays
 {
 	color: #6c6c6c;
 	font-size: 1.5em;
 	font-style: bold;
 }
-
 
 #modifier:hover, #probleme:hover, #supprimer:hover, #valider:hover
 {
@@ -460,24 +451,7 @@ ul, li
  	color: #fff;
 }
 
-.int
+.page
 {
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-
-.intsuppr
-{
-	margin-top: 12px;
-	padding-top: 7px;
 	text-align: center;
-}
-
-.titre
-{
-	font-size: 1.5em;
-	text-decoration: bold;
-	text-decoration: underline;
-	text-align: center;
-	margin-bottom: 18px;
 }

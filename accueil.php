@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
 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
 	Type fichier : php
@@ -30,9 +30,15 @@ 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
 		<link rel="stylesheet" type="text/css" href="css/body/accueil.css">
 	</head>
 	<body>
-		<!--<header>
-			<?php //include('contenu/headeraccueil.php'); ?> 
-		</header>-->
+		<header>
+			<h1> <a href="accueil.php" id="logo"> Arpenid <div id="com">.com</div></a> </h1>
+			<a href="presentation.php" class="li"><div class="txtli">Fonctionnement</div></a>
+			<a href="news.php" class="li"><div class="txtli">Actualités</div></a>
+			<a href="artistes.php" class="li"><div class="txtli">Artistes</div></a>
+			<a href="allconcerts.php" class="li"><div class="txtli">Concerts</div></a>
+			<a href="classement.php" class="li"><div class="txtli">Contributeurs</div></a>
+			<a href="./connexion.php" class="spacelink" role="button"> Connexion </a>
+		</header>
 		<div id="main">
 			<?php
 				$pseudo = $_SESSION['pseudo'];
@@ -46,6 +52,12 @@ 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
 				<h1> Arpenid.com </h1>
 				<h2> Le rap indé, par le public, pour le public</h2>
 				<a class="ajoutconcert" href="ajoutconcert.php"> Ajouter un concert </a>
+			</div>
+			<div id="bottom">
+				<span> Ajoutez des concerts </span>
+				<span> Modifiez des concerts </span>
+				<span> Gagnez des points </span>
+				<span> Obtenez des récompenses </span>
 			</div>
 		</div>
 	</body> 

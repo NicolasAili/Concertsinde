@@ -1,16 +1,7 @@
 body
 {
 	margin: 0;
-	background-image: url('../../test.svg');
-	padding: 0;
-	background-position: center;
-  	background-repeat: no-repeat;
-  	background-size: cover;
-  	overflow: hidden;
 }
-
-
-
 
 header
 {

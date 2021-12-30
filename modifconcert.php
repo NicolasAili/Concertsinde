@@ -21,8 +21,6 @@
 			include 'php/js.php'; 
 			include 'contenu/reseaux.php';
 			require('php/database.php');
-
-			require('php/error.php');
 		?>
 		<script src="js/verifmodifconcert.js"></script> 
 		

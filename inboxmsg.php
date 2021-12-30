@@ -21,7 +21,6 @@
 			include 'php/js.php';
 			include 'contenu/reseaux.php';
 			require('php/database.php');
-			require('php/error.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inboxmsg.css">
 	</head>

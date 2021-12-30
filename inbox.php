@@ -21,7 +21,6 @@
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
 			require('php/database.php');
-			require('php/error.php');
 
 			require('php/database.php');
 		?>

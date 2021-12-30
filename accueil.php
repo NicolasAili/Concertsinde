@@ -21,7 +21,6 @@ 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
 			include 'php/css.php'; 
 			include 'php/js.php';
 			require('php/database.php');
-			require('php/error.php');
 			include 'contenu/reseaux.php';
 		?>
 		<script>

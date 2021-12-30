@@ -27,16 +27,3 @@ setInterval(function() {
  }
 });*/
 
-function recherche()
-{
-	$('#recherche').css('visibility', 'hidden');
-    $('#bar').css('visibility', 'visible');
-    //$('#bar').css('display', 'contents');
-}
-
-function fermer()
-{
-	var scroll = $(window).scrollTop();
-	$('#bar').css('visibility', 'hidden');
-	$('#recherche').css('visibility', 'visible');
-}

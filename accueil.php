@@ -9,7 +9,6 @@ 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
 	JS+JQuery : non
 	CSS : oui
 
-	a mettre: scrollnav et header
 */
     session_start();
 ?>

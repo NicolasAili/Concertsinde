@@ -683,3 +683,17 @@ function offleave()
 {
     $('#off').attr('src', 'image/off.png');
 }
+
+function recherche()
+{
+    $('#recherche').css('visibility', 'hidden');
+    $('#bar').css('visibility', 'visible');
+    $('.champ').focus();
+}
+
+function fermer()
+{
+    var scroll = $(window).scrollTop();
+    $('#bar').css('visibility', 'hidden');
+    $('#recherche').css('visibility', 'visible');
+}

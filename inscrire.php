@@ -24,7 +24,6 @@
 	<body>
 		<header>
 			<?php include('contenu/header.php'); ?>
-			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<h1>Inscription</h1>  

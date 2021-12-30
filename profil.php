@@ -39,7 +39,6 @@
 	<body>
 		<header>
 			<?php include('contenu/header.php'); ?>
-			<script src="js/scrollnav.js"></script> 
 		</header>
 		<?php
 		if(isset($_SESSION['pseudo']))

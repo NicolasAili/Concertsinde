@@ -24,7 +24,6 @@ if(isset($_SESSION['pseudo']) == null)
 
 if( isset( $_POST['artisteajout'] ) )
 {
-  require('../php/error.php');
   require('../php/database.php');
 
   //echo $artiste;

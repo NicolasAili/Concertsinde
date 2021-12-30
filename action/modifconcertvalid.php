@@ -37,8 +37,6 @@
 			}
 			echo '<br>';
 		}      
-			require('../php/database.php');
-			require('../php/error.php');
 			
 			$idconcert = $_POST['idpost'];
 

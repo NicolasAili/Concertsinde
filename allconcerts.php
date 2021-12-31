@@ -171,7 +171,11 @@
 
 
 
-			?><h1>Tous les concerts</h1>
+			?>
+			<div id="ici">
+				<div id="icifirst">Vous êtes ici :</div> Accueil > concerts
+			</div>
+			<div id="hcun"><h1>Tous les</h1> <h1 id=hconcert> concerts</h1></div>
 			<hr id="hrun">
 			<div id="mainfilter">
 				<div id="filterone">
@@ -357,7 +361,7 @@
 						}
 						?>
 						>
-						Afficher les concerts archivés (cochez ou décochez)
+						Afficher les concerts archivés
 					</div>
 				</div>
 
@@ -586,7 +590,7 @@
 					else if ($add)
 					{
 						$strf = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'". $archivesql ."");
-					}
+					}			
 					else if ($modif)
 					{
 						$strf = sprintf("SELECT DISTINCT modification.id_concert FROM modification, concert WHERE id_user = '$modif'". $archivesql ."");
@@ -600,6 +604,20 @@
 						$strf = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
 					}
 					$result = mysqli_query($con, $strf);
+					
+					$search = "SELECT id_concert";
+					$replace = "SELECT COUNT(id_concert) AS countrec";
+					$count = str_replace($search, $replace, $strf);
+
+					if ($count == $strf) 
+					{
+						$search = "SELECT DISTINCT modification.id_concert";
+						$replace = "SELECT COUNT(DISTINCT modification.id_concert)";
+						$count = str_replace($search, $replace, $strf);
+					}
+
+					$countresult = mysqli_query($con, $count);
+
 					?>
 
 					<div class="trier">
@@ -664,24 +682,37 @@
 					</div>
 				</div>
 			</div>
-			<hr id="hrdeux">
-			<div class="indication">
-				<img src="image/valide.png" height="50" width="50">
-				<span>
-					= Concert validé (non modifiable)
-				</span>
-			</div>
-			<div class="indication">
-				<img src="image/invalide.png" height="50" width="50"> 
-				<span>
-					= Concert non validé (modifiable)
-				</span>
-			</div>
-			<div class="indication">
-				<img src="image/archive.png" height="50" width="50"> 
-				<span>
-					= Concert archivé
-				</span>
+			
+			<?php
+			$rowcount = mysqli_fetch_array($countresult);
+			$calc = $rowcount['countrec'];
+			?>
+			<h4> <?php $calc ?> concerts trouvés </h4>
+			<div id="indics">
+				<div class="indication">
+					<div class="center">
+						<img src="image/valide.png" height="50" width="50">
+						<span>
+							 = Concert validé (non modifiable)
+						</span>
+					</div>
+				</div>
+				<div class="indication">
+					<div class="center">
+						<img src="image/invalide.png" height="50" width="50"> 
+						<span>
+							= Concert non validé (modifiable)
+						</span>
+					</div>
+				</div>
+				<div class="indication">
+					<div class="center">
+						<img src="image/archive.png" height="50" width="50"> 
+						<span>
+							 = Concert archivé
+						</span>
+					</div>
+				</div>
 			</div>
 				
 			<div id="concertsall">

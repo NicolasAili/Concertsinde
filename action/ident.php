@@ -39,6 +39,7 @@ if (isset($_POST['inscription']))
                 {
                     if (strcmp($password, $cpassword) == 0)
                     {	
+                        $pseudo = strtoupper($pseudo);
         				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$passwordh', NOW())";
         				mysqli_query($con, $sql);
         				

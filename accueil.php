@@ -38,7 +38,15 @@ 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
 				<a href="classement.php" class="li"><div class="txtli">Contributeurs</div></a>
 			</div>
 			<div id="cnx">
-				<a href="./connexion.php" class="spacelink" role="button"> <span> Connexion </span> </a>
+				<?php 
+				if (isset($_SESSION['pseudo']) == null)
+				{?>
+					<a href="./connexion.php" class="spacelink" role="button"> <span> Connexion </span> </a><?php
+				}
+				else
+				{?>
+					<a href="./profil.php" class="spacelink" role="button"> <span> Profil </span> </a><?php
+				}?>
 			</div>
 		</header>
 		<div id="main">

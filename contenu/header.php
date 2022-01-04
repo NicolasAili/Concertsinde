@@ -78,22 +78,23 @@ $admin = $row['admin'];
 				<div class="barre"></div>
 				<div class="space">							
 					<a class="spacelinkco" role="button"><img src="./image/cadenasopen.png" class="imgcadenas"> <div id="txtspace">Profil</div></a>
+					<?php
+					switch ($count) 
+					{
+						case '0':
+							# rien à faire
+							break;
+						case '1':
+							?> <img src="./image/notifun.png" id="notifun"> <?php
+							break;
+						case '2':
+							?> <img src="./image/notifdeux.png" id="notifun"> <?php
+							break;					
+						default:
+							?> <img src="./image/notiftrois.png" id="notifun"> <?php
+							break;
+					}?>
 				</div>
-				<?php
-				switch ($count) {
-					case '0':
-						# rien à faire
-						break;
-					case '1':
-						?> <img src="./image/notifun.png" id="notifun"> <?php
-						break;
-					case '2':
-						?> <img src="./image/notifdeux.png" id="notifun"> <?php
-						break;					
-					default:
-						?> <img src="./image/notiftrois.png" id="notifun"> <?php
-						break;
-				}?>
 				<div id="dropdown">
 					<a href="./profil.php" class="fonction"> ♟ Profil </a>
 					<a href="./inbox.php" class="fonction"> ✉ Messages </a>
@@ -197,4 +198,12 @@ function handler( event ) {
   }
 }
 $( "*" ).click( handler );
+</script>
+<script>
+$( document ).ready(function() 
+{
+	var position = $('#txtspace').position();
+	$('#notifun').css('left', position.left+25 + "px");
+	$('#notifun').css('top', position.top-7 + "px");
+});
 </script>

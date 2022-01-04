@@ -24,50 +24,50 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inboxmsg.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?>
-	</header>
-	<body>
-		<?php
-		if (isset($_SESSION['pseudo']) == null)
+	<?php
+	if (isset($_SESSION['pseudo']) == null)
+	{
+		echo "erreur, vous devez être connecté pour accéder à ce contenu";
+	}
+	else
+	{
+		$pseudo = $_SESSION['pseudo'];
+		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+		$query = mysqli_query($con, $requestpseudo);
+		$row = mysqli_fetch_array($query);
+		$idpseudo = $row['id_user'];
+
+		$idtopic = $_GET['idtopic'];
+		if(!$idtopic)
 		{
-			echo "erreur, vous devez être connecté pour accéder à ce contenu";
+			$idtopic = $_POST['idtopic'];
+			$message = $_POST['message'];
+			$sql = "INSERT INTO message (utilisateur, message, id_topic) VALUES ('$idpseudo', '$message', '$idtopic')";
+			$query = mysqli_query($con, $sql);
+			?>
+			<script>
+				$(document).ready(function() {
+           			$("html, body").animate({
+                		scrollTop: $('html, body').get(0).scrollHeight
+                	}, 2000);
+    			});
+			</script><?php
 		}
-		else
-		{
-			$pseudo = $_SESSION['pseudo'];
-			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
-			$query = mysqli_query($con, $requestpseudo);
-			$row = mysqli_fetch_array($query);
-			$idpseudo = $row['id_user'];
 
-			$idtopic = $_GET['idtopic'];
-			if(!$idtopic)
-			{
-				$idtopic = $_POST['idtopic'];
-				$message = $_POST['message'];
-				$sql = "INSERT INTO message (utilisateur, message, id_topic) VALUES ('$idpseudo', '$message', '$idtopic')";
-				$query = mysqli_query($con, $sql);
-				?>
-				<script>
-					$(document).ready(function() {
-               			$("html, body").animate({
-                    		scrollTop: $('html, body').get(0).scrollHeight
-                    	}, 2000);
-        			});
-				</script><?php
-			}
+		$sql = "UPDATE message SET lu='1' WHERE id_topic = $idtopic AND utilisateur != '$idpseudo'";
+		$query = mysqli_query($con, $sql);
 
-			$sql = "UPDATE message SET lu='1' WHERE id_topic = $idtopic AND utilisateur != '$idpseudo'";
-			$query = mysqli_query($con, $sql);
+		$sql = "SELECT objet FROM topic where id = $idtopic";
+		$query = mysqli_query($con, $sql);
+		$row = mysqli_fetch_array($query);
+		$objettopic = $row['objet'];
 
-			$sql = "SELECT objet FROM topic where id = $idtopic";
-			$query = mysqli_query($con, $sql);
-			$row = mysqli_fetch_array($query);
-			$objettopic = $row['objet'];
-
-			$sql = "SELECT message, id, utilisateur, date_envoi FROM message WHERE id_topic = $idtopic ORDER BY date_envoi ASC";
-			$query = mysqli_query($con, $sql);?>
+		$sql = "SELECT message, id, utilisateur, date_envoi FROM message WHERE id_topic = $idtopic ORDER BY date_envoi ASC";
+		$query = mysqli_query($con, $sql);?>
+		<header>
+			<?php include('contenu/header.php'); ?>
+		</header>
+		<body>
 			<div id="top">
 				Arpenid.com > messages > <strong> <?php echo $objettopic; ?> </strong>
 			</div>

@@ -85,6 +85,12 @@
 ul, li
 {
 	list-style-type: none;
+	margin: 0;
+}
+
+.content
+{
+	height: 100%;
 }
 
 .ul
@@ -97,12 +103,6 @@ ul, li
 	width: 18%;
 	margin-right: 5%;
 	/*margin-right: 3%;*/
-}
-
-#txtreset
-{
-	position: relative;
-	top: 35%;
 }
 
 .trier
@@ -128,8 +128,7 @@ ul, li
 
 #triertxtun, #triertxtdeux
 {
-	position: relative;
-	top: 33%;
+	vertical-align: middle;
 }
 
 .filtres{
@@ -196,6 +195,12 @@ ul, li
     border-bottom: none;
     background-color: RGBa(200,200,200,0.1);
 }
+
+.deroulant > a
+{
+	height: 100%;
+}
+
 .deroulant > a::after{
     content:" ▼";
     font-size: 12px;
@@ -203,8 +208,7 @@ ul, li
 
 .deroulant
 {
-	position: relative;
-	top: 35%;
+	height: 100%;
 }
 
 .txtderoulant
@@ -265,6 +269,17 @@ ul, li
 	justify-content: space-between;
 	margin-left: 3%;
 	margin-right: 3%;
+}
+
+#filterone
+{
+	margin-bottom: 20px;
+}
+
+#filterone a
+{
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 h4

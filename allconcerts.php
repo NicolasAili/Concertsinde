@@ -184,7 +184,7 @@
 					{
 						?>
 						<div id="filteroneone">
-							<a class="filterresult" href="#" onclick="displayconcert();"> filtrer les résultats ▼</a>
+							<a class="filterresult" onclick="displayconcert();"> filtrer les résultats ▼</a>
 							<div class="container">
 								<ul class="ul">
 									<li>
@@ -374,7 +374,7 @@
 						<div class="trier">
 							<div id="triertxtun">   Trier par: </div>
 							<div class="filtres">
-								<ul>
+								<ul class="content">
 									<li class=deroulant><a href="#" style="padding: 0;"> <?php 
 										if($filter == 'artisteup' || $tri == 'artisteup')
 										{
@@ -615,7 +615,6 @@
 						$replace = "SELECT COUNT(DISTINCT modification.id_concert)";
 						$count = str_replace($search, $replace, $strf);
 					}
-
 					$countresult = mysqli_query($con, $count);
 
 					?>
@@ -623,7 +622,7 @@
 					<div class="trier">
 						<div id="triertxtdeux"> Résultats par page: </div>
 						<div class="filtres">
-							<ul>
+							<ul class="content">
 								<li class="deroulant"> <a href="#" style="padding: 0;"><?php switch ($n) {
 									case '25':
 										echo "25";
@@ -685,9 +684,9 @@
 			
 			<?php
 			$rowcount = mysqli_fetch_array($countresult);
-			$calc = $rowcount['countrec'];
+			$calc = $rowcount[0];
 			?>
-			<h4> <?php $calc ?> concerts trouvés </h4>
+			<h4> <?php echo $calc ?> concerts trouvés </h4>
 			<div id="indics">
 				<div class="indication">
 					<div class="center">

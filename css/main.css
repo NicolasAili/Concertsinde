@@ -16,11 +16,6 @@ body
 	flex: 1 0 auto;
 }
 
-footer
-{
-	flex-shrink: 0;
-}
-
 header
 {
 	margin-bottom: 100px;

@@ -1,19 +1,24 @@
 footer
 {
+	display: inline;
 	width: 100%;
   	text-align: center;
 	margin-bottom: 0px;
-	/*margin-top: 10%;*/
+	margin-top: 35px;
 	background-color: #270000;
 	color: #fff;
 	font-size: 150%;
 	text-decoration: none;
 	padding-top: 20px;
-	position: fixed;
-	bottom: 0;
 }
 
 .x, .x:visited
 {
 	color: #ff0000;
+}
+
+#mentions
+{
+	margin-top: 10px;
+	font-size: 0.7em;
 }

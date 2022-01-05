@@ -265,6 +265,10 @@ function getdata(identifiant)
 				success: function( data ) 
 				{
 					response( data );
+                    if(data.length == 1 && data[0].label == request.term)
+                    {
+                        getleave(identifiant);
+                    }
 				}
 			});
 		},

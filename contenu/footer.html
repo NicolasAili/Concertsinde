@@ -14,3 +14,13 @@
 	<div> <a class="x" href="./contact.php">Contactez-nous !</a> </div>
 	<div id="mentions"> ©2022 Arpenid.com - Tous droits réservés </div>
 </footer>
+
+<script>
+	$(document).ready(function () {
+		if($( window ).height() == $( document ).height())
+		{
+			$('footer').css('position', 'absolute');
+			$('footer').css('bottom', '0');
+		}
+	});
+</script>

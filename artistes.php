@@ -20,7 +20,7 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
-			include 'php/js.php'; 
+			/*include 'php/js.php'; */
 			require('php/database.php');
 			include 'contenu/reseaux.php';
 		?>

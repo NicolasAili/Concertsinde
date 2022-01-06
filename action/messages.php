@@ -19,18 +19,18 @@
    <script> 
 
         $(document).ready(function(){
-        $("#messageModal").dialog({show: "slide", modal: true, autoOpen: false, width: 500}).dialog("open");
+        $("#messageModal").dialog();
         });
 
     </script>
 
     <?php
 
-    setcookie('actionMessage', null, -1, "/");
+    /*setcookie('actionMessage', null, -1, "/");
     setcookie('typeMessage', null, -1, "/");
     setcookie('contentMessage', null, -1, "/");
 
-    ob_end_flush();
+    ob_end_flush();*/
 
 }
 

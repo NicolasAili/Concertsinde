@@ -1,4 +1,0 @@
-displayconcert()
-{
-	console.log("ok");
-}

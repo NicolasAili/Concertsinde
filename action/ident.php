@@ -44,7 +44,7 @@ if (isset($_POST['inscription']))
         				mysqli_query($con, $sql);
         				
                         setcookie('contentMessage', 'Votre inscription a été effectuée avec succès !', time() + 30, "/");
-                        header('Location: ./connexion.php');
+                        header('Location: ../connexion.php');
                         exit("Votre inscription a été effectuée avec succès !");
                     }
                     else

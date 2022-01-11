@@ -128,7 +128,8 @@
 		{
 			echo("erreur, vous n'êtes pas connecté");
 		}?>
-		<?php include('contenu/footer.html'); ?>
+		<?php include('contenu/footer.html');
+		require "action/messages.php"; ?>
 	</body>
 </html>
 

@@ -77,8 +77,20 @@ input.bouton
   margin-right: 15px;
 }
 
+#oubli
+{
+  text-decoration: none;
+  color: #6c6c6c;
+}
+
+#oubli:hover
+{
+  color: #a6a6a6;
+}
+
 #inscription
 {
+  margin-top: 30px;
   background-color: #e3d5cd;
   width: 60%;
   color: #6c6c6c;

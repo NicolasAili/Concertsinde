@@ -52,6 +52,7 @@
 					</form>
 				</div>
 				<br>
+				<a href="oubli.php" id="oubli">Mot de passe oublié ?</a>
 				<div id="inscription">
 					<div id="notmember"> 
 						Vous n'êtes pas encore membre ? 
@@ -82,7 +83,7 @@
 		{
 			header("Location: profil.php");
 		}
-
 		include('contenu/footer.html'); ?>
+		<?php require "action/messages.php"; ?> 
 	</body>	
 </html>

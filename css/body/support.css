@@ -1,0 +1,72 @@
+h2
+{
+	display: block;
+	width: 100%;
+	margin-bottom: 40px;
+	font-size: 40px;
+	font-weight: 800;
+	line-height: 40px;
+	text-align: center;
+}
+
+table
+{
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+	border-collapse: collapse; 
+}
+
+#hidecheck
+{
+	margin-left: 5%;
+	margin-bottom: 30px;
+}
+
+.sujet, .sujetcol
+{
+	width: 40%;
+	text-align: left;
+}
+
+.coltr
+{
+	border-bottom: 1px solid #8b9199;
+	padding-bottom: 20px;
+}
+
+.sujetcol, .idcol, .typecol, .datecol, .statutcol
+{
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 26px;
+  text-transform: uppercase;
+  color: #8b9199;
+}
+
+.idth, .typeth, .dateth, .resoluth
+{
+	width: 15%;
+}
+
+.idth, .typeth, .dateth, .resoluth, .sujet
+{
+	font-family: 'Proxima Nova', Arial, Helvetica, sans-serif;
+
+}
+
+.idth, .typeth, .dateth
+{
+	color: #1a1d21;
+}
+
+.sujet a
+{
+	color: #d1363a;
+	text-decoration: none;
+}
+
+.resoluth
+{
+	color: #999;
+}

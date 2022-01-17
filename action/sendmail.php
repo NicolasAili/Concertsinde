@@ -33,7 +33,7 @@ $result = md5($key);
 //envoyer le mail
 
 //===== Création du header du mail.
-/*$header = "From: <no-reply@test.com> \n";
+$header = "From: <no-reply@test.com> \n";
 $header .= "Reply-To: ".$mail."\n";
 $header .= "MIME-version: 1.0\n";
 $header .= "Content-type: text/html; charset=utf-8\n";
@@ -52,7 +52,7 @@ echo $header;
 echo "<br>";
 echo $objet;
 echo "<br>";
-echo $contenu;*/
+echo $contenu;
 
 /*ini_set( 'display_errors', 1 );
 error_reporting( E_ALL );

@@ -701,3 +701,33 @@ function fermer()
     $('#bar').css('visibility', 'hidden');
     $('#recherche').css('visibility', 'visible');
 }
+
+function motif(identifiant)
+{
+    switch (identifiant)
+    {
+        case "problemecheck":
+            $("#contactcheck").prop("checked", false);
+            $("#contactcheckother").prop("checked", false);
+            $('#type').val('2');
+        break;
+        case "contactcheck":
+            $("#problemecheck").prop("checked", false);
+            $("#contactcheckother").prop("checked", false);
+            $('#type').val('3');
+        break;
+        case "contactcheckother":
+            $("#contactcheck").prop("checked", false);
+            $("#problemecheck").prop("checked", false);
+            $('#type').val('3');
+        break;
+    }
+}
+
+//modifier value en fonction case cochée x
+//obliger en js/html de remplir tous les champs x
+//obliger en php de remplir tous les champs x
+//tester x
+//faire le css
+//créer une section ticket pour l'utilisateur
+//notification pour l'administrateur

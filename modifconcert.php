@@ -470,12 +470,14 @@
 						<input type="checkbox" id="autre" name="autre" value="autre chose">
 						<label for="autre">autre</label>
 						<p>
-							<label for="probleme">Dans ce champ, précisez les valeurs des champs du concert que vous pensez être faux, apportez des précisions ou bien décrivez votre problème s'il n'est pas relatif aux champs du concert. N'hésitez pas à fournir le plus de détails possible</label><br />
-							<textarea name="probleme" id="probleme" cols="40" rows="5"></textarea>
+							<label for="probleme">
+								Sujet
+							</label>
+							<textarea name="sujet" id="sujet"></textarea>
 						</p>
 						<p>
-							<label for="ajout">Si vous souhaitez ajouter quoi que ce soit</label><br />
-							<textarea name="ajout" id="ajout" cols="40" rows="5"></textarea>
+							<label for="probleme">Dans ce champ, précisez les valeurs des champs du concert que vous pensez être faux, apportez des précisions ou bien décrivez votre problème s'il n'est pas relatif aux champs du concert. N'hésitez pas à fournir le plus de détails possible</label><br />
+							<textarea name="probleme" id="probleme" cols="40" rows="5"></textarea>
 						</p>
 
 						<input type="hidden" id="idconcert" name="idconcert" <?php echo 'value="' . $idconcert . '"' ?>>

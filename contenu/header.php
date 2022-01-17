@@ -98,6 +98,7 @@ $admin = $row['admin'];
 				<div id="dropdown">
 					<a href="./profil.php" class="fonction"> ♟ Profil </a>
 					<a href="./inbox.php" class="fonction"> ✉ Messages </a>
+					<a href="./support.php" class="fonction"> ❓ Requêtes </a>
 					<a href="./resetpassword.php" class="fonction"> ⚒ Paramètres </a>
 					<a href="./action/deconnexion.php" class="fonction" onmouseover="off()" onmouseleave="offleave()"> 
 						<img src="image/off.png" alt="deconnexion" id="off" height="10px" width="11px"/>

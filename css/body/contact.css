@@ -10,18 +10,79 @@ body
 {
 	text-align:center;
 }
+
+label
+{
+  font-size: 0.8em;
+}
+
+.star
+{
+  color: #E04562;
+}
+
+#problemecheck
+{
+  padding-top: 200px;
+}
+
+#raison
+{
+  display: block;
+  float:left;
+  text-align: left;
+}
+
+fieldset
+{
+  clear:both
+}
+
 form 
 {  
   margin-top: auto;
   margin-left: auto; 
   margin-right: auto;
   padding: 10px;
-  width: 600px;
+  width: 50%;
   border-radius: 15px;
   box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.7),
   2px 4px 40px rgba(255, 255, 255, 0.6) inset;
   background-color:#5c0000;
   color: white;
+  display: block
+}
+
+#sujet
+{
+  width: 100%;
+}
+
+.content
+{
+  float: left;
+  margin-top: 10px;
+}
+
+textarea
+{
+  width: 100%;
+}
+
+#showmail
+{
+  float: left;
+  text-align: left;
+}
+
+#mailinput
+{
+  width: 90%;
+}
+
+#contribution
+{
+  margin-top: 20px;
 }
 
 .input x

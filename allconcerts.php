@@ -28,7 +28,6 @@
 	<body>	
 		<header>
 			<?php include('contenu/header.php'); ?>
-			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
 			<?php
@@ -686,7 +685,7 @@
 			$rowcount = mysqli_fetch_array($countresult);
 			$calc = $rowcount[0];
 			?>
-			<h4> <?php echo $calc ?> concerts trouvés </h4>
+			<h4> <?php echo $calc ?> concert(s) trouvé(s) </h4>
 			<div id="indics">
 				<div class="indication">
 					<div class="center">

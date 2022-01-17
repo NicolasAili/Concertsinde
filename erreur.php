@@ -32,15 +32,6 @@
 			<?php			
 				require('php/database.php');
 			?>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
 			<h1> Contactez nous ! </h1>
 			<form action="action/erreursubmit.php" method="post">
 				<fieldset>

@@ -35,26 +35,36 @@ if (isset($_POST['inscription']))
         {
             if($email)
             {
-                if($password) 
+                $sql = "SELECT email FROM utilisateur WHERE email = '$email'";
+                $result = mysqli_query($con, $sql);
+                $ok = mysqli_fetch_array($result);
+                if(!$ok)
                 {
-                    if (strcmp($password, $cpassword) == 0)
-                    {	
-                        $pseudo = strtoupper($pseudo);
-        				$sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$passwordh', NOW())";
-        				mysqli_query($con, $sql);
-        				
-                        setcookie('contentMessage', 'Votre inscription a été effectuée avec succès !', time() + 30, "/");
-                        header('Location: ../connexion.php');
-                        exit("Votre inscription a été effectuée avec succès !");
+                    if($password) 
+                    {
+                        if (strcmp($password, $cpassword) == 0)
+                        {   
+                            $pseudo = strtoupper($pseudo);
+                            $sql = "INSERT INTO utilisateur (pseudo, email, password, date_inscription) VALUES ('$pseudo', '$email', '$passwordh', NOW())";
+                            mysqli_query($con, $sql);
+                            
+                            setcookie('contentMessage', 'Votre inscription a été effectuée avec succès !', time() + 30, "/");
+                            header('Location: ../connexion.php');
+                            exit("Votre inscription a été effectuée avec succès !");
+                        }
+                        else
+                        {
+                            header("Location: ../inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer&mail=". $email ."&pseudo=". $pseudo ."");
+                        }
                     }
                     else
                     {
-                        header("Location: ../inscrire.php?message=Confirmation du mot de passe non valide, veuillez réessayer&mail=". $email ."&pseudo=". $pseudo ."");
+                        header("Location: ../inscrire.php?message=Erreur, vous devez saisir un mot de passe&mail=". $email ."&pseudo=". $pseudo ."");
                     }
                 }
                 else
                 {
-                    header("Location: ../inscrire.php?message=Erreur, vous devez saisir un mot de passe&mail=". $email ."&pseudo=". $pseudo ."");
+                    header("Location: ../inscrire.php?message=Erreur, cet email est déjà pris&pseudo=". $pseudo ."");
                 }
             }
             else

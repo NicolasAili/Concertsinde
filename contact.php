@@ -19,7 +19,7 @@
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
-
+			include 'php/js.php';
 			require('php/database.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/contact.css">
@@ -32,10 +32,24 @@
 		<div id="main">
 			<h1> Contactez nous ! </h1>
 			<form action="action/erreursubmit.php" method="post">
+				<div id="raison">
+					<label> Motif du contact <span class="star">*</span> </label>
+					<br>
+					<span><input type="checkbox" id="problemecheck" onclick="motif(this.id);"> Problème sur le site/report d'un bug</span>
+					<br>
+					<span><input type="checkbox" id="contactcheck" onclick="motif(this.id);"> Suggestion, remerciement ou question</span>
+					<br>
+					<span><input type="checkbox" id="contactcheckother" onclick="motif(this.id);"> Autre</span>
+					<div id="verifmotif"></div>
+				</div>
 				<fieldset>
 					<legend>Contact</legend>
-					<label for="non">De quoi souhaitez-vous nous faire part ?</label><br />
-					<textarea name="probleme" id="probleme" cols="40" rows="5"></textarea>
+					<label class="content" for="non"> Objet <span class="star">*</span> </label><br />
+					<input type="text" name="sujet" id="sujet">
+					<div id="verifsujet"></div>
+					<label class="content" for="non">Votre message <span class="star">*</span></label><br />
+					<textarea name="probleme" id="probleme"></textarea>
+					<div id="verifmessage"></div>
 					<?php
 						if(isset($_SESSION['pseudo']))
 						{?>
@@ -46,28 +60,72 @@
 							<input type="hidden" id="pseudo" name="pseudo" value="anonyme"> <?php
 						}
 					?>
-					<input type="hidden" id="type" name="type" value="3"> 
+					<input type="hidden" id="type" name="type" value=""> 
 				</fieldset>
-				<p>
-						<div id=showmail>
-							<?php if(isset($_SESSION['pseudo']) == null)
-							{
-								echo "<br>";
-								echo "Il semble que vous ne soyez pas connecté, saisissez votre mail ci-dessous ou connectez-vous";?>
-								<input type="mail" name="mailinput" id="mailinput" value=""><?php
-							}
-							?>
-						</div> 
-				</p>
-				<p>	
-					Merci pour votre contribution <br/>
-				</p>
-				<p>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Envoyer" />
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Effacer" />
-				</p>
+				<div id=showmail>
+					<?php if(isset($_SESSION['pseudo']) == null)
+					{
+						echo "<br>";
+						echo "<label> Il semble que vous ne soyez pas connecté, saisissez votre mail ci-dessous ou connectez-vous (nous ne vous enverrons un mail que si cela est strictement nécessaire)<span class='star'>*</span> </label>";?>
+						<br>
+						<input type="mail" name="mailinput" id="mailinput" value="">
+						<div id="verifmail"></div>
+						<?php
+					}
+					?>
+				</div> 
+				<div id="contribution">	
+					Merci pour votre contribution
+				</div>
+				<div id="footer">
+					<input type="button" value="Envoyer" id="valider" onclick="verification()">
+					<input type="reset" value="Effacer">
+				</div>
 			</form>
 		</div>
 		<?php include('contenu/footer.html'); ?>
+		<?php require "action/messages.php"; ?>
 	</body>
 </html>
+
+<script>
+	function verification()
+	{
+		var strsujet = $("#sujet").val();
+		var strprobleme = $("#probleme").val();
+		var strmailinput = $("#mailinput").val();
+		var verif = 0;
+
+		if(!$('#problemecheck').is(':checked') && !$('#contactcheck').is(':checked') && !$('#contactcheckother').is(':checked'))
+		{
+			$('#verifmotif').html("Une case doit être cochée");
+			verif = 1;
+		}
+		if(strsujet.length == 0)
+		{
+			$('#verifsujet').html("Ce champ est obligatoire");
+			verif = 1;
+		}
+		if(strprobleme.length == 0)
+		{
+			$('#verifmessage').html("Ce champ est obligatoire");
+			verif = 1;
+		}
+		if($('#mailinput').length)
+		{
+			if(strmailinput.length == 0)
+			{
+				$('#verifmail').html("Ce champ est obligatoire");
+				verif = 1;
+			}
+		}	
+		if (verif == 0) 
+		{
+			$("#valider").attr("type", "submit");
+			$("#valider").trigger('click');
+		}
+	}
+</script>
+
+
+   			

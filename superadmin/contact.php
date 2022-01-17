@@ -23,7 +23,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Tous les concerts</title>
+		<title>Gestion des erreurs</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
 		<link rel="stylesheet" type="text/css" href="contact.css" media="screen" />

@@ -35,7 +35,7 @@ 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
 				<a href="news.php" class="li"><div class="txtli">Actualités</div></a>
 				<a href="artistes.php" class="li"><div class="txtli">Artistes</div></a>
 				<a href="allconcerts.php" class="li"><div class="txtli">Concerts</div></a>
-				<a href="classement.php" class="li"><div class="txtli">Contributeurs</div></a>
+				<a href="classement.php" class="li"><div class="txtli">Classement</div></a>
 			</div>
 			<div id="cnx">
 				<?php 

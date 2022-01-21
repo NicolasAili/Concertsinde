@@ -44,17 +44,84 @@
 
 			?>
 
-			<h2> Classement des utilisateurs </h2>
+			<h2> Classements</h2>
 			<div id="display">
-				<div id="currentsession">
-					<h3> Classement pour la session en cours (du <?php echo $sessiondebut; echo " au "; echo $sessionfin; echo ") : "?> </h3>
-
+				<div id="allsession">
+					<h3> Général </h3>
 					<table>
-					    <caption>Points session</caption>
-					    <tr>
-					    	<th scope="col">Rang</th>
-					        <th scope="col">Pseudo</th>
-					        <th scope="col">Points</th>
+					    <tr class="headertable">
+					    	<th scope="col" class="tbunhead">Rang</th>
+					        <th scope="col" class="tbdeuxhead">Pseudo</th>
+					        <th scope="col" class="tbtroishead">Points</th>
+					    </tr>
+					    <?php
+						$sql = "SELECT points, pseudo FROM utilisateur WHERE admin = 0 AND banni = 0 ORDER BY points DESC";
+						$query = mysqli_query($con, $sql);
+						
+						while ($row = mysqli_fetch_array($query))
+						{
+							if($i < 10)
+							{
+								switch ($i) {
+									case 0:
+										echo "<tr style='background-color: #FFD700;'>";
+										break;
+									case 1:
+										echo "<tr style='background-color: #C0C0C0;'>";
+										break;
+									case 2:
+										echo "<tr style='background-color: #CD7F32;'>";
+										break;
+									default:
+										echo "<tr style='background-color: #ededed;'>";
+										break;
+								}?>
+								
+									<th scope="row" class="tbun"> <?php if($i == 0){echo "🥇";}elseif($i == 1){echo "🥈";}elseif($i == 2){echo "🥉";}else{echo $i+1;} ?> </th>
+									<td class="tbdeux"> <?php echo $row['pseudo']; ?> </td>
+							        <td class="tbtrois"><?php echo $row['points']; ?></td>
+							        <?php if($row['pseudo'] == $_SESSION['seudo']){$rank = 1;} ?>
+						    	</tr>
+						    	<?php
+							}
+							if($row['pseudo'] == $_SESSION['pseudo'] && $i > 9)
+							{
+								$rang = $i+1;
+								$pt_user = $row['points'];
+							}
+							$i++;
+						}
+						if($rank == 0 && $_SESSION['pseudo'])
+						{
+							?>
+							<tr style='background-color: #ededed;'>
+								<td class="tbun"> ... </td>
+								<td class="tbdeux"> ... </td>
+						        <td class="tbtrois"> ... </td>
+						    </tr>
+							<tr style="background-color: #33cc33;">
+								<th scope="row" class="tbun"> <?php echo $rang; ?> </th>
+								<td class="tbdeux"> <?php echo $_SESSION['pseudo']; ?> </td>
+						        <td class="tbtrois"><?php echo $pt_user; ?></td>
+						    </tr>
+						    <?php
+						}
+						?>
+					</table>
+				</div>
+				<?php
+					$i = 0;
+					$rang = 0;
+					$rank = 0;
+					$pt_user = 0;
+				?>
+				<div id="currentsession">
+					<h3> Session en cours <span> du <?php echo $sessiondebut; echo " au "; echo $sessionfin;?> </span> </h3>
+					<table>
+					    <tr class="headertable">
+					    	<th scope="col" class="tbunhead">Rang</th>
+					        <th scope="col" class="tbdeuxhead">Pseudo</th>
+					        <th scope="col" class="tbtroishead">Points</th>
 					    </tr>
 					    <?php
 						$sql = "SELECT points_session, pseudo FROM utilisateur WHERE admin = 0 AND banni = 0 ORDER BY points_session DESC";
@@ -63,11 +130,24 @@
 						while ($row = mysqli_fetch_array($query))
 						{
 							if($i < 10)
-							{?>
-								<tr>
-									<th scope="row"> <?php echo $i+1; ?> </th>
-									<td> <?php echo $row['pseudo']; ?> </td>
-							        <td><?php echo $row['points_session']; ?></td>
+							{
+								switch ($i) {
+									case 0:
+										echo "<tr style='background-color: #FFD700;'>";
+										break;
+									case 1:
+										echo "<tr style='background-color: #C0C0C0;'>";
+										break;
+									case 2:
+										echo "<tr style='background-color: #CD7F32;'>";
+										break;
+									default:
+										echo "<tr style='background-color: #ededed;'>";
+										break;
+								}?>
+									<th scope="row" class="tbun"> <?php if($i == 0){echo "🥇";}elseif($i == 1){echo "🥈";}elseif($i == 2){echo "🥉";}else{echo $i+1;} ?> </th>
+									<td class="tbdeux"> <?php echo $row['pseudo']; ?> </td>
+							        <td class="tbtrois"><?php echo $row['points_session']; ?></td>
 							        <?php if($row['pseudo'] == $_SESSION['pseudo']){$rank = 1;} ?>
 						    	</tr>
 						    	<?php
@@ -82,72 +162,15 @@
 						if($rank == 0 && $_SESSION['pseudo'])
 						{
 							?>
-							<tr>
-								<td> ... </td>
-								<td> ... </td>
-						        <td> ... </td>
+							<tr style='background-color: #ededed;'>
+								<td class="tbun"> ... </td>
+								<td class="tbdeux"> ... </td>
+						        <td class="tbtrois"> ... </td>
 						    </tr>
-							<tr>
-								<th scope="row"> <?php echo $rang; ?> </th>
-								<td> <?php echo $_SESSION['pseudo']; ?> </td>
-						        <td><?php echo $pt_user; ?></td>
-						    </tr>
-						    <?php
-						}
-						?>
-					</table>
-					<?php
-						$i = 0;
-						$rang = 0;
-						$rank = 0;
-						$pt_user = 0;
-					?>
-				</div>
-				<div id="allsession">
-					<h3> Classement depuis la création du site </h3>
-
-					<table>
-					    <caption>Points totaux</caption>
-					    <tr>
-					    	<th scope="col">Rang</th>
-					        <th scope="col">Pseudo</th>
-					        <th scope="col">Points</th>
-					    </tr>
-					    <?php
-						$sql = "SELECT points, pseudo FROM utilisateur WHERE admin = 0 AND banni = 0 ORDER BY points DESC";
-						$query = mysqli_query($con, $sql);
-						
-						while ($row = mysqli_fetch_array($query))
-						{
-							if($i < 10)
-							{?>
-								<tr>
-									<th scope="row"> <?php echo $i+1; ?> </th>
-									<td> <?php echo $row['pseudo']; ?> </td>
-							        <td><?php echo $row['points']; ?></td>
-							        <?php if($row['pseudo'] == $_SESSION['pseudo']){$rank = 1;} ?>
-						    	</tr>
-						    	<?php
-							}
-							if($row['pseudo'] == $_SESSION['pseudo'] && $i > 9)
-							{
-								$rang = $i+1;
-								$pt_user = $row['points'];
-							}
-							$i++;
-						}
-						if($rank == 0 && $_SESSION['pseudo'])
-						{
-							?>
-							<tr>
-								<td> ... </td>
-								<td> ... </td>
-						        <td> ... </td>
-						    </tr>
-							<tr>
-								<th scope="row"> <?php echo $rang; ?> </th>
-								<td> <?php echo $_SESSION['pseudo']; ?> </td>
-						        <td><?php echo $pt_user; ?></td>
+							<tr style="background-color: #33cc33;">
+								<th scope="row" class="tbun"> <?php echo $rang; ?> </th>
+								<td class="tbdeux"> <?php echo $_SESSION['pseudo']; ?> </td>
+						        <td class="tbtrois"><?php echo $pt_user; ?></td>
 						    </tr>
 						    <?php
 						}

@@ -61,7 +61,6 @@ else if($message)
 {
 	$sql = "INSERT INTO topic (objet, date_creation, sender, receiver) VALUES ('$topic', NOW(), $sender, $idpseudo)";
 	$query = mysqli_query($con ,$sql);
-	echo $sql;
 	echo "<br>";
 
 	$sql = "SELECT MAX(id) AS id_max FROM topic"; //on recupere l'ID le plus haut 
@@ -71,8 +70,7 @@ else if($message)
 
 	$sql = "INSERT INTO message (message, utilisateur, id_topic) VALUES ('$message', '$sender', $idtopicmax)";
 	$query = mysqli_query($con ,$sql);
-	echo $sql;
-	echo "<a href=users.php> retour </a>";
+	header("Location: users.php");
 }
 else
 {

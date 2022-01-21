@@ -23,7 +23,6 @@
 	<body>
 		<header>
 			<?php include('contenu/header.php'); ?>
-			<?php require "action/messages.php"; ?> 
 		</header>
 		<?php
 		if(isset($_SESSION['pseudo']) == null)

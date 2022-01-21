@@ -691,7 +691,7 @@
 					<div class="center">
 						<img src="image/valide.png" height="50" width="50">
 						<span>
-							 = Concert validé (non modifiable)
+							 Concert validé
 						</span>
 					</div>
 				</div>
@@ -699,7 +699,7 @@
 					<div class="center">
 						<img src="image/invalide.png" height="50" width="50"> 
 						<span>
-							= Concert non validé (modifiable)
+							Concert non validé
 						</span>
 					</div>
 				</div>
@@ -707,7 +707,7 @@
 					<div class="center">
 						<img src="image/archive.png" height="50" width="50"> 
 						<span>
-							 = Concert archivé
+							 Concert archivé
 						</span>
 					</div>
 				</div>

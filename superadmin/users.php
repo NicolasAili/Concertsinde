@@ -40,6 +40,8 @@
 		{
 			$pseudoget = $_GET['pseudoget'];
 			?>
+			<a href="saccueil.php">retour accueil</a>
+			<br>
 			<form action="users.php" method="get">
 			  <label for="pseudoget">Utilisateur:</label>
 			  <input type="text" id="pseudoget" name="pseudoget" onkeyup="getdata(this.id);" required><br><br>
@@ -48,7 +50,7 @@
 			<?php
 			if(!$pseudoget)
 			{
-				$sql = "SELECT pseudo, email, date_inscription, points, points_session, admin, banni FROM utilisateur";
+				$sql = "SELECT DISTINCT pseudo, email, date_inscription, points, points_session, admin, banni FROM utilisateur";
 			}
 			else
 			{

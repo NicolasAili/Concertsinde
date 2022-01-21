@@ -300,9 +300,11 @@
 								</div> 
 								<div class="links">
 									<div class="fb"> 
+										<img src="image/evenement.png">
 										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 									</div> 
 									<div class="ticket">
+										<img src="image/billetterie.png">
 										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 									</div> 
 								</div>
@@ -576,10 +578,12 @@
 									</div>
 								</div> 
 								<div class="links">
-									<div class="fb"> 
+									<div class="fb">
+										<img src="image/evenement.png">
 										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 									</div> 
 									<div class="ticket">
+										<img src="image/billetterie.png">
 										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 									</div> 
 								</div>
@@ -590,9 +594,9 @@
 				}
 	 		?>	
 			</div>
-			<?php require "action/messages.php"; ?> 
 		</div>
 		<?php include('contenu/footer.html'); ?>
+		<?php require "action/messages.php"; ?> 
 	</body>
 </html>
 

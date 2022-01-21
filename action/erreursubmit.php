@@ -58,7 +58,7 @@
 	$row = mysqli_fetch_array($query);
 	$max = $row['id_max'];
 
-	setcookie('contentMessage', 'Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans le section "requête" sous votre profil', time() + 30, "/");
+	setcookie('contentMessage', 'Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil', time() + 30, "/");
 	header("Location: ../allconcerts.php");
-	exit('Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans le section "requête" sous votre profil');
+	exit('Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil');
 

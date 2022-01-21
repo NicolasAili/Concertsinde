@@ -14,12 +14,12 @@
 <html lang="fr">
 	<head>
 		<?php
-			include '../php/base.php'; 
-			include '../php/css.php'; 
-			include '../contenu/reseaux.php';
-			require('../php/database.php');
+			include 'php/base.php'; 
+			include 'php/css.php'; 
+			include 'contenu/reseaux.php';
+			require('php/database.php');
 		?>
-		<link rel="stylesheet" type="text/css" href="../css/body/superartiste.css">
+		<link rel="stylesheet" type="text/css" href="css/body/modifconcertvalid.css">
 	</head>
 	
 	<body>
@@ -521,273 +521,201 @@
     		mysqli_query($con, $sql);
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
-		<?php
+	<?php
 	$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert";
-			$result = mysqli_query($con, $str);
-			$row = mysqli_fetch_array($result);
-				if($row['ville_departement'])
+		$result = mysqli_query($con, $str);
+		$row = mysqli_fetch_array($result);
+			if($row['ville_departement'])
+		{
+			$filter = 1;
+			$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
+			$resultdpt = mysqli_query($con, $str);
+			$rowdpt = mysqli_fetch_array($resultdpt);
+			if($rowdpt['id_region'])
 			{
-				$filter = 1;
-				$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
-				$resultdpt = mysqli_query($con, $str);
-				$rowdpt = mysqli_fetch_array($resultdpt);
-				if($rowdpt['id_region'])
-				{
-					$str = "SELECT nom_region, nom_pays FROM pays, region, departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert ";
-					$resultrgn = mysqli_query($con, $str);
-					$rowrgn = mysqli_fetch_array($resultrgn);
-				}
+				$str = "SELECT nom_region, nom_pays FROM pays, region, departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = numero AND departement.id_region = region.id AND region.id_pays = pays.id AND id_concert = $idconcert ";
+				$resultrgn = mysqli_query($con, $str);
+				$rowrgn = mysqli_fetch_array($resultrgn);
 			}
-			?>
+		}
+		?>
+		<a href="allconcerts.php" id="return"> ⬅ Retour vers les concerts</a>
+		<div id="main">
 			<div id="concertsall">
-				<div class="inwhile"> 
-								<div class="artiste"> 
-									<?php 
-									if($row['valide'] == 0)
-									{?>
-										<img class="image" src="image/invalide.png" height="50" width="50">
-									<?php
+				<div class="inwhile">
+					<div class="artiste"> 
+						<?php 
+						echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
+						?> 
+					</div> 
+					<div class="principal">
+						<div class="sectionun">
+							<div class="date"> 
+								<?php 
+								$datedisp = strtotime($row['datec']); 
+								
+								$day = date('l', $datedisp); 
+								$nbday = date('j', $datedisp); 
+								$month = date('F', $datedisp); 
+								$year = date('Y', $datedisp);
+
+								switch ($day) {
+									case 'Monday':
+										echo "Lundi";
+										break;
+									case 'Tuesday':
+										echo "Mardi";
+										break;
+									case 'Wednesday':
+										echo "Mercredi";
+										break;
+									case 'Thursday':
+										echo "Jeudi";
+										break;
+									case 'Friday':
+										echo "Vendredi";
+										break;
+									case 'Saturday':
+										echo "Samedi";
+										break;
+									case 'Sunday':
+										echo "Dimanche";
+										break;
+									default:
+										echo "Erreur";
+										break;
+								}
+								echo "<br>";
+								?> 
+								<div class="nbday">
+									<?php echo $nbday; ?>
+								</div>
+								<?php
+								switch ($month) {
+									case 'January':
+										echo "Janvier ";
+										break;
+									case 'February':
+										echo "Fevrier ";
+										break;
+									case 'March':
+										echo "Mars ";
+										break;
+									case 'April':
+										echo "Avril ";
+										break;
+									case 'May':
+										echo "Mai ";
+										break;
+									case 'June':
+										echo "Juin ";
+										break;
+									case 'July':
+										echo "Juillet ";
+										break;
+									case 'August':
+										echo "Août ";
+										break;
+									case 'September':
+										echo "Septembre ";
+										break;
+									case 'October':
+										echo "Octobre ";
+										break;
+									case 'November':
+										echo "Novembre ";
+										break;
+									case 'December':
+										echo "Decembre ";
+										break;
+									default:
+										echo "Erreur";
+										break;
+								}
+								echo $year;
+								?> 
+							</div> 
+							<div class="heure"> <?php echo $row['heure']; ?> </div> 
+						</div> 
+						<div class="barrex"></div>
+						<div class="sectiondeux">
+							<?php
+							if($row['intext'] == 'int')
+							{?>
+								<div class="salle"> <?php echo $row['nom_salle']; ?> </div> 
+							<?php
+							} 
+							else
+							{
+								?>
+								<div class="salle"> <?php echo  $row['nom_ext']; ?> </div><?php
+							}?>
+							<div class="ville"> 
+								<?php 
+									echo $row['nom_ville'];
+									if($row['ville_code_postal'])
+									{
+										?>
+										<div class="cp"> (<?php echo  $row['ville_code_postal']; ?>) </div>
+										<?php
 									}
 									else
-									{?>
-										<img class="image" src="image/valide.png" height="50" width="50">
-									<?php
+									{
+										?>
+											<div class="cp"> Code postal non renseigné </div>
+										<?php
 									}
-									echo "<span>";
-										echo $row['nom_artiste'];
-									echo "</span>";
-									?> 
-									<img class="infologo" src="image/infos.png" height="50" width="50">
-									<div class="infos hidden">
-										<div class="dateajout"> 
-											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
-											Concert ajouté le: <?php echo $newDate ?> 
-										</div> 
-										<div class="ajout"> 
-											<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
-										</div>
-										<div class="modif">
-											<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
-										</div>
-									</div>
-								</div> 
-								<div class="principal">
-									<div class="sectionun">
-										<div class="date"> 
-											<?php 
-											$datedisp = strtotime($row['datec']); 
-											
-											$day = date('l', $datedisp); 
-											$nbday = date('j', $datedisp); 
-											$month = date('F', $datedisp); 
-											$year = date('Y', $datedisp);
-
-											switch ($day) {
-												case 'Monday':
-													echo "Lundi";
-													break;
-												case 'Tuesday':
-													echo "Mardi";
-													break;
-												case 'Wednesday':
-													echo "Mercredi";
-													break;
-												case 'Thursday':
-													echo "Jeudi";
-													break;
-												case 'Friday':
-													echo "Vendredi";
-													break;
-												case 'Saturday':
-													echo "Samedi";
-													break;
-												case 'Sunday':
-													echo "Dimanche";
-													break;
-												default:
-													echo "Erreur";
-													break;
-											}
-											echo "<br>";
-											?> 
-											<div class="nbday">
-												<?php echo $nbday; ?>
-											</div>
-											<?php
-											switch ($month) {
-												case 'January':
-													echo "Janvier ";
-													break;
-												case 'February':
-													echo "Fevrier ";
-													break;
-												case 'March':
-													echo "Mars ";
-													break;
-												case 'April':
-													echo "Avril ";
-													break;
-												case 'May':
-													echo "Mai ";
-													break;
-												case 'June':
-													echo "Juin ";
-													break;
-												case 'July':
-													echo "Juillet ";
-													break;
-												case 'August':
-													echo "Août ";
-													break;
-												case 'September':
-													echo "Septembre ";
-													break;
-												case 'October':
-													echo "Octobre ";
-													break;
-												case 'November':
-													echo "Novembre ";
-													break;
-												case 'December':
-													echo "Decembre ";
-													break;
-												default:
-													echo "Erreur";
-													break;
-											}
-											echo $year;
-											?> 
-										</div> 
-										<div class="heure"> <?php echo $row['heure']; ?> </div> 
-									</div> 
-									<div class="barrex"></div>
-									<div class="sectiondeux">
-										<?php
-										if($row['intext'] == 'int')
-										{?>
-											<div class="salle"> <?php echo $row['nom_salle']; ?> </div> 
-										<?php
-										} 
-										else
-										{
-											?>
-											<div class="salle"> <?php echo  $row['nom_ext']; ?> </div><?php
-										}?>
-										<div class="ville"> 
-											<?php 
-												echo $row['nom_ville'];
-												if($row['ville_code_postal'])
-												{
-													?>
-													<div class="cp"> (<?php echo  $row['ville_code_postal']; ?>) </div>
-													<?php
-												}
-												else
-												{
-													?>
-														<div class="cp"> Code postal non renseigné </div>
-													<?php
-												}
-											?> 
-										</div>
-										<div class="adresse"> <?php echo $row['adresse']; ?> </div> 
-									</div>
-									<div class="barrex"></div>
-									<div class="sectiontrois">
-										<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30">
-										<?php
-										if($rowdpt['id_region'])
-										{
-											?>
-											<div class="pays"> <?php echo  $rowrgn['nom_pays']; ?> </div>
-											<div class="region"> <?php echo  $rowrgn['nom_region']; ?> </div> 
-											<?php 
-										}
-										else
-										{
-											?>
-											<div class="pays"> Pays non renseigné </div>
-											<div class="region"> Région non renseignée </div> 
-											<?php
-										}
-										if($row['ville_departement'])
-										{
-											?>
-											<div class="departement"> <?php echo  $rowdpt['nom_departement']; ?> </div> 
-											<?php
-										}
-										else
-										{	
-											?>
-											<div class="departement"> Département non renseigné </div> 
-											<?php
-										}
-										?>
-									</div>
-								</div> 
-								<div class="links">
-									<div class="fb"> 
-										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
-									</div> 
-									<div class="ticket">
-										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
-									</div> 
-								</div>
-								<form method="post" action="modifconcert.php" class="modif">
-									<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
-									<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-									<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
-									<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
-									<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-									<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
-									<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
-									<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
-									<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
-									<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
-									<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
-									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
-									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
-									<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
-									<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
-									<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
-
-									<div class="footer">
-										<?php
-										if ($pseudo)
-										{
-											if($row['valide'] == 0 || $testadmin > 0)
-											{?>
-												<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
-											<?php
-											}
-											else
-											{
-												?><input id="probleme" type="submit" name="probleme" value="Signaler une erreur"> <?php
-											}
-											if($testadmin > 0) 
-											{?>
-												<input id="supprimer" type="submit" name="modsuppr" value="Supprimer"> 
-												<?php 
-												if($row['valide'] == 0)
-												{?>
-													<input id="valider" type="submit" name="modsuppr" value="Valider">
-												<?php
-												}
-											}
-										}
-										else
-										{
-											echo "Vous devez être connecté afin de modifier un concert";
-										}
-										?>
-									</div>
-								</form>
-							</div>		
+								?> 
+							</div>
+							<div class="adresse"> <?php echo $row['adresse']; ?> </div> 
+						</div>
+						<div class="barrex"></div>
+						<div class="sectiontrois">
+							<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30">
+							<?php
+							if($rowdpt['id_region'])
+							{
+								?>
+								<div class="pays"> <?php echo  $rowrgn['nom_pays']; ?> </div>
+								<div class="region"> <?php echo  $rowrgn['nom_region']; ?> </div> 
+								<?php 
+							}
+							else
+							{
+								?>
+								<div class="pays"> Pays non renseigné </div>
+								<div class="region"> Région non renseignée </div> 
+								<?php
+							}
+							if($row['ville_departement'])
+							{
+								?>
+								<div class="departement"> <?php echo  $rowdpt['nom_departement']; ?> </div> 
+								<?php
+							}
+							else
+							{	
+								?>
+								<div class="departement"> Département non renseigné </div> 
+								<?php
+							}
+							?>
+						</div>
+					</div> 
+					<div class="links">
+						<div class="fb">
+							<img src="image/evenement.png">
+							<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
+						</div> 
+						<div class="ticket">
+							<img src="image/billetterie.png">
+							<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
+						</div> 
+					</div>
+				</div>		
 			</div>
 			<div class="champs">
-				<h2> Champ(s) modifié(s) : </h2>
-				<a href="../allconcerts.php"> retour en arriere </a>
-				<br>
+				<h2> Champ(s) modifié(s) ou ajouté(s) </h2>
 				<?php
 				if($date == $datepost)
 				{
@@ -855,158 +783,155 @@
 
 				if($date != $datepost)
 				{
-					echo "date modifiée";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					echo $datepost;
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Date </div>";
+						echo "<div class='old'>" . $datepost . "</div>";
 
-					echo '<br>';
-					echo "nouvelle valeur : ";
-					echo $date;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET datec = '$date' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+						echo "<div class='new'>" . $date . "</div>";
+						$sql = "UPDATE modification SET datec = '$date' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 				if ($heure != $heurepost)
 				{
-					echo "heure modifiée";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					echo $heurepost;
-					echo '<br>';
-					echo "nouvelle valeur : ";
-					echo $heure;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET heurec = '$heure' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Heure </div>";
+						echo "<div class='old'>" . $heurepost . "</div>";
+						echo "<div class='new'>" . $heure . "</div>";
+						$sql = "UPDATE modification SET heurec = '$heure' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 
 				if($ville != $villepost)
 				{
 					if($ville != $modifville)
 					{
-						echo "ville modifiée";
-						echo '<br>';
-						echo "ancienne valeur : ";
-						echo $villepost;
-						echo '<br>';
-						echo "nouvelle valeur : ";
-						echo $ville;
-						echo '<br>';
-						echo '<br>';
-						$sql = "UPDATE modification SET ville = '$ville' WHERE id = $idmodif"; 
-	   					$query = mysqli_query($con, $sql);
+						echo "<div class='modifclass'>";
+							echo "<div class='title'> Ville </div>";
+							echo "<div class='old'>" . $villepost . "</div>";
+							echo "<div class='new'>" . $ville . "</div>";
+							$sql = "UPDATE modification SET ville = '$ville' WHERE id = $idmodif"; 
+		   					$query = mysqli_query($con, $sql);
+		   				echo "</div>";
 	   				}
 				}
 				if($testcp == 1)
 				{
-					echo "code postal modifié";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					test_empty($cppost);
-					echo "nouvelle valeur : ";
-					echo $cp;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET code_postal = '$cp' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Code postal </div>";
+						if($adressepost == NULL) //ajout
+						{
+							echo "<div class='new'>" . $cp . "</div>";
+						}
+						else
+						{
+							echo "<div class='old'>" . $cppost . "</div>";
+							echo "<div class='new'>" . $cp . "</div>";
+						}
+						$sql = "UPDATE modification SET code_postal = '$cp' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}	
 				if($adresse != $adressepost)
 				{
 					if($adresse != $modifadresse)
 					{
-						echo "adresse modifiée";
-						echo '<br>';
-						echo "ancienne valeur : ";
-						test_empty($adressepost);
-						echo "nouvelle valeur : ";
-						echo $adresse;
-						echo '<br>';
-						echo '<br>';
-						$sql = "UPDATE modification SET adresse = '$adresse' WHERE id = $idmodif"; 
-	   					$query = mysqli_query($con, $sql);
+						echo "<div class='modifclass'>";
+							echo "<div class='title'> Adresse </div>";
+							if($adressepost == NULL) //ajout
+							{
+								echo "<div class='new'>" . $adresse . "</div>";
+							}
+							else
+							{
+								echo "<div class='old'>" . $adressepost . "</div>";
+								echo "<div class='new'>" . $adresse . "</div>";
+							}
+							$sql = "UPDATE modification SET adresse = '$adresse' WHERE id = $idmodif"; 
+		   					$query = mysqli_query($con, $sql);
+		   				echo "</div>";
 	   				}
 				}
 				if($testfb == 1)
 				{
-					echo "lien événement modifié";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					test_empty($fbpost);
-					echo "nouvelle valeur : ";
-					echo $fb;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET lien_fb = '$fb' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Lien événement </div>";
+						if($fbpost == NULL) //ajout
+						{
+							echo "<div class='new'>" . $fb . "</div>";
+						}
+						else
+						{
+							echo "<div class='old'>" . $fbpost . "</div>";
+							echo "<div class='new'>" . $fb . "</div>";
+						}
+						$sql = "UPDATE modification SET lien_fb = '$fb' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 				if($ticket != $ticketpost)
 				{
-					echo "lien billetterie modifié";
-					echo '<br>';
-					echo "ancienne valeur : ";
-					test_empty($ticketpost);
-					echo "nouvelle valeur : ";
-					echo $ticket;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET lien_ticket = '$ticket' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Lien billetterie </div>";
+						if($ticketpost == NULL) //ajout
+						{
+							echo "<div class='new'>" . $ticket . "</div>";
+						}
+						else
+						{
+							echo "<div class='old'>" . $ticketpost .  "</div>";
+							echo "<div class='new'>" . $ticket . "</div>";
+						}
+						$sql = "UPDATE modification SET lien_ticket = '$ticket' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}				
 				/*if($artiste != $artistepost)
 				{
 					echo "artiste modifié";
 					echo '<br>';
-					echo "ancienne valeur : ";
+					echo "<div class='new'>" . $ . "</div>";
 					echo $artistepost;
 					echo '<br>';
-					echo "nouvelle valeur : ";
+					echo "<div class='new'>" . $ . "</div>";
 					echo $artiste;
 					echo '<br>';
 					echo '<br>';
 				}*/		
 				if($testsalle == 1 && $salle != NULL)
 				{
-					if($intext)
-					{
-						echo "Salle ajoutée (passage d'exterieur à intérieur) ";
-					}
-					else
-					{
-						echo "salle modifiée";
-						echo '<br>';
-						echo "ancienne valeur : ";
-						echo $sallepost;
-					}
-					echo '<br>';
-					echo "nouvelle valeur : ";
-					echo $salle;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET salle = '$salle' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						if($intext)
+						{
+							echo "<div class='title'> Salle (passage d'exterieur à intérieur) </div>";
+						}
+						else
+						{
+							echo "<div class='title'> Salle </div>";
+							echo "<div class='old'>" . $sallepost . "</div>";
+						}
+						echo "<div class='new'>" . $salle . "</div>";
+						$sql = "UPDATE modification SET salle = '$salle' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 				if($ext != $extpost && $ext != NULL)
 				{
-					if($intext)
-					{
-						echo "Denomination ajoutée (passage d'intérieur à exterieur) ";
-					}
-					else
-					{
-						echo "denomination modifiée";
-						echo '<br>';
-						echo "ancienne valeur : ";
-						echo $extpost;
-					}
-					echo '<br>';
-					echo "nouvelle valeur : ";
-					echo $ext;
-					echo '<br>';
-					$sql = "UPDATE modification SET denomination = '$ext' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						if($intext)
+						{
+							echo "<div class='title'> Denomination (passage d'intérieur à extérieur) </div>";
+						}
+						else
+						{
+							echo "<div class='title'> Dénomination </div>";
+							echo "<div class='old'>" . $extpost . "</div>";
+						}
+						echo "<div class='new'>" . $ext . "</div>";
+						$sql = "UPDATE modification SET denomination = '$ext' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 				if($intext != $intextpost && $intext != NULL)
 				{
@@ -1024,59 +949,44 @@
 
 				if($departement != $departementpost && $departement != NULL) //modification
 				{
-					if($departementpost == NULL) //ajout
-					{
-						echo "departement ajouté";
-						echo '<br>';
-						echo "nouvelle valeur : ";
-						echo $departement;
-						echo '<br>';
-						echo '<br>';
-					}
-					else
-					{
-						echo "departement modifié";
-						echo '<br>';
-						echo "ancienne valeur : ";
-						echo $departementpost;
-						echo '<br>';
-						echo "nouvelle valeur : ";
-						echo $departement;
-						echo '<br>';
-						echo '<br>';
-					}
-					$sql = "UPDATE modification SET departement = '$departement' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Département </div>";
+						if($departementpost == NULL) //ajout
+						{
+							echo "<div class='new'>" . $departement . "</div>";
+						}
+						else
+						{
+							echo "<div class='old'>" . $departementpost . "</div>";
+							echo "<div class='new'>" . $departement . "</div>";
+						}
+						$sql = "UPDATE modification SET departement = '$departement' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 				if($region != $regionpost && $region != NULL)
 				{
-					if($regionpost == NULL)
-					{
-						echo "région ajoutée";
-						echo '<br>';
-						echo "nouvelle valeur : ";
-						echo $region;
-					}
-					else
-					{
-						echo "région modifiée";
-						echo '<br>';
-						echo "ancienne valeur : ";
-						echo $regionpost;
-						echo '<br>';
-						echo "nouvelle valeur : ";
-						echo $region;
-					}
-					echo '<br>';
-					echo "pays associé : ";
-					echo $pays;
-					echo '<br>';
-					echo '<br>';
-					$sql = "UPDATE modification SET region = '$region', pays = '$pays' WHERE id = $idmodif"; 
-   					$query = mysqli_query($con, $sql);
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Région </div>";
+						if($regionpost == NULL)
+						{
+							echo "<div class='new'>" . $region . "</div>";
+						}
+						else
+						{
+							echo "<div class='old'>" . $regionpost . "</div>";
+							echo "<div class='new'>" . $region . "</div>";
+						}
+						echo "<div class='title'> Pays </div>";
+						echo "<div class='new'>" . $pays . "</div>";
+						$sql = "UPDATE modification SET region = '$region', pays = '$pays' WHERE id = $idmodif"; 
+	   					$query = mysqli_query($con, $sql);
+	   				echo "</div>";
 				}
 				?>
 			</div>
+		</div>
+		<?php include('contenu/footer.html'); ?>
 	</body>
 	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
 </html>

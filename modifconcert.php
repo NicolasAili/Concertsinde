@@ -100,7 +100,7 @@
 					}
 					?>
 					<h1 class="titre"> Modifier un concert </h1>
-					<form method="post" id="connect" action="action/modifconcertvalid.php">
+					<form method="post" id="connect" action="modifconcertvalid.php">
 						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
 						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
 						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
@@ -262,12 +262,11 @@
 							<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
 							<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
 							<input type="button" value="Effacer tous les champs" onclick="erase();">
+    						<input type="button" value="Annuler" onclick="redirect();">
 						</div>
 						<input type="hidden" id="resetform">
 					</form>
-					<form method="post" action="allconcerts.php">
-    					<button type="submit">Annuler</button>
-					</form>
+					
 				<?php
 				}
 				else if($action == 'Supprimer')

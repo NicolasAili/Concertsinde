@@ -169,9 +169,18 @@ input.bouton
   display: flex;
 }
 
-#nomdpt
+#ouisaisie
 {
+  margin-left: 10%;
+  width: 35%;
+  margin-right: 5%;
+}
 
+#nonsaisie
+{
+  margin-left: 5%;
+  width: 35%;
+  margin-right: 10%;
 }
 
 #res, #resx, #resv, #resw

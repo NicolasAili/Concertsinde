@@ -45,19 +45,20 @@
 		if($row['admin'] == 2)
 		{
 			$hide = $_GET['hide'];
-			$count = 0;
+			$count = 1;
 			if(!$hide || $hide == 'no')
 			{
-				$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type FROM probleme, utilisateur WHERE utilisateur=ID_user";
+				$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user";
 			}
 			else
 			{
-				$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2";
+				$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2";
 			}
 			
 			$query = mysqli_query($con ,$sql);?>
 
-
+			<a href="saccueil.php">retour accueil</a>
+			<br>
 			<input type="checkbox" onclick='window.location.assign(<?php echo '"'; echo 'contact.php?';
 			if($hide == 'yes')
 			{
@@ -90,6 +91,7 @@
 		    		<th scope="col">Numero</th>
 			        <th scope="col">Type</th>
 			        <th scope="col">Utilisateur</th>
+			        <th scope="col">Sujet</th>
 			        <th scope="col">date_soumission</th>
 			        <th scope="col">resolu</th>
 			        <th scope="col">lu</th>
@@ -99,22 +101,38 @@
 						$count++;
 						$pseudo = $row['pseudo'];
 
-						if($row['lu'] == 0){echo "<strong>";}
+						//if($row['lu'] == 0){echo "<strong>";}
+
 						?>
 						<form method="post" id="connect" action="contactmodif.php">
 							<tr>
+								<?php 
+								if($row['lu']==1)
+								{
+									$i = 1;
+									while ($i < 8) 
+									{
+										$x = 7*($count-1)+$i;
+										$i++;
+										echo "<style> th:nth-child($x) {font-weight:normal; color:#33cc00;} </style>";
+									}
+								}
+								?>
 								<th scope="row"><?php echo $count; ?></th>
 								<th> <?php if($row['type'] == 1){echo "Probleme concert";} else if($row['type'] == 2){echo "Probleme site";} else if($row['type'] == 3){echo "Contact";} ?></th>
 								<th> <?php echo $pseudo; ?></th>
+								<th> <?php echo $row['sujet']; ?></th>
 								<th> <?php echo $row['date_envoi']; ?></th>
 								<th> <?php if($row['resolu'] == 0){echo "non";}else if($row['resolu'] == 1){echo "en cours";}else{echo "oui";}?> </th>
 								<th> <?php if($row['lu']==0){echo "non";} else{echo "oui";} ?></th>
 								<input type="hidden" class="idcheck" name="idcheck" <?php echo 'value="' . $row['id'] . '"' ?> >
 								<td><input type="submit" value="Afficher" class="valider" name="modsuppr" href=""></td>
+								<?php //if($row['lu']==0){echo "<strong>";}?>
 							</tr>
 						</form>
 					<?php
-						if($row['lu'] == 0){echo "</strong>";}
+						//if($row['lu'] == 0){echo "</strong>";}
+						
 					}?>
 			</table><?php
 		}

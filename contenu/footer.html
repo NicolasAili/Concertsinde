@@ -23,4 +23,23 @@
 			$('footer').css('bottom', '0');
 		}
 	});
+
+	$( window ).resize(function() {
+		if($( window ).height() == $( document ).height())
+		{
+			if($( window ).height() - $( 'footer' ).height() < $( 'body' ).height()+15)
+			{
+				$('footer').css('position', 'static');
+			}
+			else
+			{
+				$('footer').css('position', 'absolute');
+				$('footer').css('bottom', '0');
+			}
+		}
+		else
+		{
+			$('footer').css('position', 'static');
+		}
+	});
 </script>

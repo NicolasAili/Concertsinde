@@ -44,6 +44,8 @@
 				$pays = $_POST['pays'];
 				$testvle = 0;
 
+				echo $ville;
+
 				$sql = "SELECT datec FROM concert WHERE nom_artiste = '$artiste'";
 				$query = mysqli_query($con, $sql);
 				while($row = mysqli_fetch_array($query)) 
@@ -99,7 +101,8 @@
 					{
 						if(!$dpt) //le departement n'existe pas
 						{
-							$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
+							$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; 
+							//ajout département en BDD
 							mysqli_query($con, $insertdpt);
 							if($region) //la region est renseignée
 							{
@@ -111,6 +114,7 @@
 								{
 									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
 									mysqli_query($con, $insertrgn);
+									echo $insertrgn;
 								}
 								$query = mysqli_query($con, $idrgn);
 								$row = mysqli_fetch_array($query);

@@ -38,7 +38,7 @@ $admin = $row['admin'];
 		<a href="news.php" class="li"><div class="txtli">Actualités</div></a>
 		<a href="artistes.php" class="li"><div class="txtli">Artistes</div></a>
 		<a href="allconcerts.php" class="li"><div class="txtli">Concerts</div></a>
-		<a href="classement.php" class="li"><div class="txtli">Contributeurs</div></a>
+		<a href="classement.php" class="li"><div class="txtli">Classement</div></a>
 	</div>
 	<div id="side">
 		<div class="ajoutconcert">
@@ -97,12 +97,12 @@ $admin = $row['admin'];
 				</div>
 				<div id="dropdown">
 					<a href="./profil.php" class="fonction"> ♟ Profil </a>
-					<a href="./inbox.php" class="fonction"> ✉ Messages </a>
-					<a href="./support.php" class="fonction"> ❓ Requêtes </a>
+					<a href="./inbox.php" class="fonction"> ✉ Messages <span id="msgcount"><?php if($count == 1){echo "➊";}else if($count == 2){echo "➋";}else if($count>2){echo "➋+";}?></span>
+					</a>
+					<a href="./support.php" class="fonction"> <span id="req">?</span>Requêtes </a>
 					<a href="./resetpassword.php" class="fonction"> ⚒ Paramètres </a>
 					<a href="./action/deconnexion.php" class="fonction" onmouseover="off()" onmouseleave="offleave()"> 
-						<img src="image/off.png" alt="deconnexion" id="off" height="10px" width="11px"/>
-						Déconnexion 
+						<img src="image/off.png" alt="deconnexion" id="off" height="10px" width="11px"/>Déconnexion 
 					</a>
 				</div>
 				<?php

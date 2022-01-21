@@ -18,8 +18,9 @@
 #hcun
 {
 	display: flex;
-	font-size: 2.5em;
-	padding-left: 2%;
+	font-size: 2em;
+	width: 100%;
+	margin-left: 3%;
 }
 
 #hconcert
@@ -81,6 +82,10 @@
 	justify-content: center;
 }
 
+.center span
+{
+	padding-left: 5px;
+}
 
 ul, li
 {

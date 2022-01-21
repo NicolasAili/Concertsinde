@@ -63,7 +63,7 @@ if($idcheckmodif)
 					echo "<div class='title'> Type </div>"; if($row['type'] == 1){echo "Probleme concert";} else if($row['type'] == 2){echo "Probleme site";} else if($row['type'] == 3){echo "Contact";}?>
 				</div>
 				<div id="main">
-					<a href="support.php"> < Retour vers mes demandes</a>
+					<a href="support.php"> ⬅ Retour vers mes demandes</a>
 					<?php
 					switch($row['type'])
 					{

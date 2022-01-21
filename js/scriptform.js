@@ -267,6 +267,7 @@ function getdata(identifiant)
 					response( data );
                     if(data.length == 1 && data[0].label == request.term)
                     {
+                        $( '#'+identifiant+'' ).autocomplete( "close" );
                         getleave(identifiant);
                     }
 				}
@@ -274,7 +275,7 @@ function getdata(identifiant)
 		},
 		select: function (event, ui) {
 			// Set selection
-			$( this ).val(ui.item.label); // display the selected text
+			$( this ).val(ui.item.label); // display the selected text in the field
             getleave(this.id);
 			return false;
 		}
@@ -676,6 +677,11 @@ function erase()
     $('#adresse').val('');
     $('#adresse').attr("placeholder", '');
     $('#fb').val('');
+}
+
+function redirect()
+{
+    window.location.href = "allconcerts.php";
 }
 
 function off() 

@@ -15,27 +15,30 @@
 		<?php
 			include 'php/base.php'; 
 			include 'php/css.php'; 
+			include 'php/js.php';
 			include 'contenu/reseaux.php';
 			require('php/database.php');
 		?>
-		<link rel="stylesheet" type="text/css" href="css/body/connexion.css">
+		<link rel="stylesheet" type="text/css" href="css/body/oubli.css">
 	</head>
 	<body>
 		<header>
 			<?php include('contenu/header.php'); ?>
-			<?php require "action/messages.php"; ?> 
 		</header>
-		<div id="reset">
-			<h2> Entrez l'adresse mail liée à votre compte </h2>
-			<h5> Courriel </h5>
-			<form class="searchbar" action="action/sendmail.php" method="post">
-				<input class="champ"  type="recherche" name="mail">
-				<input class="o-search-submit" name="search" type="submit" value="Envoyez-moi un lien">
-			</form>
+		<div id="main">
+			<div id="reset">
+				<h2> Réinitialisation </h2>
+				<h5> Email </h5>
+				<form class="email" action="action/sendmail.php" method="post">
+					<input class="emailinput"  type="recherche" name="mail">
+					<hr>
+					<input class="submit" name="search" type="submit" value="✔ Envoyez-moi un lien">
+				</form>
+			</div>
 		</div>
 		<?php 
 		require "action/messages.php";
-		include('contenu/footer.html');
+		//include('contenu/footer.html');
 		?> 
 	</body>
 </html>

@@ -39,7 +39,8 @@
 			$sql = "SELECT id, date_debut, date_fin, actif FROM session ORDER BY id DESC";
 			$query = mysqli_query($con, $sql);
 			?>
-
+			<a href="saccueil.php">retour accueil</a>
+			<br>
 			<h2> Ajouter une session </h2>
 			<br>
 			<form method="post" id="connect" action="sessionmodif.php">

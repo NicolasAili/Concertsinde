@@ -1,0 +1,64 @@
+#reset
+{
+	margin-left: 32%;
+	margin-right: 32%;
+	padding-left: 3%;
+	padding-right: 3%;
+	background-color: #f0e3dc;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	margin-top: 50px;
+	display: block;
+}
+
+#reset h2
+{
+	font-size: 30px;
+	font-family: 'Roboto', Sans-Serif;
+	font-weight: normal;
+	margin-top: 0;
+}
+
+.email
+{
+	display: block;
+	margin-left: 0;
+}
+
+.emailinput
+{
+	border-color: #c33;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+h5
+{
+	margin: 0;
+}
+
+hr
+{
+	margin-bottom: 15px;
+}
+
+.submit
+{
+	display: block;
+	background-color: #3692e7;
+	color: white;
+	width: 100%;
+	text-transform: uppercase;
+	padding: 0.8em 1em;
+	border: none;
+	cursor: pointer;
+	text-align: center;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	white-space: nowrap;
+	/*display: inline-block;*/
+	transition: all 150ms;
+}

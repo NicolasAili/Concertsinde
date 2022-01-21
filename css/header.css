@@ -9,7 +9,7 @@
 	justify-content: space-between;
 	top: 0;
 	left: 0;
-	position: fixed; 
+	position: absolute; 
 	z-index: 2;
 	height: 4rem;
 	width: 100%;
@@ -268,15 +268,27 @@ h1 a
 	color: white;
 }
 
-.fonction:nth-of-type(4) img
+.fonction:nth-of-type(5):hover
+{
+	background-color: #830000;
+}
+
+#off
 {
 	margin-left: 2px;
 	margin-right: 6px;
 }
 
-.fonction:nth-of-type(4):hover
+#req
 {
-	background-color: #830000;
+	margin-left: 3px;
+	margin-right: 7px;
+}
+
+#msgcount
+{
+	color: #e60000;
+	padding-left: 4px;
 }
 
 

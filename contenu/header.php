@@ -34,11 +34,11 @@ $admin = $row['admin'];
 			<h1> <a href="accueil.php" id="logo"> Arpenid <div id="com">.com</div></a> </h1><?php
 		}?>
 			
-		<a href="presentation.php" class="li"><div class="txtli">Fonctionnement</div></a>
-		<a href="news.php" class="li"><div class="txtli">Actualités</div></a>
-		<a href="artistes.php" class="li"><div class="txtli">Artistes</div></a>
-		<a href="allconcerts.php" class="li"><div class="txtli">Concerts</div></a>
-		<a href="classement.php" class="li"><div class="txtli">Classement</div></a>
+		<a href="presentation.php" class="li fonctionnementup"><div class="txtli fonctionnement">Fonctionnement</div></a>
+		<a href="news.php" class="li actualitesup"><div class="txtli actualites">Actualités</div></a>
+		<a href="artistes.php" class="li artistesup"><div class="txtli artistes">Artistes</div></a>
+		<a href="allconcerts.php" class="li concertsup"><div class="txtli concerts">Concerts</div></a>
+		<a href="classement.php" class="li classementup"><div class="txtli classement">Classement</div></a>
 	</div>
 	<div id="side">
 		<div class="ajoutconcert">

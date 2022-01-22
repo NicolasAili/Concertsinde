@@ -1,3 +1,15 @@
+.classement
+{
+	color: #3a0101;
+	
+}
+
+.classementup
+{
+	border-left: 2px solid #3a0101;
+	background-color: white;
+}
+
 h2
 {
 	font-size: 2em;

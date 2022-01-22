@@ -1,3 +1,15 @@
+.fonctionnement
+{
+	color: #3a0101;
+	
+}
+
+.fonctionnementup
+{
+	border-left: 2px solid #3a0101;
+	background-color: white;
+}
+
 #main > div:not(#reseaux)
 {
 	display: none;

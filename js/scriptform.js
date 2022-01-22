@@ -469,18 +469,22 @@ function checkbox(identifiant)
             $("#resx").html('');
             if( $('input[name=checkint]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) 
             {
+                console.log("ok");
                 $('#sallediv').css('visibility', 'visible');
                 $('#sallediv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'hidden');
                 $('#extdiv').css('display', 'none');
                 $('#infos').children('input').val('');
                 $('#denom').val('');
+                $('#infosx').css('visibility', 'visible');
+                $('#infosx').css('display', 'contents');
+                $('#infos').css('visibility', 'visible');
+                $('#infos').css('display', 'contents');
+                $('#adresse, #ville, #cp, #departement, #region, #pays').val('Veuillez renseigner la salle');
                 if( $('input[name=checkext]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) et que le bouton ext est coché
                 {
                     $('#salle').val('');
                     $("#ext").prop("checked", false);
-                    $('#infos').css('visibility', 'hidden');
-                    $('#infos').css('display', 'none');
                 }
             }
            else if(!$('input[name=checkint]').prop('checked')) //si le bouton interieur était déjà coché avant (si on vient de le décocher)

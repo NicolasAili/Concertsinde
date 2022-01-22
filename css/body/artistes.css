@@ -1,3 +1,15 @@
+.artistes
+{
+	color: #3a0101;
+	
+}
+
+.artistesup
+{
+	border-left: 2px solid #3a0101;
+	background-color: white;
+}
+
 #main
 {
 	margin-left: 10%;

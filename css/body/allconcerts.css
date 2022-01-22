@@ -1,3 +1,15 @@
+.concerts
+{
+	color: #3a0101;
+	
+}
+
+.concertsup
+{
+	border-left: 2px solid #3a0101;
+	background-color: white;
+}
+
 #main
 {
 	width: 70%;

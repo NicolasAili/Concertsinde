@@ -37,3 +37,23 @@ h1.titre
 {
 	margin-top: 30px;
 }
+
+#submit input
+{
+  padding: 3px 12px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--color-btn-text);
+  background-color: var(--color-btn-bg);
+  border-color: var(--color-btn-border);
+  box-shadow: var(--color-btn-shadow),var(--color-btn-inset-shadow);
+  transition: .2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: all;
+  transition-property: color,background-color,border-color;
+  cursor: pointer;
+}
+
+#submit input
+{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}

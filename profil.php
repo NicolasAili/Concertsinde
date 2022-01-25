@@ -45,12 +45,18 @@
 		{
 			require('php/database.php');
 
+			$currentdate = date('Y-m-d');
+			$currentdate = new DateTime($currentdate);
+
 		    $pseudo = $_SESSION['pseudo'];
 			$requestpseudo = "SELECT id_user, date_inscription FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $requestpseudo);
 			$row = mysqli_fetch_array($query);
 			$idpseudo = $row['id_user'];
 			$dateregister = $row['date_inscription'];
+
+			$date = new DateTime($dateregister);
+			$intvl = $currentdate->diff($date);
 			
 			$sql = "SELECT date_debut, date_fin FROM session WHERE actif = '1'";
 			$query = mysqli_query($con, $sql);
@@ -83,6 +89,18 @@
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 			$modifadd = $row['modifadd'];
+
+			$sql = "SELECT COUNT(points_session) AS classementsession FROM utilisateur WHERE points_session < $points_session";
+			echo $sql;
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$classementsession = $row['classementsession'];
+
+			$sql = "SELECT COUNT(points) AS classement FROM utilisateur WHERE points < $points";
+			$query = mysqli_query($con, $sql);
+			$row = mysqli_fetch_array($query);
+			$classement = $row['classement'];
+
 			?>
 
 			<div id="profil">
@@ -106,7 +124,7 @@
 						<?php
 						//$createtime = new DateTime($dateregister);
 						$newDate = date("d-m-Y", strtotime($dateregister));?>
-						<h3>Membre depuis le : </h3> <?php echo $newDate; ?> <br>
+						<h3>Membre depuis le : </h3> <?php echo $newDate; echo " (" . $intvl->days . " jours)"; ?> <br>
 						<h3>Nombre de concerts ajoutés cette session : </h3><?php echo $nbconcertsession; ?><br>
 						<h3>Nombre de concerts totaux ajoutés : </h3><?php echo $nbconcert; ?><br>
 						<h3>Nombre de concerts modifiés cette session : </h3><?php echo $modifaddsession; ?><br>
@@ -119,6 +137,8 @@
 						<div id="points">
 							<h3>Total des points pour la session en cours : </h3><?php echo $points_session; ?><br>
 							<h3>Total des points depuis la création du compte : </h3><?php echo $points; ?> <br>
+							<h3>Classement pour la session actuelle : </h3><?php echo $classementsession; ?> <br>
+							<h3>Classement général : </h3><?php echo $classement; ?> <br>
 						</div>
 					</div>
 				</div>

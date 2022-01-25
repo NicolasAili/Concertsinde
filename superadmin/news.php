@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Gestion des erreurs</title>
+		<title>Gestion des actualités</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
 		<link rel="stylesheet" type="text/css" href="contact.css" media="screen" />
@@ -49,7 +49,7 @@
 				<input name="userfile" type="file" />
 				<h3> Rubrique </h3>
 				<select id="rubrique" name="rubrique">
-				  <option value="Maj">Mise à jour</option>
+				  <option value="Mise à jour">Mise à jour</option>
 				  <option value="Maintenance">Maintenance</option>
 				  <option value="Actualité">Actualité</option>
 				  <option value="Sondage">Sondage</option>
@@ -59,6 +59,7 @@
 				  <option value="Album">Album</option>
 				  <option value="Tournée">Tournée</option>
 				  <option value="Divers">Divers</option>
+				  <option value="Information">Information</option>
 				</select>
 				<h3> Titre </h3>
 				<input type="text" name="titre">
@@ -66,8 +67,29 @@
 				<textarea name="soustitre" id="soustitre"></textarea>
 				<h3> Contenu </h3>
 				<textarea name="contenu" id="contenu"></textarea>
+				<br>
 				<input type="submit" name="submit" value="ajouter">
-			</form><?php
+			</form>
+			<hr>
+			<h1> Modifier ou supprimer une actu </h1>
+			<h3> Selectionner l'actualité à modifier ou à supprimer</h3>
+			<?php
+			$sql = "SELECT id, titre FROM actualites ORDER BY date DESC";
+			$result = mysqli_query($con ,$sql);?>
+			<form method="POST" class="newsajout" action="newsajout.php">
+				<select id="idactu" name="idactu">
+				<?php
+				while($row = mysqli_fetch_array($result)) 
+				{
+					echo '<option value="' . $row['id'] . '">' . $row['titre'] . '</option>';
+				}?>
+				</select>
+				<br>
+				<br>
+				<input type="submit" name="submit" value="modifier">
+				<input type="submit" name="submit" value="supprimer">
+			</form>
+			<?php
 		}
 		else
 		{

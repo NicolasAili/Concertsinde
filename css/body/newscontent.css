@@ -1,0 +1,40 @@
+#main
+{
+	margin-right: 10%;
+	margin-left: 10%;
+	font-family: "Spiegel", "Arial Narrow", Arial, sans-serif;
+}
+
+h1, h3
+{
+	text-align: center;
+}
+
+#main h1
+{
+	text-transform: uppercase;
+	font-size: 2.5rem;
+	font-style: italic;
+	font-weight: 800;
+	font-family: "Beaufort for LOL", serif;
+}
+
+h3
+{
+	font-size: 0.875rem;
+	line-height: 1.28571;
+	letter-spacing: 0.06em;
+	margin-top: 5px;
+	font-weight: normal;
+	margin-bottom: 90px;
+}
+
+#contenu
+{
+	line-height: 1.66667;
+	width: 100%;
+	color: rgb(1, 1, 1);
+	font-size: 18px;
+	line-height: 1.66667;
+	letter-spacing: 0.04em;
+}

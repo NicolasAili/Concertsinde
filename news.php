@@ -93,7 +93,7 @@
 
 					?>
 					<div class="content">
-						<a <?php echo 'href="newscontent?newsid=' . $row['id'] . '"'; ?>>
+						<a <?php echo 'href="newscontent.php?newsid=' . $row['id'] . '"'; ?>>
 							<img class="img" <?php echo 'src="' . $filename[0] . '"' ?>>
 							<div class="rubrique"><?php echo $row['rubrique'];?></div>
 							<h2><?php echo $row['titre'];?></h2>

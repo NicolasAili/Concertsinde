@@ -8,15 +8,6 @@
 	JS+JQuery : non
 	CSS : non
 */
-/*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
-*/
     session_start();
 ?>
 

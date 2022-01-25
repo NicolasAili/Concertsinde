@@ -1,11 +1,148 @@
+#main
+{
+	margin-left: 4%;
+	margin-right: 4%;
+	font-family: "Spiegel", "Arial Narrow", Arial, sans-serif;
+
+}
+
+#top
+{
+	display: flex;
+	margin-bottom: 100px;
+}
+
+.bandeauun, .bandeaudeux
+{
+	height: 75px;
+    position: relative;
+    width: 50%;
+    background-color: black;
+    text-transform: uppercase;
+	font-size: 16px;
+}
+
+.bandeauun
+{
+	background-color: #3a0101;
+	color: white;
+}
+
+.bandeauun:before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-top: 35px solid #DBCDC6;;
+    border-right: 35px solid #3a0101;
+    width: 0;
+}
+
+.bandeauun.statutbun:before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-top: 35px solid #DBCDC6;;
+    border-right: 35px solid white;
+    width: 0;
+}
+
+.bandeaudeux
+{
+	background-color: white;
+	color: black;
+	cursor: pointer;
+}
+
+.bandeaudeux:after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    border-bottom: 35px solid #DBCDC6;;
+    border-left: 35px solid white;
+    width: 0;
+}
+
+.bandeaudeux.statutbdeux:after
+{
+	content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    border-bottom: 35px solid #DBCDC6;;
+    border-left: 35px solid #3a0101;
+    width: 0;
+}
+
+.contenub
+{
+	text-align: center;
+}
+ 
+#scene, #site
+{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#scene
+{
+	visibility: hidden;
+	display: none;
+}
+
 .actualites
 {
 	color: #3a0101;
-	
 }
 
 .actualitesup
 {
 	border-left: 2px solid #3a0101;
 	background-color: white;
+}
+
+.content
+{	
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 29%;
+	margin-bottom: 100px;
+	line-height: 1.2;
+}
+
+.img
+{
+	width: 100%;
+	margin: auto;
+}
+
+.rubrique
+{
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	color: rgb(11, 198, 227);
+	text-transform: uppercase;
+}
+
+h2
+{
+	font-weight: bold;
+	font-size: 1.4rem;
+	letter-spacing: 0.9px;
+	margin-top: 0.3125rem;
+	color: black;
+}
+
+.date
+{
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.75px;
+	color: black;
+}
+
+a
+{
+	text-decoration: none;
+	cursor: pointer;
 }

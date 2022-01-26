@@ -34,6 +34,7 @@
     		}
     		else
     		{
+    			session_set_cookie_params(20); 
 				$_SESSION['pseudo'] = $row['pseudo'];
 				/*$sql = "SELECT password FROM utilisateur WHERE pseudo = '$pseudo'";
 				$result = mysqli_query($con, $sql);
@@ -55,6 +56,7 @@
 	    		}
 	    		else
 	    		{
+	    			session_set_cookie_params(20); 
 					$_SESSION['pseudo'] = $row['pseudo'];
 					$_SESSION['password'] = $passwordh;
 					header('Location: ../allconcerts.php');

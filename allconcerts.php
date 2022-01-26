@@ -11,6 +11,7 @@
 ?>
 
 <?php
+	
     session_start();
 ?>
 <!DOCTYPE html>
@@ -588,11 +589,11 @@
 					}
 					else if ($add)
 					{
-						$strf = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'". $archivesql ."");
+						$strf = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'");
 					}			
 					else if ($modif)
 					{
-						$strf = sprintf("SELECT DISTINCT modification.id_concert FROM modification, concert WHERE id_user = '$modif'". $archivesql ."");
+						$strf = sprintf("SELECT DISTINCT modification.id_concert FROM modification, concert WHERE id_user = '$modif'");
 					}
 					else if($sqlquery)
 					{
@@ -737,7 +738,7 @@
 						$resultx = mysqli_query($con, $str);
 						$rowadd = mysqli_fetch_array($resultx);
 
-						$str = "SELECT pseudo FROM utilisateur, concert WHERE user_modif = '$pseudomodif' AND concert.user_ajout = utilisateur.id_user";
+						$str = "SELECT pseudo FROM utilisateur, concert WHERE user_modif = '$pseudomodif' AND concert.user_modif = utilisateur.id_user";
 						$resultx = mysqli_query($con, $str);
 						$rowmodif = mysqli_fetch_array($resultx);
 
@@ -1064,6 +1065,7 @@
 			</div>
 			<?php require "action/messages.php"; ?>
 		</div>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

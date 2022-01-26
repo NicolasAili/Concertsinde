@@ -18,7 +18,7 @@
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
-			include 'contenu/reseaux.php';
+			include 'contenu/reseaux.php'; 
 			session_start();
 			$currentdate = date('Y-m-d');
 			$currentdate = new DateTime($currentdate);
@@ -149,6 +149,7 @@
 				}?>
 			</div>
 		</div>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

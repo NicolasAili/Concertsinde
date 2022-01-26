@@ -83,6 +83,7 @@
 				</div>
 			</form>
 		</div>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 		<?php require "action/messages.php"; ?>
 	</body>

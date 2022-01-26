@@ -135,6 +135,7 @@
 			echo "Vous devez être connecté afin d'accéder à cette page";
 		}
 		?>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

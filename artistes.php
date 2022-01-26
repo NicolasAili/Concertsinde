@@ -178,6 +178,7 @@
 			</div>
 			<?php require "action/messages.php"; ?> 
 		</div>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

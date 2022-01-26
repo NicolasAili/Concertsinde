@@ -33,6 +33,7 @@ if($idcheckmodif)
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'php/js.php';
+    		session_start();
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/supportshow.css">
 	</head>
@@ -142,6 +143,7 @@ if($idcheckmodif)
 			?>
 
 		</div>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

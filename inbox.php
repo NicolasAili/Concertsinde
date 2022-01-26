@@ -117,6 +117,7 @@
 				}?>
 			</table><?php		
 		}?>
+		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>

@@ -90,13 +90,12 @@
 			$row = mysqli_fetch_array($query);
 			$modifadd = $row['modifadd'];
 
-			$sql = "SELECT COUNT(points_session) AS classementsession FROM utilisateur WHERE points_session < $points_session";
-			echo $sql;
+			$sql = "SELECT COUNT(points_session) AS classementsession FROM utilisateur WHERE points_session > $points_session";
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 			$classementsession = $row['classementsession'];
 
-			$sql = "SELECT COUNT(points) AS classement FROM utilisateur WHERE points < $points";
+			$sql = "SELECT COUNT(points) AS classement FROM utilisateur WHERE points > $points";
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 			$classement = $row['classement'];
@@ -122,7 +121,6 @@
 					<div id="infos">
 						<h2> Infos </h2>
 						<?php
-						//$createtime = new DateTime($dateregister);
 						$newDate = date("d-m-Y", strtotime($dateregister));?>
 						<h3>Membre depuis le : </h3> <?php echo $newDate; echo " (" . $intvl->days . " jours)"; ?> <br>
 						<h3>Nombre de concerts ajoutés cette session : </h3><?php echo $nbconcertsession; ?><br>

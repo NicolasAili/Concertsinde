@@ -16,7 +16,7 @@
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
-
+    		session_start();
 			require('php/database.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inscrire.css">

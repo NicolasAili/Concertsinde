@@ -18,7 +18,7 @@
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
-			include 'contenu/reseaux.php';
+			include 'contenu/reseaux.php'; 
 			session_start();
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/newscontent.css">

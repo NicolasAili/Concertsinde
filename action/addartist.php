@@ -9,8 +9,9 @@
   CSS : non
 */
 session_start();
+require('../php/database.php');
 
-$artiste = $_POST['artisteajout'];
+$artiste = mysqli_real_escape_string($con, $_POST['artisteajout']);
 $description = $_POST['description'];
 
 $artiste = ucfirst($artiste);
@@ -24,8 +25,6 @@ if(isset($_SESSION['pseudo']) == null)
 
 if( isset( $_POST['artisteajout'] ) )
 {
-  require('../php/database.php');
-
   //echo $artiste;
   //echo "<br>";
   //echo $description;

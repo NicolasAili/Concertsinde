@@ -47,6 +47,8 @@
 
 			$str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$searchfield'";
 			$result = mysqli_query($con, $str);
+			/*$row = mysqli_fetch_array($result);
+			echo $row['pseudo'];*/
 			?>
 				<h1> Resultat de recherche pour "<?php echo $searchfield; ?>" </h1> 
 				<?php
@@ -277,8 +279,6 @@
 					<?php
 				}
 			}
-
-
 
 			if($verif == 0)
 			{

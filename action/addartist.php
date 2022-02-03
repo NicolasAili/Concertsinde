@@ -10,9 +10,16 @@
 */
 session_start();
 require('../php/database.php');
+require ('../php/inject.php');
+$redirect = '../artistes.php';
 
-$artiste = mysqli_real_escape_string($con, $_POST['artisteajout']);
+$artiste = $_POST['artisteajout'];
+$artiste = inject($artiste, $redirect);
+
 $description = $_POST['description'];
+//$description = inject($description);
+
+
 
 $artiste = ucfirst($artiste);
 

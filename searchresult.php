@@ -18,7 +18,15 @@
 			include 'contenu/reseaux.php';
 
 			require('php/database.php');
+
+			require ('php/inject.php');
+			$redirect = 'allconcerts.php';
+
+			$searchfield = $_POST['searchfield'];
+			$searchfield = inject($searchfield, $redirect);
+
 			session_start();
+
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/searchresult.css">
 	</head>
@@ -28,9 +36,11 @@
 		</header>
 		<div id="main">
 			<?php	      
-			require('php/database.php');
+			
 
-			$searchfield = $_POST['searchfield'];
+			
+			
+			
 			$verif = 0;
 
 			$length = strlen($searchfield); //taille de la chaîne

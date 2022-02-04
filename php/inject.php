@@ -1,7 +1,7 @@
 
 <?php
 
-function inject($input, $redirect)
+function inject($input, $redirect, $regex)
 {	
 	if(file_exists("php/database.php")) 
 	{
@@ -12,7 +12,14 @@ function inject($input, $redirect)
   		require('../php/database.php');
 	}
 
-    preg_match('#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#', $input, $matches);
+    if (is_null($regex)) {
+    	preg_match('#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#', $input, $matches);
+    }
+    else
+    {
+    	preg_match($regex, $input, $matches);
+    }
+    
 	$matches = implode($matches);
 	if(strlen($matches) != strlen($input))
 	{

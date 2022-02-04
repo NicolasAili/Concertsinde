@@ -23,7 +23,7 @@
 			$redirect = 'allconcerts.php';
 
 			$searchfield = $_POST['searchfield'];
-			$searchfield = inject($searchfield, $redirect);
+			$searchfield = inject($searchfield, $redirect, null);
 
 			session_start();
 

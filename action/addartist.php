@@ -14,13 +14,13 @@ require ('../php/inject.php');
 $redirect = '../artistes.php';
 
 $artiste = $_POST['artisteajout'];
-$artiste = inject($artiste, $redirect);
+$artiste = inject($artiste, $redirect, null, 'artiste');
 
 $description = $_POST['description'];
-//$description = inject($description);
+$description = inject($description, $redirect, null, 'description');
 
 
-
+$artiste = strtolower($artiste);
 $artiste = ucfirst($artiste);
 
 if(isset($_SESSION['pseudo']) == null)

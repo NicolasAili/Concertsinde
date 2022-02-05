@@ -23,8 +23,40 @@
 			$redirect = 'allconcerts.php';
 
 			$searchfield = $_POST['searchfield'];
-			$searchfield = inject($searchfield, $redirect, null);
+			if (strlen($searchfield) < 3) {
+				 setcookie('contentMessage', 'Erreur: la recherche doit comporter au moins 3 caractères', time() + 30, "/");
+		    		header("Location: $redirect");
+		    		exit("Erreur: la recherche doit comporter au moins 3 caractères");
+			}
 
+			$values = array($searchfield);
+			$name = array('searchfield');
+
+
+			$inject = inject($values, null);
+			//array_push($inject, inject($test, $regextest));
+
+			$names = implode(", ", $inject);
+
+			if (count($inject)>0) 
+			{	
+				if (count($inject)>1)
+				{
+				    setcookie('contentMessage', 'Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 30, "/");
+		    		header("Location: $redirect");
+		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : " . $names . ".Réessayez ou contactez-nous");
+				}
+				else
+				{
+					setcookie('contentMessage', 'Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 30, "/");
+		    		header("Location: $redirect");
+		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : " . $names . ".Réessayez ou contactez-nous");
+				}
+			}
+			else
+			{
+				$searchfield = mysqli_real_escape_string($con, $searchfield);
+			}
 			session_start();
 
 		?>
@@ -35,10 +67,7 @@
 			<?php include('contenu/header.php'); ?>
 		</header>
 		<div id="main">
-			<?php	      
-			
-
-			
+			<?php	      		
 			
 			
 			$verif = 0;

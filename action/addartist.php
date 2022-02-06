@@ -10,14 +10,24 @@
 */
 session_start();
 require('../php/database.php');
+
 require ('../php/inject.php');
 $redirect = '../artistes.php';
 
 $artiste = $_POST['artisteajout'];
-$artiste = inject($artiste, $redirect, null, 'artiste');
-
 $description = $_POST['description'];
-$description = inject($description, $redirect, null, 'description');
+
+
+$values = array($artiste);
+$inject = inject($values, null);
+array_push($inject, inject($description, 'text'));
+
+/*$validate = validate($inject, $redirect);
+if($validate == 0)
+{
+  $artiste = mysqli_real_escape_string($con, $artiste);
+  $description = mysqli_real_escape_string($con, $description);
+}*/
 
 
 $artiste = strtolower($artiste);
@@ -30,7 +40,7 @@ if(isset($_SESSION['pseudo']) == null)
   exit("Erreur: vous devez être connectés afin de pouvoir ajouter un artiste");
 }
 
-if( isset( $_POST['artisteajout'] ) )
+/*if( isset( $_POST['artisteajout'] ) )
 {
   //echo $artiste;
   //echo "<br>";
@@ -59,3 +69,4 @@ else
   header("Location: ../artistes.php");
   exit("Erreur inconnue, merci de signaler cette erreur");
 }
+*/

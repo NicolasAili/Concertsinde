@@ -20,15 +20,19 @@ $description = $_POST['description'];
 
 $values = array($artiste);
 $inject = inject($values, null);
-array_push($inject, inject($description, 'text'));
 
-/*$validate = validate($inject, $redirect);
+$returnval = inject($description, 'text');
+if (!is_null($returnval)) 
+{
+  array_push($inject, $returnval);
+}
+
+$validate = validate($inject, $redirect);
 if($validate == 0)
 {
   $artiste = mysqli_real_escape_string($con, $artiste);
   $description = mysqli_real_escape_string($con, $description);
-}*/
-
+}
 
 $artiste = strtolower($artiste);
 $artiste = ucfirst($artiste);
@@ -40,11 +44,8 @@ if(isset($_SESSION['pseudo']) == null)
   exit("Erreur: vous devez être connectés afin de pouvoir ajouter un artiste");
 }
 
-/*if( isset( $_POST['artisteajout'] ) )
+if( isset( $_POST['artisteajout'] ) )
 {
-  //echo $artiste;
-  //echo "<br>";
-  //echo $description;
   $sql = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artiste' ";
   $query = mysqli_query($con, $sql);
   $row = mysqli_fetch_array($query);
@@ -69,4 +70,3 @@ else
   header("Location: ../artistes.php");
   exit("Erreur inconnue, merci de signaler cette erreur");
 }
-*/

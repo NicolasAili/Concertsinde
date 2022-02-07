@@ -24,6 +24,7 @@
 				}
 				$i++;
 			}
+			return $returnarr;
 		}
 		else //cas pour une regex modifié
 		{
@@ -33,7 +34,8 @@
 					$regex = '#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#';
 					break;
 				case 'text':
-					$regex = '#([a-zA-Z0-9\',\.() -ç?éêèà]+[\r\n]+)#';
+					//$regex = '#([a-zA-Z0-9\',\.() -ç?éêèà]+[\r\n]*)*#';
+					$regex = '#([a-zA-Z0-9\',\.() ç?!éêèàù;\-]+[\r\n]*)*#';
 					break;
 				case 'url':
 					$regex = '#(https?:\/\/)?[a-zA-Z0-9\.-]+\.[a-zA-Z]{2,4}(\/\S*)?#';
@@ -44,25 +46,23 @@
 					break;
 			}
 			preg_match($regex, $input, $matches);
-			
-			echo $input;
-			echo "<br>";
-			print_r($matches);
-			$matches = implode(" ", $matches);
-			echo "<br>";
-			echo $matches;
-			if(strlen($matches) != strlen($input))
+			if(strlen($matches[0]) != strlen($input))
 			{
-				echo "erreur";
 				$returnarr = $input;
 			}
+			else
+			{
+				$input = NULL;
+			}
+			return $input;
 		}
-		return $returnarr;
+		
 	}
 
 	function validate($inject, $redirect)
 	{
 		$names = implode(", ", $inject);
+		echo $names;
 
 			if (count($inject)>0) 
 			{	

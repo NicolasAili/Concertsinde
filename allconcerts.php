@@ -23,15 +23,12 @@
 			include 'php/js.php';
 			require('php/database.php');
 			include 'contenu/reseaux.php';
-		?>
-		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css">
-	</head>
-	<body>	
-		<header>
-			<?php include('contenu/header.php'); ?>
-		</header>
-		<div id="main">
-			<?php
+
+			require ('php/inject.php'); //0) ajouter inject et définir redirect
+			$redirect = 'allconcerts.php';
+
+			
+
 			require('php/database.php');
 
 			$string = $_SERVER['QUERY_STRING'];
@@ -47,17 +44,17 @@
 
 			$getfiltre = '0';
 
-			$getsalle = $_GET['salle'];
+			$getsalle = $_GET['salle']; //pour filtrage initial
 			if(!$getsalle)
 			{
-				$getsalle = $_POST['salle'];
+				$getsalle = $_POST['salle']; //pour nb page
 				if($getsalle)
 				{
 					$getfiltre = '1';
-					$finalstring[0] = "salle=" . $getsalle;
+					$finalstring[0] = "salle=" . $getsalle; //pour les filtres et les archives
 				}
 			}
-			
+
 			$getville = $_GET['ville'];
 			if(!$getville)
 			{
@@ -67,7 +64,7 @@
 					$getfiltre = '1';
 					$finalstring[0] = "ville=" . $getville;
 				}
-			}
+			}	
 
 			$getcp = $_GET['cp'];
 			if(!$getcp)
@@ -113,11 +110,50 @@
 				}	
 			}
 
+			$sqlquery = $_POST['sqlquery'];
+
+			$values = array($getsalle, $getville, $getdepartement, $getregion); //1) mettre données dans un arrray
+			$inject = inject($values, null); //2) les vérifier
+
+			$returnval = inject($getcp, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($getnumdepartement, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($add, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($modif, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+
+			$validate = validate($inject, $redirect); //3)validation de tous les champs
+			if($validate == 0) //4) si pas d'injection : ajout des variables
+			{
+			  $getsalle = mysqli_real_escape_string($con, $getsalle);
+			  $getville = mysqli_real_escape_string($con, $getville);
+			  $getdepartement = mysqli_real_escape_string($con, $getdepartement);
+			  $getregion = mysqli_real_escape_string($con, $getregion);
+			  $getcp = mysqli_real_escape_string($con, $getcp);
+			  $getnumdepartement = mysqli_real_escape_string($con, $getnumdepartement);
+			  $add = mysqli_real_escape_string($con, $add);
+			  $modif = mysqli_real_escape_string($con, $modif);
+			}
+
 			$pseudo = $_SESSION['pseudo'];
 			$archive = $_GET['archive'];
 
 			$page = $_POST['page'];
-			$sqlquery = $_POST['sqlquery'];
+			
 			$i = 0; //compteur pour les pages
 			$n = $_POST['n']; //nb concerts à afficher par page
 			if(!$n)
@@ -160,16 +196,20 @@
 			{
 				$page = 1;
 			}
-
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css">
+	</head>
+	<body>	
+		<header>
+			<?php include('contenu/header.php'); ?>
+		</header>
+		<div id="main">
+			<?php
 
 			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 			$testadmin = $row['admin'];
-
-			
-
-
 
 			?>
 			<div id="ici">
@@ -573,19 +613,19 @@
 
 					}
 					else if ($getville) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'. $archivesql .ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'" . $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($getcp) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'. $archivesql .ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'". $archivesql ."ORDER BY". $filtre ."");
 					}
 					else if ($getdepartement) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'. $archivesql .ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'". $archivesql ." ORDER BY". $filtre );
 					}
 					else if ($getnumdepartement) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'. $archivesql .ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'". $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($getregion) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'. $archivesql .ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'". $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($add)
 					{
@@ -604,7 +644,7 @@
 						$strf = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
 					}
 					$result = mysqli_query($con, $strf);
-					
+
 					$search = "SELECT id_concert";
 					$replace = "SELECT COUNT(id_concert) AS countrec";
 					$count = str_replace($search, $replace, $strf);
@@ -616,6 +656,7 @@
 						$count = str_replace($search, $replace, $strf);
 					}
 					$countresult = mysqli_query($con, $count);
+
 
 					?>
 

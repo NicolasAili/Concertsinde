@@ -18,6 +18,17 @@
 
 	if ( isset($_POST['connexion'])) {
 		$pseudo = $_POST['pseudo'];
+
+		require ('../php/inject.php'); //0) ajouter inject et définir redirect
+		$redirect = '../connexion.php';
+
+		$values = array($pseudo); //1) mettre données dans un arrray
+		$inject = inject($values, null); //2) les vérifier
+		$validate = validate($inject, $redirect); //3)validation de tous les champs
+		if($validate == 0) //4) si pas d'injection : ajout des variables
+		{
+		  $pseudo = mysqli_real_escape_string($con, $pseudo); 
+		}
 		$password = $_POST['password'];
 		$passwordh = hash('sha512', $password);
 		$sql = "SELECT pseudo, banni FROM utilisateur WHERE pseudo = '$pseudo' AND password = '$passwordh'";

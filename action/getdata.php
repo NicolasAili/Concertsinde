@@ -14,6 +14,18 @@
   if( isset( $_POST['search'] ) )
   {
     $name = $_POST['search'];
+
+    require ('../php/inject.php'); //0) ajouter inject et définir redirect
+    $redirect = '../allconcerts.php';
+
+    $values = array($name); //1) mettre données dans un arrray
+    $inject = inject($values, null); //2) les vérifier
+    $validate = validate($inject, $redirect); //3)validation de tous les champs
+    if($validate == 0) //4) si pas d'injection : ajout des variables
+    {
+      $name = mysqli_real_escape_string($con, $name); 
+    }
+
     $test = $_POST['this'];
     
     require('../php/database.php');

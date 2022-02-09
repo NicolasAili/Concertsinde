@@ -10,15 +10,43 @@
 */?>
 <?php
 require('php/database.php');
-$idcheckmodif = $_POST['idcheckmodif'];
-$idcheck = $_GET['idcheck'];
-$idchecklink = $_GET['idchecklink'];
+$idcheckmodif = $_POST['idcheckmodif']; //var pour vérifier une modification
+$idcheck = $_GET['idcheck']; //requête à afficher
+$idchecklink = $_GET['idchecklink']; //var qui récupère l'id de la requête après une modification
 if($idchecklink)
 {
 	$idcheckmodif = NULL;
 	$idcheck = $idchecklink;
 }
-if($idcheckmodif)
+
+require ('php/inject.php'); //0) ajouter inject et définir redirect
+$redirect = 'support.php';
+
+$inject = array(); 
+$returnval = inject($idcheckmodif, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+if (!is_null($returnval)) 
+{
+  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+}
+$returnval = inject($idcheck, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+if (!is_null($returnval)) 
+{
+  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+}
+$returnval = inject($idchecklink, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+if (!is_null($returnval)) 
+{
+  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+}
+$validate = validate($inject, $redirect); //3)validation de tous les champs
+if($validate == 0) //4) si pas d'injection : ajout des variables
+{
+  $idcheckmodif = mysqli_real_escape_string($con, $idcheckmodif); 
+  $idcheck = mysqli_real_escape_string($con, $idcheck); 
+  $idchecklink = mysqli_real_escape_string($con, $idchecklink); 
+}
+
+if($idcheckmodif) //s'il y a eu modification
 {
 	$probleme = $_POST['probleme'];
 	$sql = "UPDATE probleme SET probleme = '$probleme', edited = '1', Date_edit = NOW() WHERE id = '$idcheckmodif'";

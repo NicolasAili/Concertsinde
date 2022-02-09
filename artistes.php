@@ -23,6 +23,19 @@
 			/*include 'php/js.php'; */
 			require('php/database.php');
 			include 'contenu/reseaux.php';
+
+			$artiste = $_POST['artiste'];
+
+			require ('php/inject.php'); //0) ajouter inject et définir redirect
+			$redirect = 'artistes.php';
+
+			$values = array($artiste); //1) mettre données dans un arrray
+			$inject = inject($values, null); //2) les vérifier
+			$validate = validate($inject, $redirect); //3)validation de tous les champs
+			if($validate == 0) //4) si pas d'injection : ajout des variables
+			{
+			  $artiste = mysqli_real_escape_string($con, $artiste); 
+			}
 		?>
 		 
 		<link rel="stylesheet" type="text/css" href="css/body/artistes.css">
@@ -74,7 +87,7 @@
 				</div>
 			</div>
 			<?php
-				$artiste = $_POST['artiste'];
+				
 				$cnt = 0;
 				if($filter == 'up')
 				{

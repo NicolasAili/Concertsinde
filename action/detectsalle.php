@@ -17,7 +17,7 @@
     $name = $_POST['input'];
 
     require('../php/database.php');
-    
+    $name = mysqli_real_escape_string($con, $name); 
     $response = array(); //var qui contiendra nos données JSON
     if($name)
     {
@@ -189,6 +189,11 @@
           {
             $response[] = array("test"=>'erreur');
           }
+        break;
+        default:
+          $response[] = array("test"=>'nodata');
+        break;
+
       }
     }
     else
@@ -196,6 +201,15 @@
        $response[] = array("test"=>'nodata');
     }
     echo json_encode($response); //on encode en JSON*/
+  }
+  switch (variable) {
+    case 'value':
+      # code...
+      break;
+    
+    default:
+      # code...
+      break;
   }
 ?>
 

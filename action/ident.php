@@ -21,10 +21,23 @@ if (isset($_POST['inscription']))
     $passwordh = hash('sha512', $_POST['password']);
     $cpassword = $_POST['cpassword'];
 
-    
-	
-    
-        
+    require ('../php/inject.php'); //0) ajouter inject et définir redirect
+    $redirect = '../inscrire.php';
+
+    $values = array($pseudo); //1) mettre données dans un arrray
+    $inject = inject($values, null); //2) les vérifier
+
+    $returnval = inject($email, 'mail'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+    if (!is_null($returnval)) 
+    {
+      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+    }
+
+    $validate = validate($inject, $redirect); //3)validation de tous les champs
+    if($validate == 0) //4) si pas d'injection : ajout des variables
+    {
+      $artiste = mysqli_real_escape_string($con, $artiste); 
+    }
             
     if ($pseudo && strlen($pseudo) > 3)
     {

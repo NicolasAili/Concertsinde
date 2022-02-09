@@ -143,7 +143,8 @@
 					<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 				</form>
 			</div>	
-			<?php include('contenu/footer.html'); ?>
+			<?php include('contenu/footer.html'); 
+			require "action/messages.php";?>
 		</div>
 	</body>
 </html>

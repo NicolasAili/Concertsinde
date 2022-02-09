@@ -27,6 +27,27 @@ if (isset($_POST['modif_password']))
 
 	$passwordh = hash('sha512', $password);
 
+	require ('../php/inject.php'); //0) ajouter inject et définir redirect
+	$redirect = '../resetpassword.php';
+
+	$inject = array(); 
+	$returnval = inject($mail, 'mail'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+	if (!is_null($returnval)) 
+	{
+	  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+	}
+	$returnval = inject($key, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+	if (!is_null($returnval)) 
+	{
+	  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+	}
+	$validate = validate($inject, $redirect); //3)validation de tous les champs
+	if($validate == 0) //4) si pas d'injection : ajout des variables
+	{
+	  $mail = mysqli_real_escape_string($con, $mail); 
+	  $key = mysqli_real_escape_string($con, $key); 
+	}
+
 
 	if($mail) //réinitialisation du mot de passe
 	{

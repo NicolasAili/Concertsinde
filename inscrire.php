@@ -62,6 +62,7 @@
 				</form>
 			</div>
 		</div>
-		<?php include('contenu/footer.html'); ?>
+		<?php include('contenu/footer.html'); 
+		require "action/messages.php"; ?> 
 	</body>
 </html>

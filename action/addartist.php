@@ -11,26 +11,26 @@
 session_start();
 require('../php/database.php');
 
-require ('../php/inject.php');
+require ('../php/inject.php'); //0) ajouter inject et définir redirect
 $redirect = '../artistes.php';
 
 $artiste = $_POST['artisteajout'];
 $description = $_POST['description'];
 
 
-$values = array($artiste);
-$inject = inject($values, null);
+$values = array($artiste); //1) mettre données dans un arrray
+$inject = inject($values, null); //2) les vérifier
 
-$returnval = inject($description, 'text');
+$returnval = inject($description, 'text'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
 if (!is_null($returnval)) 
 {
-  array_push($inject, $returnval);
+  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
 }
 
-$validate = validate($inject, $redirect);
-if($validate == 0)
+$validate = validate($inject, $redirect); //3)validation de tous les champs
+if($validate == 0) //4) si pas d'injection : ajout des variables
 {
-  $artiste = mysqli_real_escape_string($con, $artiste);
+  $artiste = mysqli_real_escape_string($con, $artiste); 
   $description = mysqli_real_escape_string($con, $description);
 }
 

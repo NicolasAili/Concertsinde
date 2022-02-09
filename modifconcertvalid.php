@@ -18,28 +18,11 @@
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
 			require('php/database.php');
-		?>
-		<link rel="stylesheet" type="text/css" href="css/body/modifconcertvalid.css">
-	</head>
-	
-	<body>
-		<header>
-			<?php include('contenu/header.php'); ?>
-		</header>
-		<?php	
-		function test_empty($input)
-		{
-			if ($input == NULL)
-			{
-				echo("pas d'ancienne valeur (ajout)");
-			}
-			else
-			{
-				echo $input;
-			}
-			echo '<br>';
-		}      
-			
+
+			require ('php/inject.php'); //0) ajouter inject et définir redirect
+			$redirect = 'allconcerts.php';
+
+
 			$idconcert = $_POST['idpost'];
 
 			$intext = $_POST['intext'];
@@ -119,226 +102,278 @@
 			$ticketpost = $_POST['ticketpost'];
 			$testticket = 0;
 
-			$pseudo = $_SESSION['pseudo'];
+			$values = array($salle, $sallepost, $ville, $villepost, $departement, $region, $ext, $pays); //1) mettre données dans un arrray
+			$inject = inject($values, null); //2) les vérifier
 
-			if($_POST['artiste'])
+			$returnval = inject($idconcert, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
 			{
-				setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 30, "/");
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($adresse, 'text'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($fb, 'url'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($ticket, 'url'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($cp, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($date, 'date'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$returnval = inject($heure, 'heure'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+
+			$validate = validate($inject, $redirect); //3)validation de tous les champs
+			if ($intext != 'int' && $intext != 'ext' && $intext != '') 
+			{
+				setcookie('contentMessage', 'Erreur: le concert doit être à l\'intérieur ou à l\'extérieur', time() + 30, "/");
+		    	header("Location: $redirect");
+		    	exit("Erreur: le concert doit être à l\'intérieur ou à l\'extérieur'");
+			}
+			if($validate == 0) //4) si pas d'injection : ajout des variables
+			{
+			  $salle = mysqli_real_escape_string($con, $salle);
+			  $sallepost = mysqli_real_escape_string($con, $sallepost); 
+			  $ville = mysqli_real_escape_string($con, $ville); 
+			  $villepost = mysqli_real_escape_string($con, $villepost); 
+			  $departement = mysqli_real_escape_string($con, $departement); 
+			  $region = mysqli_real_escape_string($con, $region); 
+			  $ext = mysqli_real_escape_string($con, $ext); 
+			  $pays = mysqli_real_escape_string($con, $pays); 
+			  $idconcert = mysqli_real_escape_string($con, $idconcert); 
+			  $adresse = mysqli_real_escape_string($con, $adresse); 
+			  $fb = mysqli_real_escape_string($con, $fb); 
+			  $ticket = mysqli_real_escape_string($con, $ticket); 
+			  $cp = mysqli_real_escape_string($con, $cp); 
+			  $date = mysqli_real_escape_string($con, $date); 
+			  $heure = mysqli_real_escape_string($con, $heure); 
+			}
+		?>
+		<link rel="stylesheet" type="text/css" href="css/body/modifconcertvalid.css">
+	</head>
+	
+	<body>
+		<header>
+			<?php include('contenu/header.php'); ?>
+		</header>
+		<?php	
+		function test_empty($input)
+		{
+			if ($input == NULL)
+			{
+				echo("pas d'ancienne valeur (ajout)");
+			}
+			else
+			{
+				echo $input;
+			}
+			echo '<br>';
+		}      
+
+		$pseudo = $_SESSION['pseudo'];
+
+		if($_POST['artiste'])
+		{
+			setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 30, "/");
+			header("Location: ../allconcerts.php");
+			exit("Erreur: il est interdit de modifier un artiste");
+		}
+
+		if($date != $datepost)
+		{
+			if($date < date("Y-m-d"))
+			{
+				setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 30, "/");
 				header("Location: ../allconcerts.php");
-				exit("Erreur: il est interdit de modifier un artiste");
+				exit("Erreur: la date saisie est inférieure à la date courante");
 			}
+			$testdate = 1;
+			$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";
+			mysqli_query($con, $sqldat);
+		}
 
-			if($date != $datepost)
+		$testmodif = 0;
+
+		$sql = "SELECT adresse FROM salle WHERE nom_salle = '$salle'";
+		$query = mysqli_query($con, $sql);
+		$row = mysqli_fetch_array($query);
+		$modifadresse = $row['adresse'];
+
+		$sql = "SELECT nom_ville FROM ville, salle WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id ";
+		$query = mysqli_query($con, $sql);
+		$row = mysqli_fetch_array($query);
+		$modifville = $row['nom_ville'];
+
+		/*echo "_______________________";
+		echo "<br>";
+		echo $intext;
+		echo $modifadresse;
+		echo "<br>";
+		echo $adresse;
+		echo "<br>";
+		echo "<br>";
+		echo $modifville;
+		echo "<br>";
+		echo "_______________________";*/
+
+
+
+		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+		$query = mysqli_query($con, $requestpseudo);
+		$row = mysqli_fetch_array($query);
+		$idpseudo = $row['id_user'];
+
+		$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+		$query = mysqli_query($con, $idville);
+		$row = mysqli_fetch_array($query);
+		$vle = $row['ville_id'];
+
+		$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
+		$query = mysqli_query($con, $iddpt);
+		$row = mysqli_fetch_array($query);
+		$dpt = $row['numero'];
+
+		$idrgn = "SELECT id FROM region WHERE nom_region = '$region'"; //Verifier si la region existe
+		$query = mysqli_query($con, $idrgn);
+		$row = mysqli_fetch_array($query);
+		$rgn = $row['id'];
+		if(!$vle) //si la ville n'existe pas en BDD
+		{
+			$testvle = 1;
+			if($departement)
 			{
-				if($date < date("Y-m-d"))
+				if(!$dpt) //le departement n'existe pas
 				{
-					setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 30, "/");
-					header("Location: ../allconcerts.php");
-					exit("Erreur: la date saisie est inférieure à la date courante");
-				}
-				$testdate = 1;
-				$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";
-    			mysqli_query($con, $sqldat);
-			}
-
-			$testmodif = 0;
-
-			$sql = "SELECT adresse FROM salle WHERE nom_salle = '$salle'";
-			$query = mysqli_query($con, $sql);
-			$row = mysqli_fetch_array($query);
-			$modifadresse = $row['adresse'];
-
-			$sql = "SELECT nom_ville FROM ville, salle WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id ";
-			$query = mysqli_query($con, $sql);
-			$row = mysqli_fetch_array($query);
-			$modifville = $row['nom_ville'];
-
-			/*echo "_______________________";
-			echo "<br>";
-			echo $intext;
-			echo $modifadresse;
-			echo "<br>";
-			echo $adresse;
-			echo "<br>";
-			echo "<br>";
-			echo $modifville;
-			echo "<br>";
-			echo "_______________________";*/
-
-
-
-			$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
-			$query = mysqli_query($con, $requestpseudo);
-			$row = mysqli_fetch_array($query);
-			$idpseudo = $row['id_user'];
-
-			$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
-			$query = mysqli_query($con, $idville);
-			$row = mysqli_fetch_array($query);
-			$vle = $row['ville_id'];
-
-			$iddpt = "SELECT numero FROM departement WHERE nom_departement = '$departement'"; //Verifier si le departement existe
-			$query = mysqli_query($con, $iddpt);
-			$row = mysqli_fetch_array($query);
-			$dpt = $row['numero'];
-
-			$idrgn = "SELECT id FROM region WHERE nom_region = '$region'"; //Verifier si la region existe
-			$query = mysqli_query($con, $idrgn);
-			$row = mysqli_fetch_array($query);
-			$rgn = $row['id'];
-			if(!$vle) //si la ville n'existe pas en BDD
-			{
-				$testvle = 1;
-				if($departement)
-				{
-					if(!$dpt) //le departement n'existe pas
+					$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
+					mysqli_query($con, $insertdpt);
+					if($region) //la region est renseignée
 					{
-						$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
-						mysqli_query($con, $insertdpt);
-						if($region) //la region est renseignée
-						{
-							$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
-							$query = mysqli_query($con, $selectpays);
-							$row = mysqli_fetch_array($query);
-							$idpays = $row['id'];
-							if(!$rgn)
-							{
-								$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
-								mysqli_query($con, $insertrgn);
-							}
-							$query = mysqli_query($con, $idrgn);
-							$row = mysqli_fetch_array($query);
-							$rgn = $row['id'];
-							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
-							mysqli_query($con, $updatedpt);
-						}
-						$query = mysqli_query($con, $iddpt);
+						$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+						$query = mysqli_query($con, $selectpays);
 						$row = mysqli_fetch_array($query);
-						$nodpt = $row['numero'];
-						if($cp)
+						$idpays = $row['id'];
+						if(!$rgn)
 						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+							$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+							mysqli_query($con, $insertrgn);
 						}
-						else if(!$cp)
-						{
-
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
-						}
-						mysqli_query($con, $insertvle);
+						$query = mysqli_query($con, $idrgn);
+						$row = mysqli_fetch_array($query);
+						$rgn = $row['id'];
+						$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
+						mysqli_query($con, $updatedpt);
 					}
-					else if($dpt)
-					{
-						if($region)
-						{
-							$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
-							$query = mysqli_query($con, $selectpays);
-							$row = mysqli_fetch_array($query);
-							$idpays = $row['id'];
-							if(!$rgn)
-							{
-								$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
-								mysqli_query($con, $insertrgn);
-							}
-							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
-							mysqli_query($con, $updatedpt);
-						}
-						if($cp)
-						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
-							mysqli_query($con, $insertvle);
-						}
-						else if(!$cp)
-						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
-							mysqli_query($con, $insertvle);
-						}
-					}
-				}
-				else if(!$departement)
-				{
+					$query = mysqli_query($con, $iddpt);
+					$row = mysqli_fetch_array($query);
+					$nodpt = $row['numero'];
 					if($cp)
 					{
-						$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+						$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+					}
+					else if(!$cp)
+					{
+
+						$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
+					}
+					mysqli_query($con, $insertvle);
+				}
+				else if($dpt)
+				{
+					if($region)
+					{
+						$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+						$query = mysqli_query($con, $selectpays);
+						$row = mysqli_fetch_array($query);
+						$idpays = $row['id'];
+						if(!$rgn)
+						{
+							$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+							mysqli_query($con, $insertrgn);
+						}
+						$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
+						mysqli_query($con, $updatedpt);
+					}
+					if($cp)
+					{
+						$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
 						mysqli_query($con, $insertvle);
 					}
 					else if(!$cp)
 					{
-						$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
+						$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
 						mysqli_query($con, $insertvle);
 					}
 				}
 			}
-			else if($vle) //la ville existe
+			else if(!$departement)
 			{
-				if($departement) //le departement est renseigne
+				if($cp)
 				{
-					if(!$dpt) //... et il n'existe pas en BDD
-					{
-						$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
-						mysqli_query($con, $insertdpt);
+					$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+					mysqli_query($con, $insertvle);
+				}
+				else if(!$cp)
+				{
+					$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
+					mysqli_query($con, $insertvle);
+				}
+			}
+		}
+		else if($vle) //la ville existe
+		{
+			if($departement) //le departement est renseigne
+			{
+				if(!$dpt) //... et il n'existe pas en BDD
+				{
+					$insertdpt = "INSERT INTO departement (nom_departement) VALUES ('$departement')"; //ajout département en BDD
+					mysqli_query($con, $insertdpt);
 
-						$query = mysqli_query($con, $iddpt); //SELECT numero FROM departement WHERE nom_departement = '$departement'
+					$query = mysqli_query($con, $iddpt); //SELECT numero FROM departement WHERE nom_departement = '$departement'
+					$row = mysqli_fetch_array($query);
+					$nodpt = $row['numero'];
+
+					$updatedpt = "UPDATE ville SET ville_departement = '$nodpt' WHERE ville_id = '$vle' "; 
+					mysqli_query($con, $updatedpt);
+					if($region) //la région (et le pays) sont renseignés
+					{
+						$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+						$query = mysqli_query($con, $selectpays);
 						$row = mysqli_fetch_array($query);
-						$nodpt = $row['numero'];
-
-						$updatedpt = "UPDATE ville SET ville_departement = '$nodpt' WHERE ville_id = '$vle' "; 
-						mysqli_query($con, $updatedpt);
-						if($region) //la région (et le pays) sont renseignés
+						$idpays = $row['id'];
+						if(!$rgn)
 						{
-							$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
-							$query = mysqli_query($con, $selectpays);
-							$row = mysqli_fetch_array($query);
-							$idpays = $row['id'];
-							if(!$rgn)
-							{
-								$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
-								mysqli_query($con, $insertrgn);
-							}
-							$query = mysqli_query($con, $idrgn);
-							$row = mysqli_fetch_array($query);
-							$rgn = $row['id'];
-							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
-							mysqli_query($con, $updatedpt);
+							$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+							mysqli_query($con, $insertrgn);
 						}
-					}
-					else if($dpt) //le dpt existe en BDD
-					{
-						$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
+						$query = mysqli_query($con, $idrgn);
+						$row = mysqli_fetch_array($query);
+						$rgn = $row['id'];
+						$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 						mysqli_query($con, $updatedpt);
-						if($region)
-						{
-							$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
-							$query = mysqli_query($con, $selectpays);
-							$row = mysqli_fetch_array($query);
-							$idpays = $row['id'];
-
-							if(!$rgn)
-							{
-								$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
-								mysqli_query($con, $insertrgn);
-							}
-
-							$query = mysqli_query($con, $idrgn);
-							$row = mysqli_fetch_array($query);
-							$rgn = $row['id'];
-							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
-							mysqli_query($con, $updatedpt);
-						}
-						/*else if(!$region)
-						{
-							$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
-							$query = mysqli_query($con, $xxx);
-							$row = mysqli_fetch_array($query);
-							$yyy = $row['id'];
-							if($yyy)
-							{
-
-							}
-						}*/
 					}
 				}
-				else if(!$departement)
+				else if($dpt) //le dpt existe en BDD
 				{
+					$updatedpt = "UPDATE ville SET ville_departement = '$dpt' WHERE ville_id = '$vle' "; 
+					mysqli_query($con, $updatedpt);
 					if($region)
 					{
 						$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
@@ -355,16 +390,10 @@
 						$query = mysqli_query($con, $idrgn);
 						$row = mysqli_fetch_array($query);
 						$rgn = $row['id'];
-
-						$xxx = "SELECT ville_departement FROM ville WHERE nom_ville = '$ville'";
-						$query = mysqli_query($con, $xxx);
-						$row = mysqli_fetch_array($query);
-						$yyy = $row['ville_departement'];
-
-						$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE numero = '$yyy' "; //lien du departement avec la région
+						$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 						mysqli_query($con, $updatedpt);
 					}
-					else if(!$region)
+					/*else if(!$region)
 					{
 						$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
 						$query = mysqli_query($con, $xxx);
@@ -374,151 +403,191 @@
 						{
 
 						}
-					}
-				}
-				if($cp)
-				{
-					$updatevle = "UPDATE ville SET ville_code_postal = '$cp' WHERE ville_id = '$vle' ";
+					}*/
 				}
 			}
-		
+			else if(!$departement)
+			{
+				if($region)
+				{
+					$selectpays = "SELECT id FROM pays WHERE nom_pays = '$pays' "; //selectionner pays_id
+					$query = mysqli_query($con, $selectpays);
+					$row = mysqli_fetch_array($query);
+					$idpays = $row['id'];
 
-			if($intext != $intextpost) //si il y a eu changement de lieu
-			{
-				if($intext == "ext")
-				{
-					if($ville != $villepost)
+					if(!$rgn)
 					{
-						$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+						$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
+						mysqli_query($con, $insertrgn);
 					}
-					else
-					{
-						$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$villepost'";
-					}
-					$result = mysqli_query($con, $vleid);
-					$row = mysqli_fetch_array($result);
-					$idvle = $row['ville_id'];
-					$sql = "INSERT INTO salle (id_ville, adresse, nom_ext, intext) VALUES ('$idvle', '$adresse', '$ext', 'ext')";
-					mysqli_query($con, $sql);
-					$sql = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_ext = '$ext' AND ID_concert = '$idconcert'";
-					mysqli_query($con, $sql);
-				}
-			}
-			if($salle != $sallepost && $salle != NULL)
-			{
-				$testsalle = 1;
-				$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE nom_salle = '$salle'");
-				$row_cnt = mysqli_num_rows($result);
-				if($row_cnt<1) //si pas de ligne trouvée
-				{
-					$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
-					mysqli_query($con, $insertsalle);
-				}
-				/* Ferme le jeu de résultats */
-				mysqli_free_result($result);
-				$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = '$idconcert'";
-    			mysqli_query($con, $sqlsal);
-			}
-			else if($ext)
-			{
-				$testext = 1;
-				$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
-				mysqli_query($con, $sqlext);
-			}
 
-			if($heure != $heurepost)
-			{
-				$sqlheu = "UPDATE concert SET heure = '$heure' WHERE ID_concert = $idconcert";
-    			mysqli_query($con, $sqlheu);
-			}
-			if($ville != $villepost)
-			{
-				$testville = 1;
-				if(!$ext)
+					$query = mysqli_query($con, $idrgn);
+					$row = mysqli_fetch_array($query);
+					$rgn = $row['id'];
+
+					$xxx = "SELECT ville_departement FROM ville WHERE nom_ville = '$ville'";
+					$query = mysqli_query($con, $xxx);
+					$row = mysqli_fetch_array($query);
+					$yyy = $row['ville_departement'];
+
+					$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE numero = '$yyy' "; //lien du departement avec la région
+					mysqli_query($con, $updatedpt);
+				}
+				else if(!$region)
 				{
-					if($testsalle == 1)
+					$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
+					$query = mysqli_query($con, $xxx);
+					$row = mysqli_fetch_array($query);
+					$yyy = $row['id'];
+					if($yyy)
 					{
-						$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.nom_ville = '$ville'";
-	    				mysqli_query($con, $sqlville);
-	    			}
-	    			else if($testsalle == 0)
-					{
-						$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.nom_ville = '$ville'";
-	    				mysqli_query($con, $sqlvilleex);
-	    			}
-    			}
-    			else if($ext)
-    			{
-    				$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_ext = '$ext' AND ville.nom_ville = '$ville'";
-    				mysqli_query($con, $sqlville);
-    			}
+
+					}
+				}
 			}
-			if($cp != NULL)
+			if($cp)
 			{
-				$testcp = 1;
+				$updatevle = "UPDATE ville SET ville_code_postal = '$cp' WHERE ville_id = '$vle' ";
+			}
+		}
+	
+
+		if($intext != $intextpost) //si il y a eu changement de lieu
+		{
+			if($intext == "ext")
+			{
+				if($ville != $villepost)
+				{
+					$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+				}
+				else
+				{
+					$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$villepost'";
+				}
+				$result = mysqli_query($con, $vleid);
+				$row = mysqli_fetch_array($result);
+				$idvle = $row['ville_id'];
+				$sql = "INSERT INTO salle (id_ville, adresse, nom_ext, intext) VALUES ('$idvle', '$adresse', '$ext', 'ext')";
+				mysqli_query($con, $sql);
+				$sql = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_ext = '$ext' AND ID_concert = '$idconcert'";
+				mysqli_query($con, $sql);
+			}
+		}
+		if($salle != $sallepost && $salle != NULL)
+		{
+			$testsalle = 1;
+			$result = mysqli_query($con, "SELECT Nom_salle FROM salle WHERE nom_salle = '$salle'");
+			$row_cnt = mysqli_num_rows($result);
+			if($row_cnt<1) //si pas de ligne trouvée
+			{
+				$insertsalle = "INSERT INTO salle (nom_salle) VALUES ('$salle')";
+				mysqli_query($con, $insertsalle);
+			}
+			/* Ferme le jeu de résultats */
+			mysqli_free_result($result);
+			$sqlsal = "UPDATE concert, salle SET fksalle = salle.id_salle WHERE salle.nom_salle = '$salle' AND ID_concert = '$idconcert'";
+			mysqli_query($con, $sqlsal);
+		}
+		else if($ext)
+		{
+			$testext = 1;
+			$sqlext = "UPDATE concert, salle SET nom_ext = '$ext' WHERE salle.id_salle = concert.fksalle AND concert.id_concert = '$idconcert'";
+			mysqli_query($con, $sqlext);
+		}
+
+		if($heure != $heurepost)
+		{
+			$sqlheu = "UPDATE concert SET heure = '$heure' WHERE ID_concert = $idconcert";
+			mysqli_query($con, $sqlheu);
+		}
+		if($ville != $villepost)
+		{
+			$testville = 1;
+			if(!$ext)
+			{
 				if($testsalle == 1)
 				{
-					$sqlcp = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$salle'";
-    				mysqli_query($con, $sqlcp);
+					$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.nom_ville = '$ville'";
+    				mysqli_query($con, $sqlville);
     			}
     			else if($testsalle == 0)
 				{
-					$sqlcpex = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$sallepost'";
-    				mysqli_query($con, $sqlcpex);
+					$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.nom_ville = '$ville'";
+    				mysqli_query($con, $sqlvilleex);
     			}
 			}
-
-			if($adresse != $adressepost)
+			else if($ext)
 			{
-				$testadresse = 1;
-				if($salle)
+				$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_ext = '$ext' AND ville.nom_ville = '$ville'";
+				mysqli_query($con, $sqlville);
+			}
+		}
+		if($cp != NULL)
+		{
+			$testcp = 1;
+			if($testsalle == 1)
+			{
+				$sqlcp = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$salle'";
+				mysqli_query($con, $sqlcp);
+			}
+			else if($testsalle == 0)
+			{
+				$sqlcpex = "UPDATE salle SET CP = '$cp' WHERE Nom_salle = '$sallepost'";
+				mysqli_query($con, $sqlcpex);
+			}
+		}
+
+		if($adresse != $adressepost)
+		{
+			$testadresse = 1;
+			if($salle)
+			{
+				if($testsalle == 1)
 				{
-					if($testsalle == 1)
-					{
-						$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
-	    				mysqli_query($con, $sqladr);
-	    			}
-	    			else if($testsalle == 0)
-					{
-						$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
-	    				mysqli_query($con, $sqladrex);
-	    			}
-	    		}
-	    		else
-	    		{
-	    			$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE nom_ext = '$ext'";
-	    			mysqli_query($con, $sqladr);
-	    		}
-			}
-			else if($adresse == $adressepost && $salle != $sallepost)
-			{
-					if($testsalle == 1)
-					{
-						$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
-	    				mysqli_query($con, $sqladr);
-	    			}
-	    			else if($testsalle == 0)
-					{
-						$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
-	    				mysqli_query($con, $sqladrex);
-	    			}
-			}
+					$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqladr);
+    			}
+    			else if($testsalle == 0)
+				{
+					$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqladrex);
+    			}
+    		}
+    		else
+    		{
+    			$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE nom_ext = '$ext'";
+    			mysqli_query($con, $sqladr);
+    		}
+		}
+		else if($adresse == $adressepost && $salle != $sallepost)
+		{
+				if($testsalle == 1)
+				{
+					$sqladr = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$salle'";
+    				mysqli_query($con, $sqladr);
+    			}
+    			else if($testsalle == 0)
+				{
+					$sqladrex = "UPDATE salle SET adresse = '$adresse' WHERE Nom_salle = '$sallepost'";
+    				mysqli_query($con, $sqladrex);
+    			}
+		}
 
-			if($fb != $fbpost)
-			{
-				$testfb = 1;
-				$sqlfbu = "UPDATE concert SET lien_fb  = '$fb' WHERE  ID_concert = $idconcert";
-    			mysqli_query($con, $sqlfbu);
-			}
-			if($ticket != $ticketpost)
-			{
-				$testticket = 1;
-				$sqltic = "UPDATE concert SET lien_ticket = '$ticket' WHERE ID_concert = $idconcert";
-    			mysqli_query($con, $sqltic);
-			}
-			
-			$sql = "UPDATE concert SET user_modif = '$idpseudo', date_modif = NOW() WHERE id_concert = $idconcert";
-    		mysqli_query($con, $sql);
+		if($fb != $fbpost)
+		{
+			$testfb = 1;
+			$sqlfbu = "UPDATE concert SET lien_fb  = '$fb' WHERE  ID_concert = $idconcert";
+			mysqli_query($con, $sqlfbu);
+		}
+		if($ticket != $ticketpost)
+		{
+			$testticket = 1;
+			$sqltic = "UPDATE concert SET lien_ticket = '$ticket' WHERE ID_concert = $idconcert";
+			mysqli_query($con, $sqltic);
+		}
+		
+		$sql = "UPDATE concert SET user_modif = '$idpseudo', date_modif = NOW() WHERE id_concert = $idconcert";
+		mysqli_query($con, $sql);
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
 	<?php

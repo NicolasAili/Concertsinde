@@ -21,6 +21,23 @@
 			include 'php/js.php'; 
 			include 'contenu/reseaux.php';
 			require('php/database.php');
+
+			$idconcert = $_POST['idpost'];
+
+			require ('php/inject.php'); //0) ajouter inject et définir redirect
+			$redirect = 'allconcerts.php';
+
+			$inject = array(); 
+			$returnval = inject($idconcert, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+			if (!is_null($returnval)) 
+			{
+			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+			}
+			$validate = validate($inject, $redirect); //3)validation de tous les champs
+			if($validate == 0) //4) si pas d'injection : ajout des variables
+			{
+			  $idconcert = mysqli_real_escape_string($con, $idconcert); 
+			}
 		?>
 		<script src="js/verifmodifconcert.js"></script> 
 		
@@ -32,7 +49,7 @@
 		</header>
 		<div id="main">
 			<?php	      
-			$idconcert = $_POST['idpost'];
+			
 			$idsalle = $_POST['idsallepost'];
 			$artiste = $_POST['artistepost'];
 			$date = $_POST['datepost'];
@@ -271,7 +288,7 @@
 				}
 				else if($action == 'Supprimer')
 				{
-					$sql = "DELETE FROM Concert WHERE nom_artiste = '$artiste' AND datec = '$date' AND id_concert = '$idconcert'"; 
+					$sql = "DELETE FROM Concert WHERE id_concert = '$idconcert'"; 
 					mysqli_query($con, $sql);
 					setcookie('contentMessage', 'Concert supprimé', time() + 30, "/");
 					header("Location: allconcerts.php");

@@ -20,6 +20,76 @@
 			include '../php/css.php'; */
 				
 			require('../php/database.php');
+
+			$artiste = $_POST['artiste'];
+			$artiste = ucfirst($artiste); //met la première lettre en capitale
+			$date = $_POST['date'];
+			$heure = $_POST['heure'];
+			$ville = $_POST['ville'];
+			$salle = $_POST['salle'];
+			$denom = $_POST['denom'];
+			$fb = $_POST['fb'];
+			$ticket = $_POST['ticket'];
+			$adresse = $_POST['adresse'];
+			$cp = $_POST['cp'];
+			$departement = $_POST['departement'];
+			$region = $_POST['region'];
+			$pays = $_POST['pays'];
+
+			require ('../php/inject.php'); //0) ajouter inject et définir redirect
+		    $redirect = '../ajoutconcert.php';
+
+		    $values = array($artiste, $ville, $salle, $denom, $departement, $region, $pays); //1) mettre données dans un arrray
+		    $inject = inject($values, null); //2) les vérifier
+
+		    $returnval = inject($date, 'date'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		    if (!is_null($returnval)) 
+		    {
+		      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		    }
+		    $returnval = inject($heure, 'heure'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		    if (!is_null($returnval)) 
+		    {
+		      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		    }
+		    $returnval = inject($fb, 'url'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		    if (!is_null($returnval)) 
+		    {
+		      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		    }
+		    $returnval = inject($ticket, 'url'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		    if (!is_null($returnval)) 
+		    {
+		      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		    }
+		    $returnval = inject($cp, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		    if (!is_null($returnval)) 
+		    {
+		      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		    }
+		    $returnval = inject($adresse, 'text'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		    if (!is_null($returnval)) 
+		    {
+		      array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		    }
+
+		    $validate = validate($inject, $redirect); //3)validation de tous les champs
+		    if($validate == 0) //4) si pas d'injection : ajout des variables
+		    {
+		      $artiste = mysqli_real_escape_string($con, $artiste);
+		      $ville = mysqli_real_escape_string($con, $ville);
+		      $salle = mysqli_real_escape_string($con, $salle);
+		      $denom = mysqli_real_escape_string($con, $denom);
+		      $departement = mysqli_real_escape_string($con, $departement);
+		      $region = mysqli_real_escape_string($con, $region);
+		      $pays = mysqli_real_escape_string($con, $pays);
+		      $date = mysqli_real_escape_string($con, $date);
+		      $heure = mysqli_real_escape_string($con, $heure);
+		      $fb = mysqli_real_escape_string($con, $fb);
+		      $ticket = mysqli_real_escape_string($con, $ticket);
+		      $cp = mysqli_real_escape_string($con, $cp);
+		      $adresse = mysqli_real_escape_string($con, $adresse);
+		    }
 		?>
 		<link rel="stylesheet" type="text/css" href="../css/body/concert.css">
 	</head>
@@ -28,23 +98,7 @@
 		<?php	      
 			if (isset($_POST['concert']))
 			{
-				$artiste = $_POST['artiste'];
-				$artiste = ucfirst($artiste); //met la première lettre en capitale
-				$date = $_POST['date'];
-				$heure = $_POST['heure'];
-				$ville = $_POST['ville'];
-				$salle = $_POST['salle'];
-				$denom = $_POST['denom'];
-				$fb = $_POST['fb'];
-				$ticket = $_POST['ticket'];
-				$adresse = $_POST['adresse'];
-				$cp = $_POST['cp'];
-				$departement = $_POST['departement'];
-				$region = $_POST['region'];
-				$pays = $_POST['pays'];
 				$testvle = 0;
-
-				echo $ville;
 
 				$sql = "SELECT datec FROM concert WHERE nom_artiste = '$artiste'";
 				$query = mysqli_query($con, $sql);

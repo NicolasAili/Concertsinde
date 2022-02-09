@@ -31,7 +31,7 @@
 			switch ($regex) 
 			{
 				case 'num':
-					$regex = '#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#';
+					$regex = '#[0-9 ]+#';
 					break;
 				case 'text':
 					//$regex = '#([a-zA-Z0-9\',\.() -ç?éêèà]+[\r\n]*)*#';
@@ -40,7 +40,18 @@
 				case 'url':
 					$regex = '#(https?:\/\/)?[a-zA-Z0-9\.-]+\.[a-zA-Z]{2,4}(\/\S*)?#';
 					break;
-				
+				case 'identifier':
+					$regex = '#[0-9]{1,4}#';
+					break;
+				case 'date':
+					$regex = '#[0-9]{4}-[0-9]{2}-[0-9]{2}#';
+					break;
+				case 'heure':
+					$regex = '#[0-9]{2}:[0-9]{2}:[0-9]{2}#';
+					break;
+				case 'mail':
+					$regex = '^[a-zA-Z-0-9]+\.{0,1}[a-zA-Z-0-9]+@[a-zA-Z-0-9]+\.[a-zA-Z0-9]{2,6}$';
+					break;
 				default:
 					$regex = '#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#';
 					break;

@@ -31,7 +31,7 @@ $query = mysqli_query($con, $sql);
 //echo "<br>";
 if(!$row = mysqli_fetch_array($query))
 {
-	setcookie('contentMessage', 'Erreur: cet email n\'est lié à aucun compte', time() + 30, "/");
+	setcookie('contentMessage', 'Erreur: cet email n\'est lié à aucun compte', time() + 15, "/");
     header("Location: ../oubli.php");
     exit("Erreur: cet email n\'est lié à aucun compte");
 }
@@ -82,7 +82,7 @@ echo "Test email sent";*/
 
 $sql = "INSERT INTO oublimdp (mail, keyid) VALUES ('$mail', '$key')";
 $query = mysqli_query($con, $sql);
-setcookie('contentMessage', 'Mail envoyé avec succès', time() + 30, "/");
+setcookie('contentMessage', 'Mail envoyé avec succès', time() + 15, "/");
 header("Location: ../oubli.php");
 exit("Mail envoyé avec succès");
 ?>

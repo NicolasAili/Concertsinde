@@ -118,7 +118,7 @@
 	}
 
 	if ($erreur == 1) {
-		setcookie('contentMessage', 'Erreur', time() + 30, "/");
+		setcookie('contentMessage', 'Erreur', time() + 15, "/");
 		header("Location: ../allconcerts.php");
 		exit("Erreur");
 	}
@@ -143,7 +143,7 @@
 	$row = mysqli_fetch_array($query);
 	$max = $row['id_max'];
 
-	/*setcookie('contentMessage', 'Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil', time() + 30, "/");
+	/*setcookie('contentMessage', 'Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil', time() + 15, "/");
 	header("Location: ../allconcerts.php");
 	exit('Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil');*/
 

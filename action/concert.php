@@ -106,7 +106,7 @@
 				{
 					if($date == $row['datec'])
 					{
-						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de le signaler', time() + 30, "/");
+						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de le signaler', time() + 15, "/");
 						header("Location: ../allconcerts.php");
 						exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
 					}
@@ -117,7 +117,7 @@
 				{
 					if($heure+2 > $row['heure'] && $heure-2 < $row['heure'])
 					{
-						setcookie('contentMessage', 'Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés. Vérifiez les concerts. Si vous pensez que cela est dû à une erreur, merci de le signaler', time() + 30, "/");
+						setcookie('contentMessage', 'Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés. Vérifiez les concerts. Si vous pensez que cela est dû à une erreur, merci de le signaler', time() + 15, "/");
 						header("Location: ../allconcerts.php");
 						exit("Erreur: COncert déjà saisi (même artiste et même date)");
 					}

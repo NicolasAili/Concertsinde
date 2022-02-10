@@ -24,7 +24,7 @@
 
 			$searchfield = $_POST['searchfield'];
 			if (strlen($searchfield) < 3) {
-				 setcookie('contentMessage', 'Erreur: la recherche doit comporter au moins 3 caractères', time() + 30, "/");
+				 setcookie('contentMessage', 'Erreur: la recherche doit comporter au moins 3 caractères', time() + 15, "/");
 		    		header("Location: $redirect");
 		    		exit("Erreur: la recherche doit comporter au moins 3 caractères");
 			}

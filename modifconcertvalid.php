@@ -144,7 +144,7 @@
 			$validate = validate($inject, $redirect); //3)validation de tous les champs
 			if ($intext != 'int' && $intext != 'ext' && $intext != '') 
 			{
-				setcookie('contentMessage', 'Erreur: le concert doit être à l\'intérieur ou à l\'extérieur', time() + 30, "/");
+				setcookie('contentMessage', 'Erreur: le concert doit être à l\'intérieur ou à l\'extérieur', time() + 15, "/");
 		    	header("Location: $redirect");
 		    	exit("Erreur: le concert doit être à l\'intérieur ou à l\'extérieur'");
 			}
@@ -192,7 +192,7 @@
 
 		if($_POST['artiste'])
 		{
-			setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 30, "/");
+			setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 15, "/");
 			header("Location: ../allconcerts.php");
 			exit("Erreur: il est interdit de modifier un artiste");
 		}
@@ -201,7 +201,7 @@
 		{
 			if($date < date("Y-m-d"))
 			{
-				setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 30, "/");
+				setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 15, "/");
 				header("Location: ../allconcerts.php");
 				exit("Erreur: la date saisie est inférieure à la date courante");
 			}
@@ -825,7 +825,7 @@
 															//echo "11ok";
 															if ($intext == $intextpost || $intext == NULL) 
 															{
-																setcookie('contentMessage', 'Erreur: aucun champ modifié', time() + 30, "/");
+																setcookie('contentMessage', 'Erreur: aucun champ modifié', time() + 15, "/");
 																header("Location: ./allconcerts.php");
 																exit("Erreur: aucun champ modifié");
 															}

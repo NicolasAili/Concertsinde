@@ -18,7 +18,19 @@
 <html lang="fr">
 	<head>
 		<?php
-			include 'php/base.php'; 
+
+		if (isset($_SESSION['pseudo'])) {
+			echo "CONNECTE";
+			setcookie("login", $_SESSION['pseudo'], time()+315360000);
+			setcookie("passwd",$_SESSION['password'], time()+315360000);
+		}
+		echo $_COOKIE['login'];
+		echo "<br>";
+		echo $_COOKIE['passwd'];
+			
+
+			require 'php/connectcookie.php';
+			include 'php/base.php';
 			include 'php/css.php'; 
 			include 'php/js.php';
 			require('php/database.php');
@@ -27,9 +39,6 @@
 			require ('php/inject.php'); //0) ajouter inject et définir redirect
 			$redirect = 'allconcerts.php';
 
-			
-
-			require('php/database.php');
 
 			$string = $_SERVER['QUERY_STRING'];
 			

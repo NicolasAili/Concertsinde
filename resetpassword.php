@@ -5,7 +5,7 @@
 	Emplacement : /
 	Connexion à la BDD :  oui
 	Contenu HTML : oui
-	JS+JQuery : non
+	JS+JQuery : nonx
 	CSS : oui
 */
 ?>
@@ -13,11 +13,27 @@
 <?php
     session_start();
     $key = $_GET['key'];
+
+    require ('php/inject.php'); //0) ajouter inject et définir redirect
+	$redirect = 'resetpassword.php';
+
+	$inject = array();
+	$returnval = inject($key, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+	if (!is_null($returnval)) 
+	{
+	  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+	}
+	$validate = validate($inject, $redirect); //3)validation de tous les champs
+	if($validate == 0) //4) si pas d'injection : ajout des variables
+	{
+	  $key = mysqli_real_escape_string($con, $key); 
+	}
+
     $valide = 0;
 
     if(isset($_SESSION['pseudo']) && $key)
 	{
-		setcookie('contentMessage', 'Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté', time() + 30, "/");
+		setcookie('contentMessage', 'Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté', time() + 15, "/");
 		header("Location: profil.php");
 		exit("Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté");
 	}
@@ -51,7 +67,7 @@
 				}
 				else
 				{
-					setcookie('contentMessage', 'Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau', time() + 30, "/");
+					setcookie('contentMessage', 'Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau', time() + 15, "/");
 					header("Location: oubli.php");
 					exit("Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau");
 				}

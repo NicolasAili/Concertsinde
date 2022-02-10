@@ -56,7 +56,7 @@ if (isset($_POST['modif_password']))
 		{
 			$sql = "UPDATE utilisateur SET password = '$passwordh' WHERE email = '$mail'";
 			$result = mysqli_query($con ,$sql);
-			setcookie('contentMessage', 'Mot de passe réinitialisé avec succès', time() + 30, "/");
+			setcookie('contentMessage', 'Mot de passe réinitialisé avec succès', time() + 15, "/");
 			header("Location: ../connexion.php");
 			exit("Mot de passe réinitialisé avec succès");
 
@@ -65,7 +65,7 @@ if (isset($_POST['modif_password']))
 		{
 			$sql = "UPDATE oublimdp SET actif = 1 WHERE keyid = '$key'";
 			$result = mysqli_query($con ,$sql);
-			setcookie('contentMessage', 'Erreur: le mot de passe saisi et sa confirmation ne correspondent pas, veuillez réessayer', time() + 30, "/");
+			setcookie('contentMessage', 'Erreur: le mot de passe saisi et sa confirmation ne correspondent pas, veuillez réessayer', time() + 15, "/");
 			header("Location: ../resetpassword.php?key=" . $key . "");
 			exit("Erreur: le mot de passe saisi et sa confirmation ne correspondent pas, veuillez réessayer");
 		}
@@ -80,20 +80,20 @@ if (isset($_POST['modif_password']))
 				$sql = "UPDATE utilisateur SET password = '$passwordh' WHERE pseudo = '$user'";
 				$result = mysqli_query($con ,$sql);
 				$_SESSION['password']=$newpassword;
-				setcookie('contentMessage', 'Mot de passe modifié avec succès !', time() + 30, "/");
+				setcookie('contentMessage', 'Mot de passe modifié avec succès !', time() + 15, "/");
 				header("Location: ../profil.php");
 				exit("Mot de passe modifié avec succès !");
 			}
 			else 
 			{	
-				setcookie('contentMessage', 'Erreur: le mot de passe saisi et sa confirmation ne correspondent pas, veuillez réessayer', time() + 30, "/");
+				setcookie('contentMessage', 'Erreur: le mot de passe saisi et sa confirmation ne correspondent pas, veuillez réessayer', time() + 15, "/");
 				header("Location: ../resetpassword.php");
 				exit("Erreur: le mot de passe saisi et sa confirmation ne correspondent pas, veuillez réessayer");
 			}
 		}
 		else 
 		{ 
-			setcookie('contentMessage', 'Erreur: le mot de passe actuel saisi est incorrect', time() + 30, "/");
+			setcookie('contentMessage', 'Erreur: le mot de passe actuel saisi est incorrect', time() + 15, "/");
 			header("Location: ../resetpassword.php");
 			exit("Le mot de passe actuel saisi est incorrect");
 		}

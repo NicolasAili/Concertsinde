@@ -32,8 +32,8 @@ $query = mysqli_query($con, $sql);
 if(!$row = mysqli_fetch_array($query))
 {
 	setcookie('contentMessage', 'Erreur: cet email n\'est lié à aucun compte', time() + 15, "/");
-    header("Location: ../oubli.php");
-    exit("Erreur: cet email n\'est lié à aucun compte");
+  header("Location: ../oubli.php");
+  exit("Erreur: cet email n\'est lié à aucun compte");
 }
 
 //supprimer les vieilles clés liées à ce mail

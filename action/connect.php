@@ -10,7 +10,7 @@
 */
 ?>
 <?php
-	require 'php/connectcookie.php';
+	require '../php/connectcookie.php';
 	require('../php/database.php');
 
 	if ( isset($_POST['connexion'])) {

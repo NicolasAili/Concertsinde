@@ -90,6 +90,23 @@ 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
 		$('#main').css('height', height);
 		$('#main').css('width', width);
     });
+    $( document ).ready(function() {
+        var width = $(window).width();
+		var height = $(window).height();
+		if (width<900)
+		{
+			alert('Le site mobile n\'est pas encore fonctionnel');
+		}
+    });
+
+    $(window).resize(function() 
+    {
+    	var width = $(window).width();
+		var height = $(window).height();
+		$('header').css('width', width);
+		$('#main').css('height', height);
+		$('#main').css('width', width);
+	});
 </script>
 
 

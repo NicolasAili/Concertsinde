@@ -15,7 +15,7 @@
 		<?php
 			/*include '../php/base.php'; 
 			include '../php/css.php'; */
-			require 'php/connectcookie.php';
+			require '../php/connectcookie.php';
 			require('../php/database.php');
 
 			$artiste = $_POST['artiste'];

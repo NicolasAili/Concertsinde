@@ -6,6 +6,24 @@ h1.titre
   margin-bottom: 30px;
 }
 
+form
+{
+  text-align: left;
+  line-height: 2em;
+}
+
+/*#artistediv, #datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv
+{
+  display: block;
+}*/
+
+input, label
+{
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+}
+
 .connect
 {  
   display: inline-block;

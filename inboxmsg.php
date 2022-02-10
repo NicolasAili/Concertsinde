@@ -10,12 +10,10 @@
 */
 ?>
 <!DOCTYPE html>
-<?php
-    session_start();
-?>
 <html lang="fr">
 	<head>
 		<?php
+			require 'php/connectcookie.php';
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'php/js.php';

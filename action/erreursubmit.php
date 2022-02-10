@@ -10,10 +10,7 @@
 */
 ?>
 <?php
-    session_start();
-?>
-<?php
-		      
+	require 'php/connectcookie.php';	 	     
 	require('../php/database.php');
 	
 	$type = $_POST['type'];

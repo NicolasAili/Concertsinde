@@ -8,7 +8,7 @@
   JS+JQuery : non
   CSS : non
 */
-session_start();
+require '../php/connectcookie.php';
 require('../php/database.php');
 
 require ('../php/inject.php'); //0) ajouter inject et définir redirect

@@ -10,7 +10,6 @@ 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
 	CSS : oui
 
 */
-    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">

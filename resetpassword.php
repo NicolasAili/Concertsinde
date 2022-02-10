@@ -11,7 +11,8 @@
 ?>
 <!DOCTYPE html>
 <?php
-    session_start();
+	require 'php/connectcookie.php';
+
     $key = $_GET['key'];
 
     require ('php/inject.php'); //0) ajouter inject et définir redirect

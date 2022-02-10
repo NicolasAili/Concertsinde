@@ -58,10 +58,10 @@ if($idcheckmodif) //s'il y a eu modification
 <html>
 	<head>
 		<?php
+			require 'php/connectcookie.php';
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'php/js.php';
-    		session_start();
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/supportshow.css">
 	</head>

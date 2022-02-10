@@ -13,6 +13,7 @@
 <html lang="fr">
 	<head>
 		<?php
+			require 'php/connectcookie.php';
 			include 'php/base.php'; 
 			include 'php/css.php'; 
 			include 'php/js.php';
@@ -21,24 +22,32 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/oubli.css">
 	</head>
-	<body>
-		<header>
-			<?php include('contenu/header.php'); ?>
-		</header>
-		<div id="main">
-			<div id="reset">
-				<h2> Réinitialisation </h2>
-				<h5> Email </h5>
-				<form class="email" action="action/sendmail.php" method="post">
-					<input class="emailinput"  type="recherche" name="mail">
-					<hr>
-					<input class="submit" name="search" type="submit" value="✔ Envoyez-moi un lien">
-				</form>
+	<?php
+	if(isset($_SESSION['pseudo']) == null)
+	{?>
+		<body>
+			<header>
+				<?php include('contenu/header.php'); ?>
+			</header>
+			<div id="main">
+				<div id="reset">
+					<h2> Réinitialisation </h2>
+					<h5> Email </h5>
+					<form class="email" action="action/sendmail.php" method="post">
+						<input class="emailinput"  type="recherche" name="mail">
+						<hr>
+						<input class="submit" name="search" type="submit" value="✔ Envoyez-moi un lien">
+					</form>
+				</div>
 			</div>
-		</div>
-		<?php 
-		require "action/messages.php";
-		//include('contenu/footer.html');
-		?> 
-	</body>
+			<?php 
+			require "action/messages.php";
+			//include('contenu/footer.html');
+			?> 
+		</body><?php
+	}
+	else
+	{
+		header("Location: profil.php");
+	}?> 
 </html>

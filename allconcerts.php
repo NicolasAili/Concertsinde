@@ -19,194 +19,190 @@
 	<head>
 		<?php
 
-		if (isset($_SESSION['pseudo'])) {
-			echo "CONNECTE";
-			setcookie("login", $_SESSION['pseudo'], time()+315360000);
-			setcookie("passwd",$_SESSION['password'], time()+315360000);
+		if (isset($_SESSION['pseudo']) && !isset($_COOKIE['login'])) 
+		{
+			setcookie("login", $_SESSION['pseudo'], time()+315360000, "/");
+			setcookie("passwd",$_SESSION['password'], time()+315360000, "/");
 		}
-		echo $_COOKIE['login'];
-		echo "<br>";
-		echo $_COOKIE['passwd'];
-			
+		
+		require 'php/connectcookie.php';
+		include 'php/base.php';
+		include 'php/css.php'; 
+		include 'php/js.php';
+		require('php/database.php');
+		include 'contenu/reseaux.php';
 
-			require 'php/connectcookie.php';
-			include 'php/base.php';
-			include 'php/css.php'; 
-			include 'php/js.php';
-			require('php/database.php');
-			include 'contenu/reseaux.php';
-
-			require ('php/inject.php'); //0) ajouter inject et définir redirect
-			$redirect = 'allconcerts.php';
+		require ('php/inject.php'); //0) ajouter inject et définir redirect
+		$redirect = 'allconcerts.php';
 
 
-			$string = $_SERVER['QUERY_STRING'];
-			
-			parse_str($string);
-			$finalstring = explode("&", $string);
-			$filtre = " datec ASC";
-			$archivesql = " AND concert.datec >= NOW()";
-			
-			$add = $_GET['add'];
-			$modif = $_GET['modif'];
-			$filter = $_GET['filter'];
+		$string = $_SERVER['QUERY_STRING'];
+		
+		parse_str($string);
+		$finalstring = explode("&", $string);
+		$filtre = " datec ASC";
+		$archivesql = " AND concert.datec >= NOW()";
+		
+		$add = $_GET['add'];
+		$modif = $_GET['modif'];
+		$filter = $_GET['filter'];
 
-			$getfiltre = '0';
+		$getfiltre = '0';
 
-			$getsalle = $_GET['salle']; //pour filtrage initial
-			if(!$getsalle)
+		$getsalle = $_GET['salle']; //pour filtrage initial
+		if(!$getsalle)
+		{
+			$getsalle = $_POST['salle']; //pour nb page
+			if($getsalle)
 			{
-				$getsalle = $_POST['salle']; //pour nb page
-				if($getsalle)
-				{
-					$getfiltre = '1';
-					$finalstring[0] = "salle=" . $getsalle; //pour les filtres et les archives
-				}
+				$getfiltre = '1';
+				$finalstring[0] = "salle=" . $getsalle; //pour les filtres et les archives
 			}
+		}
 
-			$getville = $_GET['ville'];
-			if(!$getville)
+		$getville = $_GET['ville'];
+		if(!$getville)
+		{
+			$getville = $_POST['ville'];
+			if($getville)
 			{
-				$getville = $_POST['ville'];
-				if($getville)
-				{
-					$getfiltre = '1';
-					$finalstring[0] = "ville=" . $getville;
-				}
+				$getfiltre = '1';
+				$finalstring[0] = "ville=" . $getville;
+			}
+		}	
+
+		$getcp = $_GET['cp'];
+		if(!$getcp)
+		{
+			$getcp = $_POST['cp'];
+			if($getcp)
+			{
+				$getfiltre = '1';
+				$finalstring[0] = "cp=" . $getcp;
+			}
+		}
+
+		$getdepartement = $_GET['departement'];
+		if(!$getdepartement)
+		{
+			$getdepartement = $_POST['departement'];
+			if($getdepartement)
+			{
+				$getfiltre = '1';
+				$finalstring[0] = "departement=" . $getdepartement;
+			}
+		}
+
+		$getnumdepartement = $_GET['numero'];
+		if(!$getnumdepartement)
+		{
+			$getnumdepartement = $_POST['numero'];
+			if($getnumdepartement)
+			{
+				$getfiltre = '1';
+				$finalstring[0] = "numero=" . $getnumdepartement;
+			}
+		}
+
+		$getregion = $_GET['region'];
+		if(!$getregion)
+		{
+			$getregion = $_POST['region'];
+			if($getregion)
+			{
+				$getfiltre = '1';
+				$finalstring[0] = "region=" . $getregion;
 			}	
+		}
 
-			$getcp = $_GET['cp'];
-			if(!$getcp)
-			{
-				$getcp = $_POST['cp'];
-				if($getcp)
-				{
-					$getfiltre = '1';
-					$finalstring[0] = "cp=" . $getcp;
-				}
-			}
+		$sqlquery = $_POST['sqlquery'];
 
-			$getdepartement = $_GET['departement'];
-			if(!$getdepartement)
-			{
-				$getdepartement = $_POST['departement'];
-				if($getdepartement)
-				{
-					$getfiltre = '1';
-					$finalstring[0] = "departement=" . $getdepartement;
-				}
-			}
+		$values = array($getsalle, $getville, $getdepartement, $getregion); //1) mettre données dans un arrray
+		$inject = inject($values, null); //2) les vérifier
 
-			$getnumdepartement = $_GET['numero'];
-			if(!$getnumdepartement)
-			{
-				$getnumdepartement = $_POST['numero'];
-				if($getnumdepartement)
-				{
-					$getfiltre = '1';
-					$finalstring[0] = "numero=" . $getnumdepartement;
-				}
-			}
+		$returnval = inject($getcp, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+		$returnval = inject($getnumdepartement, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+		$returnval = inject($add, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+		$returnval = inject($modif, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
 
-			$getregion = $_GET['region'];
-			if(!$getregion)
-			{
-				$getregion = $_POST['region'];
-				if($getregion)
-				{
-					$getfiltre = '1';
-					$finalstring[0] = "region=" . $getregion;
-				}	
-			}
+		$validate = validate($inject, $redirect); //3)validation de tous les champs
+		if($validate == 0) //4) si pas d'injection : ajout des variables
+		{
+		  $getsalle = mysqli_real_escape_string($con, $getsalle);
+		  $getville = mysqli_real_escape_string($con, $getville);
+		  $getdepartement = mysqli_real_escape_string($con, $getdepartement);
+		  $getregion = mysqli_real_escape_string($con, $getregion);
+		  $getcp = mysqli_real_escape_string($con, $getcp);
+		  $getnumdepartement = mysqli_real_escape_string($con, $getnumdepartement);
+		  $add = mysqli_real_escape_string($con, $add);
+		  $modif = mysqli_real_escape_string($con, $modif);
+		}
 
-			$sqlquery = $_POST['sqlquery'];
+		$pseudo = $_SESSION['pseudo'];
+		$archive = $_GET['archive'];
 
-			$values = array($getsalle, $getville, $getdepartement, $getregion); //1) mettre données dans un arrray
-			$inject = inject($values, null); //2) les vérifier
+		$page = $_POST['page'];
+		
+		$i = 0; //compteur pour les pages
+		$n = $_POST['n']; //nb concerts à afficher par page
+		if(!$n)
+		{
+			$n = $_GET['n'];;
+		}
 
-			$returnval = inject($getcp, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-			if (!is_null($returnval)) 
-			{
-			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-			}
-			$returnval = inject($getnumdepartement, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-			if (!is_null($returnval)) 
-			{
-			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-			}
-			$returnval = inject($add, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-			if (!is_null($returnval)) 
-			{
-			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-			}
-			$returnval = inject($modif, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-			if (!is_null($returnval)) 
-			{
-			  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-			}
+		$tri = $_POST['tri'];
+		$postfiltre;
 
-			$validate = validate($inject, $redirect); //3)validation de tous les champs
-			if($validate == 0) //4) si pas d'injection : ajout des variables
-			{
-			  $getsalle = mysqli_real_escape_string($con, $getsalle);
-			  $getville = mysqli_real_escape_string($con, $getville);
-			  $getdepartement = mysqli_real_escape_string($con, $getdepartement);
-			  $getregion = mysqli_real_escape_string($con, $getregion);
-			  $getcp = mysqli_real_escape_string($con, $getcp);
-			  $getnumdepartement = mysqli_real_escape_string($con, $getnumdepartement);
-			  $add = mysqli_real_escape_string($con, $add);
-			  $modif = mysqli_real_escape_string($con, $modif);
-			}
+		if(!$filter)
+		{
+			$filter = $tri;
+		}
+		else
+		{
+			$tri = $filter;
+		}
 
-			$pseudo = $_SESSION['pseudo'];
-			$archive = $_GET['archive'];
+		if($postfiltre)
+		{
+			$filter = $postfiltre;
+		}
 
-			$page = $_POST['page'];
-			
-			$i = 0; //compteur pour les pages
-			$n = $_POST['n']; //nb concerts à afficher par page
-			if(!$n)
-			{
-				$n = $_GET['n'];;
-			}
+		if(!$n)
+		{
+			$n = 10;
+		}
 
-			$tri = $_POST['tri'];
-			$postfiltre;
-
-			if(!$filter)
-			{
-				$filter = $tri;
-			}
-			else
-			{
-				$tri = $filter;
-			}
-
-			if($postfiltre)
-			{
-				$filter = $postfiltre;
-			}
-
-			if(!$n)
-			{
-				$n = 10;
-			}
-
+		if(!$archive)
+		{
+			$archive = $_POST['archive'];
 			if(!$archive)
 			{
-				$archive = $_POST['archive'];
-				if(!$archive)
-				{
-					$archive = 'no';
-				}
+				$archive = 'no';
 			}
+		}
 
-			if(!$page)
-			{
-				$page = 1;
-			}
-		?>
-		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css">
+		if(!$page)
+		{
+			$page = 1;
+		}
+	?>
+	<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css">
 	</head>
 	<body>	
 		<header>

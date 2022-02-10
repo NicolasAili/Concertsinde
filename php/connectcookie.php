@@ -1,12 +1,10 @@
 <?php
-//session_start();
+session_start();
 
-if (isset($_COOKIE['login'])) 
+if (isset($_COOKIE['login']) && !isset($_SESSION['pseudo'])) 
 {
-	echo "OKOK";
     $_SESSION['pseudo'] = $_COOKIE['login'];
 	$_SESSION['password'] = $_COOKIE['passwd'];
-	echo $_COOKIE['login'];
 }
 else
 {

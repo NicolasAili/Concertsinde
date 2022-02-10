@@ -13,11 +13,11 @@
 <html lang="fr">
 	<head>
 		<?php
+			require 'php/connectcookie.php';
 			include 'php/base.php';
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
-			session_start();
 			include 'contenu/reseaux.php';
 		?>
 		<script src="js/popupaddconcert.js"></script> 

@@ -1,27 +1,30 @@
 
 h1.titre
 {
-	text-align:center;
+	text-align:left;
   font-family: Georgia, serif;
   margin-bottom: 30px;
+  margin-left: 3%;
 }
 
 form
 {
   text-align: left;
-  line-height: 2em;
+  line-height: 1.5rem;
 }
 
-/*#artistediv, #datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv
+#artistediv, #datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv
 {
-  display: block;
-}*/
+  margin-bottom: 1rem;
+}
 
 input, label
 {
-  margin-left: 2%;
-  margin-right: 2%;
-  width: 96%;
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 94%;
+  height: 2rem;
+  padding-left: 2%;
 }
 
 .connect

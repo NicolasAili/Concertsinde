@@ -32,22 +32,20 @@
 		</header>
 		<div id="main">
 			<div class="indentfi">
-				 <h1 class="titre">Ajout d'un concert</h1>
 				 <form method="post" class="connect" action="action/concert.php">
-				 	(*): champs <u>obligatoires</u>
+				 	<h1 class="titre">Ajout d'un concert</h1>
 				 	<div id="artistediv">
-				 		<label for="artiste">*Nom de l'artiste ou du groupe:  </label> 
+				 		<label for="artiste">Nom de l'artiste ou du groupe<span class="star">*</span></label> 
 						<input type="text" name="artiste" placeholder="Saisir l'artiste" onkeyup="getdata(this.id);" id="artiste" required>
 				 	</div>
 					<div id="datediv">
-						<label for="date">*Date : </label> 
+						<label for="date">Date<span class="star">*</span></label> 
 						<input type="date" name="date" placeholder="Saisir la date du concert " id="date" required>
 					</div>
 					<div id="heurediv">
-						<label for="heure">Heure : </label> 
+						<label for="heure">Heure</label> 
 						<input type="time" name="heure" id="heure">
 					</div>
-
 					Lieu du concert  
 					<div id="extint"> 
 						<input type="checkbox" id="int" name="checkint" onclick="checkbox(this.id);"> 
@@ -56,44 +54,44 @@
 						en extérieur (festival, concert sauvage, rue etc...)
 					</div>
 					<div id="sallediv">
-						<label for="salle">*Salle : </label> 
+						<label for="salle">Salle<span class="star">*</span></label> 
 						<input type="text" name="salle" id="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);">
 						<div id="res"> </div>
 					</div>
 					<div id="extdiv">
 						Vous pouvez indiquer un nom pour cet événement exemple: garorock 
-						<label for="denom">Denomination : </label> 
+						<label for="denom">Denomination<span class="star">*</span></label> 
 						<input type="text" name="denom" placeholder="Donnez un nom à ce concert" id="denom">
 						<div id="resx"> </div>
 					</div>
 					<div id=infosx>
 						<div id="infos">
 							<div id="adressdiv">
-								<label for="adresse">Adresse: </label> 
+								<label for="adresse">Adresse</label> 
 								<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
 							<div id="villediv">
-								<label for="ville">*Ville : </label> 
+								<label for="ville">Ville<span class="star">*</span></label> 
 								<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
 								<div id="resv"> </div>
 							<div id="cpdiv">
-								<label for="cp">Code postal: </label> 
+								<label for="cp">Code postal</label> 
 								<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>
 							<div id="departementdiv">
-								<label for="departement">Departement: </label> 
+								<label for="departement">Departement</label> 
 								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
 								<div id="resw"> </div>
 							<div id="regiondiv">
-								<label for="region">Region: </label> 
+								<label for="region">Region</label> 
 								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
 							<div id="paysdiv">
-								<label for="pays">Pays: </label> 
+								<label for="pays">Pays</label> 
 								<input type="text" name="pays" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
 						</div>
 					</div>
 					<br>
-					<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
+					<label for="fb">Lien de l'evenement (facebook ou autre)</label> 
 					<input type="text" name="fb" placeholder="" id="fb">
-					<label for="ticket">Lien de la billetterie : </label> 
+					<label for="ticket">Lien de la billetterie</label> 
 					<input type="text" name="ticket" placeholder="" id="ticket">
 					<button type="button" id="dialog" onclick="popup();"> Enregister le concert </button>
 					<div id="divSchedule">
@@ -101,7 +99,7 @@
 						<div id="partiste">  </div> 
 						<div id="dahe">Date et heure</div>
 							<div id="pdate">  </div>  
-							<div id="pheure">  </div>  
+							<div id="pheure">  </div>
 						<div id="pacp">Pays ville et CP</div>
 							<div id="ppays">  </div> 
 							<div id="pregion">  </div> 
@@ -130,7 +128,7 @@
 					<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 				</form>
 			</div>	
-			<?php include('contenu/footer.html'); 
+			<?php //include('contenu/footer.html'); 
 			require "action/messages.php";?>
 		</div>
 	</body>

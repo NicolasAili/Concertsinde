@@ -469,7 +469,6 @@ function checkbox(identifiant)
             $("#resx").html('');
             if( $('input[name=checkint]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) 
             {
-                console.log("ok");
                 $('#sallediv').css('visibility', 'visible');
                 $('#sallediv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'hidden');
@@ -480,14 +479,14 @@ function checkbox(identifiant)
                 $('#infosx').css('display', 'contents');
                 $('#infos').css('visibility', 'visible');
                 $('#infos').css('display', 'contents');
-                $('#adresse, #ville, #cp, #departement, #region, #pays').val('Veuillez renseigner la salle');
+                $('#adresse, #ville, #cp, #departement, #region, #pays').attr('placeholder', 'Veuillez renseigner la salle');
                 if( $('input[name=checkext]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) et que le bouton ext est coché
                 {
                     $('#salle').val('');
                     $("#ext").prop("checked", false);
                 }
             }
-           else if(!$('input[name=checkint]').prop('checked')) //si le bouton interieur était déjà coché avant (si on vient de le décocher)
+            else if(!$('input[name=checkint]').prop('checked')) //si le bouton interieur était déjà coché avant (si on vient de le décocher)
             {
                 $('#salle').val('');
                 $("#res").html("");
@@ -535,6 +534,7 @@ function checkbox(identifiant)
             $("#pays").prop( "disabled", true );
             $("#region").prop( "disabled", true );
             $("#departement").prop( "disabled", true );
+            console.log("ok");
             $("#cp").attr("placeholder", "renseignez la ville");
             $("#ville").attr("placeholder", "renseignez la ville");
             $("#pays").attr("placeholder", "renseignez la ville");

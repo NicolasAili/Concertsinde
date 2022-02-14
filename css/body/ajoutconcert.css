@@ -10,7 +10,7 @@ h1.titre
 form
 {
   text-align: left;
-  line-height: 1.5rem;
+  line-height: 1.8rem;
 }
 
 #artistediv, #datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv
@@ -18,12 +18,40 @@ form
   margin-bottom: 1rem;
 }
 
-input, label
+input:not(#int, #ext), label
 {
   margin-left: 3%;
-  margin-right: 3%;
-  width: 94%;
+  margin-right: 5%;
+  width: 92%;
   height: 2rem;
+}
+
+#resw, #resx, #res
+{
+  margin-left: 3%;
+  margin-right: 5%;
+  width: 92%;
+}
+
+#extint
+{
+ display:flex;
+ flex-direction:column;
+}
+
+#exitintcontent
+{
+  display:flex;
+  flex-direction:column;
+}
+
+#int, #ext
+{
+  margin-left: 3%;
+}
+
+input
+{
   padding-left: 2%;
 }
 

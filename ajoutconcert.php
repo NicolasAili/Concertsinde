@@ -46,22 +46,27 @@
 						<label for="heure">Heure</label> 
 						<input type="time" name="heure" id="heure">
 					</div>
-					Lieu du concert  
 					<div id="extint"> 
-						<input type="checkbox" id="int" name="checkint" onclick="checkbox(this.id);"> 
-						en intérieur (salle)
-						<input type="checkbox" id="ext" name="checkext" onclick="checkbox(this.id);"> 
-						en extérieur (festival, concert sauvage, rue etc...)
+						<label> Lieu du concert <span class="star">*</span></label>
+						<div id="exitintcontent">
+							<div>
+								<input type="checkbox" id="int" name="checkint" onclick="checkbox(this.id);"> 
+							en intérieur (salle)
+							</div>
+							<div>
+								<input type="checkbox" id="ext" name="checkext" onclick="checkbox(this.id);"> 
+							en extérieur (festival, concert sauvage, rue etc...)
+							</div>
+						</div>
 					</div>
 					<div id="sallediv">
 						<label for="salle">Salle<span class="star">*</span></label> 
 						<input type="text" name="salle" id="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);">
 						<div id="res"> </div>
 					</div>
-					<div id="extdiv">
-						Vous pouvez indiquer un nom pour cet événement exemple: garorock 
+					<div id="extdiv"> 
 						<label for="denom">Denomination<span class="star">*</span></label> 
-						<input type="text" name="denom" placeholder="Donnez un nom à ce concert" id="denom">
+						<input type="text" name="denom" placeholder="Indiquez un nom pour cet événement exemple: garorock" id="denom">
 						<div id="resx"> </div>
 					</div>
 					<div id=infosx>
@@ -69,23 +74,29 @@
 							<div id="adressdiv">
 								<label for="adresse">Adresse</label> 
 								<input type="text" name="adresse" placeholder="Adresse où a lieu le concert" id="adresse">
+							</div>
 							<div id="villediv">
 								<label for="ville">Ville<span class="star">*</span></label> 
 								<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
+							</div>
 								<div id="resv"> </div>
 							<div id="cpdiv">
 								<label for="cp">Code postal</label> 
 								<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>
+							</div>
 							<div id="departementdiv">
 								<label for="departement">Departement</label> 
 								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
+							</div>
 								<div id="resw"> </div>
 							<div id="regiondiv">
 								<label for="region">Region</label> 
 								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>
+							</div>
 							<div id="paysdiv">
 								<label for="pays">Pays</label> 
 								<input type="text" name="pays" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Pays où a lieu le concert" id="pays" disabled>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -133,3 +144,12 @@
 		</div>
 	</body>
 </html>
+
+<?php 
+/* 
+- changer la couleur du placeholder
+- complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le reste direct avec message?)
+- probleme footer
+- recentrer bouton valider
+- distance entre éléments
+*/

@@ -1,4 +1,3 @@
-
 h1.titre
 {
 	text-align:left;
@@ -26,6 +25,33 @@ input:not(#int, #ext), label
   height: 2rem;
 }
 
+#dateheure
+{
+  display: flex;
+}
+
+#datediv
+{
+  width: 50%;
+  margin-left: 3%;
+}
+
+#heurediv
+{
+ width: 50%;
+}
+
+/*#heurediv input, #heurediv label, #datediv input, #datediv label
+{
+  margin 0;
+}*/
+
+#datediv input, #heurediv input, #datediv label, #heurediv label
+{
+  margin-left: 0;
+  margin-right: 0;
+}
+
 #resw, #resx, #res
 {
   margin-left: 3%;
@@ -39,7 +65,7 @@ input:not(#int, #ext), label
  flex-direction:column;
 }
 
-#exitintcontent
+#extintcontent
 {
   display:flex;
   flex-direction:column;
@@ -255,4 +281,9 @@ button
 button:hover
 {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #3f3c3c;
+  opacity: 1; /* Firefox */
 }

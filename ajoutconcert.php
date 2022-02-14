@@ -38,17 +38,19 @@
 				 		<label for="artiste">Nom de l'artiste ou du groupe<span class="star">*</span></label> 
 						<input type="text" name="artiste" placeholder="Saisir l'artiste" onkeyup="getdata(this.id);" id="artiste" required>
 				 	</div>
-					<div id="datediv">
-						<label for="date">Date<span class="star">*</span></label> 
-						<input type="date" name="date" placeholder="Saisir la date du concert " id="date" required>
-					</div>
-					<div id="heurediv">
-						<label for="heure">Heure</label> 
-						<input type="time" name="heure" id="heure">
+				 	<div id="dateheure">
+						<div id="datediv">
+							<label for="date">Date<span class="star">*</span></label> 
+							<input type="date" name="date" placeholder="Saisir la date du concert " id="date" required>
+						</div>
+						<div id="heurediv">
+							<label for="heure">Heure</label> 
+							<input type="time" name="heure" id="heure">
+						</div>
 					</div>
 					<div id="extint"> 
 						<label> Lieu du concert <span class="star">*</span></label>
-						<div id="exitintcontent">
+						<div id="extintcontent">
 							<div>
 								<input type="checkbox" id="int" name="checkint" onclick="checkbox(this.id);"> 
 							en intérieur (salle)
@@ -147,7 +149,7 @@
 
 <?php 
 /* 
-- changer la couleur du placeholder
+- changer la couleur du placeholder xx
 - complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le reste direct avec message?)
 - probleme footer
 - recentrer bouton valider

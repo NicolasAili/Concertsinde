@@ -267,6 +267,7 @@ function getdata(identifiant)
 					response( data );
                     if(data.length == 1 && data[0].label == request.term)
                     {
+                        console.log("ok");
                         $( '#'+identifiant+'' ).autocomplete( "close" );
                         getleave(identifiant);
                     }

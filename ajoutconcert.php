@@ -156,7 +156,7 @@
 <?php 
 /* 
 - changer la couleur du placeholder xx
-- complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le reste direct avec message?) xx
+- complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le re ste direct avec message?) xx
 - probleme footer xx
 - recentrer bouton valider xx
 - distance entre éléments xx

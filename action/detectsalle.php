@@ -34,6 +34,9 @@
              if($row = mysqli_fetch_array($querypvcpa))
              {
                 $adresse = $row['adresse']; //adresse de la salle
+                if (!$adresse) {
+                  $adresse = 'nodata';
+                }
                 $ville_id = $row['id_ville']; //cle etrangere ville_id permettant de faire le lien avec la ville où se situe la salle
                 //echo "<br>";
                 //echo ($ville_id);

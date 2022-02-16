@@ -13,6 +13,7 @@
   header('Content-type: application/json');
   if( isset( $_POST['search'] ) )
   {
+    require('../php/database.php');
     $name = $_POST['search'];
 
     require ('../php/inject.php'); //0) ajouter inject et définir redirect
@@ -27,8 +28,6 @@
     }
 
     $test = $_POST['this'];
-    
-    require('../php/database.php');
     
     if($test == 'salle')
     {
@@ -88,8 +87,6 @@
     {
       echo("erreur");
     }
-
     echo json_encode($response);
-    //echo json_encode($t);*/
   }
 ?>

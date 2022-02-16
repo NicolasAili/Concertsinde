@@ -80,8 +80,8 @@
 							<div id="villediv">
 								<label for="ville">Ville<span class="star">*</span></label> 
 								<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Ville où a lieu le concert" id="ville">
-							</div>
 								<div id="resv"> </div>
+							</div>
 							<div id="cpdiv">
 								<label for="cp">Code postal</label> 
 								<input type="text" name="cp" placeholder="Code postal où a lieu le concert" id="cp" disabled>
@@ -106,7 +106,9 @@
 					<input type="text" name="fb" placeholder="" id="fb">
 					<label for="ticket">Lien de la billetterie</label> 
 					<input type="text" name="ticket" placeholder="" id="ticket">
-					<button type="button" id="dialog" onclick="popup();"> Enregister le concert </button>
+					<div id="enregistrer">
+						<button type="button" id="dialog" onclick="popup();"> Enregister le concert </button>
+					</div>
 					<div id="divSchedule">
 						<h1> Recapitulatif du concert </h1>
 						<div id="partiste">  </div> 
@@ -150,8 +152,14 @@
 <?php 
 /* 
 - changer la couleur du placeholder xx
-- complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le reste direct avec message?)
+- complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le reste direct avec message?) xx
 - probleme footer
-- recentrer bouton valider
+- recentrer bouton valider xx
 - distance entre éléments
+- recentrer écrits resx, resw... xx
+- régler problème date/heure en anglais
+- fix popup
+- police et largeur du texte
+- problème barre de recherche
+- color red
 */

@@ -52,13 +52,6 @@ input:not(#int, #ext), label
   margin-right: 0;
 }
 
-#resw, #resx, #res
-{
-  margin-left: 3%;
-  margin-right: 5%;
-  width: 92%;
-}
-
 #extint
 {
  display:flex;
@@ -261,6 +254,16 @@ input.bouton
 #res, #resx, #resv, #resw
 {
   font-style: italic;
+  margin-left: 3%;
+  margin-right: 5%;
+  width: 92%;
+}
+
+#enregistrer
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 button
@@ -276,6 +279,8 @@ button
   transition-property: all;
   transition-property: color,background-color,border-color;
   cursor: pointer;
+  margin-top: 25px;
+  
 }
 
 button:hover

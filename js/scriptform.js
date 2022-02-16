@@ -106,7 +106,7 @@ function getleave(identifiant)
                                 else
                                 {
                                     $('#adresse').val('');
-                                    $("#adresse").attr("placeholder", "adresse non renseignée");
+                                    $('#adresse').attr("placeholder", "adresse non renseignée");
                                 }
                             }
                             else

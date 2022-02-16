@@ -10,7 +10,6 @@
 */
 ?>
 <?php
-require('php/database.php');
 include 'php/js.php';
 	
 $pseudo = $_SESSION['pseudo'];

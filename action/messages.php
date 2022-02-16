@@ -22,7 +22,7 @@
             $("#messageModal").dialog();
             $("#main, #reseaux, footer, header").css('filter', 'blur(0.6rem)');
             $(".ui-button").click(function(){
-                $("#main, #reseaux, footer, header").css('filter', 'blur(0)');
+                $("#main, #reseaux, footer, header").css('filter', '');
             });
         });
 

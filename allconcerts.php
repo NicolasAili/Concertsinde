@@ -8,8 +8,11 @@
 	JS+JQuery : non
 	CSS : oui
 */
+/* *******************CHECKING********************
+V1 : non
+Support(s) : pc boulot et ecran boulot
+*/
 ?>
-
 <?php
 	
     session_start();
@@ -25,11 +28,12 @@
 			setcookie("passwd",$_SESSION['password'], time()+315360000, "/");
 		}
 		
+		include 'php/error.php';
 		require 'php/connectcookie.php';
 		include 'php/base.php';
-		include 'php/css.php'; 
+		include 'php/css.php';
 		include 'php/js.php';
-		require('php/database.php');
+		require 'php/database.php';
 		include 'contenu/reseaux.php';
 
 		require ('php/inject.php'); //0) ajouter inject et définir redirect
@@ -237,7 +241,7 @@
 										<ul class="formsalledepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="salle" name="salle" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required><br><br>
+												  <input type="text" id="salle" name="salle" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
@@ -249,7 +253,7 @@
 												  ?> 
 												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
 												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-												  <input type="submit" value="Filtrer">
+												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											<li>
 										</ul>
@@ -260,7 +264,7 @@
 										<ul class="formvilledepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="ville" name="ville" <?php if($getville){echo 'value='; echo "$getville";}?> required><br><br>
+												  <input type="text" id="ville" name="ville" <?php if($getville){echo 'value='; echo "$getville";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
@@ -271,7 +275,7 @@
 												  }?>
 												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
 												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-												  <input type="submit" value="Filtrer">
+												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
@@ -282,7 +286,7 @@
 										<ul class="formcpdepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="cp" name="cp" <?php if($getcp){echo 'value='; echo "$getcp";}?> required><br><br>
+												  <input type="text" id="cp" name="cp" <?php if($getcp){echo 'value='; echo "$getcp";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
@@ -293,7 +297,7 @@
 												  }?>
 												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
 												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-												  <input type="submit" value="Filtrer">
+												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
@@ -304,7 +308,7 @@
 										<ul class="formdptdepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="departement" name="departement" <?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required><br><br>
+												  <input type="text" id="departement" name="departement" <?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
@@ -315,18 +319,18 @@
 												  }?>
 												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
 												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-												  <input type="submit" value="Filtrer">
+												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
 									</li>
 									<br>
 									<li>
-										<div class="formnumdpt">► Numero de département</div>
+										<div class="formnumdpt">► Numéro de département</div>
 										<ul class="formnumdptdepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="numero" name="numero" <?php if($getnumdepartement){echo 'value='; echo "$getnumdepartement";}?> required><br><br>
+												  <input type="text" id="numero" name="numero" <?php if($getnumdepartement){echo 'value='; echo "$getnumdepartement";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
@@ -337,18 +341,18 @@
 												  }?>
 												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
 												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-												  <input type="submit" value="Filtrer">
+												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul> 
 									</li>
 									<br>
 									<li>
-										<div class="formrgn">► Region</div>
+										<div class="formrgn">► Région</div>
 										<ul class="formrgndepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="region" name="region" <?php if($getregion){echo 'value='; echo "$getregion";}?> required><br><br>
+												  <input type="text" id="region" name="region" <?php if($getregion){echo 'value='; echo "$getregion";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
@@ -359,7 +363,7 @@
 												  }?>
 												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
 												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
-												  <input type="submit" value="Filtrer">
+												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
@@ -417,10 +421,10 @@
 					{
 						?>
 						<div class="trier">
-							<div id="triertxtun">   Trier par: </div>
+							<div id="triertxtun">Trier par :</div>
 							<div class="filtres">
 								<ul class="content">
-									<li class=deroulant><a href="#" style="padding: 0;"> <?php 
+									<li class=deroulant><a href="#" style="padding: 0;"> <div class="acontent"><?php 
 										if($filter == 'artisteup' || $tri == 'artisteup')
 										{
 											echo "nom d'artiste (A à Z)";
@@ -441,7 +445,7 @@
 										{
 											echo "Date (du plus proche, par défaut)";
 										}
-										?></a>
+										?></div></a>
 										<ul class="sous">
 											<?php
 											if(!$archive || $archive == 'no')
@@ -669,7 +673,7 @@
 						<div id="triertxtdeux"> Résultats par page: </div>
 						<div class="filtres">
 							<ul class="content">
-								<li class="deroulant"> <a href="#" style="padding: 0;"><?php switch ($n) {
+								<li class="deroulant"> <a href="#" style="padding: 0;"><div class="acontent"><?php switch ($n) {
 									case '25':
 										echo "25";
 										break;
@@ -679,7 +683,7 @@
 									default:
 										echo "10 (par défaut)";
 										break;
-								}?></a>
+								}?></div></a>
 									<ul class="sous">
 										<form method="post" action="allconcerts.php" class="n">
 											<li>
@@ -962,8 +966,15 @@
 								</div>
 								<div class="barrex"></div>
 								<div class="sectiontrois">
-									<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30">
 									<?php
+									if($rowrgn['nom_pays'])
+									{?>
+										<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+									}
+									else
+									{?>
+										<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+									}
 									if($rowdpt['id_region'])
 									{
 										?>

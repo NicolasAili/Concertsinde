@@ -8,13 +8,16 @@
 	JS+JQuery : non
 	CSS : oui
 */
+/* *******************CHECKING********************
+V1 : oui
+Support(s) : pc boulot et ecran boulot
+*/
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<?php
-			/*include '../php/base.php'; 
-			include '../php/css.php'; */
+			include '../php/error.php';  
 			require '../php/connectcookie.php';
 			require('../php/database.php');
 
@@ -90,7 +93,6 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="../css/body/concert.css">
 	</head>
-	
 	<body style="background-color: #DBCDC6";>
 		<?php	      
 			if (isset($_POST['concert']))

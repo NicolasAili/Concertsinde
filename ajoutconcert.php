@@ -8,6 +8,10 @@
 	JS+JQuery : oui
 	CSS : oui
 */
+/* *******************CHECKING********************
+V1 : oui
+Support(s) : pc boulot et ecran boulot
+*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,9 +19,10 @@
 		<?php
 			require 'php/connectcookie.php';
 			include 'php/base.php';
+			include 'php/error.php';
 			include 'php/css.php'; 
 			include 'php/js.php'; 
-			require('php/database.php');
+			require 'php/database.php';
 			include 'contenu/reseaux.php';
 		?>
 		<script src="js/popupaddconcert.js"></script> 
@@ -27,8 +32,7 @@
 	
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?>
-			<script src="js/scrollnav.js"></script> 
+			<?php include('contenu/header.php'); ?> 
 		</header>
 		<div id="main">
 			<div class="indentfi">
@@ -152,19 +156,3 @@
 		</div>
 	</body>
 </html>
-
-<?php 
-/* 
-- changer la couleur du placeholder xx
-- complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le re ste direct avec message?) xx
-- probleme footer xx
-- recentrer bouton valider xx
-- distance entre éléments xx
-- recentrer écrits resx, resw... xx
-- régler problème date/heure en anglais
-- fix popup xx
-- police et largeur du texte xx
-- problème barre de recherche xx
-- color star xx
-- problème footer lorsque popup erreur message
-*/

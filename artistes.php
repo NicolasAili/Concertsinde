@@ -206,3 +206,14 @@
 	}
 </script>
 
+<?php 
+
+/* 
+- Filtre + stylé
+- Hover sur tri
+- Border sur filtrer + bouton validation
+- Bouton validation ajouter un artiste
+- Photo par défaut si pas de photo
+- après avoir cherché un artiste améliorer le retour à tous les artistes
+- dans superadmin, pouvoir ajouter la photo d'un artiste
+*/

@@ -10,7 +10,7 @@
 */
 /* *******************CHECKING********************
 V1 : non
-Support(s) : pc boulot et ecran boulot
+Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 */
 ?>
 <?php

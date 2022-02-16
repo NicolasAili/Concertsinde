@@ -1,3 +1,8 @@
+#main
+{
+  font-family: 'Noto Sans', Sans-Serif;
+}
+
 h1.titre
 {
 	text-align:left;
@@ -17,12 +22,20 @@ form
   margin-bottom: 1rem;
 }
 
-input:not(#int, #ext), label
+form input:not(#int, #ext, #date, #heure), label
 {
   margin-left: 3%;
   margin-right: 5%;
   width: 92%;
   height: 2rem;
+}
+
+label
+{
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  cursor: text;
 }
 
 #dateheure
@@ -41,15 +54,12 @@ input:not(#int, #ext), label
  width: 50%;
 }
 
-/*#heurediv input, #heurediv label, #datediv input, #datediv label
-{
-  margin 0;
-}*/
-
 #datediv input, #heurediv input, #datediv label, #heurediv label
 {
   margin-left: 0;
   margin-right: 0;
+  width: 92%;
+  height: 2rem;
 }
 
 #extint
@@ -69,7 +79,7 @@ input:not(#int, #ext), label
   margin-left: 3%;
 }
 
-input
+#main input
 {
   padding-left: 2%;
 }
@@ -291,4 +301,20 @@ button:hover
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #3f3c3c;
   opacity: 1; /* Firefox */
+}
+
+#checkboxes
+{
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkintext
+{
+  display: block;
+}
+
+.star
+{
+  color: #ff2f2f;
 }

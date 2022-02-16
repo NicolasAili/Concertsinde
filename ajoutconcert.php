@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					<div id="extint"> 
-						<label> Lieu du concert <span class="star">*</span></label>
+						<label> Lieu du concert<span class="star">*</span></label>
 						<div id="extintcontent">
 							<div>
 								<input type="checkbox" id="int" name="checkint" onclick="checkbox(this.id);"> 
@@ -121,13 +121,17 @@
 							<div id="pdepartement"> test </div> 
 							<div id="pville">  </div> 
 							<div id="pcp">  </div>
-						<div id="saad">Lieu et adresse</div> 
-							<input type="checkbox" id="pint" name="checkint" disabled> 
-							Interieur
-							<br>
-							<input type="checkbox" id="pext" name="checkint" disabled> 
-							Exterieur
-							<br>
+						<div id="saad">Lieu et adresse</div>
+						<div id="checkboxes">
+							<div class="checkintext">
+								<input type="checkbox" id="pint" name="checkint" disabled>
+								Interieur
+							</div>
+							<div class="checkintext">
+								<input type="checkbox" id="pext" name="checkint" disabled>
+								Exterieur
+							</div>
+						</div> 
 							<div id="psalle">  </div> 
 							<div id="padresse">  </div> 
 						<div id="saad">Liens relatifs a l'evenement</div>
@@ -143,7 +147,7 @@
 					<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 				</form>
 			</div>	
-			<?php //include('contenu/footer.html'); 
+			<?php include('contenu/footer.html'); 
 			require "action/messages.php";?>
 		</div>
 	</body>
@@ -153,13 +157,14 @@
 /* 
 - changer la couleur du placeholder xx
 - complétion automatique lorsque champ trouvé (voir éventuellement faire apparaitre le reste direct avec message?) xx
-- probleme footer
+- probleme footer xx
 - recentrer bouton valider xx
-- distance entre éléments
+- distance entre éléments xx
 - recentrer écrits resx, resw... xx
 - régler problème date/heure en anglais
-- fix popup
-- police et largeur du texte
-- problème barre de recherche
-- color red
+- fix popup xx
+- police et largeur du texte xx
+- problème barre de recherche xx
+- color star xx
+- problème footer lorsque popup erreur message
 */

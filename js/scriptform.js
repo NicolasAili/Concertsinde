@@ -470,6 +470,8 @@ function checkbox(identifiant)
             $("#resx").html('');
             if( $('input[name=checkint]').is(':checked') ) //si le bouton interieur n'était pas déjà coché (on vient de le cocher) 
             {
+                $('footer').css('position', 'static');
+                $('form').css('margin-bottom', '50px');
                 $('#sallediv').css('visibility', 'visible');
                 $('#sallediv').css('display', 'contents');
                 $('#extdiv').css('visibility', 'hidden');
@@ -489,6 +491,8 @@ function checkbox(identifiant)
             }
             else if(!$('input[name=checkint]').prop('checked')) //si le bouton interieur était déjà coché avant (si on vient de le décocher)
             {
+                $('footer').css('position', 'absolute');
+                $('footer').css('bottom', '0');
                 $('#salle').val('');
                 $("#res").html("");
                 $('#sallediv').css('visibility', 'hidden');
@@ -509,6 +513,8 @@ function checkbox(identifiant)
             $("#resx").html('');
             if( $('input[name=checkext]').is(':checked') )
             {
+                $('footer').css('position', 'static');
+                $('form').css('margin-bottom', '50px');
                 $('#extdiv').css('visibility', 'visible');
                 $('#extdiv').css('display', 'contents');
                 $('#sallediv').css('visibility', 'hidden');
@@ -526,6 +532,8 @@ function checkbox(identifiant)
             }
            else 
             {
+                $('footer').css('position', 'absolute');
+                $('footer').css('bottom', '0');
                 $('#extdiv').css('visibility', 'hidden');
                 $('#extdiv').css('display', 'none');
                 $('#infos').css('visibility', 'hidden');

@@ -205,14 +205,5 @@
     }
     echo json_encode($response); //on encode en JSON*/
   }
-  switch (variable) {
-    case 'value':
-      # code...
-      break;
-    
-    default:
-      # code...
-      break;
-  }
 ?>
 

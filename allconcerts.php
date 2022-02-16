@@ -670,7 +670,7 @@ Support(s) : pc boulot et ecran boulot
 					?>
 
 					<div class="trier">
-						<div id="triertxtdeux"> Résultats par page: </div>
+						<div id="triertxtdeux"> Résultats par page : </div>
 						<div class="filtres">
 							<ul class="content">
 								<li class="deroulant"> <a href="#" style="padding: 0;"><div class="acontent"><?php switch ($n) {
@@ -736,7 +736,7 @@ Support(s) : pc boulot et ecran boulot
 			$rowcount = mysqli_fetch_array($countresult);
 			$calc = $rowcount[0];
 			?>
-			<h4> <?php echo $calc ?> concert(s) trouvé(s) </h4>
+			<h4> <?php echo $calc; if($calc>1){echo " concerts trouvés";}else{echo " concert trouvé";}?> </h4>
 			<div id="indics">
 				<div class="indication">
 					<div class="center">

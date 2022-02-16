@@ -828,18 +828,20 @@ Support(s) : pc boulot et ecran boulot
 									}
 								}
 								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
-								?> 
-								<img class="infologo" src="image/infos.png" height="50" width="50">
-								<div class="infos hidden">
-									<div class="dateajout"> 
-										<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
-										Concert ajouté le: <?php echo $newDate ?> 
-									</div> 
-									<div class="ajout"> 
-										<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
-									</div>
-									<div class="modif">
-										<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
+								?>
+								<div class="infosdiv">
+									<img class="infologo" src="image/infos.png" height="50" width="50">
+									<div class="infos hidden">
+										<div class="dateajout"> 
+											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
+											Concert ajouté le: <?php echo $newDate ?> 
+										</div> 
+										<div class="ajout"> 
+											<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
+										</div>
+										<div class="modif">
+											<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
+										</div>
 									</div>
 								</div>
 							</div> 
@@ -1282,9 +1284,17 @@ Support(s) : pc boulot et ecran boulot
 	$(document).delegate('.infologo','mouseenter',function(){
 		var position = $(this).position();
 		$('.infos').addClass('hidden');
+		height = $('.hidden').height();
+		width = $('.hidden').width();
+		heightlogo = $('.infologo').height();
+		widthlogo = $('.infologo').width();
+		widthlogo = widthlogo / 2;
+		heightlogo = heightlogo / 2;
+		varleft = position.left + widthlogo;
+		vartop = position.top - heightlogo;
 		$(this).next('.infos').removeClass('hidden');
-		$(this).next('.infos').css('left', position.left-230 + "px");
-		$(this).next('.infos').css('top', position.top-30 + "px");
+		$(this).next('.infos').css('left', varleft + "px");
+		$(this).next('.infos').css('top', vartop + "px");
 	});
 
 	$(document).delegate('.infologo', 'mouseleave',function(){

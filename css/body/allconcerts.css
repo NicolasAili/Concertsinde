@@ -383,14 +383,20 @@ h4
 	display: none;
 }
 
+.infosdiv
+{
+	float: right;
+	margin-right: 2%;
+}
+
 .infos
 {
 	z-index: 3;
 	background-color: #f5ebeb;
 	color: #0e0d0d;
 	position: absolute;
-	left: 620px;
-	top: 580px;
+	top: 0;
+	left: 0;
 	border: 2px solid black;
 	line-height: 1.1em;
 	font-size: 0.4em;

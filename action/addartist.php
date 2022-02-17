@@ -39,7 +39,7 @@ $artiste = ucfirst($artiste);
 
 if(isset($_SESSION['pseudo']) == null)
 {
-  setcookie('contentMessage', 'Erreur: vous devez être connectés afin de pouvoir ajouter un artiste', time() + 15, "/");
+  setcookie('contentMessage', 'Erreur: vous devez être connecté afin de pouvoir ajouter un artiste', time() + 15, "/");
   header("Location: ../artistes.php");
   exit("Erreur: vous devez être connectés afin de pouvoir ajouter un artiste");
 }

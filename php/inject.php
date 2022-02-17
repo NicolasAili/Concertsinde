@@ -78,24 +78,35 @@
 			$names = implode(", ", $inject);
 			if (count($inject)>1)
 			{
-			    setcookie('contentMessage', 'Erreur: un ou ma bite caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 10, "/");
-	    		header("Location: $redirect");
-	    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : " . $names . ".Réessayez ou contactez-nous");
-	    		return 'detection erreur : $names';
+				if(strlen($names)>1)
+				{
+				    setcookie('contentMessage', 'Erreur: un ou plusieurs caractére(s) renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous');
+		    		header("Location: $redirect");
+		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : " . $names . ".Réessayez ou contactez-nous");
+		    	}
+		    	else
+		    	{
+		    		return 0;
+		    	}
 			}
 			else
 			{
-				setcookie('contentMessage', 'Erreur: un ou ma bite caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 10, "/");
-	    		header("Location: $redirect");
-	    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : " . $names . ".Réessayez ou contactez-nous");
-	    		return 'detection';
+				if(strlen($names)>1)
+				{
+					setcookie('contentMessage', 'Erreur: un ou plusieurs caractère(s) renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous');
+		    		header("Location: $redirect");
+		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : " . $names . ".Réessayez ou contactez-nous");
+	    		}
+	    		else //notre bug bizarre
+	    		{
+	    			return 0;
+	    		}
 			}
 		}
 		else
 		{
-			return 0;
+			return 0; //pas d'injection
 		}
-	//return $names;
 	}
 ?>
 

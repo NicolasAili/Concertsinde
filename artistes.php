@@ -23,27 +23,27 @@
 			include 'contenu/reseaux.php';
 
 			$artiste = $_POST['artiste'];
-
-			require ('php/inject.php'); //0) ajouter inject et définir redirect
-			$redirect = 'artistes.php';
-
-			$values = array($artiste); //1) mettre données dans un arrray
-			$inject = inject($values, null); //2) les vérifier
-			print_r($inject); //return arr
-			echo "<br>";
-			$validate = validate($inject, $redirect); //3)validation de tous les champs
-			echo $validate;; //return names
-			if($validate == 0) //4) si pas d'injection : ajout des variables
+			$file = basename(__FILE__, '.php');
+			if(isset($artiste))
 			{
-			  $artiste = mysqli_real_escape_string($con, $artiste); 
-			}
+				require ('php/inject.php'); //0) ajouter inject et définir redirect
+				$redirect = 'artistes.php';
+
+				$values = array($artiste); //1) mettre données dans un arrray
+				$inject = inject($values, null); //2) les vérifier
+				$validate = validate($inject, $redirect); //3)validation de tous les champs
+				if($validate == 0) //4) si pas d'injection : ajout des variables
+				{
+				  $artiste = mysqli_real_escape_string($con, $artiste); 
+				}
+			}	
 		?>
 		 
 		<link rel="stylesheet" type="text/css" href="css/body/artistes.css">
 	</head>
 	<body>
 		<header>
-			<?php //include('contenu/header.php'); ?>
+			<?php include('contenu/header.php'); ?>
 			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
@@ -193,7 +193,8 @@
 			{
 				echo '<a href="artistes.php" id="displayartistes">'; ?> Revenir à tous les artistes <?php echo '</a>';
 			}?>
-			<?php require "action/messages.php"; ?> 
+			<?php //if($validate == 1){require "action/messages.php";}else{echo "no inj";}
+			 require "action/messages.php";?> 
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>

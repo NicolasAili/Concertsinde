@@ -15,7 +15,6 @@
 
     <div id="messageModal"><?php echo $_COOKIE['contentMessage']; ?></div>
 
-
    <script> 
 
         $(document).ready(function(){
@@ -29,13 +28,6 @@
     </script>
 
     <?php
-
-    /*setcookie('actionMessage', null, -1, "/");
-    setcookie('typeMessage', null, -1, "/");
-    setcookie('contentMessage', null, -1, "/");
-
-    ob_end_flush();*/
-
+    setcookie('contentMessage');
 }
-
 ?>

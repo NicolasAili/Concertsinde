@@ -24,6 +24,7 @@
 				}
 				$i++;
 			}
+			//$returnarr = $input;
 			return $returnarr;
 		}
 		else //cas pour une regex modifié

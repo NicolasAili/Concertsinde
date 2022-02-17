@@ -16,9 +16,10 @@
 		<?php
 			require 'php/connectcookie.php';
 			include 'php/base.php'; 
+			include 'php/error.php';
 			include 'php/css.php'; 
-			/*include 'php/js.php'; */
-			require('php/database.php');
+			include 'php/js.php';
+			require 'php/database.php';
 			include 'contenu/reseaux.php';
 
 			$artiste = $_POST['artiste'];
@@ -28,6 +29,7 @@
 
 			$values = array($artiste); //1) mettre données dans un arrray
 			$inject = inject($values, null); //2) les vérifier
+			print_r($inject);
 			$validate = validate($inject, $redirect); //3)validation de tous les champs
 			if($validate == 0) //4) si pas d'injection : ajout des variables
 			{
@@ -37,10 +39,9 @@
 		 
 		<link rel="stylesheet" type="text/css" href="css/body/artistes.css">
 	</head>
-	
 	<body>
 		<header>
-			<?php include('contenu/header.php'); ?>
+			<?php //include('contenu/header.php'); ?>
 			<script src="js/scrollnav.js"></script> 
 		</header>
 		<div id="main">
@@ -56,10 +57,10 @@
 				}
 			?>
 			<div id = "ajoutartiste">
-					Ajouter un artiste
+					<h3> Ajouter un artiste </h3>
 					<form method="post" class="connect" action="action/addartist.php">
 						<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
-						<textarea cols="40" rows="5" name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
+						<textarea name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
 						<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
 					</form>
 			</div>
@@ -98,10 +99,6 @@
 				{
 					$str = "SELECT * FROM artiste WHERE Nom_artiste = '$artiste'";
 				}
-				/*else if($filter == 'number')
-				{
-
-				}*/
 				else if ($sqlquery) 
 				{
 					$str = $sqlquery;
@@ -125,7 +122,15 @@
 							<div class="artiste">
 								<?php 
 									$artistecnt = $row['Nom_artiste'];
-									echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgartiste">';
+									$filename = 'image/artiste/' . $artistecnt . '.jpg';
+									if (file_exists($filename)) 
+									{
+					    				echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgartiste">';
+									} 
+									else 
+									{
+					    				echo '<img src="image/artiste/inconnu.png" class="imgartiste">';
+									}
 									echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
 									echo '</a>';
 								?>
@@ -156,11 +161,7 @@
 					}
 					$i++;
 				}
-				if($artiste)
-				{
-					echo '<a href="artistes.php">'; ?> afficher tous les artistes <?php echo '</a>';
-				}
-				else
+				if(!$artiste)
 				{?>
 					<form method="post" action="artistes.php" class="page" style="display: flex;">
  					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
@@ -185,7 +186,11 @@
  					</form><?php
 				}
 				?>	
-			</div>
+			</div><?php
+			if($artiste)
+			{
+				echo '<a href="artistes.php" id="displayartistes">'; ?> Revenir à tous les artistes <?php echo '</a>';
+			}?>
 			<?php require "action/messages.php"; ?> 
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
@@ -209,11 +214,12 @@
 <?php 
 
 /* 
-- Filtre + stylé
-- Hover sur tri
-- Border sur filtrer + bouton validation
-- Bouton validation ajouter un artiste
-- Photo par défaut si pas de photo
+- Filtre + stylé xx
+- Hover sur tri xx
+- Border sur filtrer + bouton validation xx
+- Bouton validation ajouter un artiste xx
+- Photo par défaut si pas de photo xx
 - après avoir cherché un artiste améliorer le retour à tous les artistes
 - dans superadmin, pouvoir ajouter la photo d'un artiste
 */
+?>

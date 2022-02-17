@@ -2,7 +2,7 @@
 <?php
 
 // Désactiver le rapport d'erreurs
-error_reporting(0);
+//error_reporting(0);
 
 // Rapporte les erreurs d'exécution de script
 //error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -16,7 +16,7 @@ error_reporting(0);
 //error_reporting(E_ALL & ~E_NOTICE);
 
 // Rapporte toutes les erreurs PHP
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 // Rapporte toutes les erreurs PHP
 //error_reporting(-1);

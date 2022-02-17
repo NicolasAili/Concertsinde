@@ -24,7 +24,7 @@
 				}
 				$i++;
 			}
-			//$returnarr = $input;
+			//return 'erreur detectee';
 			return $returnarr;
 		}
 		else //cas pour une regex modifié
@@ -73,28 +73,29 @@
 
 	function validate($inject, $redirect)
 	{
-		$names = implode(", ", $inject);
-		echo $names;
-
-			if (count($inject)>0) 
-			{	
-				if (count($inject)>1)
-				{
-				    setcookie('contentMessage', 'Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 10, "/");
-		    		header("Location: $redirect");
-		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : " . $names . ".Réessayez ou contactez-nous");
-				}
-				else
-				{
-					setcookie('contentMessage', 'Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 10, "/");
-		    		header("Location: $redirect");
-		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : " . $names . ".Réessayez ou contactez-nous");
-				}
+		if (count($inject)>0) 
+		{	
+			$names = implode(", ", $inject);
+			if (count($inject)>1)
+			{
+			    setcookie('contentMessage', 'Erreur: un ou ma bite caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 10, "/");
+	    		header("Location: $redirect");
+	    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : " . $names . ".Réessayez ou contactez-nous");
+	    		return 'detection erreur : $names';
 			}
 			else
 			{
-				return 0;
+				setcookie('contentMessage', 'Erreur: un ou ma bite caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time() + 10, "/");
+	    		header("Location: $redirect");
+	    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : " . $names . ".Réessayez ou contactez-nous");
+	    		return 'detection';
 			}
+		}
+		else
+		{
+			return 0;
+		}
+	//return $names;
 	}
 ?>
 

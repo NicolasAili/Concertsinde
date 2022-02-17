@@ -29,8 +29,10 @@
 
 			$values = array($artiste); //1) mettre données dans un arrray
 			$inject = inject($values, null); //2) les vérifier
-			print_r($inject);
+			print_r($inject); //return arr
+			echo "<br>";
 			$validate = validate($inject, $redirect); //3)validation de tous les champs
+			echo $validate;; //return names
 			if($validate == 0) //4) si pas d'injection : ajout des variables
 			{
 			  $artiste = mysqli_real_escape_string($con, $artiste); 

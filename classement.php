@@ -184,3 +184,10 @@
 	</body>
 </html>
 
+<?php
+//interface de gestion des artistes :
+//ajouter photo, supprimer, modifier description?
+//changer background du titre et de "rang, pseudo points"
+//mettre message alerte pour faire penser à changer la session à l'admin x jours avant
+?>
+

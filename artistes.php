@@ -223,16 +223,3 @@ Support(s) : pc perso et ecran perso
 		});
 	}
 </script>
-
-<?php 
-
-/* 
-- Filtre + stylé xx
-- Hover sur tri xx
-- Border sur filtrer + bouton validation xx
-- Bouton validation ajouter un artiste xx
-- Photo par défaut si pas de photo xx
-- après avoir cherché un artiste améliorer le retour à tous les artistes
-- dans superadmin, pouvoir ajouter la photo d'un artiste
-*/
-?>

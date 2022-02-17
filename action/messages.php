@@ -27,14 +27,5 @@
 
     </script>
     <?php
-    $bool = setcookie('contentMessage', 'modiftest', time() + 3600);
-    if($bool)
-    {
-        echo $bool;
-    }
-    else 
-    {
-        echo "cookie not deleted";
-    }
 }
 ?>

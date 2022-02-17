@@ -66,7 +66,7 @@ if( isset( $_POST['artisteajout'] ) )
 }
 else
 {
-  setcookie('contentMessage', 'Erreur inconnue, merci de signaler cette erreur', time() + 15, "/");
+  setcookie('contentMessage', 'Erreur inconnue, merci de signaler cette erreur en nous contactant', time() + 15, "/");
   header("Location: ../artistes.php");
-  exit("Erreur inconnue, merci de signaler cette erreur");
+  exit("Erreur inconnue, merci de signaler cette erreur en nous contactant");
 }

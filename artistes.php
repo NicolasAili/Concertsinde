@@ -8,6 +8,10 @@
 	JS+JQuery : oui
 	CSS : oui
 */
+/* *******************CHECKING********************
+V1 : oui
+Support(s) : pc perso et ecran perso
+*/
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +27,6 @@
 			include 'contenu/reseaux.php';
 
 			$artiste = $_POST['artiste'];
-			$file = basename(__FILE__, '.php');
 			if(isset($artiste))
 			{
 				require ('php/inject.php'); //0) ajouter inject et définir redirect
@@ -57,6 +60,7 @@
 				{
 					$page = 1;
 				}
+				$count = 0;
 			?>
 			<div id = "ajoutartiste">
 					<h3> Ajouter un artiste </h3>
@@ -162,6 +166,7 @@
 						<?php
 					}
 					$i++;
+					$count++;
 				}
 				if(!$artiste)
 				{?>
@@ -191,10 +196,15 @@
 			</div><?php
 			if($artiste)
 			{
+				if ($count<1) 
+				{
+					echo "Pas de résultat";
+					echo "<br>";
+					echo "<br>";
+				}
 				echo '<a href="artistes.php" id="displayartistes">'; ?> Revenir à tous les artistes <?php echo '</a>';
 			}?>
-			<?php //if($validate == 1){require "action/messages.php";}else{echo "no inj";}
-			 require "action/messages.php";?> 
+			<?php require "action/messages.php"; ?> 
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>

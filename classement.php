@@ -185,8 +185,8 @@
 </html>
 
 <?php
-//interface de gestion des artistes :
-//ajouter photo, supprimer, modifier description?
+//back-end gestion artiste
+// verifier modifier, signaler erreur etc... sur allconcerts
 //changer background du titre et de "rang, pseudo points"
 //mettre message alerte pour faire penser à changer la session à l'admin x jours avant
 ?>

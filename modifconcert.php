@@ -37,6 +37,13 @@
 			{
 			  $idconcert = mysqli_real_escape_string($con, $idconcert); 
 			}
+			$action = $_POST['modsuppr'];
+			if ($action != 'Valider' && $action != 'Supprimer' && $action != 'Modifier' && $action != 'probleme') 
+			{
+				setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 15, "/");
+				header("Location: allconcerts.php");
+				exit("Erreur inconnue, merci de contacter le support");
+			}
 		?>
 		<script src="js/verifmodifconcert.js"></script> 
 		
@@ -64,7 +71,6 @@
 			$adresse = $_POST['adressepost'];
 			$fb = $_POST['fbpost'];
 			$ticket = $_POST['ticketpost'];
-			$action = $_POST['modsuppr'];
 			$pseudo = $_SESSION['pseudo'];
 
 			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
@@ -454,8 +460,9 @@
 					header("Location: allconcerts.php");
 					exit("Concert validé avec succès !");*/
 				}
-				else if($action = 'probleme')
-				{?>
+				else if($action == 'probleme')
+				{echo $action;
+?>
 					<form action="action/erreursubmit.php" method="post">
 						Sur quel(s) champ(s) pensez-vous qu'il y a erreur ?
 						<input type="checkbox" id="artiste" name="artiste" value="artiste">
@@ -501,12 +508,6 @@
 						<input type="submit" value="Envoyer" />
 					</form>
 					<?php
-				}
-				else
-				{
-					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 15, "/");
-					header("Location: allconcerts.php");
-					exit("Erreur inconnue, merci de contacter le support");
 				}
 			}
 			?>

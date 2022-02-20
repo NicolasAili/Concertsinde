@@ -1046,7 +1046,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 											}
 											else
 											{
-												?><input id="probleme" type="submit" name="probleme" value="Signaler une erreur"> <?php
+												?><input id="probleme" type="submit" name="modsuppr" value="Signaler une erreur"> <?php
 											}
 											if($testadmin > 0) 
 											{?>
@@ -1299,5 +1299,10 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 
 	$(document).delegate('.infologo', 'mouseleave',function(){
 		$(this).next('.infos').addClass('hidden');
+	});
+
+	$( "#probleme" ).click(function() 
+	{
+  		$( "#probleme" ).val( 'probleme' );
 	});
 </script>

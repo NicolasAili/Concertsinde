@@ -94,8 +94,9 @@
 								<h3> Supprimer artiste</h3>
 								<input type="checkbox" id="delete" name="delete" value="Suppression">
 							</div>
+							<input type="hidden" name="idconcert" <?php echo 'value="' . $row['Nom_artiste'] . '"'; ?>>
 							<br>
-							<input type="submit" name="modifartiste" value="Modifier artiste">
+							<input type="submit" name="submit" value="Modifier">
 							<hr>
 						</form><?php
 					}?>
@@ -110,7 +111,8 @@
 						<h3> Ajout d'image</h3>
 						<input name="userfile" type="file" />
 						<br>
-						<input type="submit" name="addartiste" value="Ajouter artiste">
+						<br>
+						<input type="submit" name="submit" value="Ajouter">
 					</form>
 				</div>
 				<div id="addflag">
@@ -120,7 +122,9 @@
 						<input type="text" name="pays">
 						<h3> Image drapeau </h3>
 						<input name="userfile" type="file" />
-						<input type="submit" name="addflag" value="ajoutdrapeau">
+						<br>
+						<br>
+						<input type="submit" name="submit" value="ajoutdrapeau">
 					</form>
 				</div>
 			</div>

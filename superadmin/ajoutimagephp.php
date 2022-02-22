@@ -171,5 +171,6 @@
 	<?php 
 
 	// pouvoir afficher image artiste peu importe lextension
+	// probleme suur recherche artiste
 
 	?>

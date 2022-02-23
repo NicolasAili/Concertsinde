@@ -34,9 +34,9 @@
 
 			//$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
-			$extension = pathinfo(basename($_FILES['userfile']['name'],PATHINFO_EXTENSION));
-			$extension = $extension['extension'];
-			$extension = strtolower($extension);
+			$extension = pathinfo(basename($_FILES['userfile']['name'],PATHINFO_EXTENSION)); //recupère l'extension du fichier DL
+			$extension = $extension['extension']; //string
+			$extension = strtolower($extension); //minuscule
 			
 			if($extension)
 			{
@@ -46,7 +46,7 @@
 
 
 				echo '<pre>';
-				if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) 
+				if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile))  //upload
 				{
 				    header("Location: saccueil.php");
 				} 

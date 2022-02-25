@@ -28,9 +28,7 @@
 		<?php
 		if(isset($_SESSION['pseudo']) == null)
 		{?>
-			<div id="main">
-				<h1>Inscription</h1>  
-
+			<div id="main"> 
 					 <?php 
 					 	if(!empty($_GET['message'])) 
 					 	{
@@ -39,37 +37,39 @@
 						}
 						$email = $_GET['mail'];
 						$pseudo = $_GET['pseudo'];
-
 					?>
 					
 				<div class="indentfi">
 					<form action="action/ident.php" method="post" class="connect">
-		  			 	<label for="pseudo">Pseudo: (3 caractères minimum) </label> 
+						<h1>Inscription</h1> 
+		  			 	<label for="pseudo">Pseudo (3 caractères minimum) <span class="star">*</span></label> 
 		    			<input type="text" name="pseudo" <?php if(!$pseudo){echo 'placeholder="Entrez votre pseudo"';} else{echo 'value="' . $pseudo . '"'; }?> id="prenom" required>
 		    			<br>
 		    			<br>
-		    			<label for="email">Email:  </label> 
+		    			<label for="email">Email <span class="star">*</span></label> 
 		    			<input type="email" name="email" <?php if(!$email){echo 'placeholder="Entrez votre email"';} else{echo 'value="' . $email . '"'; }?> id="mail" required>
 		    			<br>
 		    			<br>
-		    			<label for="password">Mot de passe: </label> 
+		    			<label for="password">Mot de passe <span class="star">*</span></label> 
 		    			<input type="password" name="password" placeholder="Mot de passe" id="password" required>
 		  				<br>
 
 		    			<br>
-		    			<label for="cpassword">Confirmez votre mot de passe:  </label> 
+		    			<label for="cpassword">Confirmez votre mot de passe <span class="star">*</span></label> 
 		    			<input type="password" name="cpassword" placeholder="Confirmez votre mot de passe" id="password" required>
 		    			<br>
 		    			<br>
-						<input  type="submit" value="Inscription" name="inscription">
+						<input  type="submit" value="Inscription" name="inscription" id="inscription">
 					</form>
 				</div>
 			</div>
-			<?php include('contenu/footer.html'); 
-			require "action/messages.php"; 
+			<?php  
+		}
 		else
 		{
 			header("Location: profil.php");
-		}?> 
+		}
+		include('contenu/footer.html'); 
+		//require "action/messages.php";?> 
 	</body>
 </html>

@@ -10,7 +10,7 @@
 */
 ?>
 <?php
-	require 'php/connectcookie.php';	 	     
+	require '../php/connectcookie.php';	 	     
 	require('../php/database.php');
 	
 	$type = $_POST['type'];
@@ -140,7 +140,7 @@
 	$row = mysqli_fetch_array($query);
 	$max = $row['id_max'];
 
-	/*setcookie('contentMessage', 'Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil', time() + 15, "/");
+	setcookie('contentMessage', 'Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil', time() + 15, "/");
 	header("Location: ../allconcerts.php");
-	exit('Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil');*/
+	exit('Votre requête a bien été enregistrée sous le numéro #' . $max .', vous pouvez la retrouver ainsi que toutes vos autres requêtes dans la section "requête" sous votre profil');
 

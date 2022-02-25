@@ -49,10 +49,13 @@
 		$row = mysqli_fetch_array($result);
 
 		if($row['admin'] == 2)
-		{?>
+		{
+			$artiste = $_GET['artiste'];
+			?>
+
 			<a href='saccueil.php'>retour accueil</a>
 			<h1> !!!!! PNG avec 1ere lettre majuscule pour les 2 !!!!! </h1>
-			<form action="users.php" method="get" id="formsearch">
+			<form action="ajoutimage.php" method="get" id="formsearch">
 			  <label for="artiste">Chercher un artiste:</label>
 			  <input type="text" id="artiste" name="artiste" onkeyup="getdata(this.id);" required><br><br>
 			  <input type="submit">
@@ -80,7 +83,16 @@
 						} 
 						else 
 						{
-		    				echo '<img src="../image/artiste/inconnu.png" class="imgartiste" width="60px" height="80px">';
+							$filename = '../image/artiste/' . $artistecnt . '.png';
+							if (file_exists($filename)) 
+							{
+								echo '<img src="../image/artiste/' . $row['Nom_artiste'] . '.png' . '" class="imgartiste" width="60px" height="80px">';
+							}
+							else
+							{
+								echo '<img src="../image/artiste/inconnu.png" class="imgartiste" width="60px" height="80px">';
+							}
+		    				
 						}
 						?>
 						<form enctype="multipart/form-data" method="POST" class="ajoutimagephp" action="ajoutimagephp.php">

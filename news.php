@@ -15,7 +15,8 @@
 	<head>
 		<?php
 			require 'php/connectcookie.php';
-			include 'php/base.php'; 
+			include 'php/base.php';
+			include 'php/error.php';
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require('php/database.php');
@@ -109,8 +110,6 @@
 				$query = mysqli_query($con, $sql);
 				while ($row = mysqli_fetch_array($query))
 				{
-					
-
 					$filename = glob("image/actualites/news" . $row['id'] . "*");
 					$date = $row['date'];
 					$date = new DateTime($date);

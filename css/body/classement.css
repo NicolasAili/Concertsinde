@@ -35,6 +35,7 @@ h3
 {
 	text-align: center;
 	font-size: 23px;
+	color: white;
 }
 
 #allsession h3
@@ -62,6 +63,7 @@ h3 span
 	/*border: solid 1px #cdd2d2;*/
 	border: 2px solid #949e9e;
 	background-color: white;
+	background-color: #3a0101;
 }
 
 #allsession

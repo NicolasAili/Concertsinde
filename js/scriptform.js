@@ -543,7 +543,8 @@ function checkbox(identifiant)
             $("#pays").prop( "disabled", true );
             $("#region").prop( "disabled", true );
             $("#departement").prop( "disabled", true );
-            console.log("ok");
+
+            $("#adresse").attr("placeholder", "adresse du concert");
             $("#cp").attr("placeholder", "renseignez la ville");
             $("#ville").attr("placeholder", "renseignez la ville");
             $("#pays").attr("placeholder", "renseignez la ville");

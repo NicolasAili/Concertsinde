@@ -51,7 +51,7 @@ $admin = $row['admin'];
 			$count = 0;
 			if ($admin == 2) 
 			{
-				$sql = $sql = "SELECT message.id FROM message, topic WHERE utilisateur != '$pseudoid' AND lu = 0 AND sender = '$pseudoid' AND message.id_topic = topic.id";
+				$sql = "SELECT message.id FROM message, topic WHERE lu = 0 AND sender = '$pseudoid' AND message.id_topic = topic.id";
 			}
 			else
 			{

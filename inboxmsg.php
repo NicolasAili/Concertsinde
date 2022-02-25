@@ -30,10 +30,11 @@
 	else
 	{
 		$pseudo = $_SESSION['pseudo'];
-		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+		$requestpseudo = "SELECT id_user, admin FROM utilisateur WHERE pseudo = '$pseudo'";
 		$query = mysqli_query($con, $requestpseudo);
 		$row = mysqli_fetch_array($query);
 		$idpseudo = $row['id_user'];
+		$admin = $row['admin'];
 
 		$idtopic = $_GET['idtopic'];
 		if(!$idtopic)
@@ -53,6 +54,10 @@
 		}
 
 		$sql = "UPDATE message SET lu='1' WHERE id_topic = $idtopic AND utilisateur != '$idpseudo'";
+		if($admin == 2)
+		{
+			$sql = "UPDATE message SET lu='1' WHERE id_topic = $idtopic";
+		}
 		$query = mysqli_query($con, $sql);
 
 		$sql = "SELECT objet FROM topic where id = $idtopic";
@@ -113,6 +118,7 @@
 				</div>
 			</div><?php
 		}?>
+		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>
 

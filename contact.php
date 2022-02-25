@@ -77,8 +77,9 @@
 					Merci pour votre contribution
 				</div>
 				<div id="footer">
-					<input type="button" value="Envoyer" id="valider" onclick="verification()">
-					<input type="reset" value="Effacer">
+					<input type="hidden" name="valider" id="valider">
+					<input type="button" value="Envoyer" class="okbutton" onclick="verification()" style="margin-top: 0px;">
+					<input type="reset" value="Effacer" class="okbutton" style="margin-top: 0px;">
 				</div>
 			</form>
 		</div>

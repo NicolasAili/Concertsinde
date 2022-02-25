@@ -316,7 +316,7 @@ h1 a
 	height: 5rem;
 	position: fixed;
 	z-index: 2;
-
+	top: 0px;
 }
 
 #loupebar

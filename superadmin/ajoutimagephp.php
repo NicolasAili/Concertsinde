@@ -167,10 +167,3 @@
 			break;
 	}?>
 	<a href="ajoutimage.php"> retour </a>
-
-	<?php 
-
-	// pouvoir afficher image artiste peu importe lextension
-	// probleme suur recherche artiste
-
-	?>

@@ -1,4 +1,4 @@
-#main
+#main 
 {
   font-family: 'Noto Sans', Sans-Serif;
 }
@@ -290,7 +290,6 @@ button
   transition-property: color,background-color,border-color;
   cursor: pointer;
   margin-top: 25px;
-  
 }
 
 button:hover

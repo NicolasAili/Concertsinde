@@ -87,7 +87,3 @@
 		<?php require "action/messages.php"; ?> 
 	</body>	
 </html>
-
-<?php
-//searchbar qui part en yecou
-?>

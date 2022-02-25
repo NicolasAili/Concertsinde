@@ -970,11 +970,32 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								<div class="sectiontrois">
 									<?php
 									if($rowrgn['nom_pays'])
-									{?>
-										<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+									{
+										$nompays = $rowrgn['nom_pays'];
+										$filename = 'image/flags/' . $nompays . '.jpg';
+										if (file_exists($filename)) 
+										{
+											?>
+											<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
+										}
+										else
+										{
+											$filename = 'image/flags/' . $nompays . '.png';
+											if (file_exists($filename)) 
+											{
+												?>
+												<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+											}
+											else
+											{
+												?>
+												<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+											}
+										}
 									}
 									else
-									{?>
+									{
+										?>
 										<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
 									}
 									if($rowdpt['id_region'])

@@ -93,12 +93,15 @@
 						}
 						if($rank == 0 && $_SESSION['pseudo'])
 						{
+							if ($rang > 11) 
+							{?>
+								<tr style='background-color: #ededed;'>
+									<td class="tbun"> ... </td>
+									<td class="tbdeux"> ... </td>
+							        <td class="tbtrois"> ... </td>
+						   		</tr><?php
+							}
 							?>
-							<tr style='background-color: #ededed;'>
-								<td class="tbun"> ... </td>
-								<td class="tbdeux"> ... </td>
-						        <td class="tbtrois"> ... </td>
-						    </tr>
 							<tr style="background-color: #33cc33;">
 								<th scope="row" class="tbun"> <?php echo $rang; ?> </th>
 								<td class="tbdeux"> <?php echo $_SESSION['pseudo']; ?> </td>
@@ -161,12 +164,15 @@
 						}
 						if($rank == 0 && $_SESSION['pseudo'])
 						{
+							if ($rang > 11) 
+							{?>
+								<tr style='background-color: #ededed;'>
+									<td class="tbun"> ... </td>
+									<td class="tbdeux"> ... </td>
+							        <td class="tbtrois"> ... </td>
+						   		</tr><?php
+							}
 							?>
-							<tr style='background-color: #ededed;'>
-								<td class="tbun"> ... </td>
-								<td class="tbdeux"> ... </td>
-						        <td class="tbtrois"> ... </td>
-						    </tr>
 							<tr style="background-color: #33cc33;">
 								<th scope="row" class="tbun"> <?php echo $rang; ?> </th>
 								<td class="tbdeux"> <?php echo $_SESSION['pseudo']; ?> </td>
@@ -183,11 +189,4 @@
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>
-
-<?php
-//back-end gestion artiste
-// verifier modifier, signaler erreur etc... sur allconcerts
-//changer background du titre et de "rang, pseudo points"
-//mettre message alerte pour faire penser à changer la session à l'admin x jours avant
-?>
 

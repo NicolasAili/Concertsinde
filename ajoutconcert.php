@@ -61,7 +61,7 @@ Support(s) : pc boulot et ecran boulot
 							</div>
 							<div>
 								<input type="checkbox" id="ext" name="checkext" onclick="checkbox(this.id);"> 
-							en extérieur (festival, concert sauvage, rue etc...)
+							en extérieur (festival, concert sauvage, concert de rue etc...)
 							</div>
 						</div>
 					</div>

@@ -80,6 +80,12 @@
 					$pseudosender = $row['sender'];
 
 					$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic' AND utilisateur != '$idpseudo'";
+
+					if($admin == 2)
+					{
+						$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic'";
+					}
+
 					$querylu = mysqli_query($con, $sql);
 					while($rowl = mysqli_fetch_array($querylu))
 					{

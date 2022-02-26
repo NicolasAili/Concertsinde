@@ -19,27 +19,32 @@
 	$(document).ready(function () {
 		if($( window ).height() == $( document ).height())
 		{
-			console.log("okheight");
+			console.log("detect-1");
 			$('footer').css('position', 'absolute');
 			$('footer').css('bottom', '0');
 		}
 	});
 
 	$( window ).resize(function() {
+		console.log("detect0");
 		if($( window ).height() == $( document ).height())
 		{
+			console.log("detect1");
 			if($( window ).height() - $( 'footer' ).height() < $( 'body' ).height()+15)
 			{
+				console.log("detect2");
 				$('footer').css('position', 'static');
 			}
 			else
 			{
+				console.log("detect3");
 				$('footer').css('position', 'absolute');
 				$('footer').css('bottom', '0');
 			}
 		}
 		else
 		{
+			console.log("detect4");
 			$('footer').css('position', 'static');
 		}
 	});

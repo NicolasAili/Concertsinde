@@ -22,7 +22,7 @@ form
   margin-bottom: 1rem;
 }
 
-form input:not(#int, #ext, #date, #heure), label
+#main form input:not(#int, #ext, #date, #heure), label
 {
   margin-left: 3%;
   margin-right: 5%;

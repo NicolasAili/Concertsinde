@@ -26,7 +26,7 @@ $admin = $row['admin'];
 		<?php 
 		if($admin == 2)
 		{?>
-			<h1> <a href="superadmin/saccueil.php" id="logo"> Arpenid.com </a> </h1><?php
+			<h1> <a href="superadmin/saccueil.php" id="logo"> Arpenid <div id="com">.com</div></a> </h1><?php
 		}
 		else
 		{?>

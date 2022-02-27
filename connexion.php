@@ -18,6 +18,10 @@
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
 			require('php/database.php');
+			if(isset($_SESSION['pseudo']))
+			{
+				header("Location: profil.php");
+			}
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/connexion.css">
 	</head>
@@ -58,7 +62,7 @@
 						Vous n'êtes pas encore membre ? 
 					</div>
 					<div id="notmemberunder">
-						Créez gratuitement votre compte  et bénéficiez de nouvelles fonctionnalités ! 
+						Créez gratuitement votre compte  et bénéficiez de fonctionnalités supplémentaires ! 
 						<br>
 						<a href=inscrire.php> Inscrivez-vous maintenant ! </a>
 					</div>
@@ -73,15 +77,11 @@
 						    	gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site
 						    </li>
 						</ul>
-						Rejoignez dès maintenant la communauté afin d'aider la scène du rap indé :)
+						Mais avant tout vous permettrez l'expansion de la scéne du rap indé. Alors inscrivez-vous dès maintenant afin d'aider la communauté ! :)
 					</div>
 				</div>
 			</div>
 		<?php 
-		}
-		else
-		{
-			header("Location: profil.php");
 		}
 		include('contenu/footer.html'); ?>
 		<?php require "action/messages.php"; ?> 

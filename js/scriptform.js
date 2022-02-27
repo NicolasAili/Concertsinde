@@ -6,6 +6,7 @@
     JS+JQuery : n
     CSS : n
 */
+
 function getleave(identifiant)
 {
     var input = $('#'+identifiant+'').val();
@@ -490,8 +491,7 @@ function checkbox(identifiant)
                 }
             }
             else if(!$('input[name=checkint]').prop('checked')) //si le bouton interieur était déjà coché avant (si on vient de le décocher)
-            {
-                $('footer').css('position', 'absolute');
+            {             
                 $('#salle').val('');
                 $("#res").html("");
                 $('#sallediv').css('visibility', 'hidden');
@@ -503,6 +503,11 @@ function checkbox(identifiant)
             $("#pays").prop( "disabled", true );
             $("#region").prop( "disabled", true );
             $("#departement").prop( "disabled", true );
+            if ($( window ).height() == $( document ).height()) 
+            {
+                $('footer').css('position', 'absolute');
+                $('footer').css('bottom', '0');
+            }  
             
         break;
         case "ext":
@@ -529,9 +534,8 @@ function checkbox(identifiant)
                 $('#infos').css('visibility', 'visible');
                 $('#infos').css('display', 'contents');
             }
-           else 
+            else 
             {
-                $('footer').css('position', 'absolute');
                 $('#extdiv').css('visibility', 'hidden');
                 $('#extdiv').css('display', 'none');
                 $('#infos').css('visibility', 'hidden');
@@ -548,6 +552,11 @@ function checkbox(identifiant)
             $("#pays").attr("placeholder", "renseignez la ville");
             $("#region").attr("placeholder", "renseignez la ville");
             $("#departement").attr("placeholder", "renseignez la ville");
+            if ($( window ).height() == $( document ).height()) 
+            {
+                $('footer').css('position', 'absolute');
+                $('footer').css('bottom', '0');
+            } 
 
         break;
     }

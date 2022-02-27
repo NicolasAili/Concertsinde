@@ -23,7 +23,7 @@ Support(s) : pc boulot et ecran boulot
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
+			//include 'contenu/reseaux.php';
 		?>
 		<script src="js/popupaddconcert.js"></script> 
 
@@ -151,8 +151,8 @@ Support(s) : pc boulot et ecran boulot
 					<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
 				</form>
 			</div>	
-			<?php include('contenu/footer.html'); 
-			require "action/messages.php";?>
 		</div>
+		<?php include('contenu/footer.html'); 
+			require "action/messages.php";?>
 	</body>
 </html>

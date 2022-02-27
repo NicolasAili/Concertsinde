@@ -27,7 +27,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 			setcookie("login", $_SESSION['pseudo'], time()+315360000, "/");
 			setcookie("passwd",$_SESSION['password'], time()+315360000, "/");
 		}
-		
 		include 'php/error.php';
 		require 'php/connectcookie.php';
 		include 'php/base.php';

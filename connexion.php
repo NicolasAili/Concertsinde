@@ -13,11 +13,13 @@
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/error.php';
 			require 'php/connectcookie.php';
-			include 'php/base.php'; 
+			include 'php/base.php';
 			include 'php/css.php'; 
 			include 'contenu/reseaux.php';
 			require('php/database.php');
+
 			if(isset($_SESSION['pseudo']))
 			{
 				header("Location: profil.php");

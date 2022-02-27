@@ -14,11 +14,13 @@
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/error.php';
 			require 'php/connectcookie.php';
-			include 'php/base.php'; 
-			include 'php/css.php'; 
+			include 'php/base.php';
+			include 'php/css.php';
+			include 'php/js.php';
+			require 'php/database.php';
 			include 'contenu/reseaux.php';
-			require('php/database.php');
 
 			require ('php/inject.php'); //0) ajouter inject et définir redirect
 			$redirect = 'allconcerts.php';

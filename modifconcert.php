@@ -14,12 +14,13 @@
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/error.php';
 			require 'php/connectcookie.php';
-			include 'php/base.php'; 
-			include 'php/css.php'; 
-			include 'php/js.php'; 
+			include 'php/base.php';
+			include 'php/css.php';
+			include 'php/js.php';
+			require 'php/database.php';
 			include 'contenu/reseaux.php';
-			require('php/database.php');
 
 			$idconcert = $_POST['idpost'];
 
@@ -72,6 +73,9 @@
 			$fb = $_POST['fbpost'];
 			$ticket = $_POST['ticketpost'];
 			$pseudo = $_SESSION['pseudo'];
+
+			
+			$heure = str_replace(":00", "", "$heure");
 
 			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $sql);
@@ -133,7 +137,7 @@
 						<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> > 
 						<br>
 						<br>
-						<label for="heure">Heure (laissez les deux derniers chiffres à 0) : </label> 
+						<label for="heure">Heure : </label> 
 						<input type="time" name="heure" <?php echo 'value="' . $heure . '"' ?>  id="heure">
 						<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> > 
 						<br>

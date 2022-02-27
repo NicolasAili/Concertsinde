@@ -17,9 +17,9 @@ Support(s) : pc boulot et ecran boulot
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/error.php';
 			require 'php/connectcookie.php';
 			include 'php/base.php';
-			include 'php/error.php';
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require 'php/database.php';

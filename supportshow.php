@@ -7,9 +7,18 @@
 	Contenu HTML : oui
 	JS+JQuery : non
 	CSS : non
-*/?>
+*/
+?>
 <?php
-require('php/database.php');
+
+include 'php/error.php';
+require 'php/connectcookie.php';
+include 'php/base.php';
+include 'php/css.php';
+include 'php/js.php';
+require 'php/database.php';
+include 'contenu/reseaux.php';
+
 $idcheckmodif = $_POST['idcheckmodif']; //var pour vérifier une modification
 $idcheck = $_GET['idcheck']; //requête à afficher
 $idchecklink = $_GET['idchecklink']; //var qui récupère l'id de la requête après une modification
@@ -57,12 +66,6 @@ if($idcheckmodif) //s'il y a eu modification
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php
-			require 'php/connectcookie.php';
-			include 'php/base.php'; 
-			include 'php/css.php'; 
-			include 'php/js.php';
-		?>
 		<link rel="stylesheet" type="text/css" href="css/body/supportshow.css">
 	</head>
 	<header>

@@ -58,4 +58,10 @@
 /*
 - Confirmation mail inscription
 - trier ticket par date interface admin
+....
+- suite fichiers (super artiste description)
+- modifconcert
+- connexion
+- pages superadmin
+- pages action
 */

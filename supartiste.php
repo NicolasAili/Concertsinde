@@ -69,7 +69,6 @@
 						<form method="post" class="connect" action="action/adddescr.php">
 							<textarea cols="40" rows="5" name="description" id="description" placeholder="Il n'existe pas de description pour cet artiste, vous pouvez en ajouter une"></textarea> 
 							<input type="hidden" id="artiste" name="artiste" <?php echo 'value="' . $artiste . '"' ?> > 
-							<br>
 							<input type="submit" value="Enregister la description" name="concert" href="">
 						</form>
 						<?php
@@ -85,15 +84,15 @@
 			$row = mysqli_fetch_array($result);
 			?>
 			<div id="bandeau">
-				<span id="spanconcert" onclick="concert();">Concerts</span>
-				<span id="spanarchive" onclick="archive();">Archives</span>
+				<span id="spanconcert" onclick="concert();managefooter();">Concerts</span>
+				<span id="spanarchive" onclick="archive();managefooter();">Archives</span>
 			</div>
 			<div id="futuresconcerts">
 				<?php
 				echo "<h2> Concerts à venir </h2>";
 				if(!$row)
 				{?>
-					<div id="noconcert" onclick="archive();"><?php
+					<div id="noconcert" onclick="archive() managefooter();"><?php
 						echo "Aucun concert n'est prévu pour cet artiste, consultez les archives";?>
 					</div><?php
 				}
@@ -660,7 +659,7 @@
         $('#futuresconcerts').css('display', 'contents');
         $('#archivesall').css('visibility', 'hidden');
         $('#archivesall').css('display', 'none');
-        $('#spanconcert').css('cursor', 'zoom-in');
+        $('#spanconcert').css('cursor', 'auto');
         $('#spanarchive').css('cursor', 'pointer');
 		$('#spanconcert').css('border-bottom', '3px solid #df1c1c');
 		$('#spanarchive').css('border-bottom', '3px solid transparent');
@@ -672,10 +671,23 @@
         $('#archivesall').css('display', 'contents');
         $('#futuresconcerts').css('visibility', 'hidden');
         $('#futuresconcerts').css('display', 'none');
-        $('#spanarchive').css('cursor', 'zoom-in');
+        $('#spanarchive').css('cursor', 'auto');
         $('#spanconcert').css('cursor', 'pointer');
 		$('#spanarchive').css('border-bottom', '3px solid #df1c1c');
 		$('#spanconcert').css('border-bottom', '3px solid transparent');
+	}
+
+	function managefooter()
+	{
+		if ($( window ).height() == $( document ).height()) 
+		{
+			$('footer').css('position', 'absolute');
+			$('footer').css('bottom', '0');
+		}
+		else
+		{
+			$('footer').css('position', 'static');
+		}
 	}
 </script>
 
@@ -686,8 +698,6 @@
 		$(this).next('.infos').removeClass('hidden');
 		$(this).next('.infos').css('left', position.left-230 + "px");
 		$(this).next('.infos').css('top', position.top-30 + "px");
-		console.log(position.left);
-		console.log(position.top);
 	});
 
 	$(document).delegate('.infologo', 'mouseleave',function(){

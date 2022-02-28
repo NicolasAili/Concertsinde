@@ -19,22 +19,35 @@
 	$(document).ready(function () {
 		//console.log(screen.width);
 		console.log(screen.height);
-		console.log($( 'footer' ).height());
 		console.log($( 'body' ).height());
+		console.log($( 'footer' ).height());
+		
 		sheight = screen.height;
 		fheight = $( 'footer' ).height();
 		bheight = $( 'body' ).height();
 		
-		if (screen.height>900 && $( 'body' ).height() < 950) 
+		/*if (screen.height>900 && $( 'body' ).height() < 950) 
 		{
 			$('footer').css('position', 'absolute');
 			$('footer').css('bottom', '0');
 			
-		}
-		if (bheight + fheight < sheight) 
+		}*/
+		finalheight = sheight - fheight - 15;
+		/*if (bheight + fheight < sheight) 
 		{
+			console.log('truetrue');
+			$('body').css('height', finalheight + 'px');
 			$('body').css('height', sheight + 'px');
+		}*/
+
+		if (bheight < sheight) 
+		{
+			$('body').css('height', finalheight + 'px');
 		}
+
+
+
+
 		/*url = window.location.href;
 		url = url.slice(-8);
 		if($( window ).height() == $( document ).height()) //pas de scroll

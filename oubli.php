@@ -60,10 +60,8 @@
 - trier ticket par date interface admin
 - plus de contenu page superartiste (ex: articles ou autres)
 ....
-- pb profil
 - modifconcert
 - connexion
 - pages superadmin
 - pages action
-- superartiste pb info fenetre flottante
 */

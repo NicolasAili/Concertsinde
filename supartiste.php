@@ -691,13 +691,21 @@
 	}
 </script>
 
-<script>
+<script> 
 	$(document).delegate('.infologo','mouseenter',function(){
 		var position = $(this).position();
 		$('.infos').addClass('hidden');
+		height = $('.hidden').height();
+		width = $('.hidden').width();
+		heightlogo = $('.infologo').height();
+		widthlogo = $('.infologo').width();
+		widthlogo = widthlogo / 2;
+		heightlogo = heightlogo / 2;
+		varleft = position.left + widthlogo;
+		vartop = position.top - heightlogo;
 		$(this).next('.infos').removeClass('hidden');
-		$(this).next('.infos').css('left', position.left-230 + "px");
-		$(this).next('.infos').css('top', position.top-30 + "px");
+		$(this).next('.infos').css('left', varleft + "px");
+		$(this).next('.infos').css('top', vartop + "px");
 	});
 
 	$(document).delegate('.infologo', 'mouseleave',function(){

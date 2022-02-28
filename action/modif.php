@@ -95,9 +95,6 @@ if (isset($_POST['modif_password']))
 			exit("Le mot de passe actuel saisi est incorrect");
 		}
 	}
-	
-
-	
 ?>
 
 

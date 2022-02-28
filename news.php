@@ -14,13 +14,13 @@
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/error.php';
 			require 'php/connectcookie.php';
 			include 'php/base.php';
-			include 'php/error.php';
-			include 'php/css.php'; 
-			include 'php/js.php'; 
-			require('php/database.php');
-			include 'contenu/reseaux.php'; 
+			include 'php/css.php';
+			include 'php/js.php';
+			require 'php/database.php';
+			include 'contenu/reseaux.php';
 
 			$currentdate = date('Y-m-d');
 			$currentdate = new DateTime($currentdate);

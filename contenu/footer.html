@@ -17,15 +17,24 @@
 
 <script>
 	$(document).ready(function () {
-		console.log(screen.width);
+		//console.log(screen.width);
 		console.log(screen.height);
+		console.log($( 'footer' ).height());
 		console.log($( 'body' ).height());
+		sheight = screen.height;
+		fheight = $( 'footer' ).height();
+		bheight = $( 'body' ).height();
+		
 		if (screen.height>900 && $( 'body' ).height() < 950) 
 		{
 			$('footer').css('position', 'absolute');
 			$('footer').css('bottom', '0');
+			
 		}
-		
+		if (bheight + fheight < sheight) 
+		{
+			$('body').css('height', sheight + 'px');
+		}
 		/*url = window.location.href;
 		url = url.slice(-8);
 		if($( window ).height() == $( document ).height()) //pas de scroll

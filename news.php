@@ -61,10 +61,6 @@
 					
 					$intvl = $currentdate->diff($date);
 
-					/*echo $intvl->y . " year, " . $intvl->m." months and ".$intvl->d." day"; 
-					echo "\n";
-					// Total amount of days
-					echo $intvl->days . " days ";*/
 					if ($intvl->m == 0 && $intvl->y == 0) {
 						if ($intvl->d == 1) {
 							$displaytime = "Il y a " . $intvl->d . " jour";

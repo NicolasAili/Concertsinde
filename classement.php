@@ -49,7 +49,7 @@
 			<h2> Classements</h2>
 			<div id="display">
 				<div id="allsession">
-					<h3> Général </h3>
+					<h3> Général <span> depuis la création du site </span></h3>
 					<table>
 					    <tr class="headertable">
 					    	<th scope="col" class="tbunhead">Rang</th>

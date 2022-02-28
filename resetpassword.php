@@ -11,7 +11,13 @@
 ?>
 <!DOCTYPE html>
 <?php
+	include 'php/error.php';
 	require 'php/connectcookie.php';
+	include 'php/base.php';
+	include 'php/css.php';
+	include 'php/js.php';
+	require 'php/database.php';
+	include 'contenu/reseaux.php';
 
     $key = $_GET['key'];
 
@@ -41,68 +47,64 @@
 ?>
 <html lang="fr">
 	<head>
-		<?php
-			include 'php/base.php'; 
-			include 'php/css.php'; 
-			include 'contenu/reseaux.php';
-			require('php/database.php');
-		?>
 		<link rel="stylesheet" type="text/css" href="css/body/resetpassword.css">
 	</head>
 	<header>
 		<?php include('contenu/header.php'); ?> 
 	</header>
 	<body>
-		<form action="action/modif.php" method="post" class="connect">
-			<?php
-			if($key)
-			{
-				$sql = "SELECT mail FROM oublimdp WHERE keyid = $key AND actif = 1";
-				$query = mysqli_query($con, $sql);
-				if($row = mysqli_fetch_array($query))
+		<div id="main">
+			<form action="action/modif.php" method="post" class="connect">
+				<?php
+				if($key)
 				{
-					$mail = $row['mail'];
-					$valide = 1;
-					$sql = "UPDATE oublimdp SET actif = 0 WHERE mail = '$mail' AND actif = 1";
+					$sql = "SELECT mail FROM oublimdp WHERE keyid = $key AND actif = 1";
 					$query = mysqli_query($con, $sql);
+					if($row = mysqli_fetch_array($query))
+					{
+						$mail = $row['mail'];
+						$valide = 1;
+						$sql = "UPDATE oublimdp SET actif = 0 WHERE mail = '$mail' AND actif = 1";
+						$query = mysqli_query($con, $sql);
+					}
+					else
+					{
+						setcookie('contentMessage', 'Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau', time() + 15, "/");
+						header("Location: oubli.php");
+						exit("Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau");
+					}
+				}
+				if ($valide == 0) 
+				{?>
+					<h1> Modifier votre mot de passe </h1>
+					<div id="actual">
+						<label for="password">Mot de passe actuel</label> 
+						<input type="password" name="password" id="password">
+					</div><?php
 				}
 				else
 				{
-					setcookie('contentMessage', 'Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau', time() + 15, "/");
-					header("Location: oubli.php");
-					exit("Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau");
-				}
-			}
-			if ($valide == 0) 
-			{?>
-				<h1> Modifier votre mot de passe </h1>
-				<div id="actual">
-					<label for="password">Mot de passe actuel</label> 
-					<input type="password" name="password" id="password">
-				</div><?php
-			}
-			else
-			{
-				echo "<h1> Réinitialiser votre mot de passe </h1>";
-				
-			}?>
-			<div id="new">
-				<label for="password">Nouveau mot de passe</label>
+					echo "<h1> Réinitialiser votre mot de passe </h1>";
+					
+				}?>
+				<div id="new">
+					<label for="password">Nouveau mot de passe</label>
+					<br> 
+					<input type="password" name="newpassword" id="newpassword" >
+				</div>
+				<div id="confirm">
+					<label for="password">Confirmer le nouveau mot de passe</label> 
+					<br>
+					<input type="password" name="cnewpassword" id="cnewpassword" >
+				</div>
 				<br> 
-				<input type="password" name="newpassword" id="newpassword" >
-			</div>
-			<div id="confirm">
-				<label for="password">Confirmer le nouveau mot de passe</label> 
-				<br>
-				<input type="password" name="cnewpassword" id="cnewpassword" >
-			</div>
-			<br> 
-			<div id="formaction">
-				<input id="confirmsub" type="submit" value="✔ Valider" name="modif_password">
-			</div>
-			<input id="mail" type="hidden" <?php echo 'value="' . $mail . '"' ?> name="mail">
-			<input id="key" type="hidden" <?php echo 'value="' . $key . '"' ?> name="key">	
-		</form>
+				<div id="formaction">
+					<input id="confirmsub" type="submit" value="✔ Valider" name="modif_password">
+				</div>
+				<input id="mail" type="hidden" <?php echo 'value="' . $mail . '"' ?> name="mail">
+				<input id="key" type="hidden" <?php echo 'value="' . $key . '"' ?> name="key">	
+			</form>
+		</div>
 	</body>
 	<?php include('contenu/footer.html');
 	require "action/messages.php"; ?>

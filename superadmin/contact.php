@@ -42,7 +42,7 @@
 			{
 				if ($user) 
 				{
-					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND ID_user = $user";
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND ID_user = $user ORDER BY date_envoi";
 				}
 				else
 				{

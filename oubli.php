@@ -56,9 +56,6 @@
 <?php
 
 /*
-
-- COnfirmation mail inscription
-- Bouton déconnexion dans profil
-- Bug blur profil après chgmt mdp
+- Confirmation mail inscription
 - trier ticket par date interface admin
 */

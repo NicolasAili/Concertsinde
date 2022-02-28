@@ -87,21 +87,21 @@
 
 			?>
 
-			<div id="profil">
-				<div id="top">
-					<img src="image/profil.png">
-					<h1>Profil de <?php echo $_SESSION['pseudo']; ?> : </h1>
-				</div>
-				<?php 
-				 	if(!empty($_GET['message'])) 
-				 	{
-						$message = $_GET['message'];
-						 echo '<p class="message"> '.$message.'</p>';
-					}
-				?>
-			</div>
-
 			<div id="main">
+				<div id="profil">
+					<div id="top">
+						<img src="image/profil.png">
+						<h1>Profil de <?php echo $_SESSION['pseudo']; ?> </h1>
+						<a href="action/deconnexion.php"><img src="image/power.png" id="onoff"></a>
+					</div>
+					<?php 
+					 	if(!empty($_GET['message'])) 
+					 	{
+							$message = $_GET['message'];
+							 echo '<p class="message"> '.$message.'</p>';
+						}
+					?>
+				</div>
 				<div id="content">
 					<div id="infos">
 						<h2> Infos </h2>

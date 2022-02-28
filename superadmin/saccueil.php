@@ -40,7 +40,7 @@
 			<a href="sessions.php"> Gestion des sessions </a> <br>
 			<a href="contact.php"> Gestion des erreurs </a> <br>
 			<a href="news.php"> Gestion des actualités </a> <br>
-			<a href="ajoutimage.php"> Ajout d'image </a> <br>
+			<a href="ajoutimage.php"> Gestion artistes et drapeaux </a> <br>
 			<a href="../accueil.php"> Quitter </a> <br>
 		<?php
 		}

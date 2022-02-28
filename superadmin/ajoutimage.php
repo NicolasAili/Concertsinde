@@ -54,7 +54,6 @@
 			?>
 
 			<a href='saccueil.php'>retour accueil</a>
-			<h1> !!!!! PNG avec 1ere lettre majuscule pour les 2 !!!!! </h1>
 			<form action="ajoutimage.php" method="get" id="formsearch">
 			  <label for="artiste">Chercher un artiste:</label>
 			  <input type="text" id="artiste" name="artiste" onkeyup="getdata(this.id);" required><br><br>

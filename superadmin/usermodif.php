@@ -41,6 +41,10 @@ if($action == 'Valider')
 	echo "<br>";
 	echo "<a href=users.php> retour </a>";
 }
+else if ($action == 'Tickets') 
+{
+	header("Location: contact.php?user=$idpseudo");
+}
 else if($action == 'Message')
 {
 	echo "Nouveau fil de discussion avec ";

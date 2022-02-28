@@ -16,16 +16,11 @@
 	<head>
 		<title>Tous les concerts</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
-		<script type="text/javascript" src="../jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../jquery/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="../js/scriptform.js"></script> 
-		<link rel="stylesheet" type="text/css" href="../jquery/jquery-ui.css" media="screen" />		
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+	echo "<script type='text/javascript' src='../jquery/jquery.min.js'></script>";
+	echo "<script type='text/javascript' src='../jquery/jquery-ui-1.13.0/jquery-ui.min.js'></script>";
+	echo "<link rel='stylesheet' type='text/css' href='../jquery/jquery-ui-1.13.0/jquery-ui.css'>";
+?>	
 	</head>
 	<body>
 		<?php
@@ -88,6 +83,7 @@
 				        <input type="hidden" class="bannicheck" name="bannicheck" <?php echo 'value="' . $row['banni'] . '"' ?> >
 				        <td><input type="submit" value="Valider" class="valider" name="modsuppr" href=""></td>
 				        <td><input class="message" type="submit" name="modsuppr" value="Message"></td>
+				        <td><input type="submit" value="Tickets" class="ticket" name="modsuppr" href=""></td>
 		    			</tr>
 		    		</form>
 	    		<?php
@@ -142,6 +138,39 @@
 		    $('.bannicheck').eq(par).val("0");
 		}
 	});
+
+
+	function getdata(identifiant)
+{
+	$( '#'+identifiant+'' ).autocomplete({
+		source: function( request, response ) {
+			$.ajax({
+				url: "../action/getdata.php",
+				type: 'post',
+				dataType: "json",
+				data: {
+						search: request.term,
+						this: identifiant
+				  },
+				success: function( data ) 
+				{
+					response( data );
+                    if(data.length == 1 && data[0].label == request.term)
+                    {
+                        $( '#'+identifiant+'' ).autocomplete( "close" );
+                        getleave(identifiant);
+                    }
+				}
+			});
+		},
+		select: function (event, ui) {
+			// Set selection
+			$( this ).val(ui.item.label); // display the selected text in the field
+            getleave(this.id);
+			return false;
+		}
+	});
+}
 </script>
 
 	

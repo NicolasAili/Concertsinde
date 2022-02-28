@@ -36,32 +36,61 @@
 		if($row['admin'] == 2)
 		{
 			$hide = $_GET['hide'];
+			$user = $_GET['user'];
 			$count = 1;
 			if(!$hide || $hide == 'no')
 			{
-				$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user";
+				if ($user) 
+				{
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND ID_user = $user";
+				}
+				else
+				{
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user";
+				}
 			}
 			else
 			{
-				$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2";
+				if ($user) 
+				{
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2 AND ID_user = $user";
+				}
+				else
+				{
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2";
+				}
 			}
-			
+
 			$query = mysqli_query($con ,$sql);?>
 
 			<a href="saccueil.php">retour accueil</a>
+			<br>
+			<a href="contact.php">réinitialiser</a>
 			<br>
 			<input type="checkbox" onclick='window.location.assign(<?php echo '"'; echo 'contact.php?';
 			if($hide == 'yes')
 			{
 				echo 'hide=no';
+				if ($user) 
+				{
+					echo "&user=$user";
+				}
 			}
 			else if($hide == 'no')
 			{
 				echo 'hide=yes';
+				if ($user) 
+				{
+					echo "&user=$user";
+				}
 			}
 			else
 			{
 				echo 'hide=yes';
+				if ($user) 
+				{
+					echo "&user=$user";
+				}
 			}
 			?>
 			")'

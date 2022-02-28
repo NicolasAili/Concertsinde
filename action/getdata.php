@@ -83,6 +83,15 @@
         $response[] = array("label"=>$row['nom_pays']);
       }
     }
+    else if($test == 'pseudoget')
+    {
+      $str = "SELECT pseudo FROM utilisateur WHERE pseudo LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
+      {
+        $response[] = array("label"=>$row['pseudo']);
+      }
+    }
     else
     {
       echo("erreur");

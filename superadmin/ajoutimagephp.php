@@ -85,6 +85,7 @@
 		case 'Ajouter':
 			$uploaddir = '../image/artiste/';
 			$nomartiste = $_POST['nomartiste'];
+			$nomartiste = strtolower($nomartiste);
 			$nomartiste = ucfirst($nomartiste);
 			$description = $_POST['description'];
 			$userfile = $_POST['userfile'];

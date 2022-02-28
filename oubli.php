@@ -61,7 +61,6 @@
 - plus de contenu page superartiste (ex: articles ou autres)
 ....
 - modifconcert
-- connexion
 - pages superadmin
 - pages action
 */

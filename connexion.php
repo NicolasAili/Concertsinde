@@ -46,11 +46,11 @@
 				<div class="formin">
 					<form action="action/connect.php" method="post" class="form-example">
 		  				<div class="form">
-			  			 	<label for="name">Pseudo ou mail : </label> 
+			  			 	<label for="name">Pseudo ou mail </label> 
 			    			<input type="text" name="pseudo" placeholder="Pseudo ou mail" id="prenom" required>
 			    			<br>
 			    			<br>
-			    			<label for="name">Mot de passe : </label> 
+			    			<label for="name">Mot de passe </label> 
 			    			<input type="password" name="password" placeholder="Entrer mdp" id="password" required>
 		      				<br>
 							<div class="connexion"> <input class="bouton" type="submit" value="Connexion" name="connexion"> </div>

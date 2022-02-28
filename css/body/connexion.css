@@ -1,6 +1,8 @@
 #main
 {
   margin-left: 12%;
+  margin-right: 12%;
+
 }
 
 h2
@@ -28,7 +30,27 @@ h2
 
 .formin
 {
+  /*width: 70%;*/
+}
+
+.form-example
+{
+  width: 40%;
+}
+
+.form input
+{
   width: 100%;
+}
+
+.form label
+{
+  float: left;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  cursor: text;
+  font-family: 'Noto Sans', Sans-Serif;
 }
 
 .input x
@@ -62,6 +84,7 @@ input.bouton
   text-align: center;
   font-weight: bold;
   padding: 5px;
+  cursor: pointer;
 }
 
 .connexion
@@ -80,12 +103,12 @@ input.bouton
 #oubli
 {
   text-decoration: none;
-  color: #6c6c6c;
+  color: #3a0101;
 }
 
 #oubli:hover
 {
-  color: #a6a6a6;
+  color: #a50101;
 }
 
 #inscription

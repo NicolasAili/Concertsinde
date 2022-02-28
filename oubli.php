@@ -58,10 +58,13 @@
 /*
 - Confirmation mail inscription
 - trier ticket par date interface admin
+- plus de contenu page superartiste (ex: articles ou autres)
 ....
-- suite fichiers (super artiste description)
+
 - modifconcert
 - connexion
 - pages superadmin
 - pages action
+- superartiste pb info fenetre flottante
+- supportshow footer
 */

@@ -17,11 +17,26 @@
 
 <script>
 	$(document).ready(function () {
-		if($( window ).height() >= $( document ).height()-156)
+		url = window.location.href;
+		url = url.slice(-8);
+		if($( window ).height() == $( document ).height()) //pas de scroll
 		{
 			$('footer').css('position', 'absolute');
 			$('footer').css('bottom', '0');
 		}
+		else
+		{
+			$('footer').css('position', 'static');
+		}
+		if ($( window ).width()>1274 && url == 'news.php') 
+		{
+			$('footer').css('position', 'absolute');
+			$('footer').css('bottom', '0');
+		}
+		//console.log($( window ).width());
+		//console.log($( document ).height());
+		//console.log($( 'footer' ).height());
+		//console.log($( 'body' ).height());
 	});
 
 	$( window ).resize(function() {

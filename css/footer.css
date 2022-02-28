@@ -8,6 +8,10 @@ footer
 	font-size: 150%;
 	text-decoration: none;
 	padding-top: 20px;
+	/*clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;*/
 }
 
 .x, .x:visited

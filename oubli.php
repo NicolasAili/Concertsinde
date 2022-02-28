@@ -66,5 +66,4 @@
 - pages superadmin
 - pages action
 - superartiste pb info fenetre flottante
-- supportshow footer
 */

@@ -178,24 +178,5 @@ if($idcheckmodif) //s'il y a eu modification
 		<?php include('contenu/footer.html'); ?>
 	</body>
 </html>
-<script>
-	$(document).ready(function () {
-		$("#edit").click(function () {
-			$("#confirm").css('visibility', 'visible');
-			$("#confirm").css('display', 'block');
-			$("#pb").css('visibility', 'hidden');
-			$("#pb").css('display', 'none');
-			$("#edit").css('visibility', 'hidden');
-			//$("#edit").css('display', 'none');
-		});
-		$("#button").click(function () {
-			$("#confirm").css('visibility', 'hidden');
-			$("#confirm").css('display', 'none');
-			$("#pb").css('visibility', 'visible');
-			$("#pb").css('display', 'block');
-			$("#edit").css('visibility', 'visible');
-			//$("#edit").css('display', 'contents');
-		});
-	});
-</script>
+
 

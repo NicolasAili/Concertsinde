@@ -133,3 +133,9 @@ textarea
 	margin-bottom: 20px;
 	border-bottom: 1px solid #8b9199;
 }
+
+footer
+{
+	position: absolute;
+	bottom: 0;
+}

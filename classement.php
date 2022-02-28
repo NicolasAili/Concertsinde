@@ -82,7 +82,7 @@
 									<th scope="row" class="tbun"> <?php if($i == 0){echo "🥇";}elseif($i == 1){echo "🥈";}elseif($i == 2){echo "🥉";}else{echo $i+1;} ?> </th>
 									<td class="tbdeux"> <?php echo $row['pseudo']; ?> </td>
 							        <td class="tbtrois"><?php echo $row['points']; ?></td>
-							        <?php if($row['pseudo'] == $_SESSION['seudo']){$rank = 1;} ?>
+							        <?php if($row['pseudo'] == $_SESSION['pseudo']){$rank = 1;} ?>
 						    	</tr>
 						    	<?php
 							}

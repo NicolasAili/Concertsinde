@@ -49,8 +49,5 @@
 			echo "accès non autorisé";
 		}
 		?>
-
-
-
 	</body>
 </html>

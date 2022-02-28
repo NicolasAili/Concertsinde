@@ -17,8 +17,9 @@
 
 <script>
 	$(document).ready(function () {
-		if($( window ).height() == $( document ).height())
+		if($( window ).height() >= $( document ).height()-220)
 		{
+			console.log('okokok');
 			$('footer').css('position', 'absolute');
 			$('footer').css('bottom', '0');
 		}

@@ -160,13 +160,11 @@
 	$( document ).ready(function() {
 		imgwidth = $( '.img' ).width();
 		newheight = (imgwidth*9)/16;
-		//console.log(imgwidth);
 		$( '.img' ).css('height', newheight);
 	});
 	$( window ).resize(function() {
 		imgwidth = $( '.img' ).width();
 		newheight = (imgwidth*9)/16;
-		//console.log(imgwidth);
 		$( '.img' ).css('height', newheight);
 	});
 

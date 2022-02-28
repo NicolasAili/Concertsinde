@@ -31,13 +31,16 @@ body
 	margin-left: 30px;
 	height: 200px;
 	max-height: 200px;
-	overflow: scroll;
+	width: 100%;
+	overflow: auto;
 }
 
 #partunun textarea
 {
 	border-radius: 6px;
 	border: 1px solid red;
+	width: 90%;
+	overflow: auto;
 }
 
 #partunun input
@@ -114,10 +117,6 @@ h1
 	color: #c2bcbc;
 }
 
-
-
-
-
 .concertsall
 {
 	margin-top: 80px;
@@ -125,6 +124,7 @@ h1
 	margin-right: 25%;
 	display: block;
 	background-color: white;
+	border-radius: 12px;
 }
 
 .inwhile

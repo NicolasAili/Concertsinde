@@ -19,7 +19,7 @@ Support(s) : pc boulot et ecran boulot
 		<?php
 			include '../php/error.php';  
 			require '../php/connectcookie.php';
-			require('../php/database.php');
+			require '../php/database.php';
 
 			$artiste = $_POST['artiste'];
 			$artiste = strtolower($artiste);

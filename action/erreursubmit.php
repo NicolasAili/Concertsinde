@@ -10,8 +10,9 @@
 */
 ?>
 <?php
-	require '../php/connectcookie.php';	 	     
-	require('../php/database.php');
+	include '../php/error.php';  
+	require '../php/connectcookie.php';
+	require '../php/database.php';
 	
 	$type = $_POST['type'];
 
@@ -19,7 +20,6 @@
 	$probleme = $_POST['probleme'];
 	$mail = $_POST['mailinput'];
 	$sujet = $_POST['sujet'];
-	//$mailsuivi = $_POST['mailsuivi'];
 
 	$idconcert = $_POST['idconcert'];
 

@@ -1,7 +1,7 @@
 <?php
 /*
     Type fichier : php
-    Fonction : permet d'afficher boîte de dialogue lorsque header
+    Fonction : permet d'afficher boîte de dialogue lorsqu'on fait une redirection (généralement pour afficher une erreur ou une action interdite)
     Emplacement : action
     Connexion à la BDD : non  
     Contenu HTML : oui

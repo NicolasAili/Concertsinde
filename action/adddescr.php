@@ -11,7 +11,7 @@
 header('Content-type: application/json');
 if( isset( $_POST['artiste'] ) )
 {
-  include 'php/error.php';
+  include '../php/error.php';  
   require '../php/connectcookie.php';
   require '../php/database.php';
 

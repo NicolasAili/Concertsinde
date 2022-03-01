@@ -10,8 +10,9 @@
 */
 ?>
 <?php
+	include '../php/error.php';  
 	require '../php/connectcookie.php';
-	require('../php/database.php');
+	require '../php/database.php';
 ?>
 <?php
     unset($_SESSION['pseudo']);

@@ -23,9 +23,6 @@ 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
 			require 'php/database.php';
 			include 'contenu/reseaux.php';
 		?>
-		<script>
-			//alert($(window).width());
-		</script>
 		<link rel="stylesheet" type="text/css" href="css/body/accueil.css">
 	</head>
 	<body>

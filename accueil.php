@@ -69,12 +69,6 @@ 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
 					<img src="image/transition.png" width="50" height="50">
 					<span> Obtenez des récompenses </span>
 				</div>
-				<!--<div id="bottomdeux">
-					<span> Mais surtout...</span>
-				</div>
-				<div id="bottomtrois">
-					<span> Soutenez </span> la scène indépendante, <span> supportez </span> les artistes et <span> aidez </span> le public
-				</div>-->
 			</div>
 		</div>
 	</body> 

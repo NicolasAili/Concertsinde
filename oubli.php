@@ -59,10 +59,9 @@
 - Confirmation mail inscription
 - trier ticket par date interface admin
 - plus de contenu page superartiste (ex: articles ou autres)
+- https
 ....
-- pages action
-....
-- commentaires + supprimer inutile
 - repassage rapide avec 2 ecrans differents sur toutes les pages
+- commentaires + supprimer inutile
 - readme github
 */

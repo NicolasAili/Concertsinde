@@ -16,16 +16,16 @@
 ?>
 <link rel="stylesheet" type="text/css" href="css/reseaux.css">
 <div id="reseaux">
-	<a href="https://facebook.com" class="imgreseaux"><img class="imgfb" src="./image/facebook.png"></a>
-	<a href="https://instagram.com" class="imgreseaux"><img class="imgig" src="./image/instagram.png"></a>
-	<a href="https://discord.com" class="imgreseaux"><img class="imgdiscord" src="./image/discord.png"></a>
+	<a href="https://facebook.com" class="imgreseaux"><img class="imgfb" src="./image/facebook.png" alt="logo facebook"></a>
+	<a href="https://instagram.com" class="imgreseaux"><img class="imgig" src="./image/instagram.png" alt="logo instagram"></a>
+	<a href="https://discord.com" class="imgreseaux"><img class="imgdiscord" src="./image/discord.png" alt="logo discord"></a>
 	<?php
 	if($finalstring[2] == 'accueil.php')
 	{?>
-		<a href="contact.php" class="imgreseaux"><img class="contact" src="./image/bullewhite.png"></a><?php
+		<a href="contact.php" class="imgreseaux"><img class="contact" src="./image/bullewhite.png" alt="logo contact"></a><?php
 	}
 	else
 	{?>
-		<a href="contact.php" class="imgreseaux"><img class="contact" src="./image/bulle.png"></a><?php
+		<a href="contact.php" class="imgreseaux"><img class="contact" src="./image/bulle.png" alt="logo contact"></a><?php
 	}?>
 </div>

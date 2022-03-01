@@ -1,4 +1,3 @@
-
 <?php
 
 // Désactiver le rapport d'erreurs
@@ -25,5 +24,5 @@ error_reporting(0);
 //ini_set('error_reporting', E_ALL);
 ?>
 <noscript>
-		<meta http-equiv="refresh" content="0;url=nojs.php" />
+		<meta http-equiv="refresh" content="0; url=nojs.php" />
 </noscript>

@@ -1,12 +1,12 @@
 <?php
 /*
 	Type fichier : php
-	Fonction : gestion des news
+	Fonction : gestion/ajout artistes, ajout drapeaux
 	Emplacement : supermadmin
 	Connexion à la BDD :  oui
 	Contenu HTML : oui
 	JS+JQuery : non
-	CSS : non
+	CSS : non 
 */
     session_start();
 ?>
@@ -16,12 +16,11 @@
 	<head>
 		<title>Gestion des artistes</title>
 		<meta charset="utf-8">
-		<!--<script type="text/javascript" src="./jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />-->		
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+			include '../php/error.php';
+			require '../php/connectcookie.php';
+			require '../php/database.php';
+		?>
 		<style>
 			#file 
 			{
@@ -41,8 +40,6 @@
 	</head>
 	<body>
 		<?php
-		require('../php/database.php');
-		include '../php/error.php';
 		$pseudo = $_SESSION['pseudo'];
 		$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
 		$result = mysqli_query($con ,$sql);

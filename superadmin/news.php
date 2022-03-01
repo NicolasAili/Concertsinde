@@ -16,15 +16,11 @@
 	<head>
 		<title>Gestion des actualités</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/header.css" media="screen" />	
-		<link rel="stylesheet" type="text/css" href="contact.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/footer.css" media="screen" />	
-		<!--<script type="text/javascript" src="./jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="./jquery/jquery-ui.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="./jquery/jquery-ui.css" media="screen" />-->		
-		<meta name="Author" content="BUSQUET_TOURNU" />
-		<meta name="Keywords" content="ConcertAll" />
-		<meta name="Description" content="Recap" />
+		<?php
+			include '../php/error.php';
+			require '../php/connectcookie.php';
+			require '../php/database.php';
+		?>
 		<style>
 			#content
 			{

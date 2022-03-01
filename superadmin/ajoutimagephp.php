@@ -1,10 +1,9 @@
 <?php
 	$action = $_POST['submit'];
+	include '../php/error.php';
 	require '../php/connectcookie.php';
-	require('../php/database.php');
+	require '../php/database.php';
 	
-
-
 	switch ($action) {
 		case 'Modifier':
 			$nomartiste = $_POST['nomartiste'];

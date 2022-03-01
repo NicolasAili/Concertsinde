@@ -8,7 +8,9 @@
 	JS+JQuery : non
 	CSS : non
 */
-require('../php/database.php');
+include '../php/error.php';
+require '../php/connectcookie.php';
+require '../php/database.php';
 session_start();
 $points = $_POST['points'];
 $points_session = $_POST['points_session'];

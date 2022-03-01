@@ -1,5 +1,3 @@
-
-
 #inthiddiv
 {
 	visibility: hidden;
@@ -10,6 +8,11 @@
 {
 	visibility: hidden;
 	display: none;
+}
+
+#main
+{
+  font-family: 'Noto Sans', Sans-Serif;
 }
 
 #connect
@@ -24,19 +27,67 @@
   2px 4px 40px rgba(255, 255, 255, 0.6) inset;
   background-color:#5c0000;
   color: white;
-  text-align: center;
 }
+
+#artistediv, #datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv 
+{
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  cursor: text;
+}
+
+#main form input:not(#int, #ext, #date, #heure, #submit > input), label 
+{
+  margin-left: 3%;
+  margin-right: 5%;
+  width: 92%;
+  height: 2rem;
+}
+
 
 h1.titre
 {
-	text-align:center;
+	text-align: left;
 	font-family: Georgia, serif;
 	margin-bottom: 30px;
+  margin-left: 3%;
+}
+
+#dateheure
+{
+  display: flex;
+}
+
+#datediv input, #heurediv input, #datediv label, #heurediv label {
+  margin-left: 0;
+  margin-right: 0;
+  width: 92%;
+  height: 2rem;
+}
+
+#datediv {
+  width: 50%;
+  margin-left: 3%;
+}
+
+#heurediv {
+  width: 50%;
+}
+
+#int, #ext {
+  margin-left: 3%;
 }
 
 #submit
 {
 	margin-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #submit input
@@ -68,17 +119,8 @@ h1.titre
 
 #main form 
 {  
-  margin-top: auto;
-  margin-left: auto; 
-  margin-right: auto;
-  padding: 10px;
-  width: 50%;
-  border-radius: 15px;
-  box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.7),
-  2px 4px 40px rgba(255, 255, 255, 0.6) inset;
-  background-color:#5c0000;
-  color: white;
-  display: block
+  text-align: left;
+  line-height: 1.8rem;
 }
 
 p input, textarea
@@ -86,11 +128,11 @@ p input, textarea
   width: 100%;
 }
 
-p label
+/*p label
 {
   float: left;
   margin-top: 10px;
-}
+}*/
 
 #enregistrer 
 {
@@ -125,4 +167,16 @@ p label
 .star
 {
   color: #E04562;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #3f3c3c;
+  opacity: 1; /* Firefox */
+}
+
+#res, #resx, #resv, #resw {
+  font-style: italic;
+  margin-left: 3%;
+  margin-right: 5%;
+  width: 92%;
 }

@@ -6,7 +6,7 @@
 	Connexion à la BDD : oui
 	Contenu HTML : oui
 	JS+JQuery : oui
-	CSS : oui
+	CSS : oui 
 */
 ?>
 
@@ -125,161 +125,183 @@
 						exit("Erreur: il est interdit de modifier un concert validé");
 					}
 					?>
-					<h1 class="titre"> Modifier un concert </h1>
 					<form method="post" id="connect" action="modifconcertvalid.php">
-						<label for="artiste">Nom de l'artiste ou du groupe:  </label> 
-						<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
-						<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
-						<br>
-						<br>
-						<label for="date">Date : </label> 
-						<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
-						<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> > 
-						<br>
-						<br>
-						<label for="heure">Heure : </label> 
-						<input type="time" name="heure" <?php echo 'value="' . $heure . '"' ?>  id="heure">
-						<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> > 
-						<br>
-						<br>
-						Lieu du concert :
+						<h1 class="titre"> Modifier un concert </h1>
+						<div id="artistediv">
+							<label for="artiste">Nom de l'artiste ou du groupe </label> 
+							<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
+							<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
+						</div>
+						<div id="dateheure">
+							<div id="datediv">
+								<label for="date">Date </label> 
+								<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
+								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> >
+							</div>
+							<div id="heurediv">
+								<label for="heure">Heure </label> 
+								<input type="time" name="heure" <?php echo 'value="' . $heure . '"' ?>  id="heure">
+								<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> >
+							</div>
+						</div>
 						<div id="extint"> 
-							<br>
+							<label> Lieu du concert </label>
 							<?php
 							if($intext == 'int')
 							{
-							?>
-								<input type="checkbox" id="int" name="int" onclick="checkboxmodif(this.id);" checked disabled>
-								en intérieur (salle)
-								<input type="checkbox" id="ext" name="ext" onclick="checkboxmodif(this.id);"> 
-								en extérieur (festival, concert sauvage, rue etc...)
-								<br>
+								?>
+								<div id="extintcontent">
+									<div>
+										<input type="checkbox" id="int" name="int" onclick="checkboxmodif(this.id);" checked disabled>
+										en intérieur (salle)
+									</div>
+									<div>
+										<input type="checkbox" id="ext" name="ext" onclick="checkboxmodif(this.id);"> 
+										en extérieur (festival, concert sauvage, rue etc...)
+									</div>
+								</div>
 								<div id="intdiv">
-									<label for="salle">Salle : </label> 
+									<label for="salle">Salle </label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> required>
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
-									<br>
 								</div>
 								<div id="exthiddiv">
-									<label for="ext">Denomination : </label> 
+									<label for="ext">Denomination </label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" value=""> 
 								</div>
-							<?php
+								<?php
 							}
 							else
 							{
-							?>	
-								<input type="checkbox" id="int" name="int" onclick="checkboxmodif(this.id);"> 
-								en intérieur (salle)
-								<input type="checkbox" id="ext" name="ext" onclick="checkboxmodif(this.id);" checked disabled> 
-								en extérieur (festival, concert sauvage, rue etc...)
-								<br>
+								?>	
+								<div id="extintcontent">
+									<div>
+										<input type="checkbox" id="int" name="int" onclick="checkboxmodif(this.id);"> 
+										en intérieur (salle)
+									</div>
+									<div>
+										<input type="checkbox" id="ext" name="ext" onclick="checkboxmodif(this.id);" checked disabled> 
+										en extérieur (festival, concert sauvage, rue etc...)
+									</div>
+								</div>
 								<div id="extdiv">
-									<label for="ext">Denomination : </label> 
+									<label for="ext">Denomination </label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> required>
 									<div id="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
-									<br>
 								</div>
 								<div id="inthiddiv">
-									<label for="salle">Salle : </label> 
+									<label for="salle">Salle </label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
 									<div id="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" value=""> 
 								</div>
-							<?php
+								<?php
 							}
 							?>
 						</div>
 						<div id="infos">
-							<label for="ville">Ville : </label> 
-							<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
-							<br>
-							<label for="cp">Code postal: </label> 
-							<?php
-							if($cp)
-							{
-								?>
-								<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp" disabled>
+							<div id="adressdiv">
+								<label for="adresse">Adresse </label> 
+								<input type="text" name="adresse" <?php echo 'value="' . $adresse . '"' ?>id="adresse">
+								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $adresse . '"' ?> >
+							</div>
+							<div id="villediv">
+								<label for="ville">Ville  </label> 
+								<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
+							</div>
+							<div id="cpdiv">
+								<label for="cp">Code postal </label> 
 								<?php
-							}
-							else
-							{
-								?>
-								<input type="text" name="cp" placeholder="CP non renseigné pour cette ville" id="cp">
+								if($cp)
+								{
+									?>
+									<input type="text" name="cp" <?php echo 'placeholder="' . $cp . '"' ?> id="cp" disabled>
+									<?php
+								}
+								else
+								{
+									?>
+									<input type="text" name="cp" placeholder="CP non renseigné pour cette ville" id="cp">
+									<?php
+								}?>
+								<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> >
+							</div>
+							<div id="departementdiv">
+								<label for="departement">Département </label>
 								<?php
-							}?>
-							<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $cp . '"' ?> > 
-							<br>
-							<label for="departement">Département: </label>
-							<?php
-							if($departement)
-							{ 
+								if($departement)
+								{ 
+									?>
+									<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement" disabled>
+									<?php
+								}
+								else
+								{
+									?>
+									<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="departement non renseigne" id="departement">
+									<?php
+								}
 								?>
-								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $departement . '"' ?> id="departement" disabled>
-							<?php
-							}
-							else
-							{
+								<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
+							</div>
+							<div id="regiondiv">
+								<label for="region">Région </label>
+								<?php
+								if($region) //region + departement
+								{ 
+									?>
+									<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region" disabled>							 
+									<?php	
+									$pays = 1;
+								}
+								else if($departement && !$region) //seulement le departement
+								{
+									?>
+									<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" >
+									<label for="pays">Pays </label> 
+									<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled="">
+									<?php
+									$pays = 0;
+								}
+								else //ni region ni departement
+								{
+									?>
+									<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" disabled>							 
+									<?php
+									$pays = 0;
+								}
 								?>
-								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="departement non renseigne" id="departement">
-							<?php
-							}
-							?>
-							<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $departement . '"' ?> > 
-							<br>
-							<?php
-							if($region) //region + departement
-							{ 
-								?>
-								<label for="region">Région: </label> 
-								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region" disabled>							 
-								<br>	
-								<label for="pays">Pays: </label> 
-								<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
-							<?php	
-							}
-							else if($departement && !$region) //seulement le departement
-							{
-								?>
-								<label for="region">Région: </label> 
-								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" >							 
-								<br>	
-								<label for="pays">Pays: </label> 
-								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled="">
-							<?php
-							}
-							else //ni region ni departement
-							{
-								?>
-								<label for="region">Région: </label> 
-								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" disabled>							 
-								<br>	
-								<label for="pays">Pays: </label> 
-								<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled>
-							<?php
-							}
-							?>
+							</div>
+							<div id="paysdiv">
+								<label for="pays">Pays </label> 
+								<?php
+								if ($pays == 1) 
+								{?>
+									<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
+									<?php
+								}
+								else
+								{?>
+									<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled>
+									<?php
+								}?>
+							</div>	
 						</div>
 						<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $region . '"' ?> >
 						<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $pays . '"' ?>> 
-						<br>
-						<br>
-						<label for="adresse">Adresse: </label> 
-						<input type="text" name="adresse" <?php echo 'value="' . $adresse . '"' ?>id="adresse">
-						<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $adresse . '"' ?> > 
-						<br>
-						<label for="fb">Lien de l'evenement (facebook ou autres) : </label> 
+						
+						<label for="fb">Lien de l'evenement (facebook ou autres) </label> 
 						<input type="text" name="fb" <?php echo 'value="' . $fb . '"' ?> id="fb">
 						<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $fb . '"' ?> > 
-						<br>
-						<label for="ticket">Lien de la billetterie : </label> 
+
+						<label for="ticket">Lien de la billetterie </label> 
 						<input type="text" name="ticket" <?php echo 'value="' . $ticket . '"' ?> id="ticket">
 						<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $ticket . '"' ?> > 
-						<br>
+
 						<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input type="hidden" id="intext" name="intext" value=""> 
@@ -292,7 +314,6 @@
 						</div>
 						<input type="hidden" id="resetform">
 					</form>
-					
 				<?php
 				}
 				else if($action == 'Supprimer')

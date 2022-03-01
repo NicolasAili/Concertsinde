@@ -69,11 +69,13 @@ Support(s) : pc boulot et ecran boulot
 						<label for="salle">Salle<span class="star">*</span></label> 
 						<input type="text" name="salle" id="salle" placeholder="Salle où a lieu le concert" onblur="getleave(this.id);" onkeyup="getdata(this.id);">
 						<div id="res"> </div>
+						<br>
 					</div>
 					<div id="extdiv"> 
 						<label for="denom">Denomination<span class="star">*</span></label> 
 						<input type="text" name="denom" placeholder="Indiquez un nom pour cet événement exemple: garorock" id="denom">
 						<div id="resx"> </div>
+						<br>
 					</div>
 					<div id=infosx>
 						<div id="infos">

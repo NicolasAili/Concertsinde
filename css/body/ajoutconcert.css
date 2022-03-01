@@ -174,13 +174,6 @@ input.bouton
   font-size: 2.5em;
 }
 
-#pheure
-{
-
-}
-
-
-
 #partiste
 {
   color: #fff;
@@ -189,8 +182,6 @@ input.bouton
   background-color: black;
   border-bottom: 5px solid white;
 }
-
-
 
 #pacp
 {
@@ -210,11 +201,6 @@ input.bouton
   color: #6c6c6c;
   text-decoration: bold;
   font-size: 1.3em
-}
-
-#pcp
-{
-
 }
 
 #saad

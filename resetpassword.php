@@ -64,12 +64,12 @@
 					{
 						$mail = $row['mail'];
 						$valide = 1;
-						$sql = "UPDATE oublimdp SET actif = 0 WHERE mail = '$mail' AND actif = 1";
+						$sql = "UPDATE oublimdp SET actif = 0 WHERE mail = '$mail' AND actif = 1"; //on enlève le mode actif pour la clé qui vient dêtre utilisée
 						$query = mysqli_query($con, $sql);
 					}
 					else
 					{
-						setcookie('contentMessage', 'Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau', time() + 15, "/");
+						setcookie('contentMessage', 'Votre lien a expiré ou une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau', time() + 15, "/");
 						header("Location: oubli.php");
 						exit("Une erreur inconnue s\'est produite, merci de recliquer sur le lien ou de vous en faire renvoyer un nouveau");
 					}

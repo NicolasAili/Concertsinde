@@ -14,6 +14,7 @@
 	require('../php/database.php');
 
 if (isset($_POST['modif_password']))
+{
 	$password = $_POST['password'];
 	$newpassword = $_POST['newpassword'];
 	$cnewpassword = $_POST['cnewpassword'];
@@ -95,6 +96,7 @@ if (isset($_POST['modif_password']))
 			exit("Le mot de passe actuel saisi est incorrect");
 		}
 	}
+}
 ?>
 
 

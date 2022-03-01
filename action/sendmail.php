@@ -1,4 +1,15 @@
 <?php
+/*
+  Type fichier : php
+  Fonction : modifier son mot de passe
+  Emplacement : action
+  Connexion à la BDD : oui  
+  Contenu HTML : non
+  JS+JQuery : non
+  CSS : non
+*/
+?>
+<?php
 require('../php/database.php');
 
 $mail = $_POST['mail'];

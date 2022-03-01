@@ -60,7 +60,6 @@
 - trier ticket par date interface admin
 - plus de contenu page superartiste (ex: articles ou autres)
 ....
-- pages superadmin
 - pages action
 ....
 - commentaires + supprimer inutile

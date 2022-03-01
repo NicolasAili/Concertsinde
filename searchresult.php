@@ -34,7 +34,6 @@
 			$values = array($searchfield);
 
 			$inject = inject($values, null);
-			//array_push($inject, inject($test, $regextest));
 
 			
 			$validate = validate($inject, $redirect);
@@ -42,9 +41,6 @@
 			{
 				$searchfield = mysqli_real_escape_string($con, $searchfield);
 			}
-
-			session_start();
-
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/searchresult.css">
 	</head>

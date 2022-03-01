@@ -11,13 +11,22 @@
 header('Content-type: application/json');
 if( isset( $_POST['artiste'] ) )
 {
-  require('../php/database.php');
-  
+  include 'php/error.php';
+  require '../php/connectcookie.php';
+  require '../php/database.php';
+
   $artiste = $_POST['artiste']; //variable envoyée grâce à la méthode "post" par notre script JQuery
   $description = $_POST['description'];
 
+  if(isset($_SESSION['pseudo']) == null)
+  {
+    setcookie('contentMessage', 'Erreur: vous devez être connecté afin de pouvoir ajouter une description', time() + 15, "/");
+    header("Location: ../supartiste.php?artiste=". $artiste ."");
+    exit("Erreur: vous devez être connectés afin de pouvoir ajouter un artiste");
+  }
+  
   require ('../php/inject.php'); //0) ajouter inject et définir redirect
-  $redirect = '../supartiste.php?artiste=$artiste';
+  $redirect = '../supartiste.php?artiste=' . $artiste;
 
   $values = array($artiste); //1) mettre données dans un arrray
   $inject = inject($values, null); //2) les vérifier

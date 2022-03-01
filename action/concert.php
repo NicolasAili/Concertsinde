@@ -22,6 +22,7 @@ Support(s) : pc boulot et ecran boulot
 			require('../php/database.php');
 
 			$artiste = $_POST['artiste'];
+			$artiste = strtolower($artiste);
 			$artiste = ucfirst($artiste); //met la première lettre en capitale
 			$date = $_POST['date'];
 			$heure = $_POST['heure'];

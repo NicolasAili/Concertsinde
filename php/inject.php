@@ -80,7 +80,7 @@
 			{
 				if(strlen($names)>1)
 				{
-				    setcookie('contentMessage', 'Erreur: un ou plusieurs caractére(s) renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous');
+				    setcookie('contentMessage', 'Erreur: un ou plusieurs caractére(s) renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous', time()+20, "/");
 		    		header("Location: $redirect");
 		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur les expressions suivantes : " . $names . ".Réessayez ou contactez-nous");
 		    	}
@@ -93,7 +93,7 @@
 			{
 				if(strlen($names)>1)
 				{
-					setcookie('contentMessage', 'Erreur: un ou plusieurs caractère(s) renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong>.<br>Réessayez ou contactez-nous');
+					setcookie('contentMessage', 'Erreur: un ou plusieurs caractère(s) renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : <strong>' . $names . '</strong><br>Réessayez ou contactez-nous', time()+20, "/");
 		    		header("Location: $redirect");
 		    		exit("Erreur: un ou plusieurs caractéres renseigné(s) est/sont interdit(s) par mesure de sécurité sur l\'expression suivante : " . $names . ".Réessayez ou contactez-nous");
 	    		}

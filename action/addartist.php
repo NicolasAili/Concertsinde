@@ -8,8 +8,9 @@
   JS+JQuery : non
   CSS : non
 */
+include 'php/error.php';
 require '../php/connectcookie.php';
-require('../php/database.php');
+require '../php/database.php';
 
 require ('../php/inject.php'); //0) ajouter inject et définir redirect
 $redirect = '../artistes.php';

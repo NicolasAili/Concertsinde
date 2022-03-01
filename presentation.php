@@ -52,7 +52,7 @@
 				Le fait aussi que ce milieu dispose de peu de moyens rend la communication parfois légère voire inexistante. <br><br>
 				En conséquence, de nombreux concerts se retrouvent en « sous-effectif » du fait de cette mauvaise communication et de la difficulté à récupérer les informations.
 				<br><br>
-				Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent participer librement à l’expansion du rap indépendant au plus grand nombre.
+				Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent s'aider mutuellement et réciproquement ainsi que toucher un public plus large.
 				<br>
 				<br>
 				<br>
@@ -82,8 +82,8 @@
 				<br><br>
 				Pour ajouter un concert, cliquez sur le bouton correspondant en haut du site.
 				<br><br>
-				Vous pouvez ajouter un concert sans être connecté mais si vous avez un compte n’hésitez pas à vous connecter afin de gagner des points (et des récompenses par la suite).<br><br>
-				Une fois sur la page, remplissez les champs dont vous avez connaissance. Vous n’êtes pas obligés de tout remplir à l’exception des champs obligatoires qui sont les suivants :<br>
+				Vous pouvez ajouter un concert sans être connecté mais si vous avez un compte n’hésitez pas à vous connecter afin de gagner des points (et éventuellement des récompenses par la suite).<br><br>
+				Une fois sur la page, remplissez les champs dont vous avez connaissance. Vous n’êtes pas obligés de tout remplir à l’exception des champs obligatoires qui sont les suivants :<br><br>
 				-	Nom de l’artiste/du groupe<br>
 				-	Date du concert<br>
 				-	Lieu du concert (en extérieur ou en intérieur)<br>
@@ -100,23 +100,23 @@
 				<br><br>
 				Pour modifier un concert, consultez la liste des concerts (page « concerts »). Sous les concerts non validés uniquement, vous verrez un bouton « modifier ». Il est obligatoire d’avoir un compte pour modifier un concert, si vous n’êtes pas connecté vous ne verrez pas le bouton de modification.<br>
 				Si vous constatez une erreur sur un concert validé, n’hésitez pas à faire remonter cette erreur via le formulaire de contact (bouton « signaler une erreur »).<br><br>
-				Une fois le bouton « modifier » cliqué, vous pourrez apercevoir le concert avec les différents champs qui ont été déjà saisi. <br>
+				Une fois le bouton « modifier » cliqué, vous pourrez apercevoir le concert avec les différents champs qui ont été déjà saisis. <br>
 				Tout comme pour l’ajout d’un concert, lorsque vous commencez à saisir un champ, une requête dans notre base de données est effectuée et si le champ saisi y est présent, les champs qui suivent (liés au champ saisi) se remplissent automatiquement. <br><br>
 				Absolument tout est modifiable (ou ajoutable si ça n’a pas été renseigné) à l’exception des champs suivants :<br>
 				-	Nom de l’artiste<br>
 				-	Champs liés à une ville (CP, département etc…)<br><br>
 				A noter que (normalement) toutes les villes françaises sont présentes en base de données. Vous pouvez si vous le souhaitez ajouter un concert à l’étranger. Si la ville étrangère n’est pas dans notre base de données vous aurez dans ce cas la possibilité de renseigner les informations liées à la ville (département, région, pays etc…)<br><br>
-				Vous disposez également des boutons suivants au sein de la page « modifier »:<br>
-				Enregistrer le concert : enregistre les modifications effectuées<br>
-				Réinitialiser le formulaire : remets les champs à leur valeur d’origine<br>
-				Effacer tous les champs : efface le contenu de tous les champs<br>
-				Annuler : retourne à la page avec tous les concerts<br><br><br>
+				Vous disposez également des boutons suivants au sein de la page « modifier » :<br><br>
+				- Enregistrer le concert : enregistre les modifications effectuées<br>
+				- Réinitialiser le formulaire : remets les champs à leur valeur d’origine<br>
+				- Effacer tous les champs : efface le contenu de tous les champs<br>
+				- Annuler : retourne à la page avec tous les concerts<br><br><br>
 			</div>
 
 			<h1>+ Validation d’un concert</h1>
 			<div id="validation">
 				<br><br>
-				Lorsque tous les champs d’un concert sont corrects, un administrateur peut valider le concert. A la validation d’un concert, les points sont distribués aux utilisateurs ayant participé au renseignement et à la modification du concert (voir la section suivante, « système de points »). A noter qu'un concert validé n'est plus modifiable; vous pouvez néanmoins toujours faire remonter une erreur via le bouton « signaler une erreur" présent sous les concerts validés.<br><br><br>
+				Lorsque tous les champs d’un concert sont corrects, un administrateur peut valider le concert. A la validation d’un concert, les points sont distribués aux utilisateurs ayant participé au renseignement et à la modification du concert (voir la section suivante, « système de points » ). A noter qu'un concert validé n'est plus modifiable; vous pouvez néanmoins toujours faire remonter une erreur via le bouton « signaler une erreur » présent sous les concerts validés.<br><br><br>
 			</div>
 
 			<h1>+ Système de points</h1>
@@ -126,16 +126,16 @@
 				Une session correspond à une plage de temps définie à l'avance (d'une durée de 4 à 6 mois). A la fin d’une session, les utilisateurs qui ont le plus de points se verront remettre des récompenses (cd, places de concert, vêtements, bons d’achat etc…) pour les remercier de leur contribution.<br><br>
 				L’attribution des points se fait lorsqu’un concert est validé par un administrateur. Cette attribution se fait de la manière suivante :<br>
 				Ajout d'un concert : +5 points si aucun champ modifié, +3 points si un ou plusieurs champs ont été modifiés après l'ajout.<br>
-				Modification d'un concert: +1 point par champ modifié et validé<br><br>
+				Modification d'un concert : +1 point par champ modifié et validé<br><br>
 				Si vous avez modifié un champ mais qu’il n’est pas correct, ou que vous avez ajouté un concert inexistant, vous ne gagnerez aucun point.<br><br>
-				<strong>Veuillez néanmoins noter que tout ceci est fait simplement dans le but de remercier les utilisateurs les plus actifs. Il n'y a aucune compétition et chaque contribution, aussi minime soit-elle, est la bienvenue.</strong><br><br><br>
+				<strong>Veuillez néanmoins noter que tout ceci est fait simplement dans le but de remercier les utilisateurs les plus actifs. Il n'y a aucune compétition et chaque contribution, aussi minime soit-elle, est plus que bienvenue.</strong><br><br><br>
 			</div>
 
 			<h1>+ Affichage des concerts</h1>
 			<div id="affichage">
 				<br><br>
 				Vous pouvez afficher les concerts dans la page « tous les concerts » (ou sur la page d’un artiste). <br>
-				N’hésitez pas à jouer avec les filtres afin de peaufiner votre recherche. Vous pouvez également utiliser la barre de recherche en cliquant sur la loupe en haut.<br><br><br>
+				N’hésitez pas à jouer avec les filtres afin de peaufiner votre recherche. Vous pouvez également utiliser la barre de recherche en cliquant sur la loupe en haut à droite.<br><br><br>
 			</div>
 
 			<h1>+ Création d’un compte</h1>

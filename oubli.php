@@ -43,7 +43,7 @@
 			</div>
 			<?php 
 			require "action/messages.php";
-			//include('contenu/footer.html');
+			include('contenu/footer.html');
 			?> 
 		</body><?php
 	}
@@ -63,4 +63,8 @@
 - modifconcert
 - pages superadmin
 - pages action
+....
+- commentaires + supprimer inutile
+- repassage rapide avec 2 ecrans differents sur toutes les pages
+- readme github
 */

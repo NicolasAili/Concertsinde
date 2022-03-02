@@ -49,10 +49,10 @@
 					<form action="action/ident.php" method="post" class="connect">
 						<h1>Inscription</h1> 
 		  			 	<label for="pseudo">Pseudo (3 caractères minimum) <span class="star">*</span></label> 
-		    			<input type="text" name="pseudo" <?php if(!$pseudo){echo 'placeholder="Entrez votre pseudo"';} else{echo 'value="' . $pseudo . '"'; }?> id="prenom" required>
+		    			<input type="text" name="pseudo" <?php if(!$pseudo){echo 'placeholder="Entrez votre pseudo"';} else{echo 'value="' . $pseudo . '"'; }?> id="pseudo" required>
 		    			<br>
 		    			<br>
-		    			<label for="email">Email <span class="star">*</span></label> 
+		    			<label for="mail">Email <span class="star">*</span></label> 
 		    			<input type="email" name="email" <?php if(!$email){echo 'placeholder="Entrez votre email"';} else{echo 'value="' . $email . '"'; }?> id="mail" required>
 		    			<br>
 		    			<br>
@@ -62,7 +62,7 @@
 
 		    			<br>
 		    			<label for="cpassword">Confirmez votre mot de passe <span class="star">*</span></label> 
-		    			<input type="password" name="cpassword" placeholder="Confirmez votre mot de passe" id="password" required>
+		    			<input type="password" name="cpassword" placeholder="Confirmez votre mot de passe" id="cpassword" required>
 		    			<br>
 		    			<br>
 						<input  type="submit" value="Inscription" name="inscription" id="inscription">

@@ -67,11 +67,12 @@
 
 		$sql = "SELECT message, id, utilisateur, date_envoi FROM message WHERE id_topic = $idtopic ORDER BY date_envoi ASC";
 		$query = mysqli_query($con, $sql);?>
-		<header>
-			<?php include('contenu/header.php'); ?>
-		</header>
-		<?php include 'contenu/reseaux.php'; ?>
+
 		<body>
+			<header>
+				<?php include('contenu/header.php'); ?>
+			</header>
+			<?php include 'contenu/reseaux.php'; ?>
 			<div id="top">
 				Arpenid.com > messages > <strong> <?php echo $objettopic; ?> </strong>
 			</div>

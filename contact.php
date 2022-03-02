@@ -26,7 +26,6 @@
 	<body>
 		<header>
 			<?php include('contenu/header.php'); ?>
-			<script src="js/scrollnav.js"></script> 
 		</header>
 		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">

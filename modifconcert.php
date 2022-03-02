@@ -163,13 +163,13 @@
 								<div id="intdiv">
 									<label for="salle">Salle </label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> required>
-									<div id="res"> </div>
+									<div class="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
 								</div>
 								<div id="exthiddiv">
 									<label for="ext">Denomination </label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> >
-									<div id="res"> </div>
+									<div class="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" value=""> 
 								</div>
 								<?php
@@ -190,13 +190,13 @@
 								<div id="extdiv">
 									<label for="ext">Denomination </label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> required>
-									<div id="res"> </div>
+									<div class="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
 								</div>
 								<div id="inthiddiv">
 									<label for="salle">Salle </label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
-									<div id="res"> </div>
+									<div class="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" value=""> 
 								</div>
 								<?php
@@ -206,7 +206,7 @@
 						<div id="infos">
 							<div id="adressdiv">
 								<label for="adresse">Adresse </label> 
-								<input type="text" name="adresse" <?php echo 'value="' . $adresse . '"' ?>id="adresse">
+								<input type="text" name="adresse" <?php echo 'value="' . $adresse . '"' ?> id="adresse">
 								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $adresse . '"' ?> >
 							</div>
 							<div id="villediv">
@@ -307,7 +307,7 @@
 						<input type="hidden" id="intext" name="intext" value=""> 
 						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
 						<div id="submit">
-							<input type="submit" value="Enregister le concert" id="valider" name="concert" href="">
+							<input type="submit" value="Enregister le concert" id="valider" name="concert">
 							<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
 							<input type="button" value="Effacer tous les champs" onclick="erase();">
     						<input type="button" value="Annuler" onclick="redirect();">

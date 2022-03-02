@@ -174,7 +174,7 @@ p input, textarea
   opacity: 1; /* Firefox */
 }
 
-#res, #resx, #resv, #resw {
+.res, #resx, #resv, #resw {
   font-style: italic;
   margin-left: 3%;
   margin-right: 5%;

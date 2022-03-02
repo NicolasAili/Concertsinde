@@ -6,7 +6,8 @@
 	Connexion à la BDD :  oui
 	Contenu HTML : oui
 	JS+JQuery : non
-	CSS : oui*/
+	CSS : oui
+*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">

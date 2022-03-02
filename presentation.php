@@ -21,8 +21,6 @@
 			require 'php/database.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/presentation.css">
-
-		
 	</head>
 	<body>	
 		<header>
@@ -152,19 +150,19 @@
 			</div>
 
 			<h1>+ Messages</h1>
-			<div id="profil">
+			<div id="messages">
 				<br><br>
 				Dans cet onglet, vous pourrez consulter les messages qui vous ont été envoyés. Seul un administrateur peut vous contacter via ce moyen, généralement pour vous solliciter suite à une de vos demandes (voir section suivante).<br><br><br>
 			</div>
 
 			<h1>+ Requêtes</h1>
-			<div id="profil">
+			<div id="requetes">
 				<br><br>
 				Ici, vous pouvez suivre et afficher toutes les demandes que vous auriez faites, via le formulaire de contact ou autre.<br><br><br>
 			</div>
 
 			<h1>+ Changement de mot de passe</h1>
-			<div id="profil">
+			<div id="mdpchange">
 				<br><br>
 				Sous l'onglet « paramètres », vous aurez la possibilité de modifier votre mot de passe.<br><br><br>
 			</div>

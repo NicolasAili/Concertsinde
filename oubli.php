@@ -35,7 +35,7 @@
 					<h2> Réinitialisation </h2>
 					<h5> Email </h5>
 					<form class="email" action="action/sendmail.php" method="post">
-						<input class="emailinput"  type="recherche" name="mail">
+						<input class="emailinput" type="email" name="mail">
 						<hr>
 						<input class="submit" name="search" type="submit" value="✔ Envoyez-moi un lien">
 					</form>

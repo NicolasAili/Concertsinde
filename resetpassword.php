@@ -11,42 +11,42 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<?php
-	include 'php/error.php';
-	require 'php/connectcookie.php';
-	include 'php/base.php';
-	include 'php/css.php';
-	include 'php/js.php';
-	require 'php/database.php';
-
-    $key = $_GET['key'];
-
-    require ('php/inject.php'); //0) ajouter inject et définir redirect
-	$redirect = 'resetpassword.php';
-
-	$inject = array();
-	$returnval = inject($key, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-	if (!is_null($returnval)) 
-	{
-	  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-	}
-	$validate = validate($inject, $redirect); //3)validation de tous les champs
-	if($validate == 0) //4) si pas d'injection : ajout des variables
-	{
-	  $key = mysqli_real_escape_string($con, $key); 
-	}
-
-    $valide = 0;
-
-    if(isset($_SESSION['pseudo']) && $key)
-	{
-		setcookie('contentMessage', 'Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté', time() + 15, "/");
-		header("Location: profil.php");
-		exit("Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté");
-	}
-?>
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/body/resetpassword.css">
+		<?php
+		include 'php/error.php';
+		/*require 'php/connectcookie.php';
+		include 'php/base.php';
+		include 'php/css.php';
+		include 'php/js.php';
+		require 'php/database.php';
+
+	    $key = $_GET['key'];
+
+	    require ('php/inject.php'); //0) ajouter inject et définir redirect
+		$redirect = 'resetpassword.php';
+
+		$inject = array();
+		$returnval = inject($key, 'num'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+		$validate = validate($inject, $redirect); //3)validation de tous les champs
+		if($validate == 0) //4) si pas d'injection : ajout des variables
+		{
+		  $key = mysqli_real_escape_string($con, $key); 
+		}
+
+	    $valide = 0;
+
+	    if(isset($_SESSION['pseudo']) && $key)
+		{
+			setcookie('contentMessage', 'Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté', time() + 15, "/");
+			header("Location: profil.php");
+			exit("Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté");
+		}*/
+		?>
+		
 	</head>
 	<header>
 		<?php include('contenu/header.php'); ?> 

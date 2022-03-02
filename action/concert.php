@@ -601,6 +601,5 @@ Support(s) : pc boulot et ecran boulot
 			}
 		?>
 	</body>
-	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
 </html>
 

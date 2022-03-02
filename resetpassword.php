@@ -14,7 +14,7 @@
 	<head>
 		<?php
 		include 'php/error.php';
-		/*require 'php/connectcookie.php';
+		require 'php/connectcookie.php';
 		include 'php/base.php';
 		include 'php/css.php';
 		include 'php/js.php';
@@ -44,14 +44,14 @@
 			setcookie('contentMessage', 'Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté', time() + 15, "/");
 			header("Location: profil.php");
 			exit("Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté");
-		}*/
+		}
 		?>
-		
+		<link rel="stylesheet" type="text/css" href="css/body/resetpassword.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?> 
-	</header>
 	<body>
+		<header>
+			<?php include('contenu/header.php'); ?> 
+		</header>
 		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<form action="action/modif.php" method="post" class="connect">
@@ -105,7 +105,7 @@
 				<input id="key" type="hidden" <?php echo 'value="' . $key . '"' ?> name="key">	
 			</form>
 		</div>
+		<?php include('contenu/footer.html');
+		require "action/messages.php"; ?>
 	</body>
-	<?php include('contenu/footer.html');
-	require "action/messages.php"; ?>
 </html>

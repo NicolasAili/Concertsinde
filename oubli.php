@@ -65,4 +65,5 @@
 - commentaires + supprimer inutile
 - readme github
 - BUG ALLCONCERT FILTRES PETIT ECRAN
+-bug footer lorsque 0 requête
 */

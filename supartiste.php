@@ -79,7 +79,7 @@
 						<form method="post" class="connect" action="action/adddescr.php">
 							<textarea cols="40" rows="5" name="description" id="description" placeholder="Il n'existe pas de description pour cet artiste, vous pouvez en ajouter une"></textarea> 
 							<input type="hidden" id="artiste" name="artiste" <?php echo 'value="' . $artiste . '"' ?> > 
-							<input type="submit" value="Enregister la description" name="concert" href="">
+							<input type="submit" value="Enregister la description" name="concert">
 						</form>
 						<?php
 					}
@@ -351,22 +351,22 @@
 									</div> 
 								</div>
 								<form method="post" action="modifconcert.php" class="modif">
-									<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
-									<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-									<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
-									<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
-									<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-									<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
-									<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
-									<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
-									<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
-									<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
-									<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
-									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
-									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
-									<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
-									<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
-									<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
+									<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
+									<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
+									<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
+									<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
+									<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
+									<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
+									<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
+									<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
+									<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
+									<input type="hidden" class="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
+									<input type="hidden" class="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
+									<input type="hidden" class="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
+									<input type="hidden" class="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
+									<input type="hidden" class="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
+									<input type="hidden" class="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
+									<input type="hidden" class="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
 
 									<div class="footer">
 										<?php
@@ -374,12 +374,12 @@
 										{
 											if($row['valide'] == 0 || $testadmin > 0)
 											{?>
-												<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+												<input class="modifier" type="submit" name="modsuppr" value="Modifier"> 
 											<?php
 											}
 											else
 											{
-												?><input id="probleme" type="submit" name="probleme" value="Signaler une erreur"> <?php
+												?><input class="probleme" type="submit" name="probleme" value="Signaler une erreur"> <?php
 											}
 											if($testadmin > 0) 
 											{?>

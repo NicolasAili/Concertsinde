@@ -8,19 +8,10 @@
 	JS+JQuery : non
 	CSS : non
 */
-/*
-	Type fichier : 
-	Fonction : 
-	Emplacement : 
-	Connexion à la BDD :  
-	Contenu HTML : 
-	JS+JQuery : 
-	CSS : 
-*/
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<?php
 			include 'php/error.php';
@@ -32,10 +23,10 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/support.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?>
-	</header>
 	<body>
+		<header>
+			<?php include('contenu/header.php'); ?>
+		</header>
 		<?php include 'contenu/reseaux.php'; ?>
 		<?php
 		$pseudo = $_SESSION['pseudo'];
@@ -44,8 +35,7 @@
 		$row = mysqli_fetch_array($result);
 		$iduser = $row['ID_user'];
 		$admin = $row['admin'];
-		/*echo $admin;
-		echo $iduser;*/
+
 		if($pseudo && $admin != 2)
 		{
 			$hide = $_GET['hide'];?>
@@ -105,26 +95,15 @@
    				<?php
    				while($row = mysqli_fetch_array($query))
 				{
-					?>
-					<form method="post" id="connect" action="supportshow.php">
-						<?php $newDate = date("d-m-Y", strtotime($row['date_envoi'])); ?> 
-						<tr>
-							<th class="sujet"> <?php echo '<a href="'; echo 'supportshow.php?idcheck='; echo $row['id']; echo '">'; echo $row['sujet']; echo "</a>";?></th>
-							<th class="idth"> <?php echo '#' . $row['id']; ?></th>
-							<th class="typeth"> <?php if($row['type'] == 1){echo "Probleme concert";} else if($row['type'] == 2){echo "Probleme site";} else if($row['type'] == 3){echo "Contact";} ?></th>
-							<th class="dateth"> <?php echo $newDate; ?></th>
-							<th class="resoluth"> <?php if($row['resolu'] == 0){echo "non résolu";}else if($row['resolu'] == 1){echo "en cours de résolution";}else{echo "résolu";}?> </th>
-						</tr>
-						<tr>
-		   					<th>ㅤ</th>
-		   					<th>ㅤ</th>
-		   					<th>ㅤ</th>
-		   					<th>ㅤ</th>
-		   					<th>ㅤ</th>
-   						</tr>
-					</form>
-				<?php
-					if($row['lu'] == 0){echo "</strong>";}
+					$newDate = date("d-m-Y", strtotime($row['date_envoi'])); ?> 
+					<tr>
+						<th class="sujet"> <?php echo '<a href="'; echo 'supportshow.php?idcheck='; echo $row['id']; echo '">'; echo $row['sujet']; echo "</a>";?></th>
+						<th class="idth"> <?php echo '#' . $row['id']; ?></th>
+						<th class="typeth"> <?php if($row['type'] == 1){echo "Probleme concert";} else if($row['type'] == 2){echo "Probleme site";} else if($row['type'] == 3){echo "Contact";} ?></th>
+						<th class="dateth"> <?php echo $newDate; ?></th>
+						<th class="resoluth"> <?php if($row['resolu'] == 0){echo "non résolu";}else if($row['resolu'] == 1){echo "en cours de résolution";}else{echo "résolu";}?> </th>
+					</tr>
+					<?php
 				}?>
 			</table><?php
 		}

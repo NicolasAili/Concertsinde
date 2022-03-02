@@ -1,77 +1,78 @@
 <?php
 /*
-	Type fichier : php
-	Fonction : affiche un probleme en particulier
-	Emplacement : superadmin
-	Connexion à la BDD :  oui
-	Contenu HTML : oui
-	JS+JQuery : non
-	CSS : non
+Type fichier : php
+Fonction : affiche un probleme en particulier
+Emplacement : superadmin
+Connexion à la BDD :  oui
+Contenu HTML : oui
+JS+JQuery : non
+CSS : non
 */
 ?>
-<?php
-
-include 'php/error.php';
-require 'php/connectcookie.php';
-include 'php/base.php';
-include 'php/css.php';
-include 'php/js.php';
-require 'php/database.php';
-include 'contenu/reseaux.php';
-
-$idcheckmodif = $_POST['idcheckmodif']; //var pour vérifier une modification
-$idcheck = $_GET['idcheck']; //requête à afficher
-$idchecklink = $_GET['idchecklink']; //var qui récupère l'id de la requête après une modification
-if($idchecklink)
-{
-	$idcheckmodif = NULL;
-	$idcheck = $idchecklink;
-}
-
-require ('php/inject.php'); //0) ajouter inject et définir redirect
-$redirect = 'support.php';
-
-$inject = array(); 
-$returnval = inject($idcheckmodif, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-if (!is_null($returnval)) 
-{
-  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-}
-$returnval = inject($idcheck, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-if (!is_null($returnval)) 
-{
-  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-}
-$returnval = inject($idchecklink, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
-if (!is_null($returnval)) 
-{
-  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
-}
-$validate = validate($inject, $redirect); //3)validation de tous les champs
-if($validate == 0) //4) si pas d'injection : ajout des variables
-{
-  $idcheckmodif = mysqli_real_escape_string($con, $idcheckmodif); 
-  $idcheck = mysqli_real_escape_string($con, $idcheck); 
-  $idchecklink = mysqli_real_escape_string($con, $idchecklink); 
-}
-
-if($idcheckmodif) //s'il y a eu modification
-{
-	$probleme = $_POST['probleme'];
-	$sql = "UPDATE probleme SET probleme = '$probleme', edited = '1', Date_edit = NOW() WHERE id = '$idcheckmodif'";
-	$query = mysqli_query($con, $sql);
-	header("Location: ./supportshow.php?idchecklink=$idcheckmodif");
-}
-?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
+		<?php
+		include 'php/error.php';
+		require 'php/connectcookie.php';
+		include 'php/base.php';
+		include 'php/css.php';
+		include 'php/js.php';
+		require 'php/database.php';
+
+		$idcheckmodif = $_POST['idcheckmodif']; //var pour vérifier une modification
+		$idcheck = $_GET['idcheck']; //requête à afficher
+		$idchecklink = $_GET['idchecklink']; //var qui récupère l'id de la requête après une modification
+		if($idchecklink)
+		{
+			$idcheckmodif = NULL;
+			$idcheck = $idchecklink;
+		}
+
+		require ('php/inject.php'); //0) ajouter inject et définir redirect
+		$redirect = 'support.php';
+
+		$inject = array(); 
+		$returnval = inject($idcheckmodif, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+			array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+
+		$returnval = inject($idcheck, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+			array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+
+		$returnval = inject($idchecklink, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+			array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
+
+		$validate = validate($inject, $redirect); //3)validation de tous les champs
+		if($validate == 0) //4) si pas d'injection : ajout des variables
+		{
+			$idcheckmodif = mysqli_real_escape_string($con, $idcheckmodif); 
+			$idcheck = mysqli_real_escape_string($con, $idcheck); 
+			$idchecklink = mysqli_real_escape_string($con, $idchecklink); 
+		}
+
+		if($idcheckmodif) //s'il y a eu modification
+		{
+			$probleme = $_POST['probleme'];
+			$sql = "UPDATE probleme SET probleme = '$probleme', edited = '1', Date_edit = NOW() WHERE id = '$idcheckmodif'";
+			$query = mysqli_query($con, $sql);
+			header("Location: ./supportshow.php?idchecklink=$idcheckmodif");
+		}
+		?>
 		<link rel="stylesheet" type="text/css" href="css/body/supportshow.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?>
-	</header>
 	<body>
+		<header>
+			<?php include('contenu/header.php'); ?>
+		</header>
 		<?php include 'contenu/reseaux.php'; ?>
 		<div id="content">
 			<?php
@@ -133,9 +134,8 @@ if($idcheckmodif) //s'il y a eu modification
 						<?php
 						break;
 					}?>
-					<p>
-						<h2> <?php echo $row['sujet'];?> </h2>
-					</p>
+					<h2> <?php echo $row['sujet'];?> </h2>
+					<br>
 					<form method="post" id="connect" action="supportshow.php">
 						<div id="pb">
 							<?php echo $probleme; ?>

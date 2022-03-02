@@ -8,17 +8,14 @@
 	JS+JQuery : non
 	CSS : oui
 */
-/* *******************CHECKING********************
-V1 : oui
-Support(s) : pc boulot et ecran boulot
-*/
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<?php
 			include '../php/error.php';  
 			require '../php/connectcookie.php';
+			include '../php/base.php';
 			require '../php/database.php';
 
 			$artiste = $_POST['artiste'];
@@ -94,7 +91,7 @@ Support(s) : pc boulot et ecran boulot
 		?>
 		<link rel="stylesheet" type="text/css" href="../css/body/concert.css">
 	</head>
-	<body style="background-color: #DBCDC6";>
+	<body style='background-color: #DBCDC6;' >
 		<?php	      
 			if (isset($_POST['concert']))
 			{

@@ -9,7 +9,7 @@
 */
 	$servername = 'localhost';
 	$username = 'root';
-	$password = 'root';
+	$password = '';
 	$dbname = 'webbd';
 
 	//Connexion à la BDD

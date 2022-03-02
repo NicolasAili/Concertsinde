@@ -20,7 +20,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 
 			require ('php/inject.php'); //0) ajouter inject et définir redirect
 			$redirect = 'allconcerts.php';
@@ -611,6 +610,7 @@
 			}
 		}
 		?>
+		<?php include 'contenu/reseaux.php'; ?>
 		<a href="allconcerts.php" id="return"> ⬅ Retour vers les concerts</a>
 		<div id="main">
 			<div id="concertsall">
@@ -751,7 +751,7 @@
 								if (file_exists($filename)) 
 								{
 									?>
-									<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
+									<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
 								}
 								else
 								{
@@ -759,12 +759,12 @@
 									if (file_exists($filename)) 
 									{
 										?>
-										<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+										<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
 									}
 									else
 									{
 										?>
-										<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+										<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
 									}
 								}
 							}
@@ -799,11 +799,11 @@
 					</div> 
 					<div class="links">
 						<div class="fb">
-							<img src="image/evenement.png">
+							<img alt="lien evenement" src="image/evenement.png">
 							<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 						</div> 
 						<div class="ticket">
-							<img src="image/billetterie.png">
+							<img alt="lien billetterie" src="image/billetterie.png">
 							<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 						</div> 
 					</div>
@@ -1083,6 +1083,5 @@
 		</div>
 		<?php include('contenu/footer.html'); ?>
 	</body>
-	<!--<script type="text/javascript" src="./js/scrollnav.js"></script> -->
 </html>
 

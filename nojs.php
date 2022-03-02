@@ -18,3 +18,4 @@
 		echo "Nous vous prions de bien vouloir nous excuser pour la gêne occasionnée.";
 	?>
 </noscript>
+<a href='accueil.php'>retour à l'accueil</a>

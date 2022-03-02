@@ -20,7 +20,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 
 			$idconcert = $_POST['idpost'];
 
@@ -54,6 +53,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php	      
 			

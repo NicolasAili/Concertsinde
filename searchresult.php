@@ -19,7 +19,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 
 			require ('php/inject.php');
 			$redirect = 'allconcerts.php';
@@ -48,6 +47,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php	      		
 			

@@ -19,7 +19,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/oubli.css">
 	</head>
@@ -30,6 +29,7 @@
 			<header>
 				<?php include('contenu/header.php'); ?>
 			</header>
+			<?php include 'contenu/reseaux.php'; ?>
 			<div id="main">
 				<div id="reset">
 					<h2> Réinitialisation </h2>

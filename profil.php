@@ -18,7 +18,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/profil.css">
 	</head>
@@ -26,6 +25,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<?php
 		if(isset($_SESSION['pseudo']))
 		{
@@ -91,9 +91,9 @@
 			<div id="main">
 				<div id="profil">
 					<div id="top">
-						<img src="image/profil.png">
+						<img alt="profil" src="image/profil.png">
 						<h1>Profil de <?php echo $_SESSION['pseudo']; ?> </h1>
-						<a href="action/deconnexion.php"><img src="image/power.png" id="onoff"></a>
+						<a href="action/deconnexion.php"><img alt="deconnexion" src="image/power.png" id="onoff"></a>
 					</div>
 					<?php 
 					 	if(!empty($_GET['message'])) 

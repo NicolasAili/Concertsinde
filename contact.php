@@ -20,7 +20,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/contact.css">
 	</head>	
@@ -29,6 +28,7 @@
 			<?php include('contenu/header.php'); ?>
 			<script src="js/scrollnav.js"></script> 
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<h1> Contactez nous ! </h1>
 			<form action="action/erreursubmit.php" method="post">
@@ -87,47 +87,46 @@
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 		<?php require "action/messages.php"; ?>
+		<script>
+			function verification()
+			{
+				var strsujet = $("#sujet").val();
+				var strprobleme = $("#probleme").val();
+				var strmailinput = $("#mailinput").val();
+				var verif = 0;
+
+				if(!$('#problemecheck').is(':checked') && !$('#contactcheck').is(':checked') && !$('#contactcheckother').is(':checked'))
+				{
+					$('#verifmotif').html("Une case doit être cochée");
+					verif = 1;
+				}
+				if(strsujet.length == 0)
+				{
+					$('#verifsujet').html("Ce champ est obligatoire");
+					verif = 1;
+				}
+				if(strprobleme.length == 0)
+				{
+					$('#verifmessage').html("Ce champ est obligatoire");
+					verif = 1;
+				}
+				if($('#mailinput').length)
+				{
+					if(strmailinput.length == 0)
+					{
+						$('#verifmail').html("Ce champ est obligatoire");
+						verif = 1;
+					}
+				}	
+				if (verif == 0) 
+				{
+					$("#valider").attr("type", "submit");
+					$("#valider").trigger('click');
+				}
+			}
+		</script>
 	</body>
 </html>
-
-<script>
-	function verification()
-	{
-		var strsujet = $("#sujet").val();
-		var strprobleme = $("#probleme").val();
-		var strmailinput = $("#mailinput").val();
-		var verif = 0;
-
-		if(!$('#problemecheck').is(':checked') && !$('#contactcheck').is(':checked') && !$('#contactcheckother').is(':checked'))
-		{
-			$('#verifmotif').html("Une case doit être cochée");
-			verif = 1;
-		}
-		if(strsujet.length == 0)
-		{
-			$('#verifsujet').html("Ce champ est obligatoire");
-			verif = 1;
-		}
-		if(strprobleme.length == 0)
-		{
-			$('#verifmessage').html("Ce champ est obligatoire");
-			verif = 1;
-		}
-		if($('#mailinput').length)
-		{
-			if(strmailinput.length == 0)
-			{
-				$('#verifmail').html("Ce champ est obligatoire");
-				verif = 1;
-			}
-		}	
-		if (verif == 0) 
-		{
-			$("#valider").attr("type", "submit");
-			$("#valider").trigger('click');
-		}
-	}
-</script>
 
 
    			

@@ -19,7 +19,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/presentation.css">
 
@@ -29,6 +28,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<h1>+ Présentation</h1>
 			<div id="presentation">
@@ -207,27 +207,24 @@
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+			var disp;
+			$(document).on("click", "h1", function()
+			{
+				ceci = (this.textContent).substring(2);
+				$(this).next().slideToggle( "slow", function()
+				{
+					console.log(this);
+					if($(this).css("display") == "block")
+					{
+						$(this).prev().replaceWith( "<h1> - " + ceci + "</h1>");
+					}
+					else
+					{
+						$(this).prev().replaceWith( "<h1> + " + ceci + "</h1>");
+					}
+			  	});
+			});
+		</script>
 	</body>
 </html>
-
-
-
-<script>
-	var disp;
-	$(document).on("click", "h1", function()
-	{
-		ceci = (this.textContent).substring(2);
-		$(this).next().slideToggle( "slow", function()
-		{
-			console.log(this);
-			if($(this).css("display") == "block")
-			{
-				$(this).prev().replaceWith( "<h1> - " + ceci + "</h1>");
-			}
-			else
-			{
-				$(this).prev().replaceWith( "<h1> + " + ceci + "</h1>");
-			}
-	  	});
-	});
-</script>

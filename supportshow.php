@@ -72,6 +72,7 @@ if($idcheckmodif) //s'il y a eu modification
 		<?php include('contenu/header.php'); ?>
 	</header>
 	<body>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="content">
 			<?php
 

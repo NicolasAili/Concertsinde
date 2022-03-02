@@ -20,7 +20,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/classement.css">
 	</head>
@@ -28,6 +27,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>	
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php 
 			$sql = "SELECT date_debut, date_fin FROM session WHERE actif = '1'";

@@ -20,7 +20,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inbox.css">
 	</head>
@@ -56,6 +55,7 @@
 			$query = mysqli_query($con, $sql);
 
 			?>
+			<?php include 'contenu/reseaux.php'; ?>
 			<div id="intro">
 				<?php
 				if ($admin == 2) 
@@ -123,13 +123,12 @@
 		}?>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+			width = $('table').width();
+			doc = $( window ).width();
+			margin = (doc - width)/2;
+			$('#intro').css('width', width);
+			$('#intro').css('margin-left', margin);
+		</script>
 	</body>
 </html>
-
-<script>
-	width = $('table').width();
-	doc = $( window ).width();
-	margin = (doc - width)/2;
-	$('#intro').css('width', width);
-	$('#intro').css('margin-left', margin);
-</script>

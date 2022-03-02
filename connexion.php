@@ -17,8 +17,7 @@
 			require 'php/connectcookie.php';
 			include 'php/base.php';
 			include 'php/css.php'; 
-			include 'contenu/reseaux.php';
-			require('php/database.php');
+			require 'php/database.php';
 
 			if(isset($_SESSION['pseudo']))
 			{
@@ -34,6 +33,7 @@
 		<?php
 		if(isset($_SESSION['pseudo']) == null)
 		{?>
+			<?php include 'contenu/reseaux.php'; ?>
 			<div id="main">
 				<h2>Connexion à votre espace membre</h2> 
 					 <?php 

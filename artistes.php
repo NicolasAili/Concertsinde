@@ -24,7 +24,6 @@ Support(s) : pc perso et ecran perso
 			include 'php/css.php'; 
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 
 			$artiste = $_POST['artiste'];
 			if(isset($artiste))
@@ -49,6 +48,7 @@ Support(s) : pc perso et ecran perso
 			<?php include('contenu/header.php'); ?>
 			<script src="js/scrollnav.js"></script> 
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<h2> Liste des artistes </h2>
 			<?php
@@ -131,11 +131,11 @@ Support(s) : pc perso et ecran perso
 									$filename = 'image/artiste/' . $artistecnt . '.jpg';
 									if (file_exists($filename)) 
 									{
-					    				echo '<img src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgartiste">';
+					    				echo '<img alt="artiste" src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgartiste">';
 									} 
 									else 
 									{
-					    				echo '<img src="image/artiste/inconnu.png" class="imgartiste">';
+					    				echo '<img alt="artiste_pas_dimage" src="image/artiste/inconnu.png" class="imgartiste">';
 									}
 									echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
 									echo '</a>';
@@ -208,18 +208,18 @@ Support(s) : pc perso et ecran perso
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+			function displayfilter()
+			{
+				$("#tri").slideToggle( "slow", function()
+				{
+					if($("#tri").css("display") != "none")
+					{
+						$("#tri").css('display', 'flex');
+					}
+					$("h3").css('margin-bottom', '10');
+				});
+			}
+		</script>
 	</body>
 </html>
-<script>
-	function displayfilter()
-	{
-		$("#tri").slideToggle( "slow", function()
-		{
-			if($("#tri").css("display") != "none")
-			{
-				$("#tri").css('display', 'flex');
-			}
-			$("h3").css('margin-bottom', '10');
-		});
-	}
-</script>

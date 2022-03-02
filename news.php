@@ -20,7 +20,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 
 			$currentdate = date('Y-m-d');
 			$currentdate = new DateTime($currentdate);
@@ -33,6 +32,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<div id="top">
 				<div class="bandeauun">
@@ -92,7 +92,7 @@
 					?>
 					<div class="content">
 						<a <?php echo 'href="newscontent.php?newsid=' . $row['id'] . '"'; ?>>
-							<img class="img" <?php echo 'src="' . $filename[0] . '"' ?>>
+							<img alt="actualite" class="img" <?php echo 'src="' . $filename[0] . '"' ?>>
 							<div class="rubrique"><?php echo $row['rubrique'];?></div>
 							<h2><?php echo $row['titre'];?></h2>
 							<div class="date"><?php echo $displaytime; ?></div>
@@ -138,7 +138,7 @@
 					?>
 					<div class="content">
 						<a <?php echo 'href="newscontent.php?newsid=' . $row['id'] . '"'; ?>>
-							<img class="img" <?php echo 'src="' . $filename[0] . '"' ?>>
+							<img alt="actualite" class="img" <?php echo 'src="' . $filename[0] . '"' ?>>
 							<div class="rubrique"><?php echo $row['rubrique'];?></div>
 							<h2><?php echo $row['titre'];?></h2>
 							<div class="date"><?php echo $displaytime; ?></div>
@@ -149,79 +149,62 @@
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+			$( document ).ready(function() {
+				imgwidth = $( '.img' ).width();
+				newheight = (imgwidth*9)/16;
+				$( '.img' ).css('height', newheight);
+			});
+			$( window ).resize(function() {
+				imgwidth = $( '.img' ).width();
+				newheight = (imgwidth*9)/16;
+				$( '.img' ).css('height', newheight);
+			});
+
+			$(".bandeauun").click(function(){
+				if($('#site').css('visibility') == 'hidden') //c'est la scène qui est affichée
+				{
+					$('#scene').css('visibility', 'hidden');
+					$('#scene').css('display', 'none');
+					$('#site').css('visibility', 'visible'); //on affiche le site
+					$('#site').css('display', 'flex');
+
+					$('.bandeauun').css('background-color', '#3a0101');
+					$('.bandeauun').css('color', 'white');
+
+					$('.bandeaudeux').css('background-color', 'white');
+					$('.bandeaudeux').css('color', 'black');
+
+					$('.bandeaudeux').css('cursor', 'pointer');
+
+					$('.bandeaudeux').toggleClass('statutbdeux');
+					$('.bandeauun').toggleClass('statutbun');
+				}
+		   		
+		    });
+
+
+		    $(".bandeaudeux").click(function(){
+
+				if($('#scene').css('visibility') == 'hidden')
+				{
+					$('#site').css('visibility', 'hidden');
+					$('#site').css('display', 'none');
+					$('#scene').css('visibility', 'visible');
+					$('#scene').css('display', 'flex');
+
+					$('.bandeaudeux').css('background-color', '#3a0101');
+					$('.bandeaudeux').css('color', 'white');
+
+					$('.bandeauun').css('background-color', 'white');
+					$('.bandeauun').css('color', 'black');
+
+					$('.bandeauun').css('cursor', 'pointer');
+
+					$('.bandeaudeux').toggleClass('statutbdeux');
+					$('.bandeauun').toggleClass('statutbun');
+				}
+		    });
+		</script>
 	</body>
 </html>
-
-<script>
-	$( document ).ready(function() {
-		imgwidth = $( '.img' ).width();
-		newheight = (imgwidth*9)/16;
-		$( '.img' ).css('height', newheight);
-	});
-	$( window ).resize(function() {
-		imgwidth = $( '.img' ).width();
-		newheight = (imgwidth*9)/16;
-		$( '.img' ).css('height', newheight);
-	});
-
-	$(".bandeauun").click(function(){
-		if($('#site').css('visibility') == 'hidden') //c'est la scène qui est affichée
-		{
-			$('#scene').css('visibility', 'hidden');
-			$('#scene').css('display', 'none');
-			$('#site').css('visibility', 'visible'); //on affiche le site
-			$('#site').css('display', 'flex');
-
-			$('.bandeauun').css('background-color', '#3a0101');
-			$('.bandeauun').css('color', 'white');
-
-			$('.bandeaudeux').css('background-color', 'white');
-			$('.bandeaudeux').css('color', 'black');
-
-			$('.bandeaudeux').css('cursor', 'pointer');
-
-			$('.bandeaudeux').toggleClass('statutbdeux');
-			$('.bandeauun').toggleClass('statutbun');
-		}
-   		
-    });
-
-
-    $(".bandeaudeux").click(function(){
-
-		if($('#scene').css('visibility') == 'hidden')
-		{
-			$('#site').css('visibility', 'hidden');
-			$('#site').css('display', 'none');
-			$('#scene').css('visibility', 'visible');
-			$('#scene').css('display', 'flex');
-
-			$('.bandeaudeux').css('background-color', '#3a0101');
-			$('.bandeaudeux').css('color', 'white');
-
-			$('.bandeauun').css('background-color', 'white');
-			$('.bandeauun').css('color', 'black');
-
-			$('.bandeauun').css('cursor', 'pointer');
-
-			$('.bandeaudeux').toggleClass('statutbdeux');
-			$('.bandeauun').toggleClass('statutbun');
-		}
-    });
-/*#bandeaudeux:hover
-{
-	background-color: #3a0101;
-	color: white;
-}
-
-#bandeaudeux:hover::after
-{
-	content: '';
-    position: absolute;
-    bottom: 0; right: 0;
-    border-bottom: 35px solid #DBCDC6;;
-    border-left: 35px solid #3a0101;
-    width: 0;
-}*/
-   
-</script>

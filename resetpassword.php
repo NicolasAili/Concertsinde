@@ -10,6 +10,7 @@
 */
 ?>
 <!DOCTYPE html>
+<html lang="fr">
 <?php
 	include 'php/error.php';
 	require 'php/connectcookie.php';
@@ -17,7 +18,6 @@
 	include 'php/css.php';
 	include 'php/js.php';
 	require 'php/database.php';
-	include 'contenu/reseaux.php';
 
     $key = $_GET['key'];
 
@@ -45,7 +45,6 @@
 		exit("Erreur: il est impossible de réinitialiser son mot de passe tout en étant connecté");
 	}
 ?>
-<html lang="fr">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/body/resetpassword.css">
 	</head>
@@ -53,6 +52,7 @@
 		<?php include('contenu/header.php'); ?> 
 	</header>
 	<body>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<form action="action/modif.php" method="post" class="connect">
 				<?php

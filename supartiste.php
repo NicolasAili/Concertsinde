@@ -19,7 +19,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 
 			$artiste = $_GET['artiste'];
 
@@ -41,6 +40,7 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php
 				require('php/database.php');
@@ -52,11 +52,11 @@
 				$filename = 'image/artiste/' . $artiste . '.jpg';
 				if (file_exists($filename)) 
 				{
-    				echo '<img src="image/artiste/' . $artiste . '.jpg' . '" id="imgartiste">';
+    				echo '<img alt="artiste" src="image/artiste/' . $artiste . '.jpg' . '" id="imgartiste">';
 				} 
 				else 
 				{
-    				echo '<img src="image/artiste/inconnu.png" id="imgartisteinconnu">';
+    				echo '<img alt="artiste" src="image/artiste/inconnu.png" id="imgartisteinconnu">';
 				}?>
 				<div id="partunun"><?php
 					echo '<h1>' . $artiste . '</h1>';
@@ -130,19 +130,19 @@
 									<?php 
 									if($row['valide'] == 0)
 									{?>
-										<img class="image" src="image/invalide.png" height="50" width="50">
+										<img alt="invalide" class="image" src="image/invalide.png" height="50" width="50">
 									<?php
 									}
 									else
 									{?>
-										<img class="image" src="image/valide.png" height="50" width="50">
+										<img alt="valide" class="image" src="image/valide.png" height="50" width="50">
 									<?php
 									}
 									echo "<span>";
 										echo $row['nom_artiste'];
 									echo "</span>";
 									?> 
-									<img class="infologo" src="image/infos.png" height="50" width="50">
+									<img alt="infos" class="infologo" src="image/infos.png" height="50" width="50">
 									<div class="infos hidden">
 										<div class="dateajout"> 
 											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
@@ -285,7 +285,7 @@
 										if (file_exists($filename)) 
 										{
 											?>
-											<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
+											<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
 										}
 										else
 										{
@@ -293,12 +293,12 @@
 											if (file_exists($filename)) 
 											{
 												?>
-												<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+												<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
 											}
 											else
 											{
 												?>
-												<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+												<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
 											}
 										}
 										if($rowdpt['id_region'])
@@ -332,11 +332,11 @@
 								</div> 
 								<div class="links">
 									<div class="fb"> 
-										<img src="image/evenement.png">
+										<img alt="lien evenement" src="image/evenement.png">
 										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 									</div> 
 									<div class="ticket">
-										<img src="image/billetterie.png">
+										<img alt="lien billetterie" src="image/billetterie.png">
 										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 									</div> 
 								</div>
@@ -435,13 +435,13 @@
 							?> 
 							<div class="inwhile"> 
 								<div class="artiste"> 
-									<img class="image" src="image/archive.png" height="50" width="50">
+									<img alt="archive" class="image" src="image/archive.png" height="50" width="50">
 									<?php
 									echo "<span>";
 										echo $row['nom_artiste'];
 									echo "</span>";
 									?> 
-									<img class="infologo" src="image/infos.png" height="50" width="50">
+									<img alt="infos" class="infologo" src="image/infos.png" height="50" width="50">
 									<div class="infos hidden">
 										<div class="dateajout"> 
 											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
@@ -584,7 +584,7 @@
 										if (file_exists($filename)) 
 										{
 											?>
-											<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
+											<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
 										}
 										else
 										{
@@ -592,12 +592,12 @@
 											if (file_exists($filename)) 
 											{
 												?>
-												<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+												<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
 											}
 											else
 											{
 												?>
-												<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+												<img alt="drapeau" class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
 											}
 										}
 										if($rowdpt['id_region'])
@@ -631,11 +631,11 @@
 								</div> 
 								<div class="links">
 									<div class="fb">
-										<img src="image/evenement.png">
+										<img alt="lien evenement" src="image/evenement.png">
 										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 									</div> 
 									<div class="ticket">
-										<img src="image/billetterie.png">
+										<img alt="lien billetterie" src="image/billetterie.png">
 										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 									</div> 
 								</div>
@@ -648,67 +648,66 @@
 			</div>
 		</div>
 		<?php include('contenu/footer.html'); ?>
-		<?php require "action/messages.php"; ?> 
+		<?php require "action/messages.php"; ?>
+		<script>
+			function concert()
+			{
+				$('#futuresconcerts').css('visibility', 'visible');
+		        $('#futuresconcerts').css('display', 'contents');
+		        $('#archivesall').css('visibility', 'hidden');
+		        $('#archivesall').css('display', 'none');
+		        $('#spanconcert').css('cursor', 'auto');
+		        $('#spanarchive').css('cursor', 'pointer');
+				$('#spanconcert').css('border-bottom', '3px solid #df1c1c');
+				$('#spanarchive').css('border-bottom', '3px solid transparent');
+			}
+
+			function archive()
+			{
+				$('#archivesall').css('visibility', 'visible');
+		        $('#archivesall').css('display', 'contents');
+		        $('#futuresconcerts').css('visibility', 'hidden');
+		        $('#futuresconcerts').css('display', 'none');
+		        $('#spanarchive').css('cursor', 'auto');
+		        $('#spanconcert').css('cursor', 'pointer');
+				$('#spanarchive').css('border-bottom', '3px solid #df1c1c');
+				$('#spanconcert').css('border-bottom', '3px solid transparent');
+			}
+
+			function managefooter()
+			{
+				if ($( window ).height() == $( document ).height()) 
+				{
+					$('footer').css('position', 'absolute');
+					$('footer').css('bottom', '0');
+				}
+				else
+				{
+					$('footer').css('position', 'static');
+				}
+			}
+		</script>
+
+		<script> 
+			$(document).delegate('.infologo','mouseenter',function(){
+				var position = $(this).position();
+				$('.infos').addClass('hidden');
+				height = $('.hidden').height();
+				width = $('.hidden').width();
+				heightlogo = $('.infologo').height();
+				widthlogo = $('.infologo').width();
+				widthlogo = widthlogo / 2;
+				heightlogo = heightlogo / 2;
+				varleft = position.left + widthlogo;
+				vartop = position.top - heightlogo;
+				$(this).next('.infos').removeClass('hidden');
+				$(this).next('.infos').css('left', varleft + "px");
+				$(this).next('.infos').css('top', vartop + "px");
+			});
+
+			$(document).delegate('.infologo', 'mouseleave',function(){
+				$(this).next('.infos').addClass('hidden');
+			});
+		</script>
 	</body>
 </html>
-
-<script>
-	function concert()
-	{
-		$('#futuresconcerts').css('visibility', 'visible');
-        $('#futuresconcerts').css('display', 'contents');
-        $('#archivesall').css('visibility', 'hidden');
-        $('#archivesall').css('display', 'none');
-        $('#spanconcert').css('cursor', 'auto');
-        $('#spanarchive').css('cursor', 'pointer');
-		$('#spanconcert').css('border-bottom', '3px solid #df1c1c');
-		$('#spanarchive').css('border-bottom', '3px solid transparent');
-	}
-
-	function archive()
-	{
-		$('#archivesall').css('visibility', 'visible');
-        $('#archivesall').css('display', 'contents');
-        $('#futuresconcerts').css('visibility', 'hidden');
-        $('#futuresconcerts').css('display', 'none');
-        $('#spanarchive').css('cursor', 'auto');
-        $('#spanconcert').css('cursor', 'pointer');
-		$('#spanarchive').css('border-bottom', '3px solid #df1c1c');
-		$('#spanconcert').css('border-bottom', '3px solid transparent');
-	}
-
-	function managefooter()
-	{
-		if ($( window ).height() == $( document ).height()) 
-		{
-			$('footer').css('position', 'absolute');
-			$('footer').css('bottom', '0');
-		}
-		else
-		{
-			$('footer').css('position', 'static');
-		}
-	}
-</script>
-
-<script> 
-	$(document).delegate('.infologo','mouseenter',function(){
-		var position = $(this).position();
-		$('.infos').addClass('hidden');
-		height = $('.hidden').height();
-		width = $('.hidden').width();
-		heightlogo = $('.infologo').height();
-		widthlogo = $('.infologo').width();
-		widthlogo = widthlogo / 2;
-		heightlogo = heightlogo / 2;
-		varleft = position.left + widthlogo;
-		vartop = position.top - heightlogo;
-		$(this).next('.infos').removeClass('hidden');
-		$(this).next('.infos').css('left', varleft + "px");
-		$(this).next('.infos').css('top', vartop + "px");
-	});
-
-	$(document).delegate('.infologo', 'mouseleave',function(){
-		$(this).next('.infos').addClass('hidden');
-	});
-</script>

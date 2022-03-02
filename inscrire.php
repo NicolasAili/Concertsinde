@@ -19,7 +19,10 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
+			if(isset($_SESSION['pseudo']))
+			{
+				header("Location: profil.php");
+			}
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inscrire.css">
 	</head>
@@ -30,6 +33,7 @@
 		<?php
 		if(isset($_SESSION['pseudo']) == null)
 		{?>
+			<?php include 'contenu/reseaux.php'; ?>
 			<div id="main"> 
 					 <?php 
 					 	if(!empty($_GET['message'])) 
@@ -66,10 +70,6 @@
 				</div>
 			</div>
 			<?php  
-		}
-		else
-		{
-			header("Location: profil.php");
 		}
 		include('contenu/footer.html');
 		//require "action/messages.php";?> 

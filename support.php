@@ -29,7 +29,6 @@
 			include 'php/css.php';
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/support.css">
 	</head>
@@ -37,6 +36,7 @@
 		<?php include('contenu/header.php'); ?>
 	</header>
 	<body>
+		<?php include 'contenu/reseaux.php'; ?>
 		<?php
 		$pseudo = $_SESSION['pseudo'];
 		$sql = "SELECT ID_user, admin FROM utilisateur WHERE pseudo = '$pseudo'";

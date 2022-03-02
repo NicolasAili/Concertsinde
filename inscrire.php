@@ -72,6 +72,6 @@
 			<?php  
 		}
 		include('contenu/footer.html');
-		//require "action/messages.php";?> 
+		require "action/messages.php";?> 
 	</body>
 </html>

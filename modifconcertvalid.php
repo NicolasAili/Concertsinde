@@ -224,20 +224,6 @@
 		$row = mysqli_fetch_array($query);
 		$modifville = $row['nom_ville'];
 
-		/*echo "_______________________";
-		echo "<br>";
-		echo $intext;
-		echo $modifadresse;
-		echo "<br>";
-		echo $adresse;
-		echo "<br>";
-		echo "<br>";
-		echo $modifville;
-		echo "<br>";
-		echo "_______________________";*/
-
-
-
 		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
 		$query = mysqli_query($con, $requestpseudo);
 		$row = mysqli_fetch_array($query);
@@ -395,17 +381,6 @@
 						$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 						mysqli_query($con, $updatedpt);
 					}
-					/*else if(!$region)
-					{
-						$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
-						$query = mysqli_query($con, $xxx);
-						$row = mysqli_fetch_array($query);
-						$yyy = $row['id'];
-						if($yyy)
-						{
-
-						}
-					}*/
 				}
 			}
 			else if(!$departement)
@@ -981,19 +956,7 @@
 						$sql = "UPDATE modification SET lien_ticket = '$ticket' WHERE id = $idmodif"; 
 	   					$query = mysqli_query($con, $sql);
 	   				echo "</div>";
-				}				
-				/*if($artiste != $artistepost)
-				{
-					echo "artiste modifié";
-					echo '<br>';
-					echo "<div class='new'>" . $ . "</div>";
-					echo $artistepost;
-					echo '<br>';
-					echo "<div class='new'>" . $ . "</div>";
-					echo $artiste;
-					echo '<br>';
-					echo '<br>';
-				}*/		
+				}					
 				if($testsalle == 1 && $salle != NULL)
 				{
 					echo "<div class='modifclass'>";
@@ -1030,14 +993,6 @@
 				}
 				if($intext != $intextpost && $intext != NULL)
 				{
-					/*if($intext == "int")
-					{
-						echo "passage du concert d'exterieur en interieur";
-					}
-					else
-					{
-						echo "passage du concert d'interieur en exterieur";
-					}*/
 					$sql = "UPDATE modification SET intext = '$intext' WHERE id = $idmodif"; 
    					$query = mysqli_query($con, $sql);
 				}

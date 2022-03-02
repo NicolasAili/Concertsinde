@@ -480,10 +480,6 @@
 					$queryvld = mysqli_query($con, $sql);
 
 					?><a href="allconcerts.php"> retour en arriere </a><?php
-
-					/*setcookie('contentMessage', 'Concert validé avec succès !', time() + 15, "/");
-					header("Location: allconcerts.php");
-					exit("Concert validé avec succès !");*/
 				}
 				else if($action == 'probleme')
 				{?>

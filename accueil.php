@@ -7,14 +7,6 @@
 	Contenu HTML : oui
 	JS+JQuery : non
 	CSS : oui
-
-_________________________________
-nettoyage :
-
-mettre reseau au dessus du main
-mettre tout dans le body dont script
-mettre des alt aux img
-enlever "px" aux widht height
 */
 ?>
 <!DOCTYPE html>

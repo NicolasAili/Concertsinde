@@ -607,7 +607,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					?>
 
 					<?php
-					//$admin = 'administateur';
 					if($getsalle)
 					{
 						$strf = sprintf("SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle'". $archivesql ." ORDER BY". $filtre ."");

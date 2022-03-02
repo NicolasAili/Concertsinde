@@ -64,4 +64,5 @@
 - repassage rapide avec 2 ecrans differents sur toutes les pages
 - commentaires + supprimer inutile
 - readme github
+- BUG ALLCONCERT FILTRES PETIT ECRAN
 */

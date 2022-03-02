@@ -8,10 +8,6 @@
 	JS+JQuery : oui
 	CSS : oui
 */
-/* *******************CHECKING********************
-V1 : oui
-Support(s) : pc boulot et ecran boulot
-*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,7 +19,6 @@ Support(s) : pc boulot et ecran boulot
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require 'php/database.php';
-			//include 'contenu/reseaux.php';
 		?>
 		<script src="js/popupaddconcert.js"></script> 
 
@@ -34,6 +29,7 @@ Support(s) : pc boulot et ecran boulot
 		<header>
 			<?php include('contenu/header.php'); ?> 
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<div class="indentfi">
 				 <form method="post" class="connect" action="action/concert.php">
@@ -45,7 +41,7 @@ Support(s) : pc boulot et ecran boulot
 				 	<div id="dateheure">
 						<div id="datediv">
 							<label for="date">Date<span class="star">*</span></label> 
-							<input type="date" name="date" placeholder="Saisir la date du concert " id="date" required>
+							<input type="date" name="date" id="date" required>
 						</div>
 						<div id="heurediv">
 							<label for="heure">Heure</label> 
@@ -127,7 +123,7 @@ Support(s) : pc boulot et ecran boulot
 							<div id="pdepartement"> test </div> 
 							<div id="pville">  </div> 
 							<div id="pcp">  </div>
-						<div id="saad">Lieu et adresse</div>
+						<div class="saad">Lieu et adresse</div>
 						<div id="checkboxes">
 							<div class="checkintext">
 								<input type="checkbox" id="pint" name="checkint" disabled>
@@ -140,7 +136,7 @@ Support(s) : pc boulot et ecran boulot
 						</div> 
 							<div id="psalle">  </div> 
 							<div id="padresse">  </div> 
-						<div id="saad">Liens relatifs a l'evenement</div>
+						<div class="saad">Liens relatifs a l'evenement</div>
 							<div id="pfb">  </div> 
 							<div id="pticket"> </div> 
 						<br>
@@ -150,7 +146,7 @@ Support(s) : pc boulot et ecran boulot
 							<button type="button" id="nonsaisie" onclick="retour();"> Non, modifier les données </button>
 						</div>
 					</div>
-					<input  type="hidden" value="Enregister le concert" name="concert" id="valider" href="">
+					<input type="hidden" value="Enregister le concert" name="concert" id="valider">
 				</form>
 			</div>	
 		</div>

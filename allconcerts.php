@@ -33,7 +33,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		include 'php/css.php';
 		include 'php/js.php';
 		require 'php/database.php';
-		include 'contenu/reseaux.php';
 
 		require ('php/inject.php'); //0) ajouter inject et définir redirect
 		$redirect = 'allconcerts.php';
@@ -211,6 +210,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php
 
@@ -243,21 +243,21 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												  <input type="text" id="salle" name="salle" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required>
 												  <?php if($filter)
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
 												  }
 												  else
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="none">';
 												  }
 												  ?> 
-												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
-												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+												  <input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
+												  <input type="hidden" class="archive" name="archive" <?php echo 'value='; echo $archive;?>>
 												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											<li>
 										</ul>
 									</li>
-									<br>
+									
 									<li>
 										<div class="formville">► Ville</div>
 										<ul class="formvilledepth">
@@ -266,20 +266,20 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												  <input type="text" id="ville" name="ville" <?php if($getville){echo 'value='; echo "$getville";}?> required>
 												  <?php if($filter)
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
 												  }
 												  else
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="none">';
 												  }?>
-												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
-												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+												  <input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
+												  <input type="hidden" class="archive" name="archive" <?php echo 'value='; echo $archive;?>>
 												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
 									</li>
-									<br>
+									
 									<li>
 										<div class="formcp">► Code postal</div>
 										<ul class="formcpdepth">
@@ -288,20 +288,20 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												  <input type="text" id="cp" name="cp" <?php if($getcp){echo 'value='; echo "$getcp";}?> required>
 												  <?php if($filter)
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
 												  }
 												  else
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="none">';
 												  }?>
-												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
-												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+												  <input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
+												  <input type="hidden" class="archive" name="archive" <?php echo 'value='; echo $archive;?>>
 												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
 									</li>
-									<br>
+									
 									<li>
 										<div class="formdpt">► Département</div>
 										<ul class="formdptdepth">
@@ -310,20 +310,20 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												  <input type="text" id="departement" name="departement" <?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required>
 												  <?php if($filter)
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
 												  }
 												  else
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="none">';
 												  }?>
-												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
-												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+												  <input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
+												  <input type="hidden" class="archive" name="archive" <?php echo 'value='; echo $archive;?>>
 												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul>
 									</li>
-									<br>
+									
 									<li>
 										<div class="formnumdpt">► Numéro de département</div>
 										<ul class="formnumdptdepth">
@@ -332,20 +332,20 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												  <input type="text" id="numero" name="numero" <?php if($getnumdepartement){echo 'value='; echo "$getnumdepartement";}?> required>
 												  <?php if($filter)
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
 												  }
 												  else
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="none">';
 												  }?>
-												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
-												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+												  <input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
+												  <input type="hidden" class="archive" name="archive" <?php echo 'value='; echo $archive;?>>
 												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
 										</ul> 
 									</li>
-									<br>
+									
 									<li>
 										<div class="formrgn">► Région</div>
 										<ul class="formrgndepth">
@@ -354,14 +354,14 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												  <input type="text" id="region" name="region" <?php if($getregion){echo 'value='; echo "$getregion";}?> required>
 												  <?php if($filter)
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="'; echo $filter; echo'">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
 												  }
 												  else
 												  {
-												  	echo '<input type="hidden" id="filter" name="filter" value="none">';
+												  	echo '<input type="hidden" class="filter" name="filter" value="none">';
 												  }?>
-												  <input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
-												  <input type="hidden" id="archive" name="archive" <?php echo 'value='; echo $archive;?>>
+												  <input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
+												  <input type="hidden" class="archive" name="archive" <?php echo 'value='; echo $archive;?>>
 												  <input type="submit" class='filtreform' value="Filtrer">
 												</form>
 											</li>
@@ -455,7 +455,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 											{
 												$archivestring = 'archive=yes';
 											}
-											echo "<br>";
 											echo "<li>";
 												if($string && $filter != "artisteup" && $finalstring[0] != "recherche=none")
 												{
@@ -480,8 +479,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												} 
 												echo '</a>';
 											echo "</li>";
-
-											echo "<br>";
 											echo "<li>";
 												if($string && $filter != "artistedown" && $finalstring[0] != "recherche=none")
 												{
@@ -506,8 +503,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												} 
 												echo '</a>';
 											echo "</li>";
-											
-											echo "<br>";
 											echo "<li>";
 												if($string && $filter != "dateup" && $finalstring[0] != "recherche=none")
 												{
@@ -532,8 +527,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												} 
 												echo '</a>';
 											echo "</li>";
-
-											echo "<br>";
 											echo "<li>";
 												if($string && $filter != "datedown" && $finalstring[0] != "recherche=none")
 												{
@@ -721,7 +714,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 											}?>
 											<input type="hidden" name="archive" <?php echo 'value="' . $archive . '"' ?>>
 											<input type="hidden" name="tri" <?php echo 'value="' . $tri . '"' ?>>
-											<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
+											<input type="hidden" class="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
 										</form>
 									</ul>
 								</li>
@@ -739,7 +732,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 			<div id="indics">
 				<div class="indication">
 					<div class="center">
-						<img src="image/valide.png" height="50" width="50">
+						<img src="image/valide.png" height="50" width="50" alt="valide">
 						<span>
 							 Concert validé
 						</span>
@@ -747,7 +740,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 				</div>
 				<div class="indication">
 					<div class="center">
-						<img src="image/invalide.png" height="50" width="50"> 
+						<img src="image/invalide.png" height="50" width="50" alt="invalide"> 
 						<span>
 							Concert non validé
 						</span>
@@ -755,7 +748,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 				</div>
 				<div class="indication">
 					<div class="center">
-						<img src="image/archive.png" height="50" width="50"> 
+						<img src="image/archive.png" height="50" width="50" alt="archive"> 
 						<span>
 							 Concert archivé
 						</span>
@@ -810,26 +803,26 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								<?php 
 								if($archive == 'yes')
 								{?>
-									<img class="image" src="image/archive.png" height="50" width="50">
+									<img class="image" src="image/archive.png" height="50" width="50" alt="archive">
 								<?php
 								}
 								else
 								{
 									if($row['valide'] == 0)
 									{?>
-										<img class="image" src="image/invalide.png" height="50" width="50">
+										<img class="image" src="image/invalide.png" height="50" width="50" alt="invalide">
 									<?php
 									}
 									else
 									{?>
-										<img class="image" src="image/valide.png" height="50" width="50">
+										<img class="image" src="image/valide.png" height="50" width="50" alt="valide">
 									<?php
 									}
 								}
 								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
 								?>
 								<div class="infosdiv">
-									<img class="infologo" src="image/infos.png" height="50" width="50">
+									<img class="infologo" src="image/infos.png" height="50" width="50" alt="infos">
 									<div class="infos hidden">
 										<div class="dateajout"> 
 											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
@@ -881,7 +874,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												echo "Erreur";
 												break;
 										}
-										echo "<br>";
 										?> 
 										<div class="nbday">
 											<?php echo $nbday; ?>
@@ -975,7 +967,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										if (file_exists($filename)) 
 										{
 											?>
-											<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30"><?php
+											<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.jpg' . '"' ?> width="50" height="30" alt="drapeau"><?php
 										}
 										else
 										{
@@ -983,19 +975,19 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 											if (file_exists($filename)) 
 											{
 												?>
-												<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30"><?php
+												<img class="flag" <?php echo 'src="image/flags/' . $rowrgn['nom_pays'] . '.png' . '"' ?> width="50" height="30" alt="drapeau"><?php
 											}
 											else
 											{
 												?>
-												<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+												<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30" alt="drapeau"><?php
 											}
 										}
 									}
 									else
 									{
 										?>
-										<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30"><?php
+										<img class="flag" <?php echo 'src="image/flags/' . 'noflag' . '.png' . '"' ?> width="50" height="30" alt="drapeau"><?php
 									}
 									if($rowdpt['id_region'])
 									{
@@ -1028,31 +1020,31 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 							</div> 
 							<div class="links">
 								<div class="fb"> 
-									<img src="image/evenement.png">
+									<img src="image/evenement.png" alt="lien_evenement">
 									<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
 								</div> 
 								<div class="ticket">
-									<img src="image/billetterie.png">
+									<img src="image/billetterie.png" alt="lien_billetterie">
 									<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
 								</div> 
 							</div>
 							<form method="post" action="modifconcert.php" class="modif">
-								<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
-								<input type="hidden" id="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-								<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
-								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
-								<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-								<input type="hidden" id="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
-								<input type="hidden" id="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
-								<input type="hidden" id="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
-								<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
-								<input type="hidden" id="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
-								<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
-								<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
-								<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
-								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
-								<input type="hidden" id="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
-								<input type="hidden" id="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
+								<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
+								<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
+								<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
+								<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
+								<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
+								<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
+								<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
+								<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
+								<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
+								<input type="hidden" class="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
+								<input type="hidden" class="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
+								<input type="hidden" class="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
+								<input type="hidden" class="sallepost" name="sallepost" <?php echo 'value="' . $row['nom_salle'] . '"' ?> > 
+								<input type="hidden" class="adressepost" name="adressepost" <?php echo 'value="' . $row['adresse'] . '"' ?> > 
+								<input type="hidden" class="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
+								<input type="hidden" class="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
 								<?php
 								if($archivesql == " AND concert.datec >= NOW()")
 								{?>
@@ -1061,12 +1053,12 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										{
 											if($row['valide'] == 0 || $testadmin > 0)
 											{?>
-												<input id="modifier" type="submit" name="modsuppr" value="Modifier"> 
+												<input class="modifier" type="submit" name="modsuppr" value="Modifier"> 
 											<?php
 											}
 											else
 											{
-												?><input id="probleme" type="submit" name="modsuppr" value="Signaler une erreur"> <?php
+												?><input class="probleme" type="submit" name="modsuppr" value="Signaler une erreur"> <?php
 											}
 											if($testadmin > 0) 
 											{?>
@@ -1093,11 +1085,11 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 	 			}
 	 			?>
  				<form method="post" action="allconcerts.php" class="page">
- 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo 'style="font-weight: bold;"';;} ?>>
+ 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
  					<?php if($i>$n-1)
  					{
  						?>
- 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo 'style="font-weight: bold;"';;} ?>>
+ 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';;} ?>>
  						<?php
  					}
  					if($i>2*$n-1)
@@ -1136,193 +1128,192 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					{?>
 						<input type="hidden" name="ville" <?php echo 'value="' . $getville . '"' ?>><?php
 					}?>
-					<input type="hidden" id="n" name="n" <?php echo 'value='; echo $n;?>>
+					<input type="hidden" class="n" name="n" <?php echo 'value='; echo $n;?>>
  					<input type="hidden" name="archive" <?php echo 'value="' . $archive . '"' ?>>
  					<input type="hidden" name="tri" <?php echo 'value="' . $tri . '"' ?>>
- 					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
+ 					<input type="hidden" class="sqlquery" name="sqlquery" <?php echo 'value="' . $strf . '"' ?> >
  				</form>
 			</div>
 			<?php require "action/messages.php"; ?>
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
-	</body>
-</html>
 
-<script>
-	function displayconcert()
-	{
-		position = $(".container").css("position");
-		if(position == 'relative') //on ferme
-		{
-			$( "ul.ul" ).children().slideToggle( 500, function()
+		<script>
+			function displayconcert()
 			{
-			});
-			setTimeout(() => {  $('.container').css("background-color", 'transparent'); $('.container').css("box-shadow", 'none');
-			$('.container').css("position", 'static');
-    		$('.container').css("z-index", '0'); }, 400);
-			
-			
-		}
-		else //on ouvre
-		{
-			$('.container').css("background-color", '#bfbfbf');
-			$('.container').css("box-shadow", '5px 5px 5px #3a0101');
-			$('.container').css("position", 'relative');
-    		$('.container').css("z-index", '1');
-    		$( "ul.ul" ).children().slideToggle( "slow", function()
-			{
-			});
-		}
-	}
-</script>
-
-<script>
-        $(document).ready(function () {
-            $(".formsalle, .formville, .formcp, .formdpt, .formnumdpt, .formrgn").click(function () {
-                var getClass = this.className;
-                var getClassdepth = getClass + "depth";
-
-                if($(".formsalledepth").children().css("display") == "list-item" && getClassdepth != 'formsalledepth') //quand c'est ouvert et qu'on clique sur autre chose
-                {
-                	$(".formsalledepth").children().slideToggle( "slow", function()
-					{
-						$(".formsalle").html("► Salle");
-			  		});
-                }
-                if($(".formvilledepth").children().css("display") == "list-item" && getClassdepth != 'formvilledepth')
-                {
-                	$(".formvilledepth").children().slideToggle( "slow", function()
-					{
-						$(".formville").html("► Ville");
-			  		});
-                } 
-                if($(".formcpdepth").children().css("display") == "list-item" && getClassdepth != 'formcpdepth')
-                {
-                	$(".formcpdepth").children().slideToggle( "slow", function()
-					{
-						$(".formcp").html("► Code postal");
-			  		});
-                } 
-                if($(".formdptdepth").children().css("display") == "list-item" && getClassdepth != 'formdptdepth')
-                {
-                	$(".formdptdepth").children().slideToggle( "slow", function()
-					{
-						$(".formdpt").html("► Département");
-			  		});
-                } 
-                if($(".formnumdptdepth").children().css("display") == "list-item" && getClassdepth != 'formnumdptdepth')
-                {
-                	$(".formnumdptdepth").children().slideToggle( "slow", function()
-					{
-						$(".formnumdpt").html("► Numéro de département");
-			  		});
-                } 
-                if($(".formrgndepth").children().css("display") == "list-item" && getClassdepth != 'formrgndepth')
-                {
-                	$(".formrgndepth").children().slideToggle( "slow", function()
-					{
-						$(".formrgn").html("► Région");
-			  		});
-                }    
-
-            	$("."+getClass+"depth").children().slideToggle( "slow", function()
+				position = $(".container").css("position");
+				if(position == 'relative') //on ferme
 				{
-					if(getClass == 'formsalle')
+					$( "ul.ul" ).children().slideToggle( 500, function()
 					{
-						if($(".formsalledepth").children().css("display") != "list-item")
+					});
+					setTimeout(() => {  $('.container').css("background-color", 'transparent'); $('.container').css("box-shadow", 'none');
+					$('.container').css("position", 'static');
+		    		$('.container').css("z-index", '0'); }, 400);
+					
+					
+				}
+				else //on ouvre
+				{
+					$('.container').css("background-color", '#bfbfbf');
+					$('.container').css("box-shadow", '5px 5px 5px #3a0101');
+					$('.container').css("position", 'relative');
+		    		$('.container').css("z-index", '1');
+		    		$( "ul.ul" ).children().slideToggle( "slow", function()
+					{
+					});
+				}
+			}
+		</script>
+
+		<script>
+	        $(document).ready(function () {
+	            $(".formsalle, .formville, .formcp, .formdpt, .formnumdpt, .formrgn").click(function () {
+	                var getClass = this.className;
+	                var getClassdepth = getClass + "depth";
+
+	                if($(".formsalledepth").children().css("display") == "list-item" && getClassdepth != 'formsalledepth') //quand c'est ouvert et qu'on clique sur autre chose
+	                {
+	                	$(".formsalledepth").children().slideToggle( "slow", function()
 						{
 							$(".formsalle").html("► Salle");
-						}
-						else
-						{
-							$("."+getClass).html("▼ Salle");
-						}
-					}
-					else if(getClass == 'formville')
-					{
-						if($(".formvilledepth").children().css("display") != "list-item")
+				  		});
+	                }
+	                if($(".formvilledepth").children().css("display") == "list-item" && getClassdepth != 'formvilledepth')
+	                {
+	                	$(".formvilledepth").children().slideToggle( "slow", function()
 						{
 							$(".formville").html("► Ville");
-						}
-						else
-						{
-							$("."+getClass).html("▼ Ville");
-						}
-					}
-					else if(getClass == 'formcp')
-					{
-						if($(".formcpdepth").children().css("display") != "list-item")
+				  		});
+	                } 
+	                if($(".formcpdepth").children().css("display") == "list-item" && getClassdepth != 'formcpdepth')
+	                {
+	                	$(".formcpdepth").children().slideToggle( "slow", function()
 						{
 							$(".formcp").html("► Code postal");
-						}
-						else
-						{
-							$("."+getClass).html("▼ Code postal");
-						}
-					}
-					else if(getClass == 'formdpt')
-					{
-						if($(".formdptdepth").children().css("display") != "list-item")
+				  		});
+	                } 
+	                if($(".formdptdepth").children().css("display") == "list-item" && getClassdepth != 'formdptdepth')
+	                {
+	                	$(".formdptdepth").children().slideToggle( "slow", function()
 						{
 							$(".formdpt").html("► Département");
-						}
-						else
-						{
-							$("."+getClass).html("▼ Département");
-						}
-					}
-					else if(getClass == 'formnumdpt')
-					{
-						if($(".formnumdptdepth").children().css("display") != "list-item")
+				  		});
+	                } 
+	                if($(".formnumdptdepth").children().css("display") == "list-item" && getClassdepth != 'formnumdptdepth')
+	                {
+	                	$(".formnumdptdepth").children().slideToggle( "slow", function()
 						{
 							$(".formnumdpt").html("► Numéro de département");
-						}
-						else
-						{
-							$("."+getClass).html("▼ Numéro de département");
-						}
-					}
-					else if(getClass == 'formrgn')
-					{
-						if($(".formrgndepth").children().css("display") != "list-item")
+				  		});
+	                } 
+	                if($(".formrgndepth").children().css("display") == "list-item" && getClassdepth != 'formrgndepth')
+	                {
+	                	$(".formrgndepth").children().slideToggle( "slow", function()
 						{
 							$(".formrgn").html("► Région");
-						}
-						else
+				  		});
+	                }    
+
+	            	$("."+getClass+"depth").children().slideToggle( "slow", function()
+					{
+						if(getClass == 'formsalle')
 						{
-							$("."+getClass).html("▼ Région");
+							if($(".formsalledepth").children().css("display") != "list-item")
+							{
+								$(".formsalle").html("► Salle");
+							}
+							else
+							{
+								$("."+getClass).html("▼ Salle");
+							}
 						}
-					}
-					
-			  	});
-		});
-    });
-</script>
+						else if(getClass == 'formville')
+						{
+							if($(".formvilledepth").children().css("display") != "list-item")
+							{
+								$(".formville").html("► Ville");
+							}
+							else
+							{
+								$("."+getClass).html("▼ Ville");
+							}
+						}
+						else if(getClass == 'formcp')
+						{
+							if($(".formcpdepth").children().css("display") != "list-item")
+							{
+								$(".formcp").html("► Code postal");
+							}
+							else
+							{
+								$("."+getClass).html("▼ Code postal");
+							}
+						}
+						else if(getClass == 'formdpt')
+						{
+							if($(".formdptdepth").children().css("display") != "list-item")
+							{
+								$(".formdpt").html("► Département");
+							}
+							else
+							{
+								$("."+getClass).html("▼ Département");
+							}
+						}
+						else if(getClass == 'formnumdpt')
+						{
+							if($(".formnumdptdepth").children().css("display") != "list-item")
+							{
+								$(".formnumdpt").html("► Numéro de département");
+							}
+							else
+							{
+								$("."+getClass).html("▼ Numéro de département");
+							}
+						}
+						else if(getClass == 'formrgn')
+						{
+							if($(".formrgndepth").children().css("display") != "list-item")
+							{
+								$(".formrgn").html("► Région");
+							}
+							else
+							{
+								$("."+getClass).html("▼ Région");
+							}
+						}
+				  	});
+				});
+		    });
+		</script>
 
-<script>
-	$(document).delegate('.infologo','mouseenter',function(){
-		var position = $(this).position();
-		$('.infos').addClass('hidden');
-		height = $('.hidden').height();
-		width = $('.hidden').width();
-		heightlogo = $('.infologo').height();
-		widthlogo = $('.infologo').width();
-		widthlogo = widthlogo / 2;
-		heightlogo = heightlogo / 2;
-		varleft = position.left + widthlogo;
-		vartop = position.top - heightlogo;
-		$(this).next('.infos').removeClass('hidden');
-		$(this).next('.infos').css('left', varleft + "px");
-		$(this).next('.infos').css('top', vartop + "px");
-	});
+		<script>
+			$(document).delegate('.infologo','mouseenter',function(){
+				var position = $(this).position();
+				$('.infos').addClass('hidden');
+				height = $('.hidden').height();
+				width = $('.hidden').width();
+				heightlogo = $('.infologo').height();
+				widthlogo = $('.infologo').width();
+				widthlogo = widthlogo / 2;
+				heightlogo = heightlogo / 2;
+				varleft = position.left + widthlogo;
+				vartop = position.top - heightlogo;
+				$(this).next('.infos').removeClass('hidden');
+				$(this).next('.infos').css('left', varleft + "px");
+				$(this).next('.infos').css('top', vartop + "px");
+			});
 
-	$(document).delegate('.infologo', 'mouseleave',function(){
-		$(this).next('.infos').addClass('hidden');
-	});
+			$(document).delegate('.infologo', 'mouseleave',function(){
+				$(this).next('.infos').addClass('hidden');
+			});
 
-	$( "#probleme" ).click(function() 
-	{
-  		$( "#probleme" ).val( 'probleme' );
-	});
-</script>
+			$( "#probleme" ).click(function() 
+			{
+		  		$( "#probleme" ).val( 'probleme' );
+			});
+		</script>
+	</body>
+</html>

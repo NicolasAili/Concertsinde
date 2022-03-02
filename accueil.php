@@ -1,6 +1,5 @@
 <?php 
 /*
-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
 	Type fichier : php
 	Fonction : page accueil
 	Emplacement : /
@@ -9,6 +8,13 @@ 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
 	JS+JQuery : non
 	CSS : oui
 
+_________________________________
+nettoyage :
+
+mettre reseau au dessus du main
+mettre tout dans le body dont script
+mettre des alt aux img
+enlever "px" aux widht height
 */
 ?>
 <!DOCTYPE html>
@@ -21,13 +27,12 @@ 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
 			include 'php/css.php'; 
 			include 'php/js.php';
 			require 'php/database.php';
-			include 'contenu/reseaux.php';
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/accueil.css">
 	</head>
 	<body>
 		<header>
-			<h1> <a href="accueil.php" id="logo"> Arpenid <div id="com">.com</div></a> </h1>
+			<h1> <a href="accueil.php" id="logo"> Arpenid <span id="com">.com</span></a> </h1>
 			<div id="corps">
 				<a href="presentation.php" class="li"><div class="txtli">Fonctionnement</div></a>
 				<a href="news.php" class="li"><div class="txtli">Actualités</div></a>
@@ -39,14 +44,15 @@ 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
 				<?php 
 				if (isset($_SESSION['pseudo']) == null)
 				{?>
-					<a href="./connexion.php" class="spacelink" role="button"> <span> Connexion </span> </a><?php
+					<a href="./connexion.php" class="spacelink" role="button"> <span class="login"> Connexion </span> </a><?php
 				}
 				else
 				{?>
-					<a href="./profil.php" class="spacelink" role="button"> <span> Profil </span> </a><?php
+					<a href="./profil.php" class="spacelink" role="button"> <span class="login"> Profil </span> </a><?php
 				}?>
 			</div>
 		</header>
+		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php
 				$pseudo = $_SESSION['pseudo'];
@@ -64,41 +70,40 @@ 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
 			<div id="bottom">
 				<div id="bottomun">
 					<span> Participez à l'activité du site </span>
-					<img src="image/transition.png" width="50" height="50">
+					<img src="image/transition.png" width="50" height="50" alt="fleche">
 					<span> Gagnez des points </span>
-					<img src="image/transition.png" width="50" height="50">
+					<img src="image/transition.png" width="50" height="50" alt="fleche">
 					<span> Obtenez des récompenses </span>
 				</div>
 			</div>
 		</div>
+		<script>
+			$( document ).ready(function() {
+		        var width = $(window).width();
+				var height = $(window).height();
+				$('header').css('width', width);
+				$('#main').css('height', height);
+				$('#main').css('width', width);
+		    });
+		    $( document ).ready(function() {
+		        var width = $(window).width();
+				var height = $(window).height();
+				if (width<900)
+				{
+					alert('Le site mobile n\'est pas encore fonctionnel');
+				}
+		    });
+
+		    $(window).resize(function() 
+		    {
+		    	var width = $(window).width();
+				var height = $(window).height();
+				$('header').css('width', width);
+				$('#main').css('height', height);
+				$('#main').css('width', width);
+			});
+		</script>
 	</body> 
 </html>
-
-<script>
-	$( document ).ready(function() {
-        var width = $(window).width();
-		var height = $(window).height();
-		$('header').css('width', width);
-		$('#main').css('height', height);
-		$('#main').css('width', width);
-    });
-    $( document ).ready(function() {
-        var width = $(window).width();
-		var height = $(window).height();
-		if (width<900)
-		{
-			alert('Le site mobile n\'est pas encore fonctionnel');
-		}
-    });
-
-    $(window).resize(function() 
-    {
-    	var width = $(window).width();
-		var height = $(window).height();
-		$('header').css('width', width);
-		$('#main').css('height', height);
-		$('#main').css('width', width);
-	});
-</script>
 
 

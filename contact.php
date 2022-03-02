@@ -44,10 +44,10 @@
 				</div>
 				<fieldset>
 					<legend>Contact</legend>
-					<label class="content" for="non"> Objet <span class="star">*</span> </label><br />
+					<label class="content" for="sujet"> Objet <span class="star">*</span> </label><br />
 					<input type="text" name="sujet" id="sujet">
 					<div id="verifsujet"></div>
-					<label class="content" for="non">Votre message <span class="star">*</span></label><br />
+					<label class="content" for="probleme">Votre message <span class="star">*</span></label><br />
 					<textarea name="probleme" id="probleme"></textarea>
 					<div id="verifmessage"></div>
 					<?php
@@ -68,7 +68,7 @@
 						echo "<br>";
 						echo "<label> Il semble que vous ne soyez pas connecté, saisissez votre mail ci-dessous ou connectez-vous (nous ne vous enverrons un mail que si cela est strictement nécessaire)<span class='star'>*</span> </label>";?>
 						<br>
-						<input type="mail" name="mailinput" id="mailinput" value="">
+						<input type="email" name="mailinput" id="mailinput" value="">
 						<div id="verifmail"></div>
 						<?php
 					}

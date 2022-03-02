@@ -67,7 +67,7 @@ Support(s) : pc perso et ecran perso
 					<form method="post" class="connect" action="action/addartist.php">
 						<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
 						<textarea name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 
-						<input type="submit" value="Ajouter" id="validajout" name="validajout" href="">
+						<input type="submit" value="Ajouter" id="validajout" name="validajout">
 					</form>
 			</div>
 			<h3 onclick="displayfilter();">Filtres ▼</h3>
@@ -86,7 +86,7 @@ Support(s) : pc perso et ecran perso
 					<h4> Filtrer </h4>
 					<form method="post" class="connect" action="artistes.php">
 						<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
-						<input type="submit" value="Valider" id="valider" name="valider" href="">
+						<input type="submit" value="Valider" id="valider" name="valider">
 					</form>
 				</div>
 			</div>
@@ -129,15 +129,27 @@ Support(s) : pc perso et ecran perso
 								<?php 
 									$artistecnt = $row['Nom_artiste'];
 									$filename = 'image/artiste/' . $artistecnt . '.jpg';
+									$artistelink = str_replace(" ", "%20", "$artistecnt");
+
 									if (file_exists($filename)) 
 									{
-					    				echo '<img alt="artiste" src="image/artiste/' . $row['Nom_artiste'] . '.jpg' . '" class="imgartiste">';
+					    				echo '<img alt="artiste" src="image/artiste/' . $artistelink . '.jpg' . '" class="imgartiste">';
 									} 
 									else 
 									{
-					    				echo '<img alt="artiste_pas_dimage" src="image/artiste/inconnu.png" class="imgartiste">';
+										$filename = 'image/artiste/' . $artistecnt . '.png';
+										if (file_exists($filename)) 
+										{
+											echo '<img alt="artiste" src="image/artiste/' . $artistelink . '.png' . '" class="imgartiste">';
+										}
+										else
+										{
+											echo '<img alt="artiste_pas_dimage" src="image/artiste/inconnu.png" class="imgartiste">';
+										}
+					    				
 									}
-									echo '<a href="supartiste.php?artiste=' . $row['Nom_artiste'] . '">' . $artistecnt;
+									
+									echo '<a href="supartiste.php?artiste=' . $artistelink . '">' . $artistecnt;
 									echo '</a>';
 								?>
 							</div>
@@ -171,25 +183,25 @@ Support(s) : pc perso et ecran perso
 				if(!$artiste)
 				{?>
 					<form method="post" action="artistes.php" class="page" style="display: flex;">
- 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
- 					<?php if($i>14)
- 					{
- 						?>
- 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';;} ?>>
- 						<?php
- 					}
- 					if($i>29)
- 					{
- 						if($page == 1 && $i > 29)
- 						{?>
- 							<input id="trois" type="submit" name="page" value="3"> <?php
- 						}
- 						else if($i >= $page*15 && $page > 1)
- 						{?>
- 							<input id="trois" type="submit" name="page" value="<?php echo($page+1); ?>"> <?php
- 						}
- 					}?>
- 					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $str . '"' ?> >
+	 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
+	 					<?php if($i>14)
+	 					{
+	 						?>
+	 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';;} ?>>
+	 						<?php
+	 					}
+	 					if($i>29)
+	 					{
+	 						if($page == 1 && $i > 29)
+	 						{?>
+	 							<input id="trois" type="submit" name="page" value="3"> <?php
+	 						}
+	 						else if($i >= $page*15 && $page > 1)
+	 						{?>
+	 							<input id="trois" type="submit" name="page" value="<?php echo($page+1); ?>"> <?php
+	 						}
+	 					}?>
+	 					<input type="hidden" id="sqlquery" name="sqlquery" <?php echo 'value="' . $str . '"' ?> >
  					</form><?php
 				}
 				?>	

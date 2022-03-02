@@ -50,13 +50,23 @@
 			?>
 			<div id="partun"><?php
 				$filename = 'image/artiste/' . $artiste . '.jpg';
+				$artistelink = str_replace(" ", "%20", "$artiste");
 				if (file_exists($filename)) 
 				{
-    				echo '<img alt="artiste" src="image/artiste/' . $artiste . '.jpg' . '" id="imgartiste">';
+    				echo '<img alt="artiste" src="image/artiste/' . $artistelink . '.jpg' . '" class="imgartiste">';
 				} 
 				else 
 				{
-    				echo '<img alt="artiste" src="image/artiste/inconnu.png" id="imgartisteinconnu">';
+					$filename = 'image/artiste/' . $artiste . '.png';
+					if (file_exists($filename)) 
+					{
+						echo '<img alt="artiste" src="image/artiste/' . $artistelink . '.png' . '" class="imgartiste">';
+					}
+					else
+					{
+						echo '<img alt="artiste_pas_dimage" src="image/artiste/inconnu.png" class="imgartiste">';
+					}
+    				
 				}?>
 				<div id="partunun"><?php
 					echo '<h1>' . $artiste . '</h1>';

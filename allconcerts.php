@@ -678,15 +678,9 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								}?></div></a>
 									<ul class="sous">
 										<form method="post" action="allconcerts.php" class="n">
-											<li>
-												<input type="submit" name="n" value="10">
-											</li>
-											<li>
-												<input type="submit" name="n" value="25">
-											</li>
-											<li>
-												<input type="submit" name="n" value="50">
-											</li>
+											<input type="submit" name="n" value="10">
+											<input type="submit" name="n" value="25">
+											<input type="submit" name="n" value="50">
 											<?php
 											if($getsalle)
 											{?>
@@ -1085,11 +1079,11 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 	 			}
 	 			?>
  				<form method="post" action="allconcerts.php" class="page">
- 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
+ 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';} ?>>
  					<?php if($i>$n-1)
  					{
  						?>
- 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';;} ?>>
+ 						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';} ?>>
  						<?php
  					}
  					if($i>2*$n-1)

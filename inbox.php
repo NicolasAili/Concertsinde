@@ -23,10 +23,10 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/inbox.css">
 	</head>
-	<header>
-		<?php include('contenu/header.php'); ?>
-	</header>
 	<body>
+		<header>
+			<?php include('contenu/header.php'); ?>
+		</header>
 		<?php
 		if (isset($_SESSION['pseudo']) == null)
 		{
@@ -45,11 +45,11 @@
 
 			if ($admin == 2) 
 			{
-				$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.sender = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+				$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, receiver, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.sender = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
 			}
 			else
 			{
-				$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+				$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, receiver, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
 			}
 			
 			$query = mysqli_query($con, $sql);
@@ -68,8 +68,15 @@
 				}?>
 			</div>
 			<table>
-	    		<tr>
-		        	<th scope="col" id="message">Message de</th>
+	    		<tr><?php
+	    			if($admin == 2)
+					{?>
+						<th scope="col" id="message">Message à</th><?php
+					}
+					else
+					{?>
+						<th scope="col" id="message">Message de</th><?php
+					}?>
 		       		<th scope="col" id="sujet">Sujet</th>
 		        	<th scope="col" id="date">Dernier message</th>
 				</tr><?php
@@ -78,6 +85,7 @@
 					$lu = 0;
 					$idtopic = $row['id'];
 					$pseudosender = $row['sender'];
+					$pseudoreceiver = $row['receiver'];
 
 					$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic' AND utilisateur != '$idpseudo'";
 
@@ -105,19 +113,24 @@
 					$dateenvoi = $rowd['date_envoi'];
 					$dateenvoi = date("d-m-Y G:i:s", strtotime($dateenvoi));
 
-
-					$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudosender'";
+					if($admin == 2)
+					{
+						$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudoreceiver'";
+					}
+					else
+					{
+						$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudosender'";
+					}
 					$querypseudo = mysqli_query($con, $requestpseudo);
 					$rowp = mysqli_fetch_array($querypseudo);
 					$pseudosender = $rowp['pseudo'];
 				?>
-				<form method="post" id="connect" action="usermodif.php">
 					<tr>
-						<td scope="row"><?php echo $pseudosender; ?></td>
-						<td scope="row"><?php echo '<a href="inboxmsg.php?idtopic='; echo $idtopic; echo '">'; if($lu == 1){echo "<strong>";} echo $row['objet']; if($lu == 1){echo "</strong>";} echo '</a>' ?></td> 
-						<td scope="row"><?php if ($admin == 2){echo $row['date_creation'];}else{echo $dateenvoi;} ?></td>
+						<td><?php echo $pseudosender; ?></td>
+						<td><?php echo '<a href="inboxmsg.php?idtopic='; echo $idtopic; echo '">'; if($lu == 1){echo "<strong>";} echo $row['objet']; if($lu == 1){echo "</strong>";} echo '</a>' ?></td> 
+						<td><?php if ($admin == 2){echo $row['date_creation'];}else{echo $dateenvoi;} ?></td>
 					</tr>
-				</form><?php			
+				<?php
 				}?>
 			</table><?php		
 		}?>

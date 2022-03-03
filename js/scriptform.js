@@ -286,6 +286,10 @@ function getdata(identifiant)
 
 //verification non nul
 function popup(){
+        bheight = $( 'body' ).height();
+        bheight = bheight/8;
+        $("html").scrollTop( bheight );  
+
         var close = 0;
         var strartiste = $("#artiste").val();
         var strdate = $("#date").val();
@@ -300,19 +304,6 @@ function popup(){
         var stradresse = $("#adresse").val();
         var strcp = $("#cp").val();
         var strville = $("#ville").val();
-        //strdate = strdate+1;
-        //console.log(strdate);
-        /*tt = 0;
-        if($('input[name=checkint]').prop('checked')) //on est sur un concert interieur
-        {
-            tt=1;
-        }
-        else if($('input[name=checkext]').prop('checked'))
-        {
-            tt=2;
-        }
-        console.log("tttest4");
-        console.log(tt);*/
         var datesaisie = new Date(strdate).getTime()
 
         var now = new Date();

@@ -181,7 +181,7 @@ Support(s) : pc perso et ecran perso
 				}
 				if(!$artiste)
 				{?>
-					<form method="post" action="artistes.php" class="page" style="display: flex;">
+					<form method="post" action="artistes.php" class="page">
 	 					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';;} ?>>
 	 					<?php if($i>14)
 	 					{

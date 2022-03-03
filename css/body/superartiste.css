@@ -196,13 +196,6 @@ body
 	color: #f5ebeb;
 }
 
-.date
-{
-	/*color: #800000;
-	font-weight: 900;
-	font-size: 2.5em;*/
-}
-
 .nbday
 {
 	color: #800000;
@@ -327,7 +320,7 @@ body
 {
 	color: #6c6c6c;
 	font-size: 1.5em;
-	font-style: bold;
+	font-weight: bold;
 }
 
 #modifier:hover, #probleme:hover, #supprimer:hover, #valider:hover

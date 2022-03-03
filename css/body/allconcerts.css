@@ -166,8 +166,6 @@ ul, li
 }
 
 .filtres ul li{
-    /*float: left;*/
-    /*width: 25%;*/
     text-align: center;
     position: relative;
     padding: 0;
@@ -271,14 +269,9 @@ ul, li
 
 .formsalle, .formville, .formcp, .formdpt, .formnumdpt, .formrgn
 {
-	border: bottom 1px solid #404040;
+	border-bottom: 1px solid #404040;
 	padding-top: 10px;
 	padding-bottom: 10px;
-}
-
-#checkboxdiv
-{
-	
 }
 
 #mainfilter
@@ -414,13 +407,6 @@ h4
 	color: red;
 }
 
-.date
-{
-	/*color: #800000;
-	font-weight: 900;
-	font-size: 2.5em;*/
-}
-
 .nbday
 {
 	color: #800000;
@@ -533,7 +519,7 @@ h4
 {
 	color: #6c6c6c;
 	font-size: 1.5em;
-	font-style: bold;
+	font-weight: bold;
 }
 
 .modifier:hover, .probleme:hover, #supprimer:hover, #valider:hover

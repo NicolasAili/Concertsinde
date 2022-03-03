@@ -83,20 +83,12 @@ h1
 .artiste a
 {
 	text-decoration: none;
-	/*color: #cda3a3;*/
 	color: #f5ebeb;
 }
 
 .artiste a:hover
 {
 	color: red;
-}
-
-.date
-{
-	/*color: #800000;
-	font-weight: 900;
-	font-size: 2.5em;*/
 }
 
 .nbday

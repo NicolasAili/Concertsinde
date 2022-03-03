@@ -59,6 +59,5 @@ hr
 	-moz-user-select: none;
 	user-select: none;
 	white-space: nowrap;
-	/*display: inline-block;*/
 	transition: all 150ms;
 }

@@ -18,13 +18,14 @@
 <script>
 	$(document).ready(function () {
 		//console.log(screen.width);
-		console.log(screen.height);
-		console.log($( 'body' ).height());
-		console.log($( 'footer' ).height());
+		//console.log(screen.height);
+		//console.log($( 'body' ).height());
+		//console.log($( 'footer' ).height());
 		
 		sheight = screen.height;
-		fheight = $( 'footer' ).height();
 		bheight = $( 'body' ).height();
+		fheight = $( 'footer' ).height();
+		
 		
 		/*if (screen.height>900 && $( 'body' ).height() < 950) 
 		{
@@ -68,10 +69,11 @@
 		console.log($( document ).height());
 		console.log($( window ).width());
 		//console.log($( 'footer' ).height());
-		//console.log($( 'body' ).height());
+		//console.log($( 'body' ).height());*/
 	});
 
 	$( window ).resize(function() {
+		console.log($( 'body' ).width());
 		if($( window ).height() == $( document ).height())
 		{
 			if($( window ).height() - $( 'footer' ).height() < $( 'body' ).height()+15)
@@ -87,6 +89,6 @@
 		else
 		{
 			$('footer').css('position', 'static');
-		}*/
+		}
 	});
 </script>

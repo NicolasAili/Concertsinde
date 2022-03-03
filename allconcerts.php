@@ -1131,6 +1131,40 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+	    	$(document).ready(function () {
+	    		if ($( 'body' ).width() < 1110) 
+	    		{
+	    			$('.formsalledepth').css("padding-left", '0');
+	    			$('.formvilledepth').css("padding-left", '0');
+	    			$('.formcpdepth').css("padding-left", '0');
+	    			$('.formdptdepth').css("padding-left", '0');
+	    			$('.formnumdptdepth').css("padding-left", '0');
+	    			$('.formrgndepth').css("padding-left", '0');
+	    		}
+	    	});
+
+	    	$( window ).resize(function() {
+	    		if ($( 'body' ).width() < 1110) 
+	    		{
+	    			$('.formsalledepth').css("padding-left", '0');
+	    			$('.formvilledepth').css("padding-left", '0');
+	    			$('.formcpdepth').css("padding-left", '0');
+	    			$('.formdptdepth').css("padding-left", '0');
+	    			$('.formnumdptdepth').css("padding-left", '0');
+	    			$('.formrgndepth').css("padding-left", '0');
+	    		}
+	    		else
+	    		{
+	    			$('.formsalledepth').css("padding-left", '40px');
+	    			$('.formvilledepth').css("padding-left", '40px');
+	    			$('.formcpdepth').css("padding-left", '40px');
+	    			$('.formdptdepth').css("padding-left", '40px');
+	    			$('.formnumdptdepth').css("padding-left", '40px');
+	    			$('.formrgndepth').css("padding-left", '40px');
+	    		}
+			});
+		</script>
 
 		<script>
 			function displayconcert()

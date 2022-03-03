@@ -250,6 +250,7 @@ ul, li
 .formsalledepth > li, .formvilledepth > li, .formcpdepth > li, .formdptdepth > li, .formnumdptdepth > li, .formrgndepth > li
 {
 	display: none;
+	overflow: hidden;
 }
 
 #filteroneone

@@ -62,6 +62,7 @@ body
 #content
 {
   display: flex;
+  padding-bottom: 50px;
 }
 
 #infos, #pts

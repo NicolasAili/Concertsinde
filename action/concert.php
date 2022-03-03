@@ -89,9 +89,8 @@
 		      $adresse = mysqli_real_escape_string($con, $adresse);
 		    }
 		?>
-		<link rel="stylesheet" type="text/css" href="../css/body/concert.css">
 	</head>
-	<body style='background-color: #DBCDC6;' >
+	<body>
 		<?php	      
 			if (isset($_POST['concert']))
 			{
@@ -116,7 +115,7 @@
 					{
 						setcookie('contentMessage', 'Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés. Vérifiez les concerts. Si vous pensez que cela est dû à une erreur, merci de le signaler', time() + 15, "/");
 						header("Location: ../allconcerts.php");
-						exit("Erreur: COncert déjà saisi (même artiste et même date)");
+						exit("Erreur: Concert déjà saisi (même artiste et même date)");
 					}
 				}
 
@@ -286,17 +285,6 @@
 								$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE nom_departement = '$departement' "; //lien du departement avec la région
 								mysqli_query($con, $updatedpt);
 							}
-							/*else if(!$region)
-							{
-								$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
-								$query = mysqli_query($con, $xxx);
-								$row = mysqli_fetch_array($query);
-								$yyy = $row['id'];
-								if($yyy)
-								{
-
-								}
-							}*/
 						}
 					}
 					else if(!$departement)
@@ -326,17 +314,6 @@
 							$updatedpt = "UPDATE departement SET id_region = '$rgn' WHERE numero = '$yyy' "; //lien du departement avec la région
 							mysqli_query($con, $updatedpt);
 						}
-						/*else if(!$region)
-						{
-							$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
-							$query = mysqli_query($con, $xxx);
-							$row = mysqli_fetch_array($query);
-							$yyy = $row['id'];
-							if($yyy)
-							{
-
-							}
-						}*/
 					}
 					if($cp)
 					{
@@ -368,11 +345,6 @@
 						$insertsalle = "INSERT INTO salle (nom_salle, adresse, id_ville, intext) VALUES ('$salle', '$adresse', '$vle', '1')"; //salle ajoutee à la BDD
 						mysqli_query($con, $insertsalle);
 					}
-					/*if($testvle == 1) //si la ville saisie n'existait pas en BDD, on la 
-					{
-						$updatesalle = "UPDATE salle SET id_ville = '$vle' WHERE nom_salle = '$salle' "; //lien de la salle avec la ville
-						$query = mysqli_query($con, $updatesalle);
-					}*/
 					else //ici on teste l'adresse et la ville
 					{
 						$test = "SELECT adresse, nom_ville FROM salle, ville WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id";
@@ -395,13 +367,6 @@
 							mysqli_query($con, $insertville);
 						}
 					}
-					/*mysqli_free_result($results);
-					$results = mysqli_query($con,"SELECT nom_ville FROM ville WHERE nom_ville = '$ville'");
-					$row_cnt = mysqli_num_rows($results);
-					if($row_cnt<1) //si pas de ligne trouvée (donc pas de salle)
-					{
-						$insertvle = "INSERT INTO ville SET id_ville = '$test_id' WHERE nom_salle = '$salle'";
-					}*/
 					
 					$idsalle = "SELECT id_salle FROM salle WHERE nom_salle = '$salle'";
 					$query = mysqli_query($con, $idsalle);
@@ -415,7 +380,6 @@
 					{
 						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$sle', NOW(), '$fb', '$ticket')";
 					}
-					mysqli_query($con, $sql);
 				}
 				else //concert en extérieur
 				{
@@ -433,170 +397,21 @@
 					{
 						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
 					}
-					mysqli_query($con, $sql);
-				}
-				$test = "SELECT ville_departement FROM ville WHERE ville_id = $vle";
-				$query = mysqli_query($con, $test);
-				$row = mysqli_fetch_array($query);
-				if($row['ville_departement']) //si un département est présent pour notre ville
-				{
-					$test = "SELECT id_region FROM departement, ville WHERE ville_id = $vle AND ville_departement = numero"; //test région
-					$query = mysqli_query($con, $test);
-					$row = mysqli_fetch_array($query);
-					if($row['id_region'])
-					{
-						$testpacp = 2;
-					}
-					else
-					{
-						$testpacp = 1;
-					}
-				}
-				else
-				{
-					$testpacp = 0;
 				}
 
-				$test = "SELECT ville_code_postal FROM ville WHERE ville_id = $vle";
-				$query = mysqli_query($con, $test);
-				$row = mysqli_fetch_array($query);
-				if($row['ville_code_postal'])
+				if(mysqli_query($con, $sql))
 				{
-					$testcp = 1;
+    				setcookie('contentMessage', 'Concert ajouté avec succès', time() + 15, "/");
+    				header("Location: ../allconcerts.php");
+     				exit("Concert ajouté avec succès");
 				}
 				else
 				{
-					$testcp = 0;
+					setcookie('contentMessage', 'Erreur dans l\'ajout du concert, vueuillez réessayer ou nous contacter si le problème persiste', time() + 15, "/");
+    				header("Location: ../allconcerts.php");
+     				exit("Erreur dans l\'ajout du concert, vueuillez réessayer ou nous contacter si le problème persiste");
 				}
-				?>
-				<div id="recap">
-					<div class="inwhile">
-						<h1> Récapitulatif : </h1>
-						<div class="artiste"> <?php echo $_POST['artiste']; ?> </div>
-						<div class="dahe">Date et heure </div>
-						<div class="date"> <?php echo $_POST['date']; ?> </div>
-						<div class="heure"> <?php echo $_POST['heure']; ?> </div>
-						<div class="pacp">Pays, ville, adresse et CP </div>
-						<?php
-						if($testpacp == 2) //ville+dpt+region
-						{
-								if($salle)
-								{
-									$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
-									$result = mysqli_query($con, $pvcpz);
-								}
-								else if($denom)
-								{
-									$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
-									$result = mysqli_query($con, $pvcpz);
-								}
-						}
-						else if($testpacp == 1) //seulement departement saisi
-						{
-							if($salle)
-							{
-								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement FROM salle, ville, departement WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
-								$result = mysqli_query($con, $pvcpz);
-							}
-							else if($denom)
-							{
-								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal, nom_departement FROM salle, ville, departement WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
-								$result = mysqli_query($con, $pvcpz);
-							}
-						}
-						else if($testpacp == 0) //que ville
-						{
-							if($salle)
-							{
-								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal FROM salle, ville WHERE salle.id_salle = '$sle' AND salle.id_ville = ville.ville_id ";
-								$result = mysqli_query($con, $pvcpz);
-							}
-							else if($denom)
-							{
-								$pvcpz = "SELECT adresse, nom_ville, ville_code_postal FROM salle, ville WHERE salle.id_salle = '$exte' AND salle.id_ville = ville.ville_id";
-								$result = mysqli_query($con, $pvcpz);
-							}
-						}
-						?> 
-						<?php $row = mysqli_fetch_array($result); 
-						if($testpacp == 2)
-						{
-						?>
-							<div class="pays"><?php	echo $row['nom_pays']; ?> </div>
-							<div class="region"><?php	echo $row['nom_region']; ?> </div>
-						<?php
-						}
-						else if($testpacp != 2)
-						{
-						?>
-							<div class="pays"> pays inconnu pour cette ville </div>
-							<div class="region">région inconnue pour cette ville </div>
-						<?php
-						}
-						if($testpacp != 0)
-						{
-						?>
-							<div class="departement"><?php	echo $row['nom_departement']; ?> </div>
-						<?php
-						}
-						else if ($testpacp == 0) 
-						{
-						?>
-							<div class="departement">departement inconnu pour cette ville </div>
-						<?php
-						}
-						?>
-						<div class="ville"> <?php echo $row['nom_ville']; ?></div>
-						<?php
-						if($testcp == 1)
-						{
-						?>
-							<div class="cp"> <?php echo $row['ville_code_postal']; ?> </div>
-						<?php
-						}
-						else if ($testcp == 0) 
-						{
-						?>
-							<div class="cp"> code postal non renseigné </div>
-						<?php
-						}
-						if($salle)
-						{
-						?>
-							<div class="saad">Salle et adresse</div>
-							<input type="checkbox" id="pint" name="checkint" checked disabled> 
-							Interieur
-							<br>
-							<input type="checkbox" id="pext" name="checkint" disabled> 
-							Exterieur
-							<br>
-							<div class="salle"> <?php echo $_POST['salle']; ?> </div>
-						<?php
-						}
-						else
-						{
-						?>
-							<div class="saad">Lieu et adresse</div>
-							<input type="checkbox" id="pint" name="checkint" disabled> 
-							Interieur
-							<br>
-							<input type="checkbox" id="pext" name="checkint" checked disabled> 
-							Exterieur
-							<br>
-							<div class="salle"> <?php echo $_POST['denom']; ?> </div>
-						<?php
-						}
-						?>
-						<div class="adresse"> <?php echo $row['adresse'];  ?> </div>
-						<div class="saad">Liens relatifs a l'evenement</div>
-						<div class="fb"> <?php echo $_POST['fb']; ?> </div>
-						<div class="ticket"> <?php echo $_POST['ticket']; ?> </div>
-					</div>
-					<a href="../allconcerts.php"> Retour au site </a>
-				</div>
-				<?php
 			}
 		?>
 	</body>
 </html>
-

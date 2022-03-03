@@ -18,9 +18,9 @@
 <script>
 	$(document).ready(function () {
 		//console.log(screen.width);
-		//console.log(screen.height);
-		//console.log($( 'body' ).height());
-		//console.log($( 'footer' ).height());
+		console.log(screen.height);
+		console.log($( 'body' ).height());
+		console.log($( 'footer' ).height());
 		
 		sheight = screen.height;
 		bheight = $( 'body' ).height();
@@ -43,7 +43,10 @@
 
 		if (bheight < sheight) 
 		{
-			$('body').css('height', finalheight + 'px');
+			/*console.log('okokok');
+			$('body').css('height', finalheight + 'px');*/
+			$('footer').css('position', 'absolute');
+			$('footer').css('bottom', '0');
 		}
 
 
@@ -73,7 +76,6 @@
 	});
 
 	$( window ).resize(function() {
-		console.log($( 'body' ).width());
 		if($( window ).height() == $( document ).height())
 		{
 			if($( window ).height() - $( 'footer' ).height() < $( 'body' ).height()+15)

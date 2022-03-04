@@ -56,14 +56,6 @@
 <?php
 
 /*
-- Confirmation mail inscription
-- trier ticket par date interface admin
-- plus de contenu page superartiste (ex: articles ou autres)
-- https
-....
-- repassage rapide avec 2 ecrans differents sur toutes les pages
-- commentaires + supprimer inutile
-- readme github
 - BUG ALLCONCERT FILTRES PETIT ECRAN
--bug footer lorsque 0 requête
+- bug footer lorsque 0 requête sur requete php
 */

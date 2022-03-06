@@ -22,9 +22,7 @@
 		console.log($( 'body' ).height());
 		console.log($( 'footer' ).height());*/
 		
-		sheight = screen.height;
-		bheight = $( 'body' ).height();
-		fheight = $( 'footer' ).height();
+		
 		
 		
 		/*if (screen.height>900 && $( 'body' ).height() < 950) 
@@ -33,7 +31,7 @@
 			$('footer').css('bottom', '0');
 			
 		}*/
-		finalheight = sheight - fheight - 15;
+		//finalheight = sheight - fheight - 15;
 		/*if (bheight + fheight < sheight) 
 		{
 			console.log('truetrue');
@@ -41,13 +39,17 @@
 			$('body').css('height', sheight + 'px');
 		}*/
 
-		if (bheight < sheight) 
+		/*sheight = screen.height;
+		bheight = $( 'body' ).height();
+		fheight = $( 'footer' ).height();*/
+
+		/*if (bheight < sheight) 
 		{
-			/*console.log('okokok');
-			$('body').css('height', finalheight + 'px');*/
+			//console.log('okokok');
+			//$('body').css('height', finalheight + 'px');
 			$('footer').css('position', 'absolute');
 			$('footer').css('bottom', '0');
-		}
+		}*/
 
 
 

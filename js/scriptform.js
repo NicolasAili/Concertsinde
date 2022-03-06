@@ -741,10 +741,3 @@ function motif(identifiant)
     }
 }
 
-//modifier value en fonction case cochée x
-//obliger en js/html de remplir tous les champs x
-//obliger en php de remplir tous les champs x
-//tester x
-//faire le css
-//créer une section ticket pour l'utilisateur
-//notification pour l'administrateur

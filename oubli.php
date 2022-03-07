@@ -52,3 +52,12 @@
 		header("Location: profil.php");
 	}?> 
 </html>
+
+<?php 
+
+/*
+- bug redirection superadmin accueil
+- il y a 0 jour actualité
+- actualité, augmenter les marges
+- requ^ete page un peu vide
+*/

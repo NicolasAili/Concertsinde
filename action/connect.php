@@ -73,6 +73,10 @@
 				header("Location: ../connexion.php?message=Pseudo ou Mot de Passe incorrect");
 			}
 		}
-}
+	}
+	else
+	{
+		header("Location: ../connexion.php");
+	}
 ?>		
 

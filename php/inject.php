@@ -27,7 +27,7 @@
 			//return 'erreur detectee';
 			return $returnarr;
 		}
-		else //cas pour une regex modifié
+		else //cas pour une regex modifiée
 		{
 			switch ($regex) 
 			{
@@ -35,7 +35,6 @@
 					$regex = '#[0-9 ]+#';
 					break;
 				case 'text':
-					//$regex = '#([a-zA-Z0-9\',\.() -ç?éêèà]+[\r\n]*)*#';
 					$regex = '#([a-zA-Z0-9\',\.() ç?!éêèàù;\-]+[\r\n]*)*#';
 					break;
 				case 'url':
@@ -51,13 +50,14 @@
 					$regex = '#[0-9]{2}:[0-9]{2}#';
 					break;
 				case 'mail':
-					$regex = '^[a-zA-Z-0-9]+\.{0,1}[a-zA-Z-0-9]+@[a-zA-Z-0-9]+\.[a-zA-Z0-9]{2,6}$';
+					$regex = '#^[a-zA-Z-0-9]+\.{0,1}[a-zA-Z-0-9]+@[a-zA-Z-0-9]+\.[a-zA-Z0-9]{2,6}$#';
 					break;
 				default:
 					$regex = '#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#';
 					break;
 			}
 			preg_match($regex, $input, $matches);
+
 			if(strlen($matches[0]) != strlen($input))
 			{
 				$returnarr = $input;

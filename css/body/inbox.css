@@ -1,16 +1,9 @@
-body
-{
-	margin: 0;
-	display: block;
-}
-
 table
 {
 	width: 66%;
 	margin-left: 17%;
 	margin-right: 17%;
 	background-color: white;
-	height: 100%;
 	color: #555;
 	margin-bottom: 40px;
 }

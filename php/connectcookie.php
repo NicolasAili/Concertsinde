@@ -42,9 +42,9 @@ if ($admin == 2)
 			}
 		}
 	}
-	if ($sended == 0) 
+	if ($sended == 0 && $datedebut && $datefin) 
 	{
-		if ($intvl->m == 0 && $intvl->y == 0) 
+		if ($intvl->m == 0 && $intvl->y == 0)
 		{
 			if ($intvl->d < 4) 
 			{
@@ -65,8 +65,33 @@ if ($admin == 2)
 
 if (isset($_COOKIE['login']) && !isset($_SESSION['pseudo'])) 
 {
-    $_SESSION['pseudo'] = $_COOKIE['login'];
-	$_SESSION['password'] = $_COOKIE['passwd'];
+	$login = $_COOKIE['login'];
+	$sql = "SELECT banni FROM utilisateur WHERE pseudo = '$login'";
+	$result = mysqli_query($con ,$sql);
+	$row = mysqli_fetch_array($result);
+	$banni = $row['banni'];
+	if ($banni == 0) 
+	{
+		$_SESSION['pseudo'] = $_COOKIE['login'];
+		$_SESSION['password'] = $_COOKIE['passwd'];
+	}
+}
+if(isset($_SESSION['pseudo']))
+{
+	$login = $_SESSION['pseudo'];
+	$sql = "SELECT banni FROM utilisateur WHERE pseudo = '$login'";
+	$result = mysqli_query($con ,$sql);
+	$row = mysqli_fetch_array($result);
+	$banni = $row['banni'];
+	if ($banni != 0) 
+	{
+	    unset($_SESSION['pseudo']);
+	    unset($_SESSION['password']);
+	    session_unset();
+
+		setcookie("passwd", null, time() - 3600, "/");
+		setcookie('login', null, time() - 3600, "/");
+	}
 }
 setcookie('contentMessage', '', 1, "/");
 setcookie('contentMessage', '', 1);

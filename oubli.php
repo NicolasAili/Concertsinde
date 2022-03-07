@@ -52,10 +52,3 @@
 		header("Location: profil.php");
 	}?> 
 </html>
-
-<?php
-
-/*
-- BUG ALLCONCERT FILTRES PETIT ECRAN
-- bug footer lorsque 0 requête sur requete php
-*/

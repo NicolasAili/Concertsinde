@@ -22,7 +22,7 @@ if (isset($_POST['inscription']))
     $cpassword = $_POST['cpassword'];
 
     require ('../php/inject.php'); //0) ajouter inject et définir redirect
-    $redirect = '../inscrire.php';
+    $redirect = '../inscrire.php?mail=' . $email . '&pseudo=' . $pseudo;
 
     $values = array($pseudo); //1) mettre données dans un arrray
     $inject = inject($values, null); //2) les vérifier
@@ -39,7 +39,7 @@ if (isset($_POST['inscription']))
       $artiste = mysqli_real_escape_string($con, $artiste); 
     }
             
-    if ($pseudo && strlen($pseudo) > 3)
+    if ($pseudo && strlen($pseudo) > 3 && $validate == 0)
     {
         $sql = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo'";
         $result = mysqli_query($con, $sql);

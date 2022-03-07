@@ -27,113 +27,115 @@
 		<header>
 			<?php include('contenu/header.php'); ?>
 		</header>
-		<?php
-		if (isset($_SESSION['pseudo']) == null)
-		{
-			echo "erreur, vous devez être connecté pour accéder à ce contenu";
-		}
-		else
-		{
-			$pseudo = $_SESSION['pseudo'];
-			$requestpseudo = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
-			$query = mysqli_query($con, $requestpseudo);
-			$row = mysqli_fetch_array($query);
-			$idpseudo = $row['id_user'];
-			$admin = $row['admin'];
-
-			$lu = 0;
-
-			if ($admin == 2) 
+		<?php include 'contenu/reseaux.php'; ?>
+		<div id="main">
+			<?php
+			if (isset($_SESSION['pseudo']) == null)
 			{
-				$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, receiver, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.sender = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+				echo "erreur, vous devez être connecté pour accéder à ce contenu";
 			}
 			else
 			{
-				$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, receiver, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
-			}
-			
-			$query = mysqli_query($con, $sql);
+				$pseudo = $_SESSION['pseudo'];
+				$requestpseudo = "SELECT admin, id_user FROM utilisateur WHERE pseudo = '$pseudo'";
+				$query = mysqli_query($con, $requestpseudo);
+				$row = mysqli_fetch_array($query);
+				$idpseudo = $row['id_user'];
+				$admin = $row['admin'];
 
-			?>
-			<?php include 'contenu/reseaux.php'; ?>
-			<div id="intro">
-				<?php
+				$lu = 0;
+
 				if ($admin == 2) 
-				{?>
-					Arpenid.com > messages <a href=superadmin/users.php> ➕ Créer un nouveau sujet </a> <?php
+				{
+					$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, receiver, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.sender = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
 				}
 				else
-				{?>
-					Arpenid.com > messages <a href=contact.php class="sendnew"> ➕ Envoyer un nouveau message </a> <?php
-				}?>
-			</div>
-			<table>
-	    		<tr><?php
-	    			if($admin == 2)
-					{?>
-						<th scope="col" id="message">Message à</th><?php
-					}
-					else
-					{?>
-						<th scope="col" id="message">Message de</th><?php
-					}?>
-		       		<th scope="col" id="sujet">Sujet</th>
-		        	<th scope="col" id="date">Dernier message</th>
-				</tr><?php
-				while($row = mysqli_fetch_array($query))
 				{
-					$lu = 0;
-					$idtopic = $row['id'];
-					$pseudosender = $row['sender'];
-					$pseudoreceiver = $row['receiver'];
+					$sql = "SELECT DISTINCT topic.id, objet, date_creation, sender, receiver, MAX(message.date_envoi) FROM topic, message WHERE topic.id = message.id_topic AND topic.receiver = '$idpseudo' GROUP BY topic.id ORDER BY MAX(message.date_envoi) DESC, topic.id";
+				}
+				
+				$query = mysqli_query($con, $sql);
 
-					$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic' AND utilisateur != '$idpseudo'";
-
-					if($admin == 2)
-					{
-						$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic'";
-					}
-
-					$querylu = mysqli_query($con, $sql);
-					while($rowl = mysqli_fetch_array($querylu))
-					{
-						if($rowl['lu'] == 0)
-						{
-							$lu = 1;
-						}
-					}
-					$sql = "SELECT MAX(id) AS id FROM message WHERE id_topic = '$idtopic'";
-					$queryid = mysqli_query($con, $sql);
-					$rowm = mysqli_fetch_array($queryid);
-					$idmessage = $rowm['id'];
-
-					$sql = "SELECT date_envoi FROM message WHERE id = $idmessage";
-					$querydate = mysqli_query($con, $sql);
-					$rowd = mysqli_fetch_array($querydate);
-					$dateenvoi = $rowd['date_envoi'];
-					$dateenvoi = date("d-m-Y G:i:s", strtotime($dateenvoi));
-
-					if($admin == 2)
-					{
-						$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudoreceiver'";
+				?>
+				<div id="intro">
+					<?php
+					if ($admin == 2) 
+					{?>
+						Arpenid.com > messages <a href=superadmin/users.php> ➕ Créer un nouveau sujet </a> <?php
 					}
 					else
+					{?>
+						Arpenid.com > messages <a href=contact.php class="sendnew"> ➕ Envoyer un nouveau message </a> <?php
+					}?>
+				</div>
+				<table>
+		    		<tr><?php
+		    			if($admin == 2)
+						{?>
+							<th scope="col" id="message">Message à</th><?php
+						}
+						else
+						{?>
+							<th scope="col" id="message">Message de</th><?php
+						}?>
+			       		<th scope="col" id="sujet">Sujet</th>
+			        	<th scope="col" id="date">Dernier message</th>
+					</tr><?php
+					while($row = mysqli_fetch_array($query))
 					{
-						$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudosender'";
-					}
-					$querypseudo = mysqli_query($con, $requestpseudo);
-					$rowp = mysqli_fetch_array($querypseudo);
-					$pseudosender = $rowp['pseudo'];
-				?>
-					<tr>
-						<td><?php echo $pseudosender; ?></td>
-						<td><?php echo '<a href="inboxmsg.php?idtopic='; echo $idtopic; echo '">'; if($lu == 1){echo "<strong>";} echo $row['objet']; if($lu == 1){echo "</strong>";} echo '</a>' ?></td> 
-						<td><?php if ($admin == 2){echo $row['date_creation'];}else{echo $dateenvoi;} ?></td>
-					</tr>
-				<?php
-				}?>
-			</table><?php		
-		}?>
+						$lu = 0;
+						$idtopic = $row['id'];
+						$pseudosender = $row['sender'];
+						$pseudoreceiver = $row['receiver'];
+
+						$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic' AND utilisateur != '$idpseudo'";
+
+						if($admin == 2)
+						{
+							$sql = "SELECT lu FROM message WHERE id_topic = '$idtopic'";
+						}
+
+						$querylu = mysqli_query($con, $sql);
+						while($rowl = mysqli_fetch_array($querylu))
+						{
+							if($rowl['lu'] == 0)
+							{
+								$lu = 1;
+							}
+						}
+						$sql = "SELECT MAX(id) AS id FROM message WHERE id_topic = '$idtopic'";
+						$queryid = mysqli_query($con, $sql);
+						$rowm = mysqli_fetch_array($queryid);
+						$idmessage = $rowm['id'];
+
+						$sql = "SELECT date_envoi FROM message WHERE id = $idmessage";
+						$querydate = mysqli_query($con, $sql);
+						$rowd = mysqli_fetch_array($querydate);
+						$dateenvoi = $rowd['date_envoi'];
+						$dateenvoi = date("d-m-Y G:i:s", strtotime($dateenvoi));
+
+						if($admin == 2)
+						{
+							$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudoreceiver'";
+						}
+						else
+						{
+							$requestpseudo = "SELECT pseudo FROM utilisateur WHERE id_user = '$pseudosender'";
+						}
+						$querypseudo = mysqli_query($con, $requestpseudo);
+						$rowp = mysqli_fetch_array($querypseudo);
+						$pseudosender = $rowp['pseudo'];
+					?>
+						<tr>
+							<td><?php echo $pseudosender; ?></td>
+							<td><?php echo '<a href="inboxmsg.php?idtopic='; echo $idtopic; echo '">'; if($lu == 1){echo "<strong>";} echo $row['objet']; if($lu == 1){echo "</strong>";} echo '</a>' ?></td> 
+							<td><?php if ($admin == 2){echo $row['date_creation'];}else{echo $dateenvoi;} ?></td>
+						</tr>
+					<?php
+					}?>
+				</table><?php		
+			}?>
+		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
 		<script>

@@ -80,13 +80,12 @@
 			$sql = "SELECT COUNT(points_session) AS classementsession FROM utilisateur WHERE points_session > $points_session";
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
-			$classementsession = $row['classementsession'];
+			$classementsession = $row['classementsession']+1;
 
 			$sql = "SELECT COUNT(points) AS classement FROM utilisateur WHERE points > $points";
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
-			$classement = $row['classement'];
-
+			$classement = $row['classement']+1;
 			?>
 
 			<div id="main">

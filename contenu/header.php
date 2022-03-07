@@ -30,7 +30,7 @@ $admin = $row['admin'];
 		}
 		else
 		{?>
-			<h1> <a href="accueil.php" id="logo"> Arpenid <span id="com">.com</span></a> </h1><?php
+			<h1> <a href="index.php" id="logo"> Arpenid <span id="com">.com</span></a> </h1><?php
 		}?>
 			
 		<a href="presentation.php" class="li fonctionnementup"><span class="txtli fonctionnement">Fonctionnement</span></a>

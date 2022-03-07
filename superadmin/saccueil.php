@@ -32,7 +32,7 @@
 		if($row['admin'] == 2)
 		{?> 
 			<a href="users.php"> Gestion des utilisateurs </a> <br>
-			<a href="accueil.php"> Gestion de la page accueil </a> <br>
+			<a href="accueil.php"> Gestion de la page accueil (not available yet) </a> <br>
 			<a href="sessions.php"> Gestion des sessions </a> <br>
 			<a href="contact.php"> Gestion des erreurs </a> <br>
 			<a href="news.php"> Gestion des actualités </a> <br>

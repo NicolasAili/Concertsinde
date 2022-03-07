@@ -20,7 +20,7 @@
 	<a href="https://instagram.com" class="imgreseaux"><img class="imgig" src="./image/instagram.png" alt="logo instagram"></a>
 	<a href="https://discord.com" class="imgreseaux"><img class="imgdiscord" src="./image/discord.png" alt="logo discord"></a>
 	<?php
-	if($finalstring[2] == 'accueil.php')
+	if($finalstring[2] == 'index.php')
 	{?>
 		<a href="contact.php" class="imgreseaux"><img class="contact" src="./image/bullewhite.png" alt="logo contact"></a><?php
 	}

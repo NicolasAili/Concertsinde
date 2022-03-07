@@ -22,6 +22,6 @@
 		</noscript>
 		<br>
 		<br>
-		<a href='accueil.php'>retour à l'accueil</a>
+		<a href='index.php'>retour à l'accueil</a>
 	</body>
 </html>

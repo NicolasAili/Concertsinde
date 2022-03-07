@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<header>
-			<h1> <a href="accueil.php" id="logo"> Arpenid <span id="com">.com</span></a> </h1>
+			<h1> <a href="index.php" id="logo"> Arpenid <span id="com">.com</span></a> </h1>
 			<div id="corps">
 				<a href="presentation.php" class="li"><div class="txtli">Fonctionnement</div></a>
 				<a href="news.php" class="li"><div class="txtli">Actualités</div></a>

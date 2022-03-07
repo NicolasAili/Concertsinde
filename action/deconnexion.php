@@ -22,5 +22,5 @@
 	setcookie("passwd", null, time() - 3600, "/");
 	setcookie('login', null, time() - 3600, "/");
 
-    header('Location: ../accueil.php');
+    header('Location: ../index.php');
 ?>

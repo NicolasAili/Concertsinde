@@ -33,7 +33,7 @@
 				<br><br>
 				L'objectif de notre site web est de permettre aux fans de rap indépendant de pouvoir facilement être au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite.
 				<br><br>
-				Ce site a pour car caractéristique principale d'être communautaire. Cela signifie que c'est le public qui fait vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs.<br>
+				Ce site a pour caractéristique principale d'être communautaire. Cela signifie que c'est le public qui fait vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs.<br>
 				Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier les concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs. 
 				<br><br>
 				En étant connecté, vous pouvez en outre gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site (voir partie « fonctionnement »).
@@ -46,11 +46,11 @@
 			<div id="idee">
 				<br><br>
 				Me rendant régulièrement à des concerts de rap indé, j’ai remarqué qu’il n’existait pas de plateforme recensant tous les concerts. Il y a bien le site « info concert » mais de nombreux concerts de rap français indépendant n’y apparaissent pas. <br><br>
-				De ce fait, le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit de suivre assidument les pages d’organisateur ou bien les pages d’artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations. <br>
+				De ce fait, le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit suivre assidûment les pages d’organisateurs ou d’artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations. <br>
 				Le fait aussi que ce milieu dispose de peu de moyens rend la communication parfois légère voire inexistante. <br><br>
 				En conséquence, de nombreux concerts se retrouvent en « sous-effectif » du fait de cette mauvaise communication et de la difficulté à récupérer les informations.
 				<br><br>
-				Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent s'aider mutuellement et réciproquement ainsi que toucher un public plus large.
+				Voilà la raison de l’existence de ce site : faire de cette plateforme un outil gratuit où public et artistes peuvent s'aider mutuellement et réciproquement.
 				<br>
 				<br>
 				<br>

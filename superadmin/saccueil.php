@@ -37,7 +37,7 @@
 			<a href="contact.php"> Gestion des erreurs </a> <br>
 			<a href="news.php"> Gestion des actualités </a> <br>
 			<a href="ajoutimage.php"> Gestion artistes et drapeaux </a> <br>
-			<a href="../accueil.php"> Quitter </a> <br>
+			<a href="../index.php"> Quitter </a> <br>
 		<?php
 		}
 		else

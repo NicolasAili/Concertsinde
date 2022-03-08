@@ -57,6 +57,7 @@
 
 /*
 - il y a 0 jour actualité
+- actualité, changer l'odre (du plus récent au plus ancien)
 - actualité, augmenter les marges
 - requ^ete page un peu vide
 - bug getdata lorsque remplir champs

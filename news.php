@@ -49,7 +49,7 @@
 			
 			<div id="site">
 				<?php 
-				$sql = "SELECT * FROM actualites WHERE type = 'site' ORDER BY date DESC";
+				$sql = "SELECT * FROM actualites WHERE type = 'site' ORDER BY id DESC";
 				$query = mysqli_query($con, $sql);
 				while ($row = mysqli_fetch_array($query))
 				{
@@ -62,7 +62,7 @@
 					$intvl = $currentdate->diff($date);
 
 					if ($intvl->m == 0 && $intvl->y == 0) {
-						if ($intvl->d == 1) {
+						if ($intvl->d < 2) {
 							$displaytime = "Il y a " . $intvl->d . " jour";
 						}
 						else

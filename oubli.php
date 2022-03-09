@@ -56,9 +56,9 @@
 <?php 
 
 /*
-- il y a 0 jour actualité
-- actualité, changer l'odre (du plus récent au plus ancien)
-- actualité, augmenter les marges
-- requ^ete page un peu vide
-- bug getdata lorsque remplir champs
+- bug getdata lorsque remplir champs > à vérifier
+- rechrche lorsque on sort la souris du cadre ou/et si il n'y a plus de proposition
+1) on mouse leave > if isfocused > appel fct°
+
+- error 200 ex: toulouse le château > espaces
 */

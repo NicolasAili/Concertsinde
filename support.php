@@ -36,7 +36,6 @@
 			$row = mysqli_fetch_array($result);
 			$iduser = $row['ID_user'];
 			$admin = $row['admin'];
-
 			if($pseudo && $admin != 2)
 			{
 				$hide = $_GET['hide'];?>
@@ -110,7 +109,8 @@
 			}
 			else if($admin == 2)
 			{
-				header("Location: superadmin/contact.php");
+				?>
+				<a href="superadmin/contact.php">requêtes admin</a><?php
 			}
 			else
 			{

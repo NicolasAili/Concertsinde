@@ -9,6 +9,7 @@
 
 function getleave(identifiant)
 {
+    $( '#'+identifiant+'' ).autocomplete( "close" );
     var input = $('#'+identifiant+'').val();
 
     if(identifiant)
@@ -205,10 +206,6 @@ function getleave(identifiant)
                             }
                             else if(data[0].test == 'erreur')
                             {
-                                //$('#nomdpt').css('visibility', 'visible');
-                                //$('#nomdpt').css('display', 'contents');
-                                //$("#numdepartement").prop( "disabled", false );
-                                //$("#nomdpthtml").html("Departement non reconnu, vous pouvez renseigner le numero associe à ce département. S'il n'en possède pas ou si vous ne le connaissez pas, laisser vide");
                                 $("#resw").html("Département non reconnu");
                                 $("#region").prop( "disabled", false );
                                 $("#region").attr("placeholder", "departement inconnu");
@@ -266,10 +263,17 @@ function getdata(identifiant)
 				success: function( data ) 
 				{
 					response( data );
-                    if(data.length == 1 && data[0].label == request.term)
+                    if (data == null) 
                     {
-                        $( '#'+identifiant+'' ).autocomplete( "close" );
                         getleave(identifiant);
+                    }
+                    else
+                    {
+                        if(data.length == 1 && data[0].label == request.term)
+                        {
+                            $( '#'+identifiant+'' ).autocomplete( "close" );
+                            getleave(identifiant);
+                        }
                     }
 				}
 			});

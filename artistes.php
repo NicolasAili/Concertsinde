@@ -84,7 +84,7 @@ Support(s) : pc perso et ecran perso
 				<div id="filtrepar">
 					<h4> Filtrer </h4>
 					<form method="post" class="connect" action="artistes.php">
-						<input type="text" name="artiste" id="artiste" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
+						<input type="text" name="artiste" id="artiste" onkeyup="getdata(this.id);" placeholder="Cherchez un artiste"  >
 						<input type="submit" value="Valider" id="valider" name="valider">
 					</form>
 				</div>

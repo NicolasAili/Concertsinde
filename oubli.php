@@ -57,8 +57,10 @@
 
 /*
 - bug getdata lorsque remplir champs > à vérifier
-- rechrche lorsque on sort la souris du cadre ou/et si il n'y a plus de proposition
-1) on mouse leave > if isfocused > appel fct°
 
 - error 200 ex: toulouse le château > espaces
+- bug departement region no answer
+
+-pb filtrer barre
+- hide file extension
 */

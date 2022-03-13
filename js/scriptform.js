@@ -9,6 +9,7 @@
 
 function getleave(identifiant)
 {
+    
     $( '#'+identifiant+'' ).autocomplete( "close" );
     var input = $('#'+identifiant+'').val();
 
@@ -24,7 +25,13 @@ function getleave(identifiant)
                  input:input
             },
              success: function ( data )
-            {
+            { 
+                console.log("pre");
+                console.log(data);
+                var json = JSON.parse(data);
+                console.log("post");
+                alert(json["name"]); //mkyong
+                alert(json.name); //mkyong
                 if(data[0].test == 'nodata' && identifiant == 'salle')
                 {
                     $('#infosx').css('visibility', 'hidden');
@@ -33,7 +40,7 @@ function getleave(identifiant)
                 }
                 if(data[0].test != 'nodata')
                 {
-                    //alert('ok2');
+                    console.log('suxxes');
                 	$('#infosx').css('visibility', 'visible');
                 	$('#infosx').css('display', 'contents');
                     $('#infos').css('visibility', 'visible');
@@ -41,8 +48,6 @@ function getleave(identifiant)
                     switch (identifiant)
                     {
                         case "salle":
-                              //$('#nomdpt').css('visibility', 'hidden');
-                              //$('#nomdpt').css('display', 'none');
                             $("#resv").html('');
                             if(data[0].test == 'erreur')
                             {
@@ -117,6 +122,7 @@ function getleave(identifiant)
                             }
                         break;
                         case "ville":
+                            console.log('suxxes0');
                             if(data[0].test == 'erreur')
                             {
                                 $('#cp').val('');
@@ -137,6 +143,7 @@ function getleave(identifiant)
                             }
                             else if(data[0].test == 'succes')
                             {
+                                console.log('suxxes1');
                                 $("#resv").html("Ville reconnue et informations récupérées");
                                 if(data[0].departement != 'nodata')
                                 {
@@ -236,7 +243,8 @@ function getleave(identifiant)
                             }
                         break;
                         default:
-                        alert("erreur");
+                            alert("erreur");
+                        break;
                     }
                 }               	
             },

@@ -38,8 +38,6 @@
                   $adresse = 'nodata';
                 }
                 $ville_id = $row['id_ville']; //cle etrangere ville_id permettant de faire le lien avec la ville où se situe la salle
-                //echo "<br>";
-                //echo ($ville_id);
                 $detectcp = "SELECT ville_code_postal FROM ville WHERE ville_id = '$ville_id'";
                 $query = mysqli_query($con, $detectcp);
                 $rowdetectcp = mysqli_fetch_array($query);
@@ -115,7 +113,14 @@
                 $ville = "SELECT nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
                 $query = mysqli_query($con, $ville);
                 $row = mysqli_fetch_array($query);
-                $response[] = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
+
+                $response = array(
+                  "test"=>'succes',
+                  "cp"=>$ville_cp,
+                  "departement"=>$row['nom_departement'],
+                  "region"=>$row['nom_region'], 
+                  "pays"=>$row['nom_pays']
+                );
               }
               else
               {
@@ -203,7 +208,7 @@
     {
        $response[] = array("test"=>'nodata');
     }
-    echo json_encode($response); //on encode en JSON*/
+    $response = array_map("utf8_encode", $response );
+    echo json_encode($response);
   }
 ?>
-

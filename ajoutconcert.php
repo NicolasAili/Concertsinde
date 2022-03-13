@@ -20,6 +20,7 @@
 			include 'php/js.php'; 
 			require 'php/database.php';
 		?>
+		<script>$(this.target).find('input').autocomplete();</script>
 		<script src="js/popupaddconcert.js"></script> 
 
 		<link rel="stylesheet" type="text/css" href="css/body/ajoutconcert.css">

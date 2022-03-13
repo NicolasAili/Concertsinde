@@ -168,7 +168,6 @@
 		select: function (event, ui) {
 			// Set selection
 			$( this ).val(ui.item.label); // display the selected text in the field
-            getleave(this.id);
 			return false;
 		}
 	});

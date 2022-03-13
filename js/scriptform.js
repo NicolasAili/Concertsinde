@@ -26,21 +26,22 @@ function getleave(identifiant)
             },
              success: function ( data )
             { 
-                console.log("pre");
-                console.log(data);
-                var json = JSON.parse(data);
-                console.log("post");
+                
+                //console.log(data);
+                //console.log(data.test);
+                //var json = JSON.parse(data);
+                /*console.log("post");
                 alert(json["name"]); //mkyong
-                alert(json.name); //mkyong
-                if(data[0].test == 'nodata' && identifiant == 'salle')
+                alert(json.name); //mkyong*/
+                if(data.test == 'nodata' && identifiant == 'salle')
                 {
                     $('#infosx').css('visibility', 'hidden');
                     $('#infosx').css('display', 'none');
                     $("#res").html("");
                 }
-                if(data[0].test != 'nodata')
+                if(data.test != 'nodata')
                 {
-                    console.log('suxxes');
+                    console.log('nodataok');
                 	$('#infosx').css('visibility', 'visible');
                 	$('#infosx').css('display', 'contents');
                     $('#infos').css('visibility', 'visible');
@@ -49,25 +50,25 @@ function getleave(identifiant)
                     {
                         case "salle":
                             $("#resv").html('');
-                            if(data[0].test == 'erreur')
+                            if(data.test == 'erreur')
                             {
                                 $('#infos').children('input').attr("placeholder", "salle non connue");
                                 $('#infos').children('input').val('');
                                 $("#ville").prop( "required", true );
                                 $("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP, sinon un gentil administrateur s'en chargera :D ");
                             }
-                            else if(data[0].test == 'succes')
+                            else if(data.test == 'succes')
                             {
                                 $('#infos').children('input').val('');
                                 $("#res").html("Salle reconnue et informations de localisation récupérées. Vous pouvez corriger ces informations ou les compléter, sinon ne rien modifier. ");
                             
-                                if(data[0].departement != 'nodata')
+                                if(data.departement != 'nodata')
                                 {
-                                    $("#departement").val(data[0].departement);
-                                    if(data[0].region != 'nodata')
+                                    $("#departement").val(data.departement);
+                                    if(data.region != 'nodata')
                                     {
-                                        $("#region").val(data[0].region);
-                                        $("#pays").val(data[0].pays);
+                                        $("#region").val(data.region);
+                                        $("#pays").val(data.pays);
                                         $("#region").prop( "disabled", true );
                                         $("#pays").prop( "disabled", true );
                                     }
@@ -94,10 +95,10 @@ function getleave(identifiant)
                                     $("#region").attr("placeholder", "région non renseignée");
                                     $("#pays").attr("placeholder", "pays non renseigné");
                                 }
-                                $("#ville").val(data[0].ville);
-                                if(data[0].cp != 'nodata')
+                                $("#ville").val(data.ville);
+                                if(data.cp != 'nodata')
                                 {
-                                    $("#cp").val(data[0].cp);
+                                    $("#cp").val(data.cp);
                                     $("#cp").prop( "disabled", true );
                                 }
                                 else
@@ -106,9 +107,9 @@ function getleave(identifiant)
                                     $('#cp').val('');
                                     $("#cp").attr("placeholder", "code postal non renseigné");
                                 }
-                                if(data[0].adresse != 'nodata')
+                                if(data.adresse != 'nodata')
                                 {
-                                    $("#adresse").val(data[0].adresse);
+                                    $("#adresse").val(data.adresse);
                                 }
                                 else
                                 {
@@ -122,9 +123,11 @@ function getleave(identifiant)
                             }
                         break;
                         case "ville":
-                            console.log('suxxes0');
+                            console.log('erreur0');
+                            console.log(data[0].test);
                             if(data[0].test == 'erreur')
                             {
+                                console.log('erreur1');
                                 $('#cp').val('');
                                 $('#departement').val('');
                                 $('#region').val('');
@@ -141,18 +144,17 @@ function getleave(identifiant)
                                 $("#region").prop( "disabled", true );
                                 $("#pays").prop( "disabled", true );
                             }
-                            else if(data[0].test == 'succes')
+                            else if(data.test == 'succes')
                             {
-                                console.log('suxxes1');
                                 $("#resv").html("Ville reconnue et informations récupérées");
-                                if(data[0].departement != 'nodata')
+                                if(data.departement != 'nodata')
                                 {
-                                    $("#departement").val(data[0].departement);
-                                    if(data[0].region != 'nodata')
+                                    $("#departement").val(data.departement);
+                                    if(data.region != 'nodata')
                                     {
                                         $("#region").prop( "disabled", true );
-                                        $("#region").val(data[0].region);
-                                        $("#pays").val(data[0].pays);
+                                        $("#region").val(data.region);
+                                        $("#pays").val(data.pays);
                                     }
                                     else
                                     {
@@ -177,9 +179,9 @@ function getleave(identifiant)
                                     $("#region").attr("placeholder", "région non renseignée pour cette ville");
                                     $("#pays").attr("placeholder", "pays non renseigné pour cette ville");  
                                 }
-                                if(data[0].cp != 'nodata')
+                                if(data.cp != 'nodata')
                                 {
-                                    $("#cp").val(data[0].cp);
+                                    $("#cp").val(data.cp);
                                     $("#cp").prop( "disabled", true );
                                 }
                                 else
@@ -191,14 +193,14 @@ function getleave(identifiant)
                             }
                         break;
                         case "departement":
-                            if(data[0].test == 'succes')
+                            if(data.test == 'succes')
                             {
-                                if(data[0].region != 'nodata')
+                                if(data.region != 'nodata')
                                 {
                                     $("#resw").html("Département reconnu et informations récupérées");
                                     $("#region").prop( "disabled", true );
-                                    $("#region").val(data[0].region);
-                                    $("#pays").val(data[0].pays);
+                                    $("#region").val(data.region);
+                                    $("#pays").val(data.pays);
                                 }
                                 else
                                 {
@@ -211,7 +213,7 @@ function getleave(identifiant)
                                 }
                                 $("#pays").prop( "disabled", true );
                             }
-                            else if(data[0].test == 'erreur')
+                            else if(data.test == 'erreur')
                             {
                                 $("#resw").html("Département non reconnu");
                                 $("#region").prop( "disabled", false );
@@ -222,13 +224,13 @@ function getleave(identifiant)
                             }
                         break;
                         case "region":
-                            if(data[0].test == 'succes')
+                            if(data.test == 'succes')
                             {
                                 $("#pays").prop( "disabled", true );
                                 $('#pays').prop( "required", true );
-                                $("#pays").val(data[0].pays);
+                                $("#pays").val(data.pays);
                             }
-                            else if(data[0].test == 'erreur')
+                            else if(data.test == 'erreur')
                             {
                                 $('#pays').val('');
                                 $("#pays").prop( "disabled", false );
@@ -236,7 +238,7 @@ function getleave(identifiant)
                             }
                         break;
                         case "pays":
-                            if(data[0].test == 'erreur')
+                            if(data.test == 'erreur')
                             {
                                 alert("pays non valide, merci de saisir un pays existant")
                                 $("#pays").val('');
@@ -277,7 +279,7 @@ function getdata(identifiant)
                     }
                     else
                     {
-                        if(data.length == 1 && data[0].label == request.term)
+                        if(data.length == 1 && data.label == request.term)
                         {
                             $( '#'+identifiant+'' ).autocomplete( "close" );
                             getleave(identifiant);

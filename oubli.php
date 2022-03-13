@@ -58,8 +58,8 @@
 /*
 - bug getdata lorsque remplir champs > à vérifier
 
-- error 200 ex: toulouse le château > espaces
-- bug departement region no answer
+- error 200 ex: toulouse le château > espaces > à vérifier (encodage de la page?)
+- bug departement region no answer 
 
 -pb filtrer barre
 - hide file extension

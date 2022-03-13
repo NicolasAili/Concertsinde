@@ -208,7 +208,7 @@
     {
        $response[] = array("test"=>'nodata');
     }
-    $response = array_map("utf8_encode", $response );
+    //$response = array_map("utf8_encode", $response );
     echo json_encode($response);
   }
 ?>

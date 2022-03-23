@@ -1,5 +1,9 @@
 <?php
 
+// Affiche ou cache les erreurs (precurseur)
+ini_set("display_errors", 0);
+//ini_set("display_errors", 1);
+
 // Désactiver le rapport d'erreurs
 error_reporting(0);
 

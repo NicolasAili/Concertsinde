@@ -50,7 +50,7 @@
 	else
 	{
 		header("Location: profil.php");
-	}?> 
+	}?>
 </html>
 
 <?php 
@@ -61,6 +61,6 @@
 - error 200 ex: toulouse le château > espaces > à vérifier (encodage de la page?)
 - bug departement region no answer 
 
--pb filtrer barre
+-pb filtrer barre allconcerts salle,villeetc...
 - hide file extension
 */

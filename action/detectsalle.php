@@ -62,14 +62,14 @@
                     $pvcpz = "SELECT nom_salle, nom_ville, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
                     $querypvcpz = mysqli_query($con, $pvcpz);
                     $row = mysqli_fetch_array($querypvcpz);
-                    $response[] = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
+                    $response = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
                   }
                   else //seulement departement
                   {
                     $pvcpz = "SELECT nom_salle, nom_ville, nom_departement FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
                     $querypvcpz = mysqli_query($con, $pvcpz);
                     $row = mysqli_fetch_array($querypvcpz);
-                    $response[] = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
+                    $response = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
                   }
                 }
                 else //seulement ville
@@ -77,13 +77,13 @@
                   $pvcpz = "SELECT nom_ville FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id";
                   $querypvcpz = mysqli_query($con, $pvcpz);
                   $row = mysqli_fetch_array($querypvcpz);
-                  $response[] = array("test"=>'succes', "adresse"=>$adresse ,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
+                  $response = array("test"=>'succes', "adresse"=>$adresse ,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
                 }
              }
           }
           else //si cette salle n'existe pas dans notre BDD
           {
-             $response[] = array("test"=>'erreur');
+             $response = array("test"=>'erreur');
           }
         break;
         case "ville":
@@ -127,18 +127,20 @@
                 $ville = "SELECT nom_departement FROM ville, departement WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero";
                 $query = mysqli_query($con, $ville);
                 $row = mysqli_fetch_array($query);
-                $response[] = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata');
+                $response = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata');
               }
             }
             else //seulement ville
             {
-              $response[] = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata');
+              $response = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata');
             }
             
           }
           else //ville non trouvee
           {
-            $response[] = array("test"=>'erreur');
+            $response = array(
+              "test"=>'erreur'
+            );
           }
         break;
         case "departement":
@@ -158,16 +160,16 @@
               $sqldpt = "SELECT nom_region, nom_pays FROM departement, region, pays WHERE departement.nom_departement = '$dpt' AND  departement.id_region = region.id AND region.id_pays = pays.id";
               $query = mysqli_query($con, $sqldpt);
               $row = mysqli_fetch_array($query);
-              $response[] = array("test"=>'succes', "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
+              $response = array("test"=>'succes', "region"=>$row['nom_region'], "pays"=>$row['nom_pays']);
             }
             else
             {
-              $response[] = array("test"=>'succes', "region"=>'nodata', "pays"=>'nodata');
+              $response = array("test"=>'succes', "region"=>'nodata', "pays"=>'nodata');
             }
           }
           else //ville non trouvee
           {
-            $response[] = array("test"=>'erreur');
+            $response = array("test"=>'erreur');
           }
         break;
         case "region":
@@ -179,11 +181,11 @@
             $sqlrgn = "SELECT nom_pays FROM region, pays WHERE region.nom_region = '$rgn' AND region.id_pays = pays.id";
             $query = mysqli_query($con, $sqlrgn);
             $row = mysqli_fetch_array($query);
-            $response[] = array("test"=>'succes', "pays"=>$row['nom_pays']);
+            $response = array("test"=>'succes', "pays"=>$row['nom_pays']);
           }
           else //ville non trouvee
           {
-            $response[] = array("test"=>'erreur');
+            $response = array("test"=>'erreur');
           }
         break;
         case "pays":
@@ -191,22 +193,22 @@
           $query = mysqli_query($con, $data);
           if($row = mysqli_fetch_array($query)) //si pays trouve
           {
-            $response[] = array("test"=>'succes', "pays"=>$row['nom_pays']);
+            $response = array("test"=>'succes', "pays"=>$row['nom_pays']);
           }
           else //ville non trouvee
           {
-            $response[] = array("test"=>'erreur');
+            $response = array("test"=>'erreur');
           }
         break;
         default:
-          $response[] = array("test"=>'nodata');
+          $response = array("test"=>'nodata');
         break;
 
       }
     }
     else
     {
-       $response[] = array("test"=>'nodata');
+       $response = array("test"=>'nodata');
     }
     //$response = array_map("utf8_encode", $response );
     echo json_encode($response);

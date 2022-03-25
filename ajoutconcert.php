@@ -92,8 +92,8 @@
 							<div id="departementdiv">
 								<label for="departement">Departement</label> 
 								<input type="text" name="departement" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Département où a lieu le concert" id="departement" disabled>
-							</div>
 								<div id="resw"> </div>
+							</div>
 							<div id="regiondiv">
 								<label for="region">Region</label> 
 								<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="Région où a lieu le concert" id="region" disabled>

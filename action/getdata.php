@@ -10,6 +10,7 @@
 */
 ?>
 <?php
+  include '../php/error.php';
   header('Content-type: application/json');
   if( isset( $_POST['search'] ) )
   {
@@ -24,7 +25,7 @@
     $validate = validate($inject, $redirect); //3)validation de tous les champs
     if($validate == 0) //4) si pas d'injection : ajout des variables
     {
-      $name = mysqli_real_escape_string($con, $name); 
+      $name = mysqli_real_escape_string($con, $name);
     }
 
     $test = $_POST['this'];
@@ -49,6 +50,8 @@
     }
     else if($test == 'ville')
     {
+      echo 'okville';
+      echo '<br>';
       $str = "SELECT nom_ville FROM ville WHERE nom_ville LIKE '%{$name}%' LIMIT 20";
       $result = mysqli_query($con, $str);
       while($row = mysqli_fetch_array($result))
@@ -96,7 +99,12 @@
     {
       echo("erreur");
     }
+    
     ob_clean();
+    if(!$response)
+    {
+      $response[] = array("label"=>'norep');
+    }
     echo json_encode($response);
   }
 ?>

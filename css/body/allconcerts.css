@@ -143,6 +143,7 @@ ul, li
 {
 	color: #3a0101;
 	display:table;
+	padding-bottom: 5px;
 }
 
 #triertxtun, #triertxtdeux
@@ -253,6 +254,13 @@ ul, li
 	overflow: hidden;
 }
 
+.formsalledepth, .formvilledepth, .formcpdepth, .formdptdepth, .formnumdptdepth, .formrgndepth
+{
+	border-bottom: 1px solid #404040;
+	padding-bottom: 3px;;
+}
+
+
 #filteroneone
 {
 	display: block;
@@ -270,7 +278,7 @@ ul, li
 
 .formsalle, .formville, .formcp, .formdpt, .formnumdpt, .formrgn
 {
-	border-bottom: 1px solid #404040;
+	padding-left: 40px;;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }

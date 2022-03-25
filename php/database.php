@@ -8,7 +8,7 @@
 	CSS : n
 */
 	$servername = 'localhost';
-	$username = 'root';
+	$username = 'aili';
 	$password = 'root';
 	$dbname = 'webbd';
 

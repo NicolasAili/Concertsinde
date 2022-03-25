@@ -26,13 +26,6 @@ function getleave(identifiant)
             },
              success: function ( data )
             { 
-                
-                //console.log(data);
-                //console.log(data.test);
-                //var json = JSON.parse(data);
-                /*console.log("post");
-                alert(json["name"]); //mkyong
-                alert(json.name); //mkyong*/
                 if(data.test == 'nodata' && identifiant == 'salle')
                 {
                     $('#infosx').css('visibility', 'hidden');
@@ -41,7 +34,6 @@ function getleave(identifiant)
                 }
                 if(data.test != 'nodata')
                 {
-                    console.log('nodataok');
                 	$('#infosx').css('visibility', 'visible');
                 	$('#infosx').css('display', 'contents');
                     $('#infos').css('visibility', 'visible');
@@ -123,11 +115,8 @@ function getleave(identifiant)
                             }
                         break;
                         case "ville":
-                            console.log('erreur0');
-                            console.log(data[0].test);
-                            if(data[0].test == 'erreur')
+                            if(data.test == 'erreur')
                             {
-                                console.log('erreur1');
                                 $('#cp').val('');
                                 $('#departement').val('');
                                 $('#region').val('');
@@ -272,19 +261,24 @@ function getdata(identifiant)
 				  },
 				success: function( data ) 
 				{
-					response( data );
-                    if (data == null) 
+                    if((request.term).length>2)
                     {
-                        getleave(identifiant);
-                    }
-                    else
-                    {
-                        if(data.length == 1 && data.label == request.term)
+                        if (data[0].label == 'norep') 
                         {
                             $( '#'+identifiant+'' ).autocomplete( "close" );
                             getleave(identifiant);
                         }
+                        else
+                        {
+                            response( data );
+                            if(data.length == 1 && data[0].label == request.term)
+                            {
+                                $( '#'+identifiant+'' ).autocomplete( "close" );
+                                getleave(identifiant);
+                            }
+                        }
                     }
+                    
 				}
 			});
 		},

@@ -232,7 +232,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					{
 						?>
 						<div id="filteroneone">
-							<a class="filterresult" onclick="displayconcert();"> filtrer les résultats ▼</a>
+							<a class="filterresult" onclick="displayconcert();"> Filtrer les résultats ▼</a>
 							<div class="container">
 								<ul class="ul">
 									<li>
@@ -1141,11 +1141,17 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 	    			$('.formdptdepth').css("padding-left", '0');
 	    			$('.formnumdptdepth').css("padding-left", '0');
 	    			$('.formrgndepth').css("padding-left", '0');
+					$('.formsalle').css("padding-left", '0');
+	    			$('.formville').css("padding-left", '0');
+	    			$('.formcp').css("padding-left", '0');
+	    			$('.formdpt').css("padding-left", '0');
+	    			$('.formnumdpt').css("padding-left", '0');
+	    			$('.formrgn').css("padding-left", '0');
 	    		}
 	    	});
 
 	    	$( window ).resize(function() {
-	    		if ($( 'body' ).width() < 1110) 
+	    		if ($( '#main' ).width() < 1110) 
 	    		{
 	    			$('.formsalledepth').css("padding-left", '0');
 	    			$('.formvilledepth').css("padding-left", '0');
@@ -1153,6 +1159,12 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 	    			$('.formdptdepth').css("padding-left", '0');
 	    			$('.formnumdptdepth').css("padding-left", '0');
 	    			$('.formrgndepth').css("padding-left", '0');
+					$('.formsalle').css("padding-left", '0');
+	    			$('.formville').css("padding-left", '0');
+	    			$('.formcp').css("padding-left", '0');
+	    			$('.formdpt').css("padding-left", '0');
+	    			$('.formnumdpt').css("padding-left", '0');
+	    			$('.formrgn').css("padding-left", '0');
 	    		}
 	    		else
 	    		{
@@ -1162,6 +1174,12 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 	    			$('.formdptdepth').css("padding-left", '40px');
 	    			$('.formnumdptdepth').css("padding-left", '40px');
 	    			$('.formrgndepth').css("padding-left", '40px');
+					$('.formsalle').css("padding-left", '40px');
+	    			$('.formville').css("padding-left", '40px');
+	    			$('.formcp').css("padding-left", '40px');
+	    			$('.formdpt').css("padding-left", '40px');
+	    			$('.formnumdpt').css("padding-left", '40px');
+	    			$('.formrgn').css("padding-left", '40px');
 	    		}
 			});
 		</script>

@@ -8,8 +8,8 @@
 	CSS : n
 */
 	$servername = 'localhost';
-	$username = 'aili';
-	$password = 'root';
+	$username = 'root';
+	$password = '2222';
 	$dbname = 'webbd';
 
 	//Connexion à la BDD

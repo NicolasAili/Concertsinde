@@ -19,6 +19,8 @@
 			require '../php/database.php';
 
 			$artiste = $_POST['artiste'];
+			$indices = $_POST['artiste'];
+			
 			$artiste = strtolower($artiste);
 			$artiste = ucfirst($artiste); //met la première lettre en capitale
 			$date = $_POST['date'];
@@ -398,7 +400,7 @@
 						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
 					}
 				}
-
+				echo $sql;
 				if(mysqli_query($con, $sql))
 				{
     				setcookie('contentMessage', 'Concert ajouté avec succès', time() + 15, "/");
@@ -407,7 +409,7 @@
 				}
 				else
 				{
-					setcookie('contentMessage', 'Erreur dans l\'ajout du concert, vueuillez réessayer ou nous contacter si le problème persiste', time() + 15, "/");
+					setcookie('contentMessage', 'Erreur dans l\'ajout du concert, veuillez réessayer ou nous contacter si le problème persiste', time() + 15, "/");
     				header("Location: ../allconcerts.php");
      				exit("Erreur dans l\'ajout du concert, vueuillez réessayer ou nous contacter si le problème persiste");
 				}

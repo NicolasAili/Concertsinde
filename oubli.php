@@ -53,14 +53,33 @@
 	}?>
 </html>
 
-<?php 
+<?php
 
-/*
-- bug getdata lorsque remplir champs > à vérifier
+/* 
 
-- error 200 ex: toulouse le château > espaces > à vérifier (encodage de la page?)
-- bug departement region no answer 
+Page artiste :
 
--pb filtrer barre allconcerts salle,villeetc...
-- hide file extension
+- plusieurs artistes :
+	-ajouter plusieurs artistes
+	1) ajout concert > maj nom_artiste
+	2) afficher concert
+		> page artistes
+		> allconcerts
+
+	3) supprimer concert
+	4) 
+
+________________________________________________________________
+- regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert
+- filtre: souligner
+- chercher artiste : autocomplete
+- réinitialisation mail vraiment laid
+
+
+Suivi fichiers modifiés depuis dernier ftp :
+
+- database php
+- concert php
+- 
+
 */

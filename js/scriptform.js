@@ -299,7 +299,7 @@ function popup(){
         $("html").scrollTop( bheight );  
 
         var close = 0;
-        var strartiste = $("#artiste").val();
+        var strartiste = $(".artiste").val();
         var strdate = $("#date").val();
         var strheure = $("#heure").val();
         var strsalle = $("#salle").val();
@@ -407,7 +407,6 @@ function popup(){
                 $("#psalle").html(strdenom);
             }
 
-            $("#partiste").html(strartiste);
             $("#pdate").html(strdate);
             $("#pheure").html(strheure);
             if(!strpays)

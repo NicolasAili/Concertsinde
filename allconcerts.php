@@ -762,8 +762,9 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						$rowdpt['nom_departement'] = NULL;
 						$rowrgn['nom_pays'] = NULL;
 						$rowrgn['nom_region'] = NULL;
-						$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
+						$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 						$resultx = mysqli_query($con, $str);
+						$row_cnt = mysqli_num_rows($resultx);
 						$row = mysqli_fetch_array($resultx);
 
 						$pseudoadd = $row['user_ajout'];
@@ -793,27 +794,50 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						?> 
 						<div class="inwhile"> 
 							<div class="artiste"> 
-								<?php 
-								if($archive == 'yes')
-								{?>
-									<img class="image" src="image/archive.png" height="50" width="50" alt="archive">
-								<?php
-								}
-								else
-								{
-									if($row['valide'] == 0)
+								<div style="margin-left: 2%; width: 8%;">
+									<?php 
+									if($archive == 'yes')
 									{?>
-										<img class="image" src="image/invalide.png" height="50" width="50" alt="invalide">
+										<img class="image" src="image/archive.png" height="50" width="50" alt="archive">
 									<?php
 									}
 									else
-									{?>
-										<img class="image" src="image/valide.png" height="50" width="50" alt="valide">
-									<?php
+									{
+										if($row['valide'] == 0)
+										{?>
+											<img class="image" src="image/invalide.png" height="50" width="50" alt="invalide">
+										<?php
+										}
+										else
+										{?>
+											<img class="image" src="image/valide.png" height="50" width="50" alt="valide">
+										<?php
+										}
+									}?>
+								</div>
+								<?php
+								echo '<div id="lesartistes">';
+									if($row_cnt == 1)
+									{
+										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
 									}
-								}
-								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
-								?>
+									else
+									{
+										$i = 1;
+										$str = "SELECT artistes_concert.nom_artiste FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.id_concert = $idconcert";
+										$resultx = mysqli_query($con, $str);
+										while ($rowart = mysqli_fetch_array($resultx)) 
+										{
+											echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+											if($i < $row_cnt)
+											{
+												echo ' / ';
+											}		
+											$i++;
+										}
+									}		 
+									?>
+								</div>
 								<div class="infosdiv">
 									<img class="infologo" src="image/infos.png" height="50" width="50" alt="infos">
 									<div class="infos hidden">

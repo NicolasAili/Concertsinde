@@ -149,6 +149,31 @@ body
 	padding-top: 2%;
 	margin-bottom: 2%;
 	text-align: center;
+	display: flex;
+}
+
+.lesartistes
+{
+	width: 80%;
+	color: #f5ebeb;
+}
+
+.lesartistes a
+{
+	text-decoration: none;
+	color: #f5ebeb;
+}
+
+.lesartistes a:hover
+{
+	color: red;
+}
+
+.infosdiv
+{
+	float: right;
+	margin-right: 2%;
+	width: 8%;
 }
 
 @media only screen and (max-width: 1650px)

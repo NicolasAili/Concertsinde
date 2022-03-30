@@ -43,7 +43,7 @@
 				 	<div id="artistediv">
 				 		<label for="artiste">Nom de l'artiste ou du groupe<span class="star">*</span></label> 
 						<div id="art">
-							<input type="text" name="artiste[]" placeholder="Saisir l'artiste" class="artiste" required>
+							<input type="text" name="artiste" placeholder="Saisir l'artiste" class="artiste" required>
 							<button type="button" name="add" id="add">Artiste supplémentaire</button>
 						</div>
 				 	</div>
@@ -155,6 +155,7 @@
 							<button type="button" id="nonsaisie" onclick="retour();"> Non, modifier les données </button>
 						</div>
 					</div>
+					<input type="hidden" value="" name="indice" id="indice">
 					<input type="hidden" value="Enregister le concert" name="concert" id="valider">
 				</form>
 			</div>	
@@ -166,7 +167,7 @@
 				var i=1;  
 				$('#add').click(function(){  
 					i++;  
-					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste[]" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  
+					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  
 				});
 				$(document).on('click', '.btn_remove', function(){  
 					var button_id = $(this).attr("id"); 
@@ -177,6 +178,7 @@
 				$('#dialog').click(function(){ 
 					var strartiste = $(".artiste").val();
 					$("#partiste").html(strartiste);
+					$("#indice").val('');
 
 					for (let index = 2; index <= i; index++) 
 					{
@@ -184,25 +186,18 @@
 						{
 							if($("#row" + index).val().length > 0)
 							{
-								console.log('succes' + index);
 								valindex = $("#row" + index).val();
 								valchamp = $("#partiste").html();
+								valindice = $("#indice").val();
+
+								valindice = valindice + index;
+								$("#indice").val(valindice);
 
 								valchamp = valchamp + ' / ' + valindex;
 								$("#partiste").html(valchamp);
 							}
 						}
 					}
-					/*$.ajax({  
-							url:"name.php",  
-							method:"POST",  
-							data:$('#add_name').serialize(),  
-							success:function(data)  
-							{  
-								alert(data);  
-								$('#add_name')[0].reset();  
-							}  
-					});  */
 				});  
 			});  
 			</script>

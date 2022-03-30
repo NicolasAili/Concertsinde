@@ -60,20 +60,22 @@
 Page artiste :
 
 - plusieurs artistes :
-	-ajouter plusieurs artistes
-	1) ajout concert > maj nom_artiste
+
 	2) afficher concert
-		> page artistes
-		> allconcerts
+		> page artistes //mercredi
+		- revoir les filtres allconcerts //mercredi
+		- affichage resultats par page //jeudi
 
-	3) supprimer concert
-	4) 
+	3) supprimer concert //jeudi
+		-concert supprimé, retour avec locate sur allconcerts //jeudi
+	4) modifier concert //jeudi (au moins une partie)
 
+	- getdata sur les plusieurs artistes //vendredi
 ________________________________________________________________
-- regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert
-- filtre: souligner
-- chercher artiste : autocomplete
-- réinitialisation mail vraiment laid
+- regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
+- filtre: souligner //vendredi
+- chercher artiste : autocomplete //vendredi
+- réinitialisation mail vraiment laid //vendredi
 
 
 Suivi fichiers modifiés depuis dernier ftp :

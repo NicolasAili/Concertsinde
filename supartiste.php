@@ -89,7 +89,7 @@
 					}?>
 				</div>
 			</div><?php
-			$sql = "SELECT id_concert FROM concert, artiste WHERE concert.nom_artiste = artiste.Nom_artiste AND artiste.Nom_artiste = '$artiste' AND concert.datec >= NOW() ORDER BY datec ASC";
+			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = 'Test0' AND concert.datec >= NOW() ORDER BY datec ASC;";
 			$result = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($result);
 			?>
@@ -102,7 +102,7 @@
 				echo "<h2> Concerts à venir </h2>";
 				if(!$row)
 				{?>
-					<div id="noconcert" onclick="archive() managefooter();"><?php
+					<div id="noconcert" onclick="archive(); managefooter();"><?php
 						echo "Aucun concert n'est prévu pour cet artiste, consultez les archives";?>
 					</div><?php
 				}
@@ -118,8 +118,9 @@
 							$rowdpt['nom_departement'] = NULL;
 							$rowrgn['nom_pays'] = NULL;
 							$rowrgn['nom_region'] = NULL;
-							$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
+							$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 							$resultx = mysqli_query($con, $str);
+							$row_cnt = mysqli_num_rows($resultx);
 							$row = mysqli_fetch_array($resultx);
 							if($row['ville_departement'])
 							{
@@ -137,32 +138,63 @@
 							?> 
 							<div class="inwhile"> 
 								<div class="artiste"> 
-									<?php 
-									if($row['valide'] == 0)
-									{?>
-										<img alt="invalide" class="image" src="image/invalide.png" height="50" width="50">
+									<div style="margin-left: 2%; width: 8%;">
+										<?php 
+										if($row['valide'] == 0)
+										{?>
+											<img class="image" src="image/invalide.png" height="50" width="50" alt="invalide">
+										<?php
+										}
+										else
+										{?>
+											<img class="image" src="image/valide.png" height="50" width="50" alt="valide">
+										<?php
+										}
+										?>
+									</div>
 									<?php
-									}
-									else
-									{?>
-										<img alt="valide" class="image" src="image/valide.png" height="50" width="50">
-									<?php
-									}
-									echo "<span>";
-										echo $row['nom_artiste'];
-									echo "</span>";
-									?> 
-									<img alt="infos" class="infologo" src="image/infos.png" height="50" width="50">
-									<div class="infos hidden">
-										<div class="dateajout"> 
-											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
-											Concert ajouté le: <?php echo $newDate ?> 
-										</div> 
-										<div class="ajout"> 
-											<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
-										</div>
-										<div class="modif">
-											<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
+									echo '<div class="lesartistes">';
+										if($row_cnt == 1)
+										{
+											echo $row['nom_artiste'];
+										}
+										else
+										{
+											$i = 1;
+											$str = "SELECT artistes_concert.nom_artiste FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.id_concert = $idconcert";
+											$resultx = mysqli_query($con, $str);
+											while ($rowart = mysqli_fetch_array($resultx)) 
+											{
+												if($artiste == $rowart['nom_artiste'])
+												{
+													echo $rowart['nom_artiste'];
+												}
+												else
+												{
+													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+												}
+												if($i < $row_cnt)
+												{
+													echo ' / ';
+												}		
+												$i++;
+											}
+										}		 
+										?>
+									</div>
+									<div class="infosdiv">
+										<img class="infologo" src="image/infos.png" height="50" width="50" alt="infos">
+										<div class="infos hidden">
+											<div class="dateajout"> 
+												<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
+												Concert ajouté le: <?php echo $newDate ?> 
+											</div> 
+											<div class="ajout"> 
+												<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
+											</div>
+											<div class="modif">
+												<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
+											</div>
 										</div>
 									</div>
 								</div> 
@@ -407,7 +439,7 @@
 		 	</div>
 		 	<div id="archivesall"><?php
 		 		echo "<h2> Concerts archivés </h2>";
-		 		$sql = "SELECT id_concert FROM concert, artiste WHERE concert.nom_artiste = artiste.Nom_artiste AND artiste.Nom_artiste = '$artiste' AND concert.datec < NOW() ORDER BY datec DESC";
+				$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = 'Test0' AND concert.datec < NOW() ORDER BY datec DESC";
 				$result = mysqli_query($con, $sql);
 				$row = mysqli_fetch_array($result);
 				if(!$row)
@@ -426,8 +458,10 @@
 							$rowdpt['nom_departement'] = NULL;
 							$rowrgn['nom_pays'] = NULL;
 							$rowrgn['nom_region'] = NULL;
-							$str = "SELECT datec, heure, lien_fb, date_ajout, lien_ticket, concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert ";
+
+							$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 							$resultx = mysqli_query($con, $str);
+							$row_cnt = mysqli_num_rows($resultx);
 							$row = mysqli_fetch_array($resultx);
 							if($row['ville_departement'])
 							{
@@ -445,23 +479,52 @@
 							?> 
 							<div class="inwhile"> 
 								<div class="artiste"> 
-									<img alt="archive" class="image" src="image/archive.png" height="50" width="50">
+									<div style="margin-left: 2%; width: 8%;">
+										<img alt="archive" class="image" src="image/archive.png" height="50" width="50">
+									</div>
 									<?php
-									echo "<span>";
-										echo $row['nom_artiste'];
-									echo "</span>";
-									?> 
-									<img alt="infos" class="infologo" src="image/infos.png" height="50" width="50">
-									<div class="infos hidden">
-										<div class="dateajout"> 
-											<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
-											Concert ajouté le: <?php echo $newDate ?> 
-										</div> 
-										<div class="ajout"> 
-											<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
-										</div>
-										<div class="modif">
-											<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
+									echo '<div class="lesartistes">';
+										if($row_cnt == 1)
+										{
+											echo $row['nom_artiste'];
+										}
+										else
+										{
+											$i = 1;
+											$str = "SELECT artistes_concert.nom_artiste FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.id_concert = $idconcert";
+											$resultx = mysqli_query($con, $str);
+											while ($rowart = mysqli_fetch_array($resultx)) 
+											{
+												if($artiste == $rowart['nom_artiste'])
+												{
+													echo $rowart['nom_artiste'];
+												}
+												else
+												{
+													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+												}
+												if($i < $row_cnt)
+												{
+													echo ' / ';
+												}		
+												$i++;
+											}
+										}
+									echo '</div>'		 
+									?>
+									<div class="infosdiv">
+										<img alt="infos" class="infologo" src="image/infos.png" height="50" width="50">
+										<div class="infos hidden">
+											<div class="dateajout"> 
+												<?php $newDate = date("d-m-Y", strtotime($row['date_ajout'])); ?>
+												Concert ajouté le: <?php echo $newDate ?> 
+											</div> 
+											<div class="ajout"> 
+												<?php if($rowadd['pseudo']){ echo "Par : "; echo  $rowadd['pseudo'];} else{echo "Par : un anonyme";} ?> 
+											</div>
+											<div class="modif">
+												<?php if($rowmodif['pseudo']){ echo "Dernière modification par : "; echo  $rowmodif['pseudo'];} else{echo "Concert non modifié";} ?> 
+											</div>
 										</div>
 									</div>
 								</div> 

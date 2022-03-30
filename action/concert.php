@@ -13,16 +13,30 @@
 <html lang="fr">
 	<head>
 		<?php
-			include '../php/error.php';  
-			require '../php/connectcookie.php';
+			//include '../php/error.php';  
 			include '../php/base.php';
 			require '../php/database.php';
 
 			$artiste = $_POST['artiste'];
-			$indices = $_POST['artiste'];
+			$indices = $_POST['indice'];
+			$indiceslength = strlen($indices);
+
 			
 			$artiste = strtolower($artiste);
 			$artiste = ucfirst($artiste); //met la première lettre en capitale
+
+			$indices = $_POST['indice']; //récupère la liste des indices où sont stockés les artistes : ex: rang3,4,5 etc...
+			$indiceslength = strlen($indices); //récupère le nombre d'artistes ajoutés
+
+			$artistelistindice = str_split($indices); //met la liste des indices dans un tableau
+
+
+			for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+			{ 
+				$postartiste = 'artiste' . $artistelistindice[$i];
+				$artistesadd[$i] = ucfirst($_POST[$postartiste]); //on range dans un tableau qui contiendra la liste des artistes
+			}
+
 			$date = $_POST['date'];
 			$heure = $_POST['heure'];
 			$ville = $_POST['ville'];
@@ -40,6 +54,10 @@
 		    $redirect = '../ajoutconcert.php';
 
 		    $values = array($artiste, $ville, $salle, $denom, $departement, $region, $pays); //1) mettre données dans un arrray
+			for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+			{ 
+				array_push($values, $artistesadd[$i]);
+			}
 		    $inject = inject($values, null); //2) les vérifier
 
 		    $returnval = inject($date, 'date'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
@@ -76,19 +94,23 @@
 		    $validate = validate($inject, $redirect); //3)validation de tous les champs
 		    if($validate == 0) //4) si pas d'injection : ajout des variables
 		    {
-		      $artiste = mysqli_real_escape_string($con, $artiste);
-		      $ville = mysqli_real_escape_string($con, $ville);
-		      $salle = mysqli_real_escape_string($con, $salle);
-		      $denom = mysqli_real_escape_string($con, $denom);
-		      $departement = mysqli_real_escape_string($con, $departement);
-		      $region = mysqli_real_escape_string($con, $region);
-		      $pays = mysqli_real_escape_string($con, $pays);
-		      $date = mysqli_real_escape_string($con, $date);
-		      $heure = mysqli_real_escape_string($con, $heure);
-		      $fb = mysqli_real_escape_string($con, $fb);
-		      $ticket = mysqli_real_escape_string($con, $ticket);
-		      $cp = mysqli_real_escape_string($con, $cp);
-		      $adresse = mysqli_real_escape_string($con, $adresse);
+		    	$artiste = mysqli_real_escape_string($con, $artiste);
+				for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+				{ 
+					$artistesadd[$i] = mysqli_real_escape_string($con, $artistesadd[$i]);
+				}
+				$ville = mysqli_real_escape_string($con, $ville);
+				$salle = mysqli_real_escape_string($con, $salle);
+				$denom = mysqli_real_escape_string($con, $denom);
+				$departement = mysqli_real_escape_string($con, $departement);
+				$region = mysqli_real_escape_string($con, $region);
+				$pays = mysqli_real_escape_string($con, $pays);
+				$date = mysqli_real_escape_string($con, $date);
+				$heure = mysqli_real_escape_string($con, $heure);
+				$fb = mysqli_real_escape_string($con, $fb);
+				$ticket = mysqli_real_escape_string($con, $ticket);
+				$cp = mysqli_real_escape_string($con, $cp);
+				$adresse = mysqli_real_escape_string($con, $adresse);
 		    }
 		?>
 	</head>
@@ -98,15 +120,30 @@
 			{
 				$testvle = 0;
 
-				$sql = "SELECT datec FROM concert WHERE nom_artiste = '$artiste'";
+				$sql = "SELECT id_concert FROM concert WHERE datec = '$date'";
 				$query = mysqli_query($con, $sql);
 				while($row = mysqli_fetch_array($query)) 
 				{
-					if($date == $row['datec'])
+					$id_concert = $row['id_concert'];
+					$sql = "SELECT nom_artiste FROM artistes_concert WHERE id_concert = $id_concert";
+					$queryart = mysqli_query($con, $sql);
+					while($rowart = mysqli_fetch_array($queryart))
 					{
-						setcookie('contentMessage', 'Erreur: ce concert a déjà été saisi (même artiste et même date), si vous pensez que ce message est une erreur merci de le signaler', time() + 15, "/");
-						header("Location: ../allconcerts.php");
-						exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
+						if ($rowart['nom_artiste'] == $artiste) 
+						{
+							setcookie('contentMessage', 'Erreur: un concert de ' . $artiste . ' a déjà été saisi à la même date, si vous pensez que ce message est une erreur merci de le signaler', time() + 15, "/");
+							header("Location: ../allconcerts.php");
+							exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
+						}
+						for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+						{ 
+							if ($rowart['nom_artiste'] == $artistesadd[$i]) 
+							{
+								setcookie('contentMessage', 'Erreur: un concert de ' . $artistesadd[$i] . ' a déjà été saisi à la même date, si vous pensez que ce message est une erreur merci de le signaler', time() + 15, "/");
+								header("Location: ../allconcerts.php");
+								exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
+							}
+						}
 					}
 				}
 				$sql = "SELECT heure FROM concert, salle WHERE salle.nom_salle = '$salle' AND concert.datec = '$date'";
@@ -166,7 +203,6 @@
 								{
 									$insertrgn = "INSERT INTO region (nom_region, id_pays) VALUES ('$region', '$idpays') "; //ajout de la région en BDD et lien de la région avec le pays
 									mysqli_query($con, $insertrgn);
-									echo $insertrgn;
 								}
 								$query = mysqli_query($con, $idrgn);
 								$row = mysqli_fetch_array($query);
@@ -331,6 +367,17 @@
 					$insertartiste = "INSERT INTO artiste (nom_artiste) VALUES ('$artiste')";
 					mysqli_query($con, $insertartiste);
 				}
+				for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+				{ 
+					$sql = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artistesadd[$i]'";
+					$result = mysqli_query($con, $sql);
+					$row_cnt = mysqli_num_rows($result);
+					if($row_cnt<1) //si pas de ligne trouvée
+					{
+						$insertartiste = "INSERT INTO artiste (nom_artiste) VALUES ('$artistesadd[$i]')";
+						mysqli_query($con, $insertartiste);
+					}
+				}
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
 
@@ -400,9 +447,21 @@
 						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
 					}
 				}
-				echo $sql;
 				if(mysqli_query($con, $sql))
 				{
+					$idconcert = "SELECT MAX(id_concert) AS id_max FROM concert";
+					$query = mysqli_query($con, $idconcert);
+					$row = mysqli_fetch_array($query);
+					$idcon = $row['id_max'];
+
+					$sql = "INSERT INTO artistes_concert (id_concert, nom_artiste) VALUES ('$idcon', '$artiste')";
+					mysqli_query($con, $sql);
+
+					for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+					{ 
+						$sql = "INSERT INTO artistes_concert (id_concert, nom_artiste) VALUES ('$idcon', '$artistesadd[$i]')";
+						mysqli_query($con, $sql);
+					}
     				setcookie('contentMessage', 'Concert ajouté avec succès', time() + 15, "/");
     				header("Location: ../allconcerts.php");
      				exit("Concert ajouté avec succès");

@@ -358,6 +358,12 @@ h4
 	padding-top: 2%;
 	margin-bottom: 2%;
 	text-align: center;
+	display: flex;
+}
+
+#lesartistes
+{
+	width: 80%;
 }
 
 @media only screen and (max-width: 1650px)
@@ -389,6 +395,7 @@ h4
 {
 	float: right;
 	margin-right: 2%;
+	width: 8%;
 }
 
 .infos

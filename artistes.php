@@ -113,7 +113,6 @@ Support(s) : pc perso et ecran perso
 					$str = "SELECT * FROM artiste ORDER BY Nom_artiste";
 				}
 				
-				
 				$result = mysqli_query($con, $str);
 			?>
 			<div id="lesartistes">
@@ -154,7 +153,7 @@ Support(s) : pc perso et ecran perso
 							</div>
 							<div class="nbconcert">
 								<?php
-									$nbr = "SELECT COUNT(*) FROM concert WHERE Nom_artiste = '$artistecnt' AND datec > NOW()";
+									$nbr = "SELECT COUNT(*) FROM artistes_concert, concert WHERE Nom_artiste = '$artistecnt' AND datec > NOW() AND concert.id_concert = artistes_concert.id_concert";
 									$resultnbr = mysqli_query($con, $nbr);
 									$rownbr = mysqli_fetch_array($resultnbr);
 									echo $rownbr[0];

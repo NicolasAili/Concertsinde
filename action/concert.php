@@ -423,11 +423,11 @@
 					$sle = $row['id_salle'];
 					if(isset($_SESSION['pseudo']))
 					{
-						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$artiste', '$sle', NOW(), '$fb', '$ticket', '$idpseudo')";
+						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$sle', NOW(), '$fb', '$ticket', '$idpseudo')";
 					}
 					else
 					{
-						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$sle', NOW(), '$fb', '$ticket')";
+						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$sle', NOW(), '$fb', '$ticket')";
 					}
 				}
 				else //concert en extérieur
@@ -440,11 +440,11 @@
 					$exte = $row['id_max'];
 					if(isset($_SESSION['pseudo']))
 					{
-						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket', '$idpseudo')";
+						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$exte', NOW(), '$fb', '$ticket', '$idpseudo')";
 					}
 					else
 					{
-						$sql = "INSERT INTO concert (datec, heure, nom_artiste, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$artiste', '$exte', NOW(), '$fb', '$ticket')";
+						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$exte', NOW(), '$fb', '$ticket')";
 					}
 				}
 				if(mysqli_query($con, $sql))

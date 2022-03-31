@@ -641,23 +641,22 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					}
 					else
 					{
-						$strf = sprintf("SELECT id_concert FROM concert WHERE 1". $archivesql ." ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, artistes_concert WHERE 1 AND concert.id_concert = artistes_concert.id_concert". $archivesql ." ORDER BY". $filtre ."");
 					}
 					$result = mysqli_query($con, $strf);
 
-					$search = "SELECT id_concert";
-					$replace = "SELECT COUNT(id_concert) AS countrec";
+					$search = "SELECT DISTINCT concert.id_concert";
+					$replace = "SELECT DISTINCT COUNT(concert.id_concert) AS countrec";
 					$count = str_replace($search, $replace, $strf);
 
-					if ($count == $strf) 
+					if ($count == $strf)
 					{
 						$search = "SELECT DISTINCT modification.id_concert";
 						$replace = "SELECT COUNT(DISTINCT modification.id_concert)";
 						$count = str_replace($search, $replace, $strf);
 					}
+					echo $count;
 					$countresult = mysqli_query($con, $count);
-
-
 					?>
 
 					<div class="trier">

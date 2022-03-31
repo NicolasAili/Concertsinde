@@ -39,7 +39,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 
 
 		$string = $_SERVER['QUERY_STRING'];
-		
 		parse_str($string);
 		$finalstring = explode("&", $string);
 		$filtre = " datec ASC";
@@ -116,7 +115,6 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 				$finalstring[0] = "region=" . $getregion;
 			}	
 		}
-
 		$sqlquery = $_POST['sqlquery'];
 
 		$values = array($getsalle, $getville, $getdepartement, $getregion); //1) mettre données dans un arrray
@@ -144,6 +142,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		}
 
 		$validate = validate($inject, $redirect); //3)validation de tous les champs
+		
 		if($validate == 0) //4) si pas d'injection : ajout des variables
 		{
 		  $getsalle = mysqli_real_escape_string($con, $getsalle);
@@ -155,7 +154,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		  $add = mysqli_real_escape_string($con, $add);
 		  $modif = mysqli_real_escape_string($con, $modif);
 		}
-
+		
 		$pseudo = $_SESSION['pseudo'];
 		$archive = $_GET['archive'];
 
@@ -203,6 +202,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		{
 			$page = 1;
 		}
+		
 	?>
 	<link rel="stylesheet" type="text/css" href="css/body/allconcerts.css">
 	</head>
@@ -213,12 +213,11 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php
-
+			
 			$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
 			$query = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($query);
 			$testadmin = $row['admin'];
-
 			?>
 			<div id="ici">
 				<div id="icifirst">Vous êtes ici :</div> Accueil > concerts
@@ -456,6 +455,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 												$archivestring = 'archive=yes';
 											}
 											echo "<li>";
+											
 												if($string && $filter != "artisteup" && $finalstring[0] != "recherche=none")
 												{
 													echo '<a href="allconcerts.php?'; echo $finalstring[0]; echo "&filter=artisteup&"; echo $archivestring; echo "&n="; echo "$n"; echo '">';
@@ -609,27 +609,26 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					<?php
 					if($getsalle)
 					{
-						$strf = sprintf("SELECT id_concert FROM concert, salle WHERE salle.id_salle = concert.fksalle AND nom_salle = '$getsalle'". $archivesql ." ORDER BY". $filtre ."");
-
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND nom_salle = '$getsalle'". $archivesql ." ORDER BY". $filtre ."");
 					}
 					else if ($getville) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'" . $archivesql ." ORDER BY". $filtre);
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'" . $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($getcp) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'". $archivesql ."ORDER BY". $filtre ."");
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'". $archivesql ."ORDER BY". $filtre ."");
 					}
 					else if ($getdepartement) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'". $archivesql ." ORDER BY". $filtre );
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, departement, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.nom_departement = '$getdepartement'". $archivesql ." ORDER BY". $filtre );
 					}
 					else if ($getnumdepartement) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'". $archivesql ." ORDER BY". $filtre);
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, departement, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.numero = '$getnumdepartement'". $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($getregion) {
-						$strf = sprintf("SELECT id_concert FROM concert, ville, salle, departement, region WHERE salle.id_salle = concert.fksalle AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'". $archivesql ." ORDER BY". $filtre);
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, departement, region, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.nom_region = '$getregion'". $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($add)
 					{
-						$strf = sprintf("SELECT id_concert FROM concert WHERE user_ajout = '$add'");
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert WHERE user_ajout = '$add'");
 					}			
 					else if ($modif)
 					{
@@ -644,20 +643,9 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, artistes_concert WHERE 1 AND concert.id_concert = artistes_concert.id_concert". $archivesql ." ORDER BY". $filtre ."");
 					}
 					$result = mysqli_query($con, $strf);
-
-					$search = "SELECT DISTINCT concert.id_concert";
-					$replace = "SELECT DISTINCT COUNT(concert.id_concert) AS countrec";
-					$count = str_replace($search, $replace, $strf);
-
-					if ($count == $strf)
-					{
-						$search = "SELECT DISTINCT modification.id_concert";
-						$replace = "SELECT COUNT(DISTINCT modification.id_concert)";
-						$count = str_replace($search, $replace, $strf);
-					}
-					echo $count;
-					$countresult = mysqli_query($con, $count);
+					$cnt_row = mysqli_num_rows($result);
 					?>
+					
 
 					<div class="trier">
 						<div id="triertxtdeux"> Résultats par page : </div>
@@ -717,10 +705,8 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 			</div>
 			
 			<?php
-			$rowcount = mysqli_fetch_array($countresult);
-			$calc = $rowcount[0];
 			?>
-			<h4> <?php echo $calc; if($calc>1){echo " concerts trouvés";}else{echo " concert trouvé";}?> </h4>
+			<h4> <?php echo $cnt_row; if($cnt_row>1){echo " concerts trouvés";}else{echo " concert trouvé";}?> </h4>
 			<div id="indics">
 				<div class="indication">
 					<div class="center">

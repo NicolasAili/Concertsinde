@@ -3,6 +3,7 @@
 	{	
 		$i = 0;
 		$returnarr = array();
+		
 		if(file_exists("php/database.php")) 
 		{
 			require('php/database.php');
@@ -16,7 +17,7 @@
 		{
 			foreach ($input as $key => $value) 
 			{
-				preg_match('#[a-zA-Z0-9\'&$ ]+[-]?[a-zA-Z0-9\'&$ ]+#', $value, $matches);
+				preg_match('#[a-zA-Z0-9\'&$ ôê]+[-]?[a-zA-Z0-9\'&$ ôê]+[-]?[a-zA-Z0-9\'&$ ôê]+[-]?#', $value, $matches);
 				$matches = implode($matches);
 				if(strlen($matches) != strlen($value))
 				{
@@ -24,7 +25,6 @@
 				}
 				$i++;
 			}
-			//return 'erreur detectee';
 			return $returnarr;
 		}
 		else //cas pour une regex modifiée

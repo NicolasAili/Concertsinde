@@ -61,16 +61,12 @@ Page artiste :
 
 - plusieurs artistes :
 
-	2) afficher concert
-		> page artistes //mercredi
-		- revoir les filtres allconcerts //mercredi
-		- affichage resultats par page //jeudi
-
 	3) supprimer concert //jeudi
 		-concert supprimé, retour avec locate sur allconcerts //jeudi
 	4) modifier concert //jeudi (au moins une partie)
 
 	- getdata sur les plusieurs artistes //vendredi
+	-getdata sur 
 ________________________________________________________________
 - regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
 - filtre: souligner //vendredi
@@ -82,6 +78,15 @@ Suivi fichiers modifiés depuis dernier ftp :
 
 - database php
 - concert php
-- 
+modifié :         action/concert.php
+	modifié :         ajoutconcert.php
+	modifié :         allconcerts.php
+	modifié :         artistes.php
+	modifié :         css/body/ajoutconcert.css
+	modifié :         css/body/allconcerts.css
+	modifié :         css/body/superartiste.css
+	modifié :         oubli.php
+	modifié :         supartiste.php
+
 
 */

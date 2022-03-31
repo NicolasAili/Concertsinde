@@ -320,9 +320,12 @@
 				{
 					$sql = "DELETE FROM concert WHERE id_concert = '$idconcert'"; 
 					mysqli_query($con, $sql);
-					setcookie('contentMessage', 'Concert supprimé', time() + 15, "/");
-					header("Location: allconcerts.php");
-					exit("Concert supprimé");
+					$sql = "DELETE FROM artistes_concert WHERE id_concert = '$idconcert'";
+					mysqli_query($con, $sql);
+					?>Concert supprimé avec succès 
+					<br>
+					<a href="allconcerts.php"> retour en arriere </a>
+					<?php
 				}
 				else if($action == 'Valider')
 				{

@@ -89,7 +89,7 @@
 					}?>
 				</div>
 			</div><?php
-			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = 'Test0' AND concert.datec >= NOW() ORDER BY datec ASC;";
+			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec >= NOW() ORDER BY datec ASC;";
 			$result = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($result);
 			?>
@@ -439,7 +439,7 @@
 		 	</div>
 		 	<div id="archivesall"><?php
 		 		echo "<h2> Concerts archivés </h2>";
-				$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = 'Test0' AND concert.datec < NOW() ORDER BY datec DESC";
+				$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec < NOW() ORDER BY datec DESC";
 				$result = mysqli_query($con, $sql);
 				$row = mysqli_fetch_array($result);
 				if(!$row)

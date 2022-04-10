@@ -61,9 +61,13 @@ Page artiste :
 
 - plusieurs artistes :
 
-	3) supprimer concert //jeudi
-		-concert supprimé, retour avec locate sur allconcerts //jeudi
 	4) modifier concert //jeudi (au moins une partie)
+	effacer tous les champs probleme dans modifconcert
+	verifier si 2 artistes similaires ont été saisi
+	probleme aucun champ modifié lorsque seul artiste ajouté
+	ajouter artiste dans table artiste s'il existe pas déjà
+
+	gérer les modfis points etc...
 
 	- getdata sur les plusieurs artistes //vendredi
 	-getdata sur 
@@ -72,13 +76,16 @@ ________________________________________________________________
 - filtre: souligner //vendredi
 - chercher artiste : autocomplete //vendredi
 - réinitialisation mail vraiment laid //vendredi
+- dans ajoutconcert, si salle pas en BDD mettre placeholder dans ville "veuillez renseigner la ville"
+-concerts ajoutés depuis profil ne fonctionne pas
+-update la BDD sur le site en ligne
 
 
 Suivi fichiers modifiés depuis dernier ftp :
 
 - database php
 - concert php
-modifié :         action/concert.php
+	modifié :         action/concert.php
 	modifié :         ajoutconcert.php
 	modifié :         allconcerts.php
 	modifié :         artistes.php
@@ -87,6 +94,10 @@ modifié :         action/concert.php
 	modifié :         css/body/superartiste.css
 	modifié :         oubli.php
 	modifié :         supartiste.php
-
+	modifié :         modifconcert.php
+	modifié :         php/inject.php
+	modifié :         contenu/reseaux.php
+	modifié :         css/body/modifconcert.css
+	modifié :         modifconcertvalid.php
 
 */

@@ -24,9 +24,26 @@
 			require ('php/inject.php'); //0) ajouter inject et définir redirect
 			$redirect = 'allconcerts.php';
 
+			$indices = $_POST['indice'];
+			$indicespost = $_POST['indicepost']; //nombre d'artistes avant modification
+
+			$indiceslength = strlen($indices); //récupère le nombre d'artistes ajoutés
+			$artistelistindice = str_split($indices); //met la liste des indices dans un tableau
+
+			for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajoutés
+			{ 
+				$postartiste = 'artiste' . $artistelistindice[$i];
+				$artistesadd[$i] = ucfirst(strtolower($_POST[$postartiste])); //on range dans un tableau qui contiendra la liste des artistes
+			}
+
+			for ($i=0; $i < $indicespost; $i++) //on va de 0 au nombre d'artistes ajoutés
+			{ 
+				$postartiste = 'artistepost' . $i;
+				$artistesaddpost[$i] = ucfirst(strtolower($_POST[$postartiste])); //on range dans un tableau qui contiendra la liste des artistes avant modification
+			}
 
 			$idconcert = $_POST['idpost'];
-
+			
 			$intext = $_POST['intext'];
 			$intextpost = $_POST['intextpost'];
 
@@ -105,6 +122,14 @@
 			$testticket = 0;
 
 			$values = array($salle, $sallepost, $ville, $villepost, $departement, $region, $ext, $pays); //1) mettre données dans un arrray
+			for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajoutés
+			{ 
+				array_push($values, $artistesadd[$i]);
+			}
+			for ($i=0; $i < $indicespost; $i++) //on va de 0 au nombre d'artistes avant modif
+			{ 
+				array_push($values, $artistesaddpost[$i]);
+			}
 			$inject = inject($values, null); //2) les vérifier
 
 			$returnval = inject($idconcert, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
@@ -152,21 +177,29 @@
 			}
 			if($validate == 0) //4) si pas d'injection : ajout des variables
 			{
-			  $salle = mysqli_real_escape_string($con, $salle);
-			  $sallepost = mysqli_real_escape_string($con, $sallepost); 
-			  $ville = mysqli_real_escape_string($con, $ville); 
-			  $villepost = mysqli_real_escape_string($con, $villepost); 
-			  $departement = mysqli_real_escape_string($con, $departement); 
-			  $region = mysqli_real_escape_string($con, $region); 
-			  $ext = mysqli_real_escape_string($con, $ext); 
-			  $pays = mysqli_real_escape_string($con, $pays); 
-			  $idconcert = mysqli_real_escape_string($con, $idconcert); 
-			  $adresse = mysqli_real_escape_string($con, $adresse); 
-			  $fb = mysqli_real_escape_string($con, $fb); 
-			  $ticket = mysqli_real_escape_string($con, $ticket); 
-			  $cp = mysqli_real_escape_string($con, $cp); 
-			  $date = mysqli_real_escape_string($con, $date); 
-			  $heure = mysqli_real_escape_string($con, $heure); 
+				for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+				{ 
+					$artistesadd[$i] = mysqli_real_escape_string($con, $artistesadd[$i]);
+				}
+				for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+				{ 
+					$artistesaddpost[$i] = mysqli_real_escape_string($con, $artistesaddpost[$i]);
+				}
+				$salle = mysqli_real_escape_string($con, $salle);
+				$sallepost = mysqli_real_escape_string($con, $sallepost); 
+				$ville = mysqli_real_escape_string($con, $ville); 
+				$villepost = mysqli_real_escape_string($con, $villepost); 
+				$departement = mysqli_real_escape_string($con, $departement); 
+				$region = mysqli_real_escape_string($con, $region); 
+				$ext = mysqli_real_escape_string($con, $ext); 
+				$pays = mysqli_real_escape_string($con, $pays); 
+				$idconcert = mysqli_real_escape_string($con, $idconcert); 
+				$adresse = mysqli_real_escape_string($con, $adresse); 
+				$fb = mysqli_real_escape_string($con, $fb); 
+				$ticket = mysqli_real_escape_string($con, $ticket); 
+				$cp = mysqli_real_escape_string($con, $cp); 
+				$date = mysqli_real_escape_string($con, $date); 
+				$heure = mysqli_real_escape_string($con, $heure); 
 			}
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/modifconcertvalid.css">
@@ -192,11 +225,11 @@
 
 		$pseudo = $_SESSION['pseudo'];
 
-		if($_POST['artiste'])
+		if($indiceslength < 1) 
 		{
-			setcookie('contentMessage', 'Erreur: il est interdit de modifier un artiste', time() + 15, "/");
+			setcookie('contentMessage', 'Erreur: au moins un artiste doit être saisi', time() + 15, "/");
 			header("Location: ../allconcerts.php");
-			exit("Erreur: il est interdit de modifier un artiste");
+			exit("Erreur: au moins un artiste doit être saisi");
 		}
 
 		if($date != $datepost)
@@ -210,6 +243,15 @@
 			$testdate = 1;
 			$sqldat = "UPDATE concert SET datec = '$date' WHERE ID_concert = $idconcert";
 			mysqli_query($con, $sqldat);
+		}
+
+		$sql = "DELETE FROM artistes_concert WHERE id_concert = '$idconcert'";
+		$query = mysqli_query($con, $sql);
+
+		for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajoutés
+		{ 
+			$sql = "INSERT INTO artistes_concert (nom_artiste, id_concert) VALUES ('$artistesadd[$i]', '$idconcert')";
+			$query = mysqli_query($con, $sql);
 		}
 
 		$testmodif = 0;
@@ -567,11 +609,13 @@
 		mysqli_query($con, $sql);
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
-	<?php
-	$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert";
+		<?php
+		//$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert";
+		$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 		$result = mysqli_query($con, $str);
+		$row_cnt = mysqli_num_rows($result);
 		$row = mysqli_fetch_array($result);
-			if($row['ville_departement'])
+		if($row['ville_departement'])
 		{
 			$filter = 1;
 			$str = "SELECT nom_departement, id_region FROM departement, ville, salle, concert WHERE concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville_departement = departement.numero AND id_concert = $idconcert ";
@@ -590,11 +634,31 @@
 		<div id="main">
 			<div id="concertsall">
 				<div class="inwhile">
-					<div class="artiste"> 
-						<?php 
-						echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>'; 
-						?> 
-					</div> 
+					<?php
+					echo '<div id="lesartistes">';
+						if($row_cnt == 1)
+						{
+							echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
+							$artistes_arr[0] = $row['nom_artiste'];
+						}
+						else
+						{
+							$i = 1;
+							$str = "SELECT artistes_concert.nom_artiste FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.id_concert = $idconcert";
+							$resultx = mysqli_query($con, $str);
+							while ($rowart = mysqli_fetch_array($resultx)) 
+							{
+								$artistes_arr[$i-1] = $rowart['nom_artiste'];
+								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+								if($i < $row_cnt)
+								{
+									echo ' / ';
+								}		
+								$i++;
+							}
+						}	
+						?>
+					</div>
 					<div class="principal">
 						<div class="sectionun">
 							<div class="date"> 
@@ -785,7 +849,7 @@
 				</div>		
 			</div>
 			<div class="champs">
-				<h2> Champ(s) modifié(s) ou ajouté(s) </h2>
+				<h2> Champ(s) modifié(s), ajout(s) ou suppression(s) </h2>
 				<?php
 				if($date == $datepost)
 				{
@@ -850,6 +914,74 @@
   				$query = mysqli_query($con, $sql);
   				$row = mysqli_fetch_array($query);
 				$idmodif = $row['id_max'];
+
+				$find = 0;
+				$deletedart = array();
+				$addedart = array();
+
+				$modifartadd = 0;
+				$modifartdel = 0;
+
+				for ($i=0; $i < $indicespost; $i++) 
+				{ 
+					$find = 0;
+					for ($j=0; $j < $indiceslength; $j++) 
+					{ 
+						if($artistesaddpost[$i] == $artistesadd[$j])
+						{
+							$find++;
+						}
+					}
+					if ($find == 0) 
+					{
+						array_push($deletedart, $artistesaddpost[$i]);
+					}
+				}
+				
+				for ($i=0; $i < $indiceslength; $i++) 
+				{ 
+					$find = 0;
+					for ($j=0; $j < $indicespost; $j++) 
+					{ 
+						if($artistesadd[$i] == $artistesaddpost[$j])
+						{
+							$find++;
+						}
+					}
+					if ($find == 0) 
+					{
+						array_push($addedart, $artistesadd[$i]);
+					}
+				}
+
+				if (count($deletedart)>0) 
+				{
+					$modifartdel = 1;
+					echo "<div class='modifclass'>";
+						echo "<div class='title'> Artiste </div>";
+						foreach ($deletedart as &$value) {
+							echo "<div class='old'>" . $value . "</div>";
+						}
+				}
+
+				if (count($addedart)>0) 
+				{
+					$modifartadd = 1;
+					if($modifartdel == 0)
+					{
+						echo "<div class='modifclass'>";
+							echo "<div class='title'> Artiste </div>";
+					}
+					foreach ($addedart as &$value) {
+						echo "<div class='new'>" . $value . "</div>";
+						$sql = "INSERT INTO artistes_modification VALUES ('$value','$idmodif')"; 
+	   					$query = mysqli_query($con, $sql);
+					}
+				}
+				if($modifartdel == 1 || $modifartadd == 1 )
+				{
+					echo "</div>";
+				}
 
 				if($date != $datepost)
 				{

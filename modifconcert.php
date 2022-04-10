@@ -58,7 +58,14 @@
 			<?php	      
 			
 			$idsalle = $_POST['idsallepost'];
-			$artiste = $_POST['artistepost'];
+			$indices = $_POST['indices'];
+
+			for ($i=0; $i < $indices; $i++) //on va de 0 au nombre d'artistes ajoutés
+			{ 
+				$postartiste = 'artistepost' . $i;
+				$artiste[$i] = $_POST[$postartiste]; //on range dans un tableau qui contiendra la liste des artistes
+			}
+
 			$date = $_POST['datepost'];
 			$heure = $_POST['heurepost'];
 			$pays = $_POST['payspost'];
@@ -129,8 +136,31 @@
 						<h1 class="titre"> Modifier un concert </h1>
 						<div id="artistediv">
 							<label for="artiste">Nom de l'artiste ou du groupe </label> 
-							<input type="text" name="artiste" onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste . '"' ?>  id="artiste" disabled>
-							<input type="hidden" id="artistepost" name="artistepost" <?php echo 'value="' . $artiste . '"' ?> > 
+							<?php
+							for ($i=0; $i < $indices; $i++) //on va de 0 au nombre d'artistes ajoutés
+							{ 
+							?>
+								<div class="artisteadddiv <?php echo 'artisteadddiv' . $i ;?>">	
+									<input type="text" <?php echo 'name="artiste' . $i . '"';?> onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste[$i] . '"';   echo 'id="row' . $i . '"';?>>
+									<?php
+									if ($i == 0) {
+										?>
+										<button type="button" name="add" id="add">Artiste supplémentaire</button>
+										<input type="hidden" id=indicepost name=indicepost <?php echo 'value="' . $indices . '"'; ?> ><?php
+										for ($j=0; $j < $indices; $j++) { ?>
+											<input type="hidden" <?php echo 'class="artistepost' . $j . '"'; echo 'name="artistepost' . $j . '"'; echo 'value="' . $artiste[$j] . '"'; ?> >
+											<?php
+										}
+									}
+									else {?>
+										<button type="button" name="remove" <?php  echo 'id="' . $i . '"';?> class="btn btn-danger btn_remove">X</button>
+									<?php
+									}?>
+									 
+								</div>
+							<?php
+							}?>	
+							
 						</div>
 						<div id="dateheure">
 							<div id="datediv">
@@ -305,10 +335,12 @@
 						<input type="hidden" id="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 						<input type="hidden" id="intextpost" name="intextpost" <?php echo 'value="' . $intext . '"' ?> > 
 						<input type="hidden" id="intext" name="intext" value=""> 
-						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> > 
+						<input type="hidden" id="villepost" name="villepost" <?php echo 'value="' . $ville . '"' ?> >
+
+						<input type="hidden" value="" name="indice" id="indice">
 						<div id="submit">
-							<input type="submit" value="Enregister le concert" id="valider" name="concert">
-							<input type="button" value="Reinitialiser le formulaire" onclick="reinitialiser();">
+							<input type="button" value="Enregister le concert" id="valider" name="concert">
+							<input type="button" value="Reinitialiser le formulaire" id="reinitialiser" onclick="reinitialiser();">
 							<input type="button" value="Effacer tous les champs" onclick="erase();">
     						<input type="button" value="Annuler" onclick="redirect();">
 						</div>
@@ -541,6 +573,41 @@
 			?>
 		</div>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+			$(document).ready(function(){  
+				var i = "<?php echo $indices-1; ?>"; //recupérer la valeur du nb d'artistes qu'il y a
+			
+				$('#add').click(function(){  //lors du click sur ajoutartiste
+					i++;  
+					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  //ajout d'un champ
+				});
+			
+				$(document).on('click', '.btn_remove', function(){  
+						var button_id = $(this).attr("id");
+						$('.artisteadddiv'+button_id+'').remove();
+						$('#row'+button_id+'').remove();
+						$('#'+button_id+'').remove();
+					});
+				$('#valider').click(function(){
+					$("#indice").val('');
+					for (let index = 0; index <= i; index++){ //on va du premier champ ajouté au dernier
+					//soccuper de artistepost en verifiant si champ hidden
+						if($("#row" + index).length>0) //si ce champ existe (non supprimé)
+						{
+							if($("#row" + index).val().length > 0) //s'il contient du texte
+							{
+								valindice = $("#indice").val();
+
+								valindice = valindice + index;
+								$("#indice").val(valindice); //on met les indices dans valindice
+							}
+						}
+					}
+					$("#valider").attr("type", "submit");
+					$("#valider").trigger('click');
+				});
+			});
+		</script>
 	</body>
 </html>
 

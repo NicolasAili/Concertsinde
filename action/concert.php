@@ -31,10 +31,11 @@
 			$artistelistindice = str_split($indices); //met la liste des indices dans un tableau
 
 
-			for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+			for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajoutés
 			{ 
 				$postartiste = 'artiste' . $artistelistindice[$i];
-				$artistesadd[$i] = ucfirst($_POST[$postartiste]); //on range dans un tableau qui contiendra la liste des artistes
+				$artistesadd[$i] = ucfirst($_POST[$postartiste]);
+				$artistesadd[$i] = ucfirst(strtolower($_POST[$postartiste])); //on range dans un tableau qui contiendra la liste des artistes
 			}
 
 			$date = $_POST['date'];

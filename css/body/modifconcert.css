@@ -29,9 +29,14 @@
   color: white;
 }
 
-#artistediv, #datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv 
+#datediv, #heurediv, #extint, #sallediv, #extdiv, #adressdiv, #villediv, #cpdiv, #departementdiv, #regiondiv, #paysdiv 
 {
   margin-bottom: 1rem;
+}
+
+#artistediv
+{
+  padding-bottom: 2.5rem;
 }
 
 label {

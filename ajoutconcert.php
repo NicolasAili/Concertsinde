@@ -21,10 +21,6 @@
 			require 'php/database.php';
 		?>
 
-		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
-
 		<script>$(this.target).find('input').autocomplete();</script>
 		<script src="js/popupaddconcert.js"></script> 
 
@@ -164,10 +160,10 @@
 			require "action/messages.php";?>
 		<script>  
 			$(document).ready(function(){  
-				var i=1;  
-				$('#add').click(function(){  
+				var i=1;
+				$('#add').click(function(){  //lors du lick sur ajoutartiste
 					i++;  
-					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  
+					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  //ajout d'un champ
 				});
 				$(document).on('click', '.btn_remove', function(){  
 					var button_id = $(this).attr("id"); 
@@ -180,18 +176,18 @@
 					$("#partiste").html(strartiste);
 					$("#indice").val('');
 
-					for (let index = 2; index <= i; index++) 
+					for (let index = 2; index <= i; index++) //on va du premier champ ajouté au dernier
 					{
-						if($("#row" + index).length>0)
+						if($("#row" + index).length>0) //si ce champ existe (non supprimé)
 						{
-							if($("#row" + index).val().length > 0)
+							if($("#row" + index).val().length > 0) //s'il contient du texte
 							{
-								valindex = $("#row" + index).val();
+								valindex = $("#row" + index).val(); //recupere la valeur du champ
 								valchamp = $("#partiste").html();
 								valindice = $("#indice").val();
 
 								valindice = valindice + index;
-								$("#indice").val(valindice);
+								$("#indice").val(valindice); //on met les indices dans valindice
 
 								valchamp = valchamp + ' / ' + valindex;
 								$("#partiste").html(valchamp);

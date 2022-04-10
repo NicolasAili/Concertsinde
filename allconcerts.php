@@ -805,6 +805,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									if($row_cnt == 1)
 									{
 										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
+										$artistes_arr[0] = $row['nom_artiste'];
 									}
 									else
 									{
@@ -813,6 +814,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										$resultx = mysqli_query($con, $str);
 										while ($rowart = mysqli_fetch_array($resultx)) 
 										{
+											$artistes_arr[$i-1] = $rowart['nom_artiste'];
 											echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
 											if($i < $row_cnt)
 											{
@@ -820,7 +822,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 											}		
 											$i++;
 										}
-									}		 
+									}	
 									?>
 								</div>
 								<div class="infosdiv">
@@ -1033,7 +1035,16 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 							<form method="post" action="modifconcert.php" class="modif">
 								<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 								<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-								<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
+								<?php
+								$i = 0;
+								foreach ($artistes_arr as &$value) 
+								{?>
+									<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
+									
+								<?php
+									$i++;
+								}?>
+								<input type="hidden" class="indices" name="indices" <?php echo 'value="' . $i . '"' ?> > 
 								<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 								<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
 								<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 

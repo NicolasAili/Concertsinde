@@ -9,7 +9,6 @@
 	CSS : oui 
 */
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -135,28 +134,29 @@
 					<form method="post" id="connect" action="modifconcertvalid.php">
 						<h1 class="titre"> Modifier un concert </h1>
 						<div id="artistediv">
-							<label for="artiste">Nom de l'artiste ou du groupe </label> 
+							<label for="artiste">Nom de l'artiste ou du groupe </label>
 							<?php
 							for ($i=0; $i < $indices; $i++) //on va de 0 au nombre d'artistes ajoutés
 							{ 
 							?>
-								<div class="artisteadddiv <?php echo 'artisteadddiv' . $i ;?>">	
-									<input type="text" <?php echo 'name="artiste' . $i . '"';?> onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste[$i] . '"';   echo 'id="row' . $i . '"';?>>
+								<div <?php if($i == 0){echo 'class="art';}else{echo 'class="artisteadddiv';} echo ' artisteadddiv' . $i .'"';?>>
 									<?php
-									if ($i == 0) {
+									if ($i == 0) 
+									{
 										?>
+										<input type="text" <?php echo 'name="artiste' . $i . '"';?> onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste[$i] . '"'; echo 'class="artiste"'; echo 'id="row' . $i . '"';?>>
 										<button type="button" name="add" id="add">Artiste supplémentaire</button>
 										<input type="hidden" id=indicepost name=indicepost <?php echo 'value="' . $indices . '"'; ?> ><?php
-										for ($j=0; $j < $indices; $j++) { ?>
+										for ($j=0; $j < $indices; $j++) 
+										{ ?>
 											<input type="hidden" <?php echo 'class="artistepost' . $j . '"'; echo 'name="artistepost' . $j . '"'; echo 'value="' . $artiste[$j] . '"'; ?> >
 											<?php
 										}
 									}
 									else {?>
-										<button type="button" name="remove" <?php  echo 'id="' . $i . '"';?> class="btn btn-danger btn_remove">X</button>
+										<input type="text" <?php echo 'name="artiste' . $i . '"';?> onkeyup="getdata(this.id);" <?php echo 'value="' . $artiste[$i] . '"'; echo 'class="artisteadd ui-autocomplete-input"'; echo 'id="row' . $i . '"';?>><button type="button" name="remove" <?php  echo 'id="' . $i . '"';?> class="btn btn-danger btn_remove">X</button>
 									<?php
 									}?>
-									 
 								</div>
 							<?php
 							}?>	

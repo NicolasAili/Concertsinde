@@ -1,3 +1,9 @@
+#main
+{
+  width: 100%;
+  text-align: center;
+}
+
 #inthiddiv
 {
 	visibility: hidden;
@@ -46,12 +52,48 @@ label {
   cursor: text;
 }
 
-#main form input:not(#int, #ext, #date, #heure, #submit > input), label 
+#main form input:not(#int, #ext, #date, #heure, .artiste, .artisteadd), label, .artisteadddiv, .art
 {
   margin-left: 3%;
   margin-right: 5%;
   width: 92%;
   height: 2rem;
+}
+
+.artisteadddiv, .art
+{
+  margin-bottom: 15px;
+}
+
+.artiste
+{
+  width: 70%;
+  height: 2rem;
+}
+
+.artisteadd
+{
+  width: 80%;
+  margin-right: 10px;;
+  height: 2rem;
+}
+
+#add
+{
+  color: #fff;
+  background-color: #d00d0d;
+  border-color: #d00d0d;
+  margin: 0;
+  width: 25%;
+  height: 2.3rem;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  width : 10%;
+  height: 2.3rem;
 }
 
 
@@ -161,6 +203,12 @@ p input, textarea
 #send:hover
 {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+button:hover
+{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  cursor: pointer;
 }
 
 .star

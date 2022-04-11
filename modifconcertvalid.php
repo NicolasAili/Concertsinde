@@ -42,6 +42,20 @@
 				$artistesaddpost[$i] = ucfirst(strtolower($_POST[$postartiste])); //on range dans un tableau qui contiendra la liste des artistes avant modification
 			}
 
+			$counts = array_count_values($artistesadd);
+            $duplicate_title  = array_filter($artistesadd, function ($value) use ($counts) {
+                return $counts[$value] > 1;
+            });
+
+            foreach ($counts as $key => $value) {
+            	if ($value>1) 
+            	{
+            		setcookie('contentMessage', 'Erreur: un artiste a été saisi plusieurs fois', time() + 15, "/");
+					header("Location: allconcerts.php");
+					exit("Erreur: un artiste a été saisi plusieurs fois");
+            	}
+            }
+
 			$idconcert = $_POST['idpost'];
 			
 			$intext = $_POST['intext'];
@@ -228,7 +242,7 @@
 		if($indiceslength < 1) 
 		{
 			setcookie('contentMessage', 'Erreur: au moins un artiste doit être saisi', time() + 15, "/");
-			header("Location: ../allconcerts.php");
+			header("Location: allconcerts.php");
 			exit("Erreur: au moins un artiste doit être saisi");
 		}
 
@@ -237,7 +251,7 @@
 			if($date < date("Y-m-d"))
 			{
 				setcookie('contentMessage', 'Erreur: la date saisie est inférieure à la date courante', time() + 15, "/");
-				header("Location: ../allconcerts.php");
+				header("Location: allconcerts.php");
 				exit("Erreur: la date saisie est inférieure à la date courante");
 			}
 			$testdate = 1;
@@ -252,6 +266,18 @@
 		{ 
 			$sql = "INSERT INTO artistes_concert (nom_artiste, id_concert) VALUES ('$artistesadd[$i]', '$idconcert')";
 			$query = mysqli_query($con, $sql);
+		}
+
+		for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
+		{ 
+			$sql = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste = '$artistesadd[$i]'";
+			$result = mysqli_query($con, $sql);
+			$row_cnt = mysqli_num_rows($result);
+			if($row_cnt<1) //si pas de ligne trouvée
+			{
+				$insertartiste = "INSERT INTO artiste (nom_artiste) VALUES ('$artistesadd[$i]')";
+				mysqli_query($con, $insertartiste);
+			}
 		}
 
 		$testmodif = 0;
@@ -634,30 +660,32 @@
 		<div id="main">
 			<div id="concertsall">
 				<div class="inwhile">
-					<?php
-					echo '<div id="lesartistes">';
-						if($row_cnt == 1)
-						{
-							echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
-							$artistes_arr[0] = $row['nom_artiste'];
-						}
-						else
-						{
-							$i = 1;
-							$str = "SELECT artistes_concert.nom_artiste FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.id_concert = $idconcert";
-							$resultx = mysqli_query($con, $str);
-							while ($rowart = mysqli_fetch_array($resultx)) 
+					<div class="artiste"> 
+						<?php
+						echo '<div id="lesartistes">';
+							if($row_cnt == 1)
 							{
-								$artistes_arr[$i-1] = $rowart['nom_artiste'];
-								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
-								if($i < $row_cnt)
-								{
-									echo ' / ';
-								}		
-								$i++;
+								echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
+								$artistes_arr[0] = $row['nom_artiste'];
 							}
-						}	
-						?>
+							else
+							{
+								$i = 1;
+								$str = "SELECT artistes_concert.nom_artiste FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.id_concert = $idconcert";
+								$resultx = mysqli_query($con, $str);
+								while ($rowart = mysqli_fetch_array($resultx)) 
+								{
+									$artistes_arr[$i-1] = $rowart['nom_artiste'];
+									echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+									if($i < $row_cnt)
+									{
+										echo ' / ';
+									}		
+									$i++;
+								}
+							}	
+							?>
+						</div>
 					</div>
 					<div class="principal">
 						<div class="sectionun">
@@ -851,6 +879,8 @@
 			<div class="champs">
 				<h2> Champ(s) modifié(s), ajout(s) ou suppression(s) </h2>
 				<?php
+				$resuldiffadd = array_diff($artistesadd, $artistesaddpost);
+				$resuldiffdel = array_diff($artistesaddpost, $artistesadd);
 				if($date == $datepost)
 				{
 					//echo "1ok";
@@ -890,9 +920,12 @@
 															//echo "11ok";
 															if ($intext == $intextpost || $intext == NULL) 
 															{
-																setcookie('contentMessage', 'Erreur: aucun champ modifié', time() + 15, "/");
-																header("Location: ./allconcerts.php");
-																exit("Erreur: aucun champ modifié");
+																if (count($resuldiffadd) == 0 && count($resuldiffdel) == 0) 
+																{
+																	setcookie('contentMessage', 'Erreur: aucun champ modifié', time() + 15, "/");
+																	header("Location: allconcerts.php");
+																	exit("Erreur: aucun champ modifié");
+																}
 															}
 														}
 													}

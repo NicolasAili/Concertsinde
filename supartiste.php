@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
 	Type fichier : php
 	Fonction : afficher la page d'un artiste
@@ -43,10 +43,10 @@
 		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php
-				require('php/database.php');
-			?>
-			<?php
-			
+					$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+				$query = mysqli_query($con, $sql);
+				$row = mysqli_fetch_array($query);
+				$testadmin = $row['admin'];
 			?>
 			<div id="partun"><?php
 				$filename = 'image/artiste/' . $artiste . '.jpg';
@@ -154,9 +154,11 @@
 									</div>
 									<?php
 									echo '<div class="lesartistes">';
+										unset($artistes_arr);
 										if($row_cnt == 1)
 										{
 											echo $row['nom_artiste'];
+											$artistes_arr[0] = $row['nom_artiste'];
 										}
 										else
 										{
@@ -165,6 +167,7 @@
 											$resultx = mysqli_query($con, $str);
 											while ($rowart = mysqli_fetch_array($resultx)) 
 											{
+												$artistes_arr[$i-1] = $rowart['nom_artiste'];
 												if($artiste == $rowart['nom_artiste'])
 												{
 													echo $rowart['nom_artiste'];
@@ -383,6 +386,17 @@
 									</div> 
 								</div>
 								<form method="post" action="modifconcert.php" class="modif">
+									<?php
+									$i = 0;
+									foreach ($artistes_arr as &$value) 
+									{
+										?>
+										<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
+										
+										<?php
+										$i++;
+									}?>
+									<input type="hidden" class="indices" name="indices" <?php echo 'value="' . $i . '"' ?> > 
 									<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 									<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
 									<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
@@ -484,6 +498,7 @@
 									</div>
 									<?php
 									echo '<div class="lesartistes">';
+										unset($artistes_arr);
 										if($row_cnt == 1)
 										{
 											echo $row['nom_artiste'];

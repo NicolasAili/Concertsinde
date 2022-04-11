@@ -634,48 +634,6 @@ function checkboxmodif(identifiant)
     }
 }*/
 
-function reinitialiser()
-{
-    checkavant = 0;
-    checkapres = 0;
-
-    if($('input[name=int]').is(':checked'))
-    {
-        check = 1;
-    }
-    else if ($('input[name=ext]').is(':checked')) 
-    {
-        check = 2;
-    }
-    $("#resetform").attr("type", "reset");
-    $("#resetform").trigger('click');
-    $( "#salle" ).trigger( "blur" );
-    $( "#ville" ).trigger( "blur" );
-    $( "#departement" ).trigger( "blur" );
-    $( "#region" ).trigger( "blur" );
-    $("#resetform").attr("type", "hidden");
-    if($('input[name=int]').is(':checked'))
-    {
-        checkapres = 1;
-    }
-    else if ($('input[name=ext]').is(':checked')) 
-    {
-        checkapres = 2;
-    }
-
-    if(checkavant != checkapres)
-    {
-        if(checkapres == 1)
-        {
-            $("#int").trigger('click');
-        }
-        else if(checkapres == 2)
-        {
-            $("#ext").trigger('click');
-        }
-    }
-}
-
 function erase()
 {
     $('#date').val('');

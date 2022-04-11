@@ -367,3 +367,10 @@ body
  	background-color:#5c0000;
  	color: #fff;
 }
+
+.modifier:hover, .probleme:hover, #supprimer:hover, #valider:hover
+{
+	font-size: 150%;
+	cursor: pointer;
+	background-color: red;
+}

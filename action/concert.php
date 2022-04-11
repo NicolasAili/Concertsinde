@@ -36,7 +36,27 @@
 				$postartiste = 'artiste' . $artistelistindice[$i];
 				$artistesadd[$i] = ucfirst($_POST[$postartiste]);
 				$artistesadd[$i] = ucfirst(strtolower($_POST[$postartiste])); //on range dans un tableau qui contiendra la liste des artistes
+				if ($artistesadd[$i] == $artiste) 
+				{
+					setcookie('contentMessage', 'Erreur: un artiste a été saisi plusieurs fois', time() + 15, "/");
+					header("Location: allconcerts.php");
+					exit("Erreur: un artiste a été saisi plusieurs fois");
+				}
 			}
+
+			$counts = array_count_values($artistesadd);
+            $duplicate_title  = array_filter($artistesadd, function ($value) use ($counts) {
+                return $counts[$value] > 1;
+            });
+            foreach ($counts as $key => $value) 
+            {
+            	if ($value>1) 
+            	{
+            		setcookie('contentMessage', 'Erreur: un artiste a été saisi plusieurs fois', time() + 15, "/");
+					header("Location: allconcerts.php");
+					exit("Erreur: un artiste a été saisi plusieurs fois");
+            	}
+            }
 
 			$date = $_POST['date'];
 			$heure = $_POST['heure'];
@@ -149,7 +169,7 @@
 				}
 				$sql = "SELECT heure FROM concert, salle WHERE salle.nom_salle = '$salle' AND concert.datec = '$date'";
 				$query = mysqli_query($con, $sql);
-				while($row = mysqli_fetch_array($query)) 
+				while($row = mysqli_fetch_array($query))
 				{
 					if($heure+2 > $row['heure'] && $heure-2 < $row['heure'])
 					{

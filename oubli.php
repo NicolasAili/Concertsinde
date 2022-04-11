@@ -57,15 +57,8 @@
 
 /* 
 
-Page artiste :
-
-- plusieurs artistes :
-
-	4) modifier concert //jeudi (au moins une partie)
 	effacer tous les champs probleme dans modifconcert
-	verifier si 2 artistes similaires ont été saisi
-	probleme aucun champ modifié lorsque seul artiste ajouté
-	ajouter artiste dans table artiste s'il existe pas déjà
+
 
 	gérer les modfis points etc...
 
@@ -73,12 +66,22 @@ Page artiste :
 	-getdata sur 
 ________________________________________________________________
 - regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
+- mettre (1) dans titre de la page (onglet) si notification
 - filtre: souligner //vendredi
 - chercher artiste : autocomplete //vendredi
 - réinitialisation mail vraiment laid //vendredi
 - dans ajoutconcert, si salle pas en BDD mettre placeholder dans ville "veuillez renseigner la ville"
 -concerts ajoutés depuis profil ne fonctionne pas
 -update la BDD sur le site en ligne
+-enlever commentaire https connexion
+-editer marche pas?
+trier tickets superadmin par ordre decroissant
+
+amélioration :
+
+	vérifier qu'un artiste a pas de conflit avec un autre concert (heure + date)
+
+_________________________________________________
 
 
 Suivi fichiers modifiés depuis dernier ftp :

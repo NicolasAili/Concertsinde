@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
 	Type fichier : php
 	Fonction : afficher tous les concerts
@@ -802,6 +802,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								</div>
 								<?php
 								echo '<div id="lesartistes">';
+									unset($artistes_arr);
 									if($row_cnt == 1)
 									{
 										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
@@ -822,7 +823,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 											}		
 											$i++;
 										}
-									}	
+									}
 									?>
 								</div>
 								<div class="infosdiv">
@@ -1034,11 +1035,12 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 							</div>
 							<form method="post" action="modifconcert.php" class="modif">
 								<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
-								<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
+								<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?>>
 								<?php
 								$i = 0;
 								foreach ($artistes_arr as &$value) 
-								{?>
+								{
+									?>
 									<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
 									
 								<?php

@@ -102,5 +102,10 @@ Suivi fichiers modifiés depuis dernier ftp :
 	modifié :         contenu/reseaux.php
 	modifié :         css/body/modifconcert.css
 	modifié :         modifconcertvalid.php
+	css\body\modifconcertvalid.css
+	js\scriptform.js
+
+
+
 
 */

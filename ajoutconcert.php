@@ -39,7 +39,7 @@
 				 	<div id="artistediv">
 				 		<label for="artiste">Nom de l'artiste ou du groupe<span class="star">*</span></label> 
 						<div id="art">
-							<input type="text" name="artiste" placeholder="Saisir l'artiste" class="artiste" required>
+							<input type="text" name="artiste" placeholder="Saisir l'artiste" id="artiste" class="artiste" onkeyup="getdata(this.id);" required>
 							<button type="button" name="add" id="add">Artiste supplémentaire</button>
 						</div>
 				 	</div>
@@ -163,11 +163,11 @@
 				var i=1;
 				$('#add').click(function(){  //lors du lick sur ajoutartiste
 					i++;  
-					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  //ajout d'un champ
+					$('#artistediv').append('<div class="artisteadddiv" id="artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  //ajout d'un champ
 				});
 				$(document).on('click', '.btn_remove', function(){  
 					var button_id = $(this).attr("id"); 
-					$('.artisteadddiv'+button_id+'').remove();  
+					$('#artisteadddiv'+button_id+'').remove();  
 					$('#row'+button_id+'').remove();  
 					$('#'+button_id+'').remove(); 
 				});  

@@ -39,15 +39,6 @@
         $response[] = array("label"=>$row['Nom_salle']);
       }
     }
-    else if($test == 'artiste')
-    {
-      $str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste LIKE '%{$name}%'";
-      $result = mysqli_query($con, $str);
-      while($row = mysqli_fetch_array($result))
-      {
-        $response[] = array("label"=>$row['Nom_artiste']);
-      }
-    }
     else if($test == 'ville')
     {
       echo 'okville';
@@ -97,7 +88,12 @@
     }
     else
     {
-      echo("erreur");
+      $str = "SELECT Nom_artiste FROM artiste WHERE Nom_artiste LIKE '%{$name}%'";
+      $result = mysqli_query($con, $str);
+      while($row = mysqli_fetch_array($result))
+      {
+        $response[] = array("label"=>$row['Nom_artiste']);
+      }
     }
     
     ob_clean();

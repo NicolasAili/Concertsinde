@@ -26,7 +26,6 @@ if(datesaisie > datesup)
     return false;
 }
 
-
 if(strregion.length > 0 && !strpays)
 {
     alert("Erreur, vous devez saisir le pays dont fait partie cette région");

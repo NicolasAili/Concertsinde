@@ -134,7 +134,7 @@
 					<form method="post" id="connect" action="modifconcertvalid.php">
 						<h1 class="titre"> Modifier un concert </h1>
 						<div id="artistediv">
-							<label for="artiste">Nom de l'artiste ou du groupe </label>
+							<label for="artiste">Nom de l'artiste ou du groupe<span class="star">*</span></label>
 							<?php
 							for ($i=0; $i < $indices; $i++) //on va de 0 au nombre d'artistes ajoutés
 							{ 
@@ -164,7 +164,7 @@
 						</div>
 						<div id="dateheure">
 							<div id="datediv">
-								<label for="date">Date </label> 
+								<label for="date">Date<span class="star">*</span></label> 
 								<input type="date" name="date" <?php echo 'value="' . $date . '"' ?> id="date">
 								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> >
 							</div>
@@ -175,7 +175,7 @@
 							</div>
 						</div>
 						<div id="extint"> 
-							<label> Lieu du concert </label>
+							<label> Lieu du concert<span class="star">*</span></label>
 							<?php
 							if($intext == 'int')
 							{
@@ -191,13 +191,13 @@
 									</div>
 								</div>
 								<div id="intdiv">
-									<label for="salle">Salle </label> 
+									<label for="salle">Salle<span class="star">*</span></label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> required>
 									<div class="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" <?php echo 'value="' . $salle . '"' ?>>
 								</div>
 								<div id="exthiddiv">
-									<label for="ext">Denomination </label> 
+									<label for="ext">Denomination<span class="star">*</span></label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> >
 									<div class="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" value=""> 
@@ -218,13 +218,13 @@
 									</div>
 								</div>
 								<div id="extdiv">
-									<label for="ext">Denomination </label> 
+									<label for="ext">Denomination<span class="star">*</span></label> 
 									<input type="text" name="extval" id="extval" <?php echo 'value="' . $ext . '"' ?> required>
 									<div class="res"> </div>
 									<input type="hidden" id="extpost" name="extpost" <?php echo 'value="' . $ext . '"' ?>> 
 								</div>
 								<div id="inthiddiv">
-									<label for="salle">Salle </label> 
+									<label for="salle">Salle<span class="star">*</span></label> 
 									<input type="text" name="salle" id="salle" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $salle . '"' ?> >
 									<div class="res"> </div>
 									<input type="hidden" id="sallepost" name="sallepost" value=""> 
@@ -240,7 +240,7 @@
 								<input type="hidden" id="adressepost" name="adressepost" <?php echo 'value="' . $adresse . '"' ?> >
 							</div>
 							<div id="villediv">
-								<label for="ville">Ville  </label> 
+								<label for="ville">Ville<span class="star">*</span></label> 
 								<input type="text" name="ville" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'value="' . $ville . '"' ?> id="ville">
 							</div>
 							<div id="cpdiv">
@@ -286,7 +286,7 @@
 									?>
 									<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $region . '"' ?> id="region" disabled>							 
 									<?php	
-									$pays = 1;
+									$paystest = 1;
 								}
 								else if($departement && !$region) //seulement le departement
 								{
@@ -295,21 +295,21 @@
 									<label for="pays">Pays </label> 
 									<input type="text" name="pays" onkeyup="getdata(this.id);" placeholder="pays non renseignée" id="pays" disabled="">
 									<?php
-									$pays = 0;
+									$paystest = 0;
 								}
 								else //ni region ni departement
 								{
 									?>
 									<input type="text" name="region" onblur="getleave(this.id);" onkeyup="getdata(this.id);" placeholder="région non renseignée" id="region" disabled>							 
 									<?php
-									$pays = 0;
+									$paystest = 0;
 								}
 								?>
 							</div>
 							<div id="paysdiv">
 								<label for="pays">Pays </label> 
 								<?php
-								if ($pays == 1) 
+								if ($paystest == 1) 
 								{?>
 									<input type="text" name="pays" onkeyup="getdata(this.id);" <?php echo 'placeholder="' . $pays . '"' ?> id="pays" disabled>
 									<?php
@@ -340,7 +340,7 @@
 						<input type="hidden" value="" name="indice" id="indice">
 						<div id="submit">
 							<input type="button" value="Enregister le concert" id="valider" name="concert">
-							<input type="button" value="Reinitialiser le formulaire" id="reinitialiser" onclick="reinitialiser();">
+							<input type="button" value="Reinitialiser le formulaire" id="reinitialiser" onclick="reinitForm()">
 							<input type="button" value="Effacer tous les champs" onclick="erase();">
     						<input type="button" value="Annuler" onclick="redirect();">
 						</div>
@@ -366,7 +366,7 @@
 					$sql = "SELECT user_ajout FROM concert WHERE id_concert = '$idconcert'";
 					$query = mysqli_query($con, $sql);
   					$row = mysqli_fetch_array($query);
-					$userajout = $row['user_ajout'];
+					$userajout = $row['user_ajout']; //personne qui a ajouté le concert
 
 					$sql = "SELECT pseudo FROM utilisateur WHERE ID_user = '$userajout'";
 					$query = mysqli_query($con, $sql);
@@ -379,21 +379,24 @@
 					$pointssession = $row['points_session'];
 					$points = $row['points'];
 
-					$sql = "SELECT datec, heure, intext, nom_salle, nom_ext, adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays, lien_fb, lien_ticket FROM concert, salle, ville, departement, region, pays WHERE  concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND concert.id_concert = '$idconcert'";
-					$query = mysqli_query($con, $sql);
-					$rowx = mysqli_fetch_array($query);
+					$sql = "SELECT datec, heure, intext, nom_salle, nom_ext, adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays, lien_fb, lien_ticket FROM concert, salle, ville, departement, region, pays, artistes_concert WHERE  concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND artistes_concert.id_concert = concert.id_concert AND concert.id_concert = '$idconcert'";
+					$queryall = mysqli_query($con, $sql);
+					$rowx = mysqli_fetch_array($queryall);
 
+					$sqlart = "SELECT nom_artiste FROM artistes_concert, concert WHERE artistes_concert.id_concert = concert.id_concert AND concert.id_concert = '$idconcert'";
+					
 
 					$sql = "SELECT * FROM modification WHERE id_concert = '$idconcert'";
-					$query = mysqli_query($con, $sql);
+					$querymodif = mysqli_query($con, $sql);
 					
-					while($row = mysqli_fetch_array($query))
+					while($row = mysqli_fetch_array($querymodif)) //on parcourt toutes les modifications pour le concert donné
 					{
 						$idpseudo = $row['id_user'];
+						$idmodif = $row['id'];
 
 						$sqlmodif = "SELECT pseudo FROM utilisateur WHERE ID_user = '$idpseudo'";
-						$querymodif = mysqli_query($con, $sqlmodif);
-	  					$rowmodif = mysqli_fetch_array($querymodif);
+						$querymodifpseudo = mysqli_query($con, $sqlmodif);
+	  					$rowmodif = mysqli_fetch_array($querymodifpseudo);
 						$pseudomodif = $rowmodif['pseudo'];
 
 						$sqlpts = "SELECT points_session, points FROM utilisateur WHERE ID_user = '$idpseudo'";
@@ -403,72 +406,114 @@
 						$points = $rowpts['points'];
 						$pointscalcul = $pointssession;
 
+						$sqlartmodif = "SELECT nom_artiste FROM artistes_modification WHERE id_modification = '$idmodif'";
+						$queryartmodif = mysqli_query($con, $sqlartmodif);
+
 						if($idpseudo != $userajout)
 						{
+							while($rowartmodif = mysqli_fetch_array($queryartmodif)) //on parcourt 
+							{
+								$queryart = mysqli_query($con, $sqlart); //on recupere les artistes de ce concert
+								while($rowart = mysqli_fetch_array($queryart))
+								{
+									if($rowartmodif['nom_artiste'] == $rowart['nom_artiste'])
+									{
+										$pointssession = $pointssession + 1;
+										$points = $points + 1;
+										echo "1 point artiste ";
+									}
+								}
+							}
 							if($rowx['datec'] == $row['datec'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point date";
+								echo "<br>";
 							}
 							if($rowx['heure'] == $row['heurec'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point heure";
+								echo "<br>";
 							}
 							if($rowx['intext'] == $row['intext'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point intext";
+								echo "<br>";
 							}
 							if($rowx['nom_salle'] && $rowx['nom_salle'] == $row['salle'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point nom_salle";
+								echo "<br>";
 							}
 							if($rowx['nom_ext'] && $rowx['nom_ext'] == $row['denomination'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point nom_ext";
+								echo "<br>";
 							}
-							if($rowx['adresse'] == $row['adresse'])
+							if($rowx['adresse'] && $rowx['adresse'] == $row['adresse'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point adresse";
+								echo "<br>";
 							}
 							if($rowx['nom_ville'] == $row['ville'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point nom_ville";
+								echo "<br>";
 							}
 							if($rowx['ville_code_postal'] == $row['code_postal'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point ville_code_postal";
+								echo "<br>";
 							}
 							if($rowx['nom_departement'] == $row['departement'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point nom_departement";
+								echo "<br>";
 							}
 							if($rowx['nom_region'] == $row['region'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point nom_region";
+								echo "<br>";
 							}
 							if($rowx['nom_pays'] == $row['pays'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point nom_pays";
+								echo "<br>";
 							}
 							if($rowx['lien_fb'] == $row['lien_fb'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point lien_fb";
+								echo "<br>";
 							}
 							if($rowx['lien_ticket'] == $row['lien_ticket'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
+								echo "1 point lien_ticket";
+								echo "<br>";
 							}
 						}
 
@@ -521,49 +566,78 @@
 					<div id="probleme">
 						<h1>Signaler une erreur</h1>
 						<form action="action/erreursubmit.php" method="post" id="problemeform">
-							<h3> Sur quel(s) champ(s) pensez-vous qu'il y a erreur ? <span class="star">*</span></h3>
-							<input type="checkbox" id="artiste" name="artiste" value="artiste">
-							<label for="artiste">artiste</label>
-							<input type="checkbox" id="date" name="date" value="date">
-							<label for="date">date</label>
-							<input type="checkbox" id="heure" name="heure" value="heure">
-							<label for="heure">heure</label>
-							<input type="checkbox" id="salle" name="salle" value="salle/denomination">
-							<label for="salle">salle</label>
-							<input type="checkbox" id="ville" name="ville" value="ville">
-							<label for="ville">ville</label>
-							<input type="checkbox" id="cp" name="cp" value="code_postal">
-							<label for="cp">code_postal</label>
-							<input type="checkbox" id="departement" name="departement" value="departement">
-							<label for="departement">departement</label>
-							<input type="checkbox" id="region" name="region" value="region">
-							<label for="region">region</label>
-							<input type="checkbox" id="pays" name="pays" value="pays">
-							<label for="pays">pays</label>
-							<input type="checkbox" id="adresse" name="adresse" value="adresse">
-							<label for="adresse">adresse</label>
-							<input type="checkbox" id="lien_fb" name="lien_fb" value="lien de l'evenement">
-							<label for="lien_fb">lien de l'evenement</label>
-							<input type="checkbox" id="lien_ticket" name="lien_ticket" value="lien vers la billetterie">
-							<label for="lien_ticket">lien vers la billetterie</label>
-							<input type="checkbox" id="autre" name="autre" value="autre chose">
-							<label for="autre">autre</label>
-							<p>
-								<label for="probleme">
-									Objet <span class="star">*</span>
-								</label>
-								<input type="text" name="sujet" id="sujet"></textarea>
-							</p>
-							<p>
-								<label for="probleme">Dans ce champ, précisez les valeurs des champs du concert que vous pensez être faux, apportez des précisions ou bien décrivez votre problème s'il n'est pas relatif aux champs du concert. <span class="star">*</span></label><br />
-								<textarea name="probleme" id="problemetext" cols="40" rows="5"></textarea>
-							</p>
+							<div id="raison">
+								<label> Sur quel(s) champ(s) pensez-vous qu'il y a erreur ? <span class="star">*</span></label>
+								<div id="champspb">
+									<span>
+										<input type="checkbox" name="artiste" value="artiste">
+										<label for="artiste">artiste</label>
+									</span>
+									<span>
+										<input type="checkbox" name="date" value="date">
+										<label for="date">date</label>
+									</span>
+									<span>
+										<input type="checkbox"  name="heure" value="heure">
+										<label for="heure">heure</label>
+									</span>
+									<span>
+										<input type="checkbox" name="salle" value="salle/denomination">
+										<label for="salle">salle</label>
+									</span>
+									<span>
+										<input type="checkbox" name="ville" value="ville">
+										<label for="ville">ville</label>
+									</span>
+									<span>
+										<input type="checkbox" name="cp" value="code_postal">
+										<label for="cp">code_postal</label>
+									</span>
+									<span>
+										<input type="checkbox" name="departement" value="departement">
+										<label for="departement">departement</label>
+									</span>
+									<span>
+										<input type="checkbox"  name="region" value="region">
+										<label for="region">region</label>
+									</span>
+									<span>
+										<input type="checkbox" name="pays" value="pays">
+										<label for="pays">pays</label>
+									</span>
+									<span>
+										<input type="checkbox" name="adresse" value="adresse">
+										<label for="adresse">adresse</label>
+									</span>
+									<span>
+										<input type="checkbox" name="lien_fb" value="lien de l'evenement">
+										<label for="lien_fb">lien de l'evenement</label>
+									</span>
+									<span>
+										<input type="checkbox" name="lien_ticket" value="lien vers la billetterie">
+										<label for="lien_ticket">lien vers la billetterie</label>
+									</span>
+									<span>
+										<input type="checkbox" name="autre" value="autre chose">
+										<label for="autre">autre</label>
+									</span>
+								</div>
+							</div>
+
+							<fieldset>
+								<legend>Problème rencontré</legend>
+								<label class="content" for="sujet"> Objet <span class="star">*</span> </label><br />
+								<input type="text" name="sujet" id="sujet" required>
+
+								<label class="content" for="probleme">Quelle(s) correction(s) souhaiteriez-vous apporter ? <span class="star">*</span></label><br />
+								<textarea name="probleme" id="probleme" cols="40" rows="5" required></textarea>
+							</fieldset>
 
 							<input type="hidden" id="idconcert" name="idconcert" <?php echo 'value="' . $idconcert . '"' ?>>
 							<input type="hidden" id="pseudo" name="pseudo" <?php echo 'value="' . $_SESSION['pseudo'] . '"' ?>>
 							<input type="hidden" id="type" name="type" value="1"> 
 							<div id="enregistrer">
-								<input type="submit" value="Envoyer" id="send" style="margin-top: 0px;"/>
+								<input type="submit" value="Envoyer" id="send">
 							</div>
 						</form>
 					</div>
@@ -576,7 +650,6 @@
 		<script>
 			$(document).ready(function(){  
 				var i = "<?php echo $indices-1; ?>"; //recupérer la valeur du nb d'artistes qu'il y a
-			
 				$('#add').click(function(){  //lors du click sur ajoutartiste
 					i++;  
 					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+i+'"><input type="text" id="row'+i+'" class="artisteadd" name="artiste'+i+'" placeholder="Saisir artiste" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div>');  //ajout d'un champ
@@ -607,6 +680,64 @@
 					$("#valider").trigger('click');
 				});
 			});
+
+			function reinitForm()
+			{
+				checkavant = 0;
+				checkapres = 0;
+
+				if($('input[name=int]').is(':checked')) //si concert intérieur
+				{
+					check = 1;
+				}
+				else if ($('input[name=ext]').is(':checked')) //si concert exterieur
+				{
+					check = 2;
+				}
+				$("#resetform").attr("type", "reset");
+				$("#resetform").trigger('click');
+				$("#resetform").attr("type", "hidden");
+				if($('input[name=int]').is(':checked'))
+				{
+					checkapres = 1;
+				}
+				else if ($('input[name=ext]').is(':checked')) 
+				{
+					checkapres = 2;
+				}
+
+				if(checkavant != checkapres)
+				{
+					if(checkapres == 1)
+					{
+						$("#int").trigger('click');
+					}
+					else if(checkapres == 2)
+					{
+						$("#ext").trigger('click');
+					}
+				}
+				$( "#ville" ).blur();
+				$(".btn_remove").trigger('click');
+				
+				var nbindices = "<?php echo $indices; ?>";
+				var jqueryarray = <?php echo json_encode($artiste); ?>;
+
+				for (let index = 1; index < nbindices; index++) 
+				{
+					$('#artistediv').append('<div class="artisteadddiv artisteadddiv'+index+'"><input type="text" id="row'+index+'" class="artisteadd" name="artiste'+index+'" value="'+jqueryarray[index]+'" onkeyup="getdata(this.id);" required><button type="button" name="remove" id="'+index+'" class="btn btn-danger btn_remove">X</button></div>');  //ajout d'un champ
+				}
+			}
+
+			function erase()
+			{
+				$(':input')
+				.not(':button, :submit, :reset, :hidden')
+				.val('')
+				.attr("placeholder", "")
+				.prop('checked', false)
+				.prop('selected', false);
+			}
 		</script>
 	</body>
 </html>

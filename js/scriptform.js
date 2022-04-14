@@ -11,7 +11,12 @@ function getleave(identifiant)
 {
     
     $( '#'+identifiant+'' ).autocomplete( "close" );
-    var input = $('#'+identifiant+'').val();
+    try {
+        var input = $('#'+identifiant+'').val();
+    } catch (error) {
+        var input = $('.'+identifiant+'').val();
+    }
+    
 
     if(identifiant)
     {
@@ -285,7 +290,10 @@ function getdata(identifiant)
 		select: function (event, ui) {
 			// Set selection
 			$( this ).val(ui.item.label); // display the selected text in the field
-            getleave(this.id);
+            if(identifiant == 'salle' || identifiant == 'ville' || identifiant == 'departement' || identifiant == 'region')
+            {
+                getleave(this.id);
+            }
 			return false;
 		}
 	});
@@ -618,67 +626,8 @@ function checkboxmodif(identifiant)
     }
 }
 
-/*function checkboxproblem()
-{
-    if($('input[name=mail]').is(':checked'))
-    {
-        $('#showmail').css('visibility', 'hidden');
-        $('#showmail').css('display', 'none');
-        $('#mailsuivi').val("0");
-    }
-    else
-    {
-        $('#showmail').css('visibility', 'visible');
-        $('#showmail').css('display', 'contents');
-        $('#mailsuivi').val("1");
-    }
-}*/
 
-function reinitialiser()
-{
-    checkavant = 0;
-    checkapres = 0;
-
-    if($('input[name=int]').is(':checked'))
-    {
-        check = 1;
-    }
-    else if ($('input[name=ext]').is(':checked')) 
-    {
-        check = 2;
-    }
-    $("#resetform").attr("type", "reset");
-    $("#resetform").trigger('click');
-    $( "#salle" ).trigger( "blur" );
-    $( "#ville" ).trigger( "blur" );
-    $( "#departement" ).trigger( "blur" );
-    $( "#region" ).trigger( "blur" );
-    $("#resetform").attr("type", "hidden");
-    if($('input[name=int]').is(':checked'))
-    {
-        checkapres = 1;
-    }
-    else if ($('input[name=ext]').is(':checked')) 
-    {
-        checkapres = 2;
-    }
-
-    if(checkavant != checkapres)
-    {
-        if(checkapres == 1)
-        {
-            $("#int").trigger('click');
-        }
-        else if(checkapres == 2)
-        {
-            $("#ext").trigger('click');
-        }
-    }
-}
-
-function erase()
-{
-    $('#date').val('');
+    /*$('#date').val('');
     $('#heure').val('');
     $('#salle').val('');
     $('#extval').val('');
@@ -694,8 +643,8 @@ function erase()
     $('#ticket').val('');
     $('#adresse').val('');
     $('#adresse').attr("placeholder", '');
-    $('#fb').val('');
-}
+    $('#fb').val('');*/
+
 
 function redirect()
 {

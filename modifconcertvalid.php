@@ -1007,7 +1007,7 @@
 					}
 					foreach ($addedart as &$value) {
 						echo "<div class='new'>" . $value . "</div>";
-						$sql = "INSERT INTO artistes_modification VALUES ('$value','$idmodif')"; 
+						$sql = "INSERT INTO artistes_modification VALUES ('$value','$idmodif')";
 	   					$query = mysqli_query($con, $sql);
 					}
 				}

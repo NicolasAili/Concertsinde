@@ -57,13 +57,7 @@
 
 /* 
 
-	effacer tous les champs probleme dans modifconcert
-
-
-	gérer les modfis points etc...
-
-	- getdata sur les plusieurs artistes //vendredi
-	-getdata sur 
+	- bug images superadmin
 ________________________________________________________________
 - regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
 - mettre (1) dans titre de la page (onglet) si notification
@@ -72,14 +66,17 @@ ________________________________________________________________
 - réinitialisation mail vraiment laid //vendredi
 - dans ajoutconcert, si salle pas en BDD mettre placeholder dans ville "veuillez renseigner la ville"
 -concerts ajoutés depuis profil ne fonctionne pas
+-favicon
 -update la BDD sur le site en ligne
 -enlever commentaire https connexion
--editer marche pas?
+-editer marche pas? dans ticket support
 trier tickets superadmin par ordre decroissant
+
 
 amélioration :
 
 	vérifier qu'un artiste a pas de conflit avec un autre concert (heure + date)
+	Pouvoir cocher plusieurs concerts pour l'admin et les valider/supprimer en même temps
 
 _________________________________________________
 
@@ -105,6 +102,13 @@ Suivi fichiers modifiés depuis dernier ftp :
 	css\body\modifconcertvalid.css
 	js\scriptform.js
 
+	_______________________________
+
+	Suivi BDD:
+
+	2 tables artistes
+	Dans modification ajouter champ + NULL
+	Adresse dans salle : NULL
 
 
 

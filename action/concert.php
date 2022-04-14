@@ -13,7 +13,8 @@
 <html lang="fr">
 	<head>
 		<?php
-			//include '../php/error.php';  
+			include '../php/error.php';  
+			include '../php/connectcookie.php'; 
 			include '../php/base.php';
 			require '../php/database.php';
 

@@ -8,11 +8,11 @@
 	JS+JQuery : non
 	CSS : oui
 */
-If ($_SERVER['SERVER_PORT'] != 443 ) 
+/*if ($_SERVER['SERVER_PORT'] != 443 ) 
 {
 	header( "Location : https://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] ) ;	
 	exit () ;
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">

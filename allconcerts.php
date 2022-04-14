@@ -239,7 +239,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										<ul class="formsalledepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="salle" name="salle" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required>
+												  <input type="text" id="salle" name="salle" onkeyup="getdata(this.id);" <?php if($getsalle){echo 'value='; echo "$getsalle";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
@@ -262,7 +262,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										<ul class="formvilledepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="ville" name="ville" <?php if($getville){echo 'value='; echo "$getville";}?> required>
+												  <input type="text" id="ville" name="ville" onkeyup="getdata(this.id);"<?php if($getville){echo 'value='; echo "$getville";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
@@ -306,7 +306,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										<ul class="formdptdepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="departement" name="departement" <?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required>
+												  <input type="text" id="departement" name="departement" onkeyup="getdata(this.id);"<?php if($getdepartement){echo 'value='; echo "$getdepartement";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
@@ -350,7 +350,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										<ul class="formrgndepth">
 											<li>
 												<form action="allconcerts.php" method="get">
-												  <input type="text" id="region" name="region" <?php if($getregion){echo 'value='; echo "$getregion";}?> required>
+												  <input type="text" id="region" name="region" onkeyup="getdata(this.id);"<?php if($getregion){echo 'value='; echo "$getregion";}?> required>
 												  <?php if($filter)
 												  {
 												  	echo '<input type="hidden" class="filter" name="filter" value="'; echo $filter; echo'">';
@@ -1377,9 +1377,9 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 				$(this).next('.infos').addClass('hidden');
 			});
 
-			$( "#probleme" ).click(function() 
+			$( ".probleme" ).click(function() 
 			{
-		  		$( "#probleme" ).val( 'probleme' );
+		  		$( ".probleme" ).val( 'probleme' );
 			});
 		</script>
 	</body>

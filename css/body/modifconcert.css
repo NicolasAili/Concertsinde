@@ -45,14 +45,14 @@
   padding-bottom: 2.5rem;
 }
 
-label {
+#connect label {
   font-weight: bold;
   display: inline-block;
   margin-bottom: 0.5rem;
   cursor: text;
 }
 
-#main form input:not(#int, #ext, #date, #heure, .artiste, .artisteadd), label, .artisteadddiv, .art
+#main #connect input:not(#int, #ext, #date, #heure, .artiste, .artisteadd), #connect label, .artisteadddiv, .art
 {
   margin-left: 3%;
   margin-right: 5%;
@@ -157,13 +157,6 @@ h1.titre
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
-#probleme h1
-{
-  text-align:center;
-  font-family: Georgia, serif;
-  margin-bottom: 30px;
-}
-
 #main form 
 {  
   text-align: left;
@@ -180,24 +173,6 @@ p input, textarea
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-#send
-{
-  margin-top: 0;
-  padding: 3px 12px;
-  font-size: 12px;
-  line-height: 20px;
-  color: var(--color-btn-text);
-  background-color: var(--color-btn-bg);
-  border-color: var(--color-btn-border);
-  box-shadow: var(--color-btn-shadow),var(--color-btn-inset-shadow);
-  transition: .2s cubic-bezier(0.3, 0, 0.5, 1);
-  transition-property: all;
-  transition-property: color,background-color,border-color;
-  cursor: pointer;
-  margin-top: 25px;
-  text-align: center;
 }
 
 #send:hover
@@ -226,4 +201,82 @@ button:hover
   margin-left: 3%;
   margin-right: 5%;
   width: 92%;
+}
+
+.star
+{
+  color: #ff2f2f;
+}
+
+#problemeform
+{
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  width: 50%;
+  border-radius: 15px;
+  box-shadow: 2px 4px 10px 4px rgba(0, 0, 0, 0.7), 2px 4px 40px rgba(255, 255, 255, 0.6) inset;
+  background-color: #5c0000;
+  color: white;
+  display: block;
+}
+
+#raison
+{
+  display: block;
+  float: left;
+  text-align: left;
+}
+
+fieldset
+{
+  clear: both;
+}
+
+.content {
+  float: left;
+  margin-top: 10px;
+}
+
+#sujet, textarea
+{
+  width: 100%;
+}
+
+#send
+{
+  padding: 3px 12px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--color-btn-text);
+  background-color: var(--color-btn-bg);
+  border-color: var(--color-btn-border);
+  box-shadow: var(--color-btn-shadow),var(--color-btn-inset-shadow);
+  transition: .2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: all;
+  transition-property: all;
+  transition-property: color,background-color,border-color;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#champspb
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#champspb input, #champspb label
+{
+  width: auto;
+  margin-right: 10px;
+}
+
+#champspb span
+{
+  display: flex;
+  width: 33%;
 }

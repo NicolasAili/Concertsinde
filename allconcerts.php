@@ -21,7 +21,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 <html lang="fr">
 	<head>
 		<?php
-
+		include 'php/https.php';
 		if (isset($_SESSION['pseudo']) && !isset($_COOKIE['login'])) 
 		{
 			setcookie("login", $_SESSION['pseudo'], time()+315360000, "/");

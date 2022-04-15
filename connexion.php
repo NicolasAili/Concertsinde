@@ -8,16 +8,12 @@
 	JS+JQuery : non
 	CSS : oui
 */
-/*if ($_SERVER['SERVER_PORT'] != 443 ) 
-{
-	header( "Location : https://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] ) ;	
-	exit () ;
-}*/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/https.php';
 			include 'php/error.php';
 			require 'php/connectcookie.php';
 			include 'php/base.php';

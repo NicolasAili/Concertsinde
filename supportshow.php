@@ -103,7 +103,6 @@ CSS : non
 					{
 						case "1":
 							?>
-
 							<h3>Champ(s) concerné(s)</h3>
 							<input type="checkbox" id="artiste" name="artiste" value="artiste" <?php if($row['artiste']){echo "checked";}?> disabled>
 							<label for="artiste">artiste</label>
@@ -111,9 +110,9 @@ CSS : non
 							<label for="date">date</label>
 							<input type="checkbox" id="heure" name="heure" value="heure" <?php if($row['heure']){echo "checked";}?>disabled>
 							<label for="heure">heure</label>
-							<input type="checkbox" id="salle" name="salle" value="salle/denomination" <?php if($row['salle']){echo "checked";}?>disabled>
+							<input type="checkbox" id="salle" name="salle" value="salle/denomination" <?php if($row['salle'] == 'salle'){echo "checked";}?> disabled>
 							<label for="salle">salle</label>
-							<input type="checkbox" id="ville" name="ville" value="ville" <?php if($row['ville']){echo "checked";}?>disabled>
+							<input type="checkbox" id="ville" name="ville" value="ville" <?php if($row['ville'] == 'ville'){echo "checked";}?> disabled>
 							<label for="ville">ville</label>
 							<input type="checkbox" id="cp" name="cp" value="code_postal" <?php if($row['cp']){echo "checked";}?>disabled>
 							<label for="cp">code_postal</label>
@@ -155,7 +154,7 @@ CSS : non
 				if($concert)
 				{?>
 					<div id="infosconcert"><?php
-						$sql = "SELECT nom_artiste, datec, nom_salle, nom_ext FROM concert, salle WHERE id_concert = '$concert' AND salle.id_salle = concert.fksalle";
+						$sql = "SELECT nom_artiste, datec, nom_salle, nom_ext FROM concert, salle, artistes_concert WHERE concert.id_concert = '$concert' AND salle.id_salle = concert.fksalle AND artistes_concert.id_concert = concert.id_concert";
 						$result = mysqli_query($con, $sql);
 						$rowc = mysqli_fetch_array($result);
 						$artiste = $rowc['nom_artiste'];
@@ -177,6 +176,24 @@ CSS : non
 		</div>
 		<?php include('contenu/scrolltop.html'); ?>
 		<?php include('contenu/footer.html'); ?>
+		<script>
+			$(document).ready(function () {
+				$("#edit").click(function () {
+					$("#confirm").css('visibility', 'visible');
+					$("#confirm").css('display', 'block');
+					$("#pb").css('visibility', 'hidden');
+					$("#pb").css('display', 'none');
+					$("#edit").css('visibility', 'hidden');
+				});
+				$("#button").click(function () {
+					$("#confirm").css('visibility', 'hidden');
+					$("#confirm").css('display', 'none');
+					$("#pb").css('visibility', 'visible');
+					$("#pb").css('display', 'block');
+					$("#edit").css('visibility', 'visible');
+				});
+			});
+		</script>
 	</body>
 </html>
 

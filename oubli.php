@@ -55,28 +55,22 @@
 
 <?php
 
-/* 
+/* ____________________________________
 
-	- bug images superadmin
-________________________________________________________________
-- regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
-- mettre (1) dans titre de la page (onglet) si notification
-- filtre: souligner //vendredi
-- chercher artiste : autocomplete //vendredi
-- réinitialisation mail vraiment laid //vendredi
-- dans ajoutconcert, si salle pas en BDD mettre placeholder dans ville "veuillez renseigner la ville"
--concerts ajoutés depuis profil ne fonctionne pas
--favicon
--update la BDD sur le site en ligne
 -enlever commentaire https connexion
--editer marche pas? dans ticket support
-trier tickets superadmin par ordre decroissant
+
+-update la BDD sur le site en ligne
+-reupload fichiers
+
+
 
 
 amélioration :
 
 	vérifier qu'un artiste a pas de conflit avec un autre concert (heure + date)
 	Pouvoir cocher plusieurs concerts pour l'admin et les valider/supprimer en même temps
+	- regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
+	- réinitialisation mail vraiment laid //vendredi
 
 _________________________________________________
 
@@ -99,9 +93,31 @@ Suivi fichiers modifiés depuis dernier ftp :
 	modifié :         contenu/reseaux.php
 	modifié :         css/body/modifconcert.css
 	modifié :         modifconcertvalid.php
-	css\body\modifconcertvalid.css
-	js\scriptform.js
-
+	modifié :         css\body\modifconcertvalid.css
+	modifié :		  js\scriptform.js
+	modifié :         index.php
+	modifié :         inscrire.php
+	modifié :         inboxmsg.php
+	modifié :         js/verifmodifconcert.js
+	modifié :         news.php
+	modifié :         newscontent.php
+	modifié :         nojs.php
+	modifié :         presentation.php
+	modifié :         profil.php
+	modifié :         resetpassword.php
+	modifié :         searchresult.php
+	modifié :         support.php
+	modifié :         supportshow.php
+	modifié :         action/getdata.php
+	modifié :         classement.php
+	modifié :         connexion.php 
+    modifié :         contact.php
+    modifié :         css/footer.css
+	modifié :         css/formulaire.css
+    modifié :         css/header.css
+    modifié :         css/main.css
+    modifié :         css/reseaux.css
+    modifié :         inbox.php
 	_______________________________
 
 	Suivi BDD:

@@ -37,25 +37,24 @@
 			{
 				if ($user) 
 				{
-					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND ID_user = $user ORDER BY date_envoi";
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND ID_user = $user ORDER BY date_envoi DESC";
 				}
 				else
 				{
-					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user";
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user ORDER BY date_envoi DESC";
 				}
 			}
 			else
 			{
 				if ($user) 
 				{
-					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2 AND ID_user = $user";
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2 AND ID_user = $user ORDER BY date_envoi DESC";
 				}
 				else
 				{
-					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2";
+					$sql = "SELECT id, date_envoi, resolu, lu, pseudo, type, sujet FROM probleme, utilisateur WHERE utilisateur=ID_user AND resolu != 2 ORDER BY date_envoi DESC";
 				}
 			}
-
 			$query = mysqli_query($con ,$sql);?>
 
 			<a href="saccueil.php">retour accueil</a>

@@ -69,7 +69,7 @@ Support(s) : pc perso et ecran perso
 						<input type="submit" value="Ajouter" id="validajout" name="validajout">
 					</form>
 			</div>
-			<h3 onclick="displayfilter();">Filtres ▼</h3>
+			<h3 onclick="displayfilter();"><u>Filtres</u> ▼</h3>
 			<div id=tri>
 				<?php
 				$filter = $_GET['filter'];

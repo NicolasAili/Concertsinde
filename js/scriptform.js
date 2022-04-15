@@ -53,6 +53,12 @@ function getleave(identifiant)
                                 $('#infos').children('input').val('');
                                 $("#ville").prop( "required", true );
                                 $("#res").html("Cette salle n'est pas dans notre base de donnée, vous pouvez (si vous le souhaitez) renseigner ses informations de Pays/Ville/CP, sinon un gentil administrateur s'en chargera :D ");
+                                
+                                $("#ville").attr("placeholder", "Renseignez la ville");
+                                $("#cp").attr("placeholder", "Veuillez renseigner la ville");
+                                $("#departement").attr("placeholder", "Veuillez renseigner la ville");
+                                $("#region").attr("placeholder", "Veuillez renseigner la ville");
+                                $("#pays").attr("placeholder", "Veuillez renseigner la ville");
                             }
                             else if(data.test == 'succes')
                             {

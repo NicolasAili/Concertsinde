@@ -13,6 +13,7 @@
 <html lang="fr">
 	<head>
 		<?php
+			include 'php/https.php';
 			include 'php/error.php';
 			require 'php/connectcookie.php';
 			include 'php/base.php';

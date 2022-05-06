@@ -287,17 +287,17 @@
 		$row = mysqli_fetch_array($query);
 		$modifadresse = $row['adresse'];
 
-		$sql = "SELECT nom_ville FROM ville, salle WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id ";
+		$sql = "SELECT ville_nom_reel FROM ville, salle WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id ";
 		$query = mysqli_query($con, $sql);
 		$row = mysqli_fetch_array($query);
-		$modifville = $row['nom_ville'];
+		$modifville = $row['ville_nom_reel'];
 
 		$requestpseudo = "SELECT id_user FROM utilisateur WHERE pseudo = '$pseudo'";
 		$query = mysqli_query($con, $requestpseudo);
 		$row = mysqli_fetch_array($query);
 		$idpseudo = $row['id_user'];
 
-		$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+		$idville = "SELECT ville_id FROM ville WHERE ville_nom_reel = '$ville'";
 		$query = mysqli_query($con, $idville);
 		$row = mysqli_fetch_array($query);
 		$vle = $row['ville_id'];
@@ -342,12 +342,12 @@
 					$nodpt = $row['numero'];
 					if($cp)
 					{
-						$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+						$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
 					}
 					else if(!$cp)
 					{
 
-						$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
+						$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
 					}
 					mysqli_query($con, $insertvle);
 				}
@@ -369,12 +369,12 @@
 					}
 					if($cp)
 					{
-						$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+						$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
 						mysqli_query($con, $insertvle);
 					}
 					else if(!$cp)
 					{
-						$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
+						$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
 						mysqli_query($con, $insertvle);
 					}
 				}
@@ -383,12 +383,12 @@
 			{
 				if($cp)
 				{
-					$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+					$insertvle = "INSERT INTO ville (ville_nom_reel, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD + lien avec dpt
 					mysqli_query($con, $insertvle);
 				}
 				else if(!$cp)
 				{
-					$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
+					$insertvle = "INSERT INTO ville (ville_nom_reel) VALUES ('$ville')"; //ajout de la ville en BDD + lien avec dpt
 					mysqli_query($con, $insertvle);
 				}
 			}
@@ -470,7 +470,7 @@
 					$row = mysqli_fetch_array($query);
 					$rgn = $row['id'];
 
-					$xxx = "SELECT ville_departement FROM ville WHERE nom_ville = '$ville'";
+					$xxx = "SELECT ville_departement FROM ville WHERE ville_nom_reel = '$ville'";
 					$query = mysqli_query($con, $xxx);
 					$row = mysqli_fetch_array($query);
 					$yyy = $row['ville_departement'];
@@ -480,7 +480,7 @@
 				}
 				else if(!$region)
 				{
-					$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND nom_ville = '$ville' ";
+					$xxx = "SELECT id FROM departement, ville WHERE ville_departement = numero AND id_region = id AND ville_nom_reel = '$ville' ";
 					$query = mysqli_query($con, $xxx);
 					$row = mysqli_fetch_array($query);
 					$yyy = $row['id'];
@@ -503,11 +503,11 @@
 			{
 				if($ville != $villepost)
 				{
-					$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+					$vleid = "SELECT ville_id FROM ville WHERE ville_nom_reel = '$ville'";
 				}
 				else
 				{
-					$vleid = "SELECT ville_id FROM ville WHERE nom_ville = '$villepost'";
+					$vleid = "SELECT ville_id FROM ville WHERE ville_nom_reel = '$villepost'";
 				}
 				$result = mysqli_query($con, $vleid);
 				$row = mysqli_fetch_array($result);
@@ -552,18 +552,18 @@
 			{
 				if($testsalle == 1)
 				{
-					$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.nom_ville = '$ville'";
+					$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$salle' AND ville.ville_nom_reel = '$ville'";
     				mysqli_query($con, $sqlville);
     			}
     			else if($testsalle == 0)
 				{
-					$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.nom_ville = '$ville'";
+					$sqlvilleex = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_salle = '$sallepost' AND ville.ville_nom_reel = '$ville'";
     				mysqli_query($con, $sqlvilleex);
     			}
 			}
 			else if($ext)
 			{
-				$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_ext = '$ext' AND ville.nom_ville = '$ville'";
+				$sqlville = "UPDATE salle, ville SET id_ville = ville.ville_id WHERE salle.nom_ext = '$ext' AND ville.ville_nom_reel = '$ville'";
 				mysqli_query($con, $sqlville);
 			}
 		}
@@ -636,8 +636,8 @@
 	?>
 		<h1> Récapitulatif du concert modifié </h1>
 		<?php
-		//$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert";
-		$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
+		//$str = "SELECT datec, heure, lien_fb, lien_ticket, concert.nom_artiste, id_salle, adresse, nom_salle, nom_ext, intext, ville_nom_reel, ville_code_postal, ville_departement FROM concert, artiste, salle, ville WHERE concert.nom_artiste = artiste.Nom_artiste AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND id_concert = $idconcert";
+		$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, ville_nom_reel, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 		$result = mysqli_query($con, $str);
 		$row_cnt = mysqli_num_rows($result);
 		$row = mysqli_fetch_array($result);
@@ -791,7 +791,7 @@
 							}?>
 							<div class="ville"> 
 								<?php 
-									echo $row['nom_ville'];
+									echo $row['ville_nom_reel'];
 									if($row['ville_code_postal'])
 									{
 										?>
@@ -867,11 +867,31 @@
 					<div class="links">
 						<div class="fb">
 							<img alt="lien evenement" src="image/evenement.png">
-							<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
+							<a <?php 
+								if (!$row['lien_fb'])
+								{
+									echo 'onclick="nolink();"';
+								}
+								else
+								{?>
+									href="<?php echo  $row['lien_fb']; ?>"<?php
+								}?>> 
+								Lien vers l'événement 
+							</a>
 						</div> 
 						<div class="ticket">
 							<img alt="lien billetterie" src="image/billetterie.png">
-							<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
+							<a <?php 
+								if (!$row['lien_ticket'])
+								{
+									echo 'onclick="nolink();"';
+								}
+								else
+								{?>
+									href="<?php echo  $row['lien_ticket']; ?>"<?php
+								}?>> 
+								Lien vers la billetterie
+							</a>
 						</div> 
 					</div>
 				</div>		

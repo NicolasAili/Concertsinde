@@ -116,28 +116,31 @@ h1
 	margin-bottom: 15px;
 }
 
-.sectionun, .sectiondeux, .sectiontrois
-{
-	display: block;
-}
-
 .sectionun
 {
 	text-align: right;
 	width: 24%;
-	padding-top: 2%;
 }
 
-.sectiondeux, .sectiontrois
+.sectiondeux
 {
 	padding-top: 2%;
-	line-height: 1.2em;
-	width: 33%;
 }
 
 .sectiontrois
 {
 	text-align: center;
+}
+
+.sectiondeux, .sectiontrois
+{
+	line-height: 1.5em;
+	width: 33%;
+}
+
+.sectionun, .sectiondeux, .sectiontrois
+{
+	display: block;
 }
 
 .salle

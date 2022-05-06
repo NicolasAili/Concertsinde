@@ -57,67 +57,68 @@
 
 /* ____________________________________
 
--enlever commentaire https connexion
-
--update la BDD sur le site en ligne
--reupload fichiers
-
-
-
-
-amélioration :
-
-	vérifier qu'un artiste a pas de conflit avec un autre concert (heure + date)
-	Pouvoir cocher plusieurs concerts pour l'admin et les valider/supprimer en même temps
-	- regler probleme de l'affichage en anglais des champs date et heure dans ajoutconcert //vendredi
-	- réinitialisation mail vraiment laid //vendredi
+-ajouter les concerts
+-reset oubli php
+-github
+-upload oubli php
 
 _________________________________________________
 
 
 Suivi fichiers modifiés depuis dernier ftp :
 
-- database php
-- concert php
-	modifié :         action/concert.php
 	modifié :         ajoutconcert.php
 	modifié :         allconcerts.php
 	modifié :         artistes.php
-	modifié :         css/body/ajoutconcert.css
-	modifié :         css/body/allconcerts.css
-	modifié :         css/body/superartiste.css
-	modifié :         oubli.php
-	modifié :         supartiste.php
-	modifié :         modifconcert.php
-	modifié :         php/inject.php
-	modifié :         contenu/reseaux.php
-	modifié :         css/body/modifconcert.css
-	modifié :         modifconcertvalid.php
-	modifié :         css\body\modifconcertvalid.css
-	modifié :		  js\scriptform.js
-	modifié :         index.php
-	modifié :         inscrire.php
-	modifié :         inboxmsg.php
-	modifié :         js/verifmodifconcert.js
-	modifié :         news.php
-	modifié :         newscontent.php
-	modifié :         nojs.php
-	modifié :         presentation.php
-	modifié :         profil.php
-	modifié :         resetpassword.php
-	modifié :         searchresult.php
-	modifié :         support.php
-	modifié :         supportshow.php
-	modifié :         action/getdata.php
 	modifié :         classement.php
 	modifié :         connexion.php 
     modifié :         contact.php
+    modifié :         inbox.php
+	modifié :         inboxmsg.php
+	modifié :         index.php
+	modifié :         inscrire.php
+	modifié :         modifconcert.php
+	modifié :         modifconcert.php
+	modifié :         news.php
+	modifié :         newscontent.php
+	modifié :         nojs.php
+	modifié :         oubli.php
+	modifié :         presentation.php
+	modifié :         profil.php
+	modifié :         searchresult.php
+	modifié :         supartiste.php
+	modifié :         support.php
+	modifié :         supportshow.php
+	modifié :         resetpassword.php
+
+	modifié :         css/body/ajoutconcert.css
+	modifié :         css/body/allconcerts.css
+	modifié :         css/body/superartiste.css
     modifié :         css/footer.css
 	modifié :         css/formulaire.css
     modifié :         css/header.css
     modifié :         css/main.css
     modifié :         css/reseaux.css
-    modifié :         inbox.php
+	modifié :         css/body/modifconcert.css
+	modifié :         css\body\modifconcertvalid.css
+
+
+	modifié :         php/inject.php
+    modifié :         php/base.php
+	nouveau fichier : php/https.php
+
+	modifié :         action/concert.php
+	modifié :         action/getdata.php
+
+	modifié :		  js\scriptform.js
+	modifié :         js/verifmodifconcert.js
+
+	modifié :         contenu/reseaux.php
+
+	nouveau fichier : image/favicon.png
+
+	modifié :         superadmin/contact.php
+
 	_______________________________
 
 	Suivi BDD:

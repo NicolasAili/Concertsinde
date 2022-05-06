@@ -59,25 +59,25 @@
                   $id_region = $rowdetectrgn['id_region'];
                   if($id_region) //departement + region + ville
                   {
-                    $pvcpz = "SELECT nom_salle, nom_ville, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+                    $pvcpz = "SELECT nom_salle, ville_nom_reel, nom_departement, nom_region, nom_pays FROM salle, ville, departement, region, pays WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
                     $querypvcpz = mysqli_query($con, $pvcpz);
                     $row = mysqli_fetch_array($querypvcpz);
-                    $response = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
+                    $response = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['ville_nom_reel'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>$row['nom_region'], "pays"=>$row['nom_pays']); //on renvoie ces données dans notre var "response"
                   }
                   else //seulement departement
                   {
-                    $pvcpz = "SELECT nom_salle, nom_ville, nom_departement FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
+                    $pvcpz = "SELECT nom_salle, ville_nom_reel, nom_departement FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero";
                     $querypvcpz = mysqli_query($con, $pvcpz);
                     $row = mysqli_fetch_array($querypvcpz);
-                    $response = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
+                    $response = array("test"=>'succes', "adresse"=>$adresse,  "ville"=>$row['ville_nom_reel'], "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
                   }
                 }
                 else //seulement ville
                 {
-                  $pvcpz = "SELECT nom_ville FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id";
+                  $pvcpz = "SELECT ville_nom_reel FROM salle, ville, departement WHERE salle.id_ville = '$ville_id' AND salle.id_ville = ville.ville_id";
                   $querypvcpz = mysqli_query($con, $pvcpz);
                   $row = mysqli_fetch_array($querypvcpz);
-                  $response = array("test"=>'succes', "adresse"=>$adresse ,  "ville"=>$row['nom_ville'], "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
+                  $response = array("test"=>'succes', "adresse"=>$adresse ,  "ville"=>$row['ville_nom_reel'], "cp"=>$ville_cp, "departement"=>'nodata', "region"=>'nodata', "pays"=>'nodata'); //on renvoie ces données dans notre var "response"
                 }
              }
           }
@@ -87,13 +87,13 @@
           }
         break;
         case "ville":
-          $data = "SELECT nom_ville, ville_code_postal, ville_id FROM ville WHERE nom_ville = '$name'";
+          $data = "SELECT ville_nom_reel, ville_code_postal, ville_id FROM ville WHERE ville_nom_reel = '$name'";
           $query = mysqli_query($con, $data);
           if($row = mysqli_fetch_array($query)) //si ville trouvee
           {
             $ville_id = $row['ville_id'];
             $ville_cp = $row['ville_code_postal'];
-            $numdpt = $row['nom_ville'];
+            $numdpt = $row['ville_nom_reel'];
             if(!$ville_cp)
             {
               $ville_cp = 'nodata';
@@ -110,7 +110,7 @@
               $id_region = $rowdetectrgn['id_region'];
               if($id_region) //departement + region(+pays) + ville
               {
-                $ville = "SELECT nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+                $ville = "SELECT nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.ville_nom_reel = '$numdpt' AND  ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
                 $query = mysqli_query($con, $ville);
                 $row = mysqli_fetch_array($query);
 
@@ -124,7 +124,7 @@
               }
               else
               {
-                $ville = "SELECT nom_departement FROM ville, departement WHERE ville.nom_ville = '$numdpt' AND  ville.ville_departement = departement.numero";
+                $ville = "SELECT nom_departement FROM ville, departement WHERE ville.ville_nom_reel = '$numdpt' AND  ville.ville_departement = departement.numero";
                 $query = mysqli_query($con, $ville);
                 $row = mysqli_fetch_array($query);
                 $response = array("test"=>'succes', "cp"=>$ville_cp, "departement"=>$row['nom_departement'], "region"=>'nodata', "pays"=>'nodata');
@@ -210,7 +210,8 @@
     {
        $response = array("test"=>'nodata');
     }
-    //$response = array_map("utf8_encode", $response );
+
+    $response = array_map('utf8_encode', $response );
     echo json_encode($response);
   }
 ?>

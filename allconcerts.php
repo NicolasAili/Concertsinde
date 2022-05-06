@@ -48,6 +48,8 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		$modif = $_GET['modif'];
 		$filter = $_GET['filter'];
 
+		$iderror = $_GET['iderror'];
+
 		$getfiltre = '0';
 
 		$getsalle = $_GET['salle']; //pour filtrage initial
@@ -140,6 +142,11 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		{
 		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
 		}
+		$returnval = inject($iderror, 'identifier'); //2.1) vérifier les champs avec des regex spéciaux : 'url' 'text' ou 'num'
+		if (!is_null($returnval)) 
+		{
+		  array_push($inject, $returnval); //2.2)ajouter les erreurs si injection détectée
+		}
 
 		$validate = validate($inject, $redirect); //3)validation de tous les champs
 		
@@ -153,6 +160,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		  $getnumdepartement = mysqli_real_escape_string($con, $getnumdepartement);
 		  $add = mysqli_real_escape_string($con, $add);
 		  $modif = mysqli_real_escape_string($con, $modif);
+		  $iderror = mysqli_real_escape_string($con, $iderror);
 		}
 		
 		$pseudo = $_SESSION['pseudo'];
@@ -160,7 +168,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 
 		$page = $_POST['page'];
 		
-		$i = 0; //compteur pour les pages
+		$p = 0; //compteur pour les pages
 		$n = $_POST['n']; //nb concerts à afficher par page
 		if(!$n)
 		{
@@ -227,7 +235,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 			<div id="mainfilter">
 				<div id="filterone">
 					<?php
-					if(!$add && !$modif)
+					if(!$add && !$modif && !$iderror)
 					{
 						?>
 						<div id="filteroneone">
@@ -415,7 +423,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 				<div id="filtertwo">
 					<div id="reset"><a href="allconcerts.php?filter=reset" id="txtreset">Réinitialiser les filtres</a></div>
 					<?php
-					if(!$add && !$modif)
+					if(!$add && !$modif && !$iderror)
 					{
 						?>
 						<div class="trier">
@@ -612,7 +620,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND nom_salle = '$getsalle'". $archivesql ." ORDER BY". $filtre ."");
 					}
 					else if ($getville) {
-						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.nom_ville = '$getville'" . $archivesql ." ORDER BY". $filtre);
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.ville_nom_reel = '$getville'" . $archivesql ." ORDER BY". $filtre);
 					}
 					else if ($getcp) {
 						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, ville, salle, artistes_concert WHERE salle.id_salle = concert.fksalle AND concert.id_concert = artistes_concert.id_concert AND salle.id_ville = ville_id AND ville.ville_code_postal = '$getcp'". $archivesql ."ORDER BY". $filtre ."");
@@ -633,6 +641,10 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					else if ($modif)
 					{
 						$strf = sprintf("SELECT DISTINCT modification.id_concert FROM modification, concert WHERE id_user = '$modif'");
+					}
+					else if ($iderror)
+					{
+						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert WHERE id_concert = '$iderror'");
 					}
 					else if($sqlquery)
 					{
@@ -739,7 +751,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 
 				while($rowx = mysqli_fetch_array($result)) 
 				{
-					if($i >= $page*$n-$n && $i<$page*$n) 
+					if($p >= $page*$n-$n && $p<$page*$n) 
 					{
 						$idconcert = $rowx['id_concert'];
 						$row['ville_departement'] = NULL;
@@ -747,7 +759,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						$rowdpt['nom_departement'] = NULL;
 						$rowrgn['nom_pays'] = NULL;
 						$rowrgn['nom_region'] = NULL;
-						$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
+						$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, ville_nom_reel, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 						$resultx = mysqli_query($con, $str);
 						$row_cnt = mysqli_num_rows($resultx);
 						$row = mysqli_fetch_array($resultx);
@@ -801,11 +813,11 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									}?>
 								</div>
 								<?php
-								echo '<div id="lesartistes">';
+								echo '<div id="lesartistes">'; 
 									unset($artistes_arr);
 									if($row_cnt == 1)
 									{
-										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
+										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo utf8_encode($row['nom_artiste']); echo '</a>';
 										$artistes_arr[0] = $row['nom_artiste'];
 									}
 									else
@@ -816,7 +828,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										while ($rowart = mysqli_fetch_array($resultx)) 
 										{
 											$artistes_arr[$i-1] = $rowart['nom_artiste'];
-											echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+											echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo utf8_encode($rowart['nom_artiste']); echo '</a>';
 											if($i < $row_cnt)
 											{
 												echo ' / ';
@@ -941,15 +953,15 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									else
 									{
 										?>
-										<div class="salle"> <?php echo  $row['nom_ext']; ?> </div><?php
+										<div class="salle"> <?php echo $row['nom_ext']; ?> </div><?php
 									}?>
 									<div class="ville"> 
 										<?php 
-											echo $row['nom_ville'];
+											echo utf8_encode($row['ville_nom_reel']);
 											if($row['ville_code_postal'])
 											{
 												?>
-												<div class="cp"> (<?php echo  $row['ville_code_postal']; ?>) </div>
+												<div class="cp"> (<?php echo $row['ville_code_postal']; ?>) </div>
 												<?php
 											}
 											else
@@ -997,8 +1009,8 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									if($rowdpt['id_region'])
 									{
 										?>
-										<div class="pays"> <?php echo  $rowrgn['nom_pays']; ?> </div>
-										<div class="region"> <?php echo  $rowrgn['nom_region']; ?> </div> 
+										<div class="pays"> <?php echo utf8_encode($rowrgn['nom_pays']); ?> </div>
+										<div class="region"> <?php echo utf8_encode($rowrgn['nom_region']); ?> </div> 
 										<?php 
 									}
 									else
@@ -1011,7 +1023,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									if($row['ville_departement'])
 									{
 										?>
-										<div class="departement"> <?php echo  $rowdpt['nom_departement']; ?> </div> 
+										<div class="departement"> <?php echo utf8_encode($rowdpt['nom_departement']); ?> </div> 
 										<?php
 									}
 									else
@@ -1026,11 +1038,31 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 							<div class="links">
 								<div class="fb"> 
 									<img src="image/evenement.png" alt="lien_evenement">
-									<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
+									<a <?php 
+										if (!$row['lien_fb'])
+										{
+											echo 'onclick="nolink();"';
+										}
+										else
+										{?>
+											href="<?php echo  $row['lien_fb']; ?>"<?php
+										}?>> 
+										Lien vers l'événement 
+									</a>
 								</div> 
 								<div class="ticket">
 									<img src="image/billetterie.png" alt="lien_billetterie">
-									<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
+									<a <?php 
+										if (!$row['lien_ticket'])
+										{
+											echo 'onclick="nolink();"';
+										}
+										else
+										{?>
+											href="<?php echo  $row['lien_ticket']; ?>"<?php
+										}?>> 
+										Lien vers la billetterie
+									</a>
 								</div> 
 							</div>
 							<form method="post" action="modifconcert.php" class="modif">
@@ -1041,18 +1073,17 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								foreach ($artistes_arr as &$value) 
 								{
 									?>
-									<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
-									
+									<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . utf8_encode($artistes_arr[$i]) . '"'; ?> >
 								<?php
 									$i++;
 								}?>
 								<input type="hidden" class="indices" name="indices" <?php echo 'value="' . $i . '"' ?> > 
 								<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 								<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-								<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
-								<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
-								<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
-								<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
+								<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . utf8_encode($rowrgn['nom_pays']) . '"' ?> > 
+								<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . utf8_encode($rowrgn['nom_region']) . '"' ?> > 
+								<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . utf8_encode($rowdpt['nom_departement']) . '"' ?> > 
+								<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . utf8_encode($row['ville_nom_reel']) . '"' ?> > 
 								<input type="hidden" class="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
 								<input type="hidden" class="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
 								<input type="hidden" class="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
@@ -1096,24 +1127,24 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						</div>
 						<?php
 					}
-					$i++;
+					$p++;
 	 			}
 	 			?>
  				<form method="post" action="allconcerts.php" class="page">
  					<input id="un" type="submit" name="page" value="<?php if($page == 1){echo '1';}else{echo $page-1;}?>"<?php if($page == 1){echo ' style="font-weight: bold;"';} ?>>
- 					<?php if($i>$n-1)
+ 					<?php if($p>$n-1)
  					{
  						?>
  						<input id="deux" type="submit" name="page" value="<?php if($page == 1){echo '2';}else{echo $page;} ?>"<?php if($page>1){echo ' style="font-weight: bold;"';} ?>>
  						<?php
  					}
- 					if($i>2*$n-1)
+ 					if($p>2*$n-1)
  					{
- 						if($page == 1 && $i > 2*$n-1)
+ 						if($page == 1 && $p > 2*$n-1)
  						{?>
  							<input id="trois" type="submit" name="page" value="3"> <?php
  						}
- 						else if($i >= $page*$n && $page > 1)
+ 						else if($p >= $page*$n && $page > 1)
  						{?>
  							<input id="trois" type="submit" name="page" value="<?php echo($page+1); ?>"> <?php
  						}

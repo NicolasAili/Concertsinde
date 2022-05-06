@@ -39,9 +39,12 @@
 			$action = $_POST['modsuppr'];
 			if ($action != 'Valider' && $action != 'Supprimer' && $action != 'Modifier' && $action != 'probleme') 
 			{
-				setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 15, "/");
-				header("Location: allconcerts.php");
-				exit("Erreur inconnue, merci de contacter le support");
+				if($action)
+				{
+					setcookie('contentMessage', 'Erreur inconnue, merci de contacter le support', time() + 15, "/");
+					header("Location: allconcerts.php");
+					exit("Erreur inconnue, merci de contacter le support");
+				}
 			}
 		?>
 		<script src="js/verifmodifconcert.js"></script> 
@@ -379,7 +382,7 @@
 					$pointssession = $row['points_session'];
 					$points = $row['points'];
 
-					$sql = "SELECT datec, heure, intext, nom_salle, nom_ext, adresse, nom_ville, ville_code_postal, nom_departement, nom_region, nom_pays, lien_fb, lien_ticket FROM concert, salle, ville, departement, region, pays, artistes_concert WHERE  concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND artistes_concert.id_concert = concert.id_concert AND concert.id_concert = '$idconcert'";
+					$sql = "SELECT datec, heure, intext, nom_salle, nom_ext, adresse, ville_nom_reel, ville_code_postal, nom_departement, nom_region, nom_pays, lien_fb, lien_ticket FROM concert, salle, ville, departement, region, pays, artistes_concert WHERE  concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id AND artistes_concert.id_concert = concert.id_concert AND concert.id_concert = '$idconcert'";
 					$queryall = mysqli_query($con, $sql);
 					$rowx = mysqli_fetch_array($queryall);
 
@@ -466,11 +469,11 @@
 								echo "1 point adresse";
 								echo "<br>";
 							}
-							if($rowx['nom_ville'] == $row['ville'])
+							if($rowx['ville_nom_reel'] == $row['ville'])
 							{
 								$pointssession = $pointssession + 1;
 								$points = $points + 1;
-								echo "1 point nom_ville";
+								echo "1 point ville_nom_reel";
 								echo "<br>";
 							}
 							if($rowx['ville_code_postal'] == $row['code_postal'])

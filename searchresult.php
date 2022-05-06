@@ -104,7 +104,7 @@
 					}
 				} 
 						
-			$str = "SELECT Nom_salle, nom_ville, ville_code_postal FROM salle, ville WHERE Nom_salle = '$searchfield' AND salle.id_ville = ville.ville_id";
+			$str = "SELECT Nom_salle, ville_nom_reel, ville_code_postal FROM salle, ville WHERE Nom_salle = '$searchfield' AND salle.id_ville = ville.ville_id";
 			$result = mysqli_query($con, $str);	
 			if($row = mysqli_fetch_array($result))
 			{ ?>
@@ -112,14 +112,14 @@
 				<div class="result"> 
 					<?php 
 					$verif = 1;
-					echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['nom_ville'] . $row['ville_code_postal'] . ")";
+					echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . $row['ville_code_postal'] . ")";
 					echo '</a>';?> 
 				</div> 
 				<?php
 			}
 			else
 			{
-				$str = "SELECT DISTINCT Nom_salle, nom_ville, ville_code_postal FROM salle, ville WHERE (Nom_salle LIKE '%{$array[0]}%' OR Nom_salle LIKE '%{$array[1]}%' OR Nom_salle LIKE '%{$searchfield}%') AND salle.id_ville = ville.ville_id";
+				$str = "SELECT DISTINCT Nom_salle, ville_nom_reel, ville_code_postal FROM salle, ville WHERE (Nom_salle LIKE '%{$array[0]}%' OR Nom_salle LIKE '%{$array[1]}%' OR Nom_salle LIKE '%{$searchfield}%') AND salle.id_ville = ville.ville_id";
 				$result = mysqli_query($con, $str);
 				if($row = mysqli_fetch_array($result))
 				{ ?>
@@ -127,7 +127,7 @@
 					<div class="result"> 
 						<?php 
 						$verif = 1;
-						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['nom_ville'] . $row['ville_code_postal'] . ")";
+						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . $row['ville_code_postal'] . ")";
 						echo '</a>';?> 
 					</div> 
 					<?php
@@ -135,13 +135,13 @@
 				while($row = mysqli_fetch_array($result))
 				{?>
 					<div class="result"> <?php
-						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['nom_ville'] . $row['ville_code_postal'] . ")";
+						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . $row['ville_code_postal'] . ")";
 						echo '</a>';?>
 					</div> <?php
 				}
 			} 						
 						
-			$str = "SELECT nom_ville, ville_code_postal FROM ville WHERE nom_ville = '$searchfield'";
+			$str = "SELECT ville_nom_reel, ville_code_postal FROM ville WHERE ville_nom_reel = '$searchfield'";
 			$result = mysqli_query($con, $str);	
 			if($row = mysqli_fetch_array($result))
 			{ ?>
@@ -149,7 +149,7 @@
 				<div class="result"> 
 					<?php 
 					$verif = 1;
-					echo '<a href="allconcerts.php?ville=' . $row['nom_ville'] . '">' . $row['nom_ville'] . " (" . $row['ville_code_postal'] . ")"; 
+					echo '<a href="allconcerts.php?ville=' . $row['ville_nom_reel'] . '">' . $row['ville_nom_reel'] . " (" . $row['ville_code_postal'] . ")"; 
 					echo '</a>';
 					?> 
 				</div> 
@@ -157,7 +157,7 @@
 			}
 			else
 			{
-				$str = "SELECT DISTINCT nom_ville, ville_code_postal FROM ville WHERE nom_ville LIKE '{$array[0]}%' OR nom_ville LIKE '%{$array[1]}' OR nom_ville LIKE '%{$searchfield}%'";
+				$str = "SELECT DISTINCT ville_nom_reel, ville_code_postal FROM ville WHERE ville_nom_reel LIKE '{$array[0]}%' OR ville_nom_reel LIKE '%{$array[1]}' OR ville_nom_reel LIKE '%{$searchfield}%'";
 				$result = mysqli_query($con, $str);
 				if($row = mysqli_fetch_array($result))
 				{ ?>
@@ -165,7 +165,7 @@
 					<div class="result"> 
 						<?php 
 						$verif = 1;
-						echo '<a href="allconcerts.php?ville=' . $row['nom_ville'] . '">' . $row['nom_ville'] . " (" . $row['ville_code_postal'] . ")"; 
+						echo '<a href="allconcerts.php?ville=' . $row['ville_nom_reel'] . '">' . $row['ville_nom_reel'] . " (" . $row['ville_code_postal'] . ")"; 
 						echo '</a>';
 						?> 
 					</div> 
@@ -175,7 +175,7 @@
 				{?>
 					<div class="result"> 
 						<?php 
-						echo '<a href="allconcerts.php?ville=' . $row['nom_ville'] . '">' . $row['nom_ville'] . " (" . $row['ville_code_postal'] . ")"; 
+						echo '<a href="allconcerts.php?ville=' . $row['ville_nom_reel'] . '">' . $row['ville_nom_reel'] . " (" . $row['ville_code_postal'] . ")"; 
 						echo '</a>';
 						?> 
 					</div> 
@@ -183,7 +183,7 @@
 				}
 			} 
 						
-			$str = "SELECT ville_code_postal, nom_ville FROM ville WHERE ville_code_postal = '$searchfield'";
+			$str = "SELECT ville_code_postal, ville_nom_reel FROM ville WHERE ville_code_postal = '$searchfield'";
 			$result = mysqli_query($con, $str);	
 			?>
 				<?php
@@ -193,7 +193,7 @@
 						<div class="result"> 
 							<?php 
 							$verif = 1;
-							echo  '<a href="allconcerts.php?cp=' . $row['ville_code_postal'] . '">' . $row['ville_code_postal'] . " (" . $row['nom_ville'] . ")";  
+							echo  '<a href="allconcerts.php?cp=' . $row['ville_code_postal'] . '">' . $row['ville_code_postal'] . " (" . $row['ville_nom_reel'] . ")";  
 							echo '</a>';
 							?> 
 						</div> 

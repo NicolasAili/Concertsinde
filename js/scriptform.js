@@ -315,6 +315,8 @@ function popup(){
         var close = 0;
         var strartiste = $(".artiste").val();
         var strdate = $("#date").val();
+        strdate = new Date(strdate);
+        strdate = new Intl.DateTimeFormat('fr-FR').format(strdate);
         var strheure = $("#heure").val();
         var strsalle = $("#salle").val();
         var strdenom = $("#denom").val();
@@ -701,5 +703,10 @@ function motif(identifiant)
             $('#type').val('3');
         break;
     }
+}
+
+function nolink()
+{
+    alert("pas de lien pour ce concert, n'hésitez pas à en ajouter un !");
 }
 

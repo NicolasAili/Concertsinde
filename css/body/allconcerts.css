@@ -123,7 +123,7 @@ ul, li
 #reset
 {
 	width: 18%;
-	margin-right: 5%;
+	margin-right: 3%;
 	display: flex;
 }
 
@@ -445,19 +445,22 @@ h4
 {
 	text-align: right;
 	width: 24%;
-	padding-top: 2%;
 }
 
-.sectiondeux, .sectiontrois
+.sectiondeux
 {
 	padding-top: 2%;
-	line-height: 1.2em;
-	width: 33%;
 }
 
 .sectiontrois
 {
 	text-align: center;
+}
+
+.sectiondeux, .sectiontrois
+{
+	line-height: 1.5em;
+	width: 33%;
 }
 
 .salle

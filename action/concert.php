@@ -142,41 +142,43 @@
 			{
 				$testvle = 0;
 
-				$sql = "SELECT id_concert FROM concert WHERE datec = '$date'";
+				$sql = "SELECT id_concert FROM concert WHERE datec = '$date'"; //selection de tous les concerts à la date saisie
 				$query = mysqli_query($con, $sql);
-				while($row = mysqli_fetch_array($query)) 
+				while($row = mysqli_fetch_array($query)) //on parcourt les concerts
 				{
 					$id_concert = $row['id_concert'];
-					$sql = "SELECT nom_artiste FROM artistes_concert WHERE id_concert = $id_concert";
+					$iderror = $id_concert;
+					$sql = "SELECT nom_artiste FROM artistes_concert WHERE id_concert = $id_concert"; //on sélectionne les artistes de ces concerts
 					$queryart = mysqli_query($con, $sql);
 					while($rowart = mysqli_fetch_array($queryart))
 					{
 						if ($rowart['nom_artiste'] == $artiste) 
 						{
-							setcookie('contentMessage', 'Erreur: un concert de ' . $artiste . ' a déjà été saisi à la même date, si vous pensez que ce message est une erreur merci de le signaler', time() + 15, "/");
-							header("Location: ../allconcerts.php");
+							setcookie('contentMessage', 'Erreur: un concert de ' . $artiste . ' a déjà été saisi à la même date (voir concert affiché ci-dessous). Si vous pensez que ce message est une erreur merci de le signaler via le <a href="contact.php">formulaire de contact</a>', time() + 15, "/");
+							header("Location: ../allconcerts.php?iderror=$iderror");
 							exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
 						}
 						for ($i=0; $i < $indiceslength; $i++) //on va de 0 au nombre d'artistes ajouté
 						{ 
 							if ($rowart['nom_artiste'] == $artistesadd[$i]) 
 							{
-								setcookie('contentMessage', 'Erreur: un concert de ' . $artistesadd[$i] . ' a déjà été saisi à la même date, si vous pensez que ce message est une erreur merci de le signaler', time() + 15, "/");
-								header("Location: ../allconcerts.php");
+								setcookie('contentMessage', 'Erreur: un concert de ' . $artistesadd[$i] . ' a déjà été saisi à la même date (voir concert affiché ci-dessous). Si vous pensez que ce message est une erreur merci de le signaler via le <a href="contact.php">formulaire de contact</a>', time() + 15, "/");
+								header("Location: ../allconcerts.php?iderror=$iderror");
 								exit("Erreur: ce concert a déjà été saisi (même artiste et même date)");
 							}
 						}
 					}
 				}
-				$sql = "SELECT heure FROM concert, salle WHERE salle.nom_salle = '$salle' AND concert.datec = '$date'";
+				$sql = "SELECT heure, id_concert FROM concert, salle WHERE salle.nom_salle = '$salle' AND concert.datec = '$date'";
 				$query = mysqli_query($con, $sql);
 				while($row = mysqli_fetch_array($query))
 				{
 					if($heure+2 > $row['heure'] && $heure-2 < $row['heure'])
 					{
-						setcookie('contentMessage', 'Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés. Vérifiez les concerts. Si vous pensez que cela est dû à une erreur, merci de le signaler', time() + 15, "/");
-						header("Location: ../allconcerts.php");
-						exit("Erreur: Concert déjà saisi (même artiste et même date)");
+						$iderror = $row['id_concert'];
+						setcookie('contentMessage', 'Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés (voir concert affiché ci-dessous). Si vous pensez que cela est dû à une erreur, merci de le signaler via le <a href="contact.php">formulaire de contact</a>', time() + 15, "/");
+						header("Location: ../allconcerts.php?iderror=$iderror");
+						exit("Erreur: il semble que un concert dans cette salle ait déjà été saisi à la date et aux horaires renseignés (voir concert affiché ci-dessous). Si vous pensez que cela est dû à une erreur, merci de le signaler");
 					}
 				}
 
@@ -190,7 +192,7 @@
 				}
 
 
-				$idville = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+				$idville = "SELECT ville_id FROM ville WHERE ville_nom_reel = '$ville'";
 				$query = mysqli_query($con, $idville);
 				$row = mysqli_fetch_array($query);
 				$vle = $row['ville_id'];
@@ -237,12 +239,12 @@
 							$nodpt = $row['numero'];
 							if($cp)
 							{
-								$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+								$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement, ville_code_postal) VALUES ('$ville', '$nodpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
 							}
 							else if(!$cp)
 							{
 
-								$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
+								$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement) VALUES ('$ville', '$nodpt')"; //ajout de la ville en BDD + lien avec dpt
 							}
 							mysqli_query($con, $insertvle);
 						}
@@ -264,12 +266,12 @@
 							}
 							if($cp)
 							{
-								$insertvle = "INSERT INTO ville (nom_ville, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
+								$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement, ville_code_postal) VALUES ('$ville', '$dpt', '$cp')"; //ajout de la ville en BDD + lien avec dpt
 								mysqli_query($con, $insertvle);
 							}
 							else if(!$cp)
 							{
-								$insertvle = "INSERT INTO ville (nom_ville, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
+								$insertvle = "INSERT INTO ville (ville_nom_reel, ville_departement) VALUES ('$ville', '$dpt')"; //ajout de la ville en BDD + lien avec dpt
 								mysqli_query($con, $insertvle);
 							}
 						}
@@ -278,12 +280,12 @@
 					{
 						if($cp)
 						{
-							$insertvle = "INSERT INTO ville (nom_ville, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD 
+							$insertvle = "INSERT INTO ville (ville_nom_reel, ville_code_postal) VALUES ('$ville', '$cp')"; //ajout de la ville en BDD 
 							mysqli_query($con, $insertvle);
 						}
 						else if(!$cp)
 						{
-							$insertvle = "INSERT INTO ville (nom_ville) VALUES ('$ville')"; //ajout de la ville en BDD 
+							$insertvle = "INSERT INTO ville (ville_nom_reel) VALUES ('$ville')"; //ajout de la ville en BDD 
 							mysqli_query($con, $insertvle);
 						}
 					}
@@ -366,7 +368,7 @@
 							$row = mysqli_fetch_array($query);
 							$rgn = $row['id'];
 
-							$xxx = "SELECT ville_departement FROM ville WHERE nom_ville = '$ville'";
+							$xxx = "SELECT ville_departement FROM ville WHERE ville_nom_reel = '$ville'";
 							$query = mysqli_query($con, $xxx);
 							$row = mysqli_fetch_array($query);
 							$yyy = $row['ville_departement'];
@@ -403,7 +405,7 @@
 				/* Ferme le jeu de résultats */
 				mysqli_free_result($result);
 
-				$query = mysqli_query($con, $idville); //"SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+				$query = mysqli_query($con, $idville); //"SELECT ville_id FROM ville WHERE ville_nom_reel = '$ville'";
 				$row = mysqli_fetch_array($query);
 				$vle = $row['ville_id'];
 
@@ -418,11 +420,11 @@
 					}
 					else //ici on teste l'adresse et la ville
 					{
-						$test = "SELECT adresse, nom_ville FROM salle, ville WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id";
+						$test = "SELECT adresse, ville_nom_reel FROM salle, ville WHERE nom_salle = '$salle' AND salle.id_ville = ville.ville_id";
 						$query = mysqli_query($con, $test);
 						$row = mysqli_fetch_array($query);
 						$test_adresse = $row['adresse'];
-						$test_ville = $row['nom_ville'];
+						$test_ville = $row['ville_nom_reel'];
 						if($test_adresse != $adresse) //si l'adresse a été modifiée
 						{
 							$insertadresse = "UPDATE salle SET adresse = '$adresse' WHERE nom_salle = '$salle'";
@@ -430,7 +432,7 @@
 						}
 						if($test_ville != $ville) //si la ville a été modifiée
 						{
-							$test = "SELECT ville_id FROM ville WHERE nom_ville = '$ville'";
+							$test = "SELECT ville_id FROM ville WHERE ville_nom_reel = '$ville'";
 							$query = mysqli_query($con, $test);
 							$row = mysqli_fetch_array($query);
 							$test_id = $row['ville_id'];
@@ -445,11 +447,25 @@
 					$sle = $row['id_salle'];
 					if(isset($_SESSION['pseudo']))
 					{
-						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$sle', NOW(), '$fb', '$ticket', '$idpseudo')";
+						if($heure)
+						{
+							$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$heure', '$sle', NOW(), '$fb', '$ticket', '$idpseudo')";
+						}
+						else
+						{
+							$sql = "INSERT INTO concert (datec, fksalle, date_ajout, lien_fb, lien_ticket, user_ajout) VALUES ('$date', '$sle', NOW(), '$fb', '$ticket', '$idpseudo')";
+						}
 					}
 					else
 					{
-						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$sle', NOW(), '$fb', '$ticket')";
+						if($heure)
+						{
+							$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$sle', NOW(), '$fb', '$ticket')";
+						}
+						else
+						{
+							$sql = "INSERT INTO concert (datec, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$sle', NOW(), '$fb', '$ticket')";
+						}
 					}
 				}
 				else //concert en extérieur
@@ -469,6 +485,7 @@
 						$sql = "INSERT INTO concert (datec, heure, fksalle, date_ajout, lien_fb, lien_ticket) VALUES ('$date', '$heure', '$exte', NOW(), '$fb', '$ticket')";
 					}
 				}
+
 				if(mysqli_query($con, $sql))
 				{
 					$idconcert = "SELECT MAX(id_concert) AS id_max FROM concert";

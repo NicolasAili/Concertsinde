@@ -17,7 +17,7 @@
 		{
 			foreach ($input as $key => $value) 
 			{
-				preg_match('#[a-zA-Z0-9\'&$ ôê]+[-]?[a-zA-Z0-9\'&$ ôê]+[-]?[a-zA-Z0-9\'&$ ôê]+[-]?#', $value, $matches);
+				preg_match('#[a-zA-Z0-9\'&$ ôêéèÉÈÇ]+[-]?[a-zA-Z0-9\'&$ ôêéèÉÈÇ]+[-]?[a-zA-Z0-9\'&$ ôêéèÉÈÇ]+[-]?#', $value, $matches);
 				$matches = implode($matches);
 				if(strlen($matches) != strlen($value))
 				{

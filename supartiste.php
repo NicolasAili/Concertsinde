@@ -118,7 +118,7 @@
 							$rowdpt['nom_departement'] = NULL;
 							$rowrgn['nom_pays'] = NULL;
 							$rowrgn['nom_region'] = NULL;
-							$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
+							$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, ville_nom_reel, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 							$resultx = mysqli_query($con, $str);
 							$row_cnt = mysqli_num_rows($resultx);
 							$row = mysqli_fetch_array($resultx);
@@ -157,7 +157,7 @@
 										unset($artistes_arr);
 										if($row_cnt == 1)
 										{
-											echo $row['nom_artiste'];
+											echo utf8_encode($row['nom_artiste']);
 											$artistes_arr[0] = $row['nom_artiste'];
 										}
 										else
@@ -170,11 +170,11 @@
 												$artistes_arr[$i-1] = $rowart['nom_artiste'];
 												if($artiste == $rowart['nom_artiste'])
 												{
-													echo $rowart['nom_artiste'];
+													echo utf8_encode($rowart['nom_artiste']);
 												}
 												else
 												{
-													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo utf8_encode($rowart['nom_artiste']); echo '</a>';
 												}
 												if($i < $row_cnt)
 												{
@@ -301,11 +301,11 @@
 										else
 										{
 											?>
-											<div class="salle"> <?php echo  $row['nom_ext']; ?> </div><?php
+											<div class="salle"> <?php echo $row['nom_ext']; ?> </div><?php
 										}?>
 										<div class="ville"> 
 											<?php 
-												echo $row['nom_ville'];
+												echo utf8_encode($row['ville_nom_reel']);
 												if($row['ville_code_postal'])
 												{
 													?>
@@ -349,8 +349,8 @@
 										if($rowdpt['id_region'])
 										{
 											?>
-											<div class="pays"> <?php echo  $rowrgn['nom_pays']; ?> </div>
-											<div class="region"> <?php echo  $rowrgn['nom_region']; ?> </div> 
+											<div class="pays"> <?php echo utf8_encode($rowrgn['nom_pays']); ?> </div>
+											<div class="region"> <?php echo utf8_encode($rowrgn['nom_region']); ?> </div> 
 											<?php 
 										}
 										else
@@ -363,7 +363,7 @@
 										if($row['ville_departement'])
 										{
 											?>
-											<div class="departement"> <?php echo  $rowdpt['nom_departement']; ?> </div> 
+											<div class="departement"> <?php echo utf8_encode($rowdpt['nom_departement']); ?> </div> 
 											<?php
 										}
 										else
@@ -378,11 +378,31 @@
 								<div class="links">
 									<div class="fb"> 
 										<img alt="lien evenement" src="image/evenement.png">
-										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
+										<a <?php 
+											if (!$row['lien_fb'])
+											{
+												echo 'onclick="nolink();"';
+											}
+											else
+											{?>
+												href="<?php echo  $row['lien_fb']; ?>"<?php
+											}?>> 
+											Lien vers l'événement 
+										</a>
 									</div> 
 									<div class="ticket">
 										<img alt="lien billetterie" src="image/billetterie.png">
-										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
+										<a <?php 
+											if (!$row['lien_ticket'])
+											{
+												echo 'onclick="nolink();"';
+											}
+											else
+											{?>
+												href="<?php echo  $row['lien_ticket']; ?>"<?php
+											}?>> 
+											Lien vers la billetterie
+										</a>
 									</div> 
 								</div>
 								<form method="post" action="modifconcert.php" class="modif">
@@ -391,7 +411,7 @@
 									foreach ($artistes_arr as &$value) 
 									{
 										?>
-										<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
+										<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . utf8_encode($artistes_arr[$i]) . '"'; ?> >
 										
 										<?php
 										$i++;
@@ -399,13 +419,13 @@
 									<input type="hidden" class="indices" name="indices" <?php echo 'value="' . $i . '"' ?> > 
 									<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 									<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-									<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
+									<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . utf8_encode($row['nom_artiste']) . '"' ?> > 
 									<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 									<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-									<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
-									<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
-									<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
-									<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . $row['nom_ville'] . '"' ?> > 
+									<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . utf8_encode($rowrgn['nom_pays']) . '"' ?> > 
+									<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . utf8_encode($rowrgn['nom_region']) . '"' ?> > 
+									<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . utf8_encode($rowdpt['nom_departement']) . '"' ?> > 
+									<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . utf8_encode($row['ville_nom_reel']) . '"' ?> > 
 									<input type="hidden" class="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
 									<input type="hidden" class="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
 									<input type="hidden" class="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
@@ -473,7 +493,7 @@
 							$rowrgn['nom_pays'] = NULL;
 							$rowrgn['nom_region'] = NULL;
 
-							$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, nom_ville, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
+							$str = "SELECT DISTINCT datec, heure, lien_fb, date_ajout, lien_ticket, artistes_concert.nom_artiste, user_ajout, user_modif, valide, id_salle, adresse, nom_salle, nom_ext, intext, ville_nom_reel, ville_code_postal, ville_departement FROM concert, artiste, salle, ville, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND concert.fksalle = salle.id_salle AND salle.id_ville = ville.ville_id AND concert.id_concert = $idconcert";
 							$resultx = mysqli_query($con, $str);
 							$row_cnt = mysqli_num_rows($resultx);
 							$row = mysqli_fetch_array($resultx);
@@ -501,7 +521,7 @@
 										unset($artistes_arr);
 										if($row_cnt == 1)
 										{
-											echo $row['nom_artiste'];
+											echo utf8_encode($row['nom_artiste']);
 										}
 										else
 										{
@@ -512,11 +532,11 @@
 											{
 												if($artiste == $rowart['nom_artiste'])
 												{
-													echo $rowart['nom_artiste'];
+													echo utf8_encode($rowart['nom_artiste']);
 												}
 												else
 												{
-													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
+													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo utf8_encode($rowart['nom_artiste']); echo '</a>';
 												}
 												if($i < $row_cnt)
 												{
@@ -643,11 +663,11 @@
 										else
 										{
 											?>
-											<div class="salle"> <?php echo  $row['nom_ext']; ?> </div><?php
+											<div class="salle"> <?php echo $row['nom_ext']; ?> </div><?php
 										}?>
 										<div class="ville"> 
 											<?php 
-												echo $row['nom_ville'];
+												echo utf8_encode($row['ville_nom_reel']);
 												if($row['ville_code_postal'])
 												{
 													?>
@@ -691,8 +711,8 @@
 										if($rowdpt['id_region'])
 										{
 											?>
-											<div class="pays"> <?php echo  $rowrgn['nom_pays']; ?> </div>
-											<div class="region"> <?php echo  $rowrgn['nom_region']; ?> </div> 
+											<div class="pays"> <?php echo utf8_encode($rowrgn['nom_pays']); ?> </div>
+											<div class="region"> <?php echo utf8_encode($rowrgn['nom_region']); ?> </div> 
 											<?php 
 										}
 										else
@@ -705,7 +725,7 @@
 										if($row['ville_departement'])
 										{
 											?>
-											<div class="departement"> <?php echo  $rowdpt['nom_departement']; ?> </div> 
+											<div class="departement"> <?php echo utf8_encode($rowdpt['nom_departement']); ?> </div> 
 											<?php
 										}
 										else
@@ -720,11 +740,31 @@
 								<div class="links">
 									<div class="fb">
 										<img alt="lien evenement" src="image/evenement.png">
-										<a href="<?php echo  $row['lien_fb']; ?>"> Lien vers l'événement </a>
+										<a <?php 
+											if (!$row['lien_fb'])
+											{
+												echo 'onclick="nolink();"';
+											}
+											else
+											{?>
+												href="<?php echo  $row['lien_fb']; ?>"<?php
+											}?>> 
+											Lien vers l'événement 
+										</a>
 									</div> 
 									<div class="ticket">
 										<img alt="lien billetterie" src="image/billetterie.png">
-										<a href="<?php echo  $row['lien_ticket']; ?>"> Lien vers la billetterie </a>
+										<a <?php 
+											if (!$row['lien_ticket'])
+											{
+												echo 'onclick="nolink();"';
+											}
+											else
+											{?>
+												href="<?php echo  $row['lien_ticket']; ?>"<?php
+											}?>> 
+											Lien vers la billetterie
+										</a>
 									</div> 
 								</div>
 							</div>

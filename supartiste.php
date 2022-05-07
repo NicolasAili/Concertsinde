@@ -89,7 +89,7 @@
 					}?>
 				</div>
 			</div><?php
-			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec >= NOW() ORDER BY datec ASC;";
+			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec >= DATE_FORMAT(NOW(), '%y-%m-%d') ORDER BY datec ASC;";
 			$result = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($result);
 			?>
@@ -157,7 +157,7 @@
 										unset($artistes_arr);
 										if($row_cnt == 1)
 										{
-											echo utf8_encode($row['nom_artiste']);
+											echo $row['nom_artiste'];
 											$artistes_arr[0] = $row['nom_artiste'];
 										}
 										else
@@ -170,11 +170,11 @@
 												$artistes_arr[$i-1] = $rowart['nom_artiste'];
 												if($artiste == $rowart['nom_artiste'])
 												{
-													echo utf8_encode($rowart['nom_artiste']);
+													echo $rowart['nom_artiste'];
 												}
 												else
 												{
-													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo utf8_encode($rowart['nom_artiste']); echo '</a>';
+													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
 												}
 												if($i < $row_cnt)
 												{
@@ -305,7 +305,7 @@
 										}?>
 										<div class="ville"> 
 											<?php 
-												echo utf8_encode($row['ville_nom_reel']);
+												echo $row['ville_nom_reel'];
 												if($row['ville_code_postal'])
 												{
 													?>
@@ -349,8 +349,8 @@
 										if($rowdpt['id_region'])
 										{
 											?>
-											<div class="pays"> <?php echo utf8_encode($rowrgn['nom_pays']); ?> </div>
-											<div class="region"> <?php echo utf8_encode($rowrgn['nom_region']); ?> </div> 
+											<div class="pays"> <?php echo $rowrgn['nom_pays']; ?> </div>
+											<div class="region"> <?php echo $rowrgn['nom_region']; ?> </div> 
 											<?php 
 										}
 										else
@@ -363,7 +363,7 @@
 										if($row['ville_departement'])
 										{
 											?>
-											<div class="departement"> <?php echo utf8_encode($rowdpt['nom_departement']); ?> </div> 
+											<div class="departement"> <?php echo $rowdpt['nom_departement']; ?> </div> 
 											<?php
 										}
 										else
@@ -411,7 +411,7 @@
 									foreach ($artistes_arr as &$value) 
 									{
 										?>
-										<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . utf8_encode($artistes_arr[$i]) . '"'; ?> >
+										<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
 										
 										<?php
 										$i++;
@@ -419,13 +419,13 @@
 									<input type="hidden" class="indices" name="indices" <?php echo 'value="' . $i . '"' ?> > 
 									<input type="hidden" class="idpost" name="idpost" <?php echo 'value="' . $idconcert . '"' ?> > 
 									<input type="hidden" class="idsallepost" name="idsallepost" <?php echo 'value="' . $row['id_salle'] . '"' ?> > 
-									<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . utf8_encode($row['nom_artiste']) . '"' ?> > 
+									<input type="hidden" class="artistepost" name="artistepost" <?php echo 'value="' . $row['nom_artiste'] . '"' ?> > 
 									<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 									<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-									<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . utf8_encode($rowrgn['nom_pays']) . '"' ?> > 
-									<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . utf8_encode($rowrgn['nom_region']) . '"' ?> > 
-									<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . utf8_encode($rowdpt['nom_departement']) . '"' ?> > 
-									<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . utf8_encode($row['ville_nom_reel']) . '"' ?> > 
+									<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
+									<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
+									<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
+									<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . $row['ville_nom_reel'] . '"' ?> > 
 									<input type="hidden" class="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
 									<input type="hidden" class="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
 									<input type="hidden" class="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
@@ -473,7 +473,7 @@
 		 	</div>
 		 	<div id="archivesall"><?php
 		 		echo "<h2> Concerts archivés </h2>";
-				$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec < NOW() ORDER BY datec DESC";
+				$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec < DATE_FORMAT(NOW(), '%y-%m-%d') ORDER BY datec DESC";
 				$result = mysqli_query($con, $sql);
 				$row = mysqli_fetch_array($result);
 				if(!$row)
@@ -521,7 +521,7 @@
 										unset($artistes_arr);
 										if($row_cnt == 1)
 										{
-											echo utf8_encode($row['nom_artiste']);
+											echo $row['nom_artiste'];
 										}
 										else
 										{
@@ -532,11 +532,11 @@
 											{
 												if($artiste == $rowart['nom_artiste'])
 												{
-													echo utf8_encode($rowart['nom_artiste']);
+													echo $rowart['nom_artiste'];
 												}
 												else
 												{
-													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo utf8_encode($rowart['nom_artiste']); echo '</a>';
+													echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
 												}
 												if($i < $row_cnt)
 												{
@@ -667,7 +667,7 @@
 										}?>
 										<div class="ville"> 
 											<?php 
-												echo utf8_encode($row['ville_nom_reel']);
+												echo $row['ville_nom_reel'];
 												if($row['ville_code_postal'])
 												{
 													?>
@@ -711,8 +711,8 @@
 										if($rowdpt['id_region'])
 										{
 											?>
-											<div class="pays"> <?php echo utf8_encode($rowrgn['nom_pays']); ?> </div>
-											<div class="region"> <?php echo utf8_encode($rowrgn['nom_region']); ?> </div> 
+											<div class="pays"> <?php echo $rowrgn['nom_pays']; ?> </div>
+											<div class="region"> <?php echo $rowrgn['nom_region']; ?> </div> 
 											<?php 
 										}
 										else
@@ -725,7 +725,7 @@
 										if($row['ville_departement'])
 										{
 											?>
-											<div class="departement"> <?php echo utf8_encode($rowdpt['nom_departement']); ?> </div> 
+											<div class="departement"> <?php echo $rowdpt['nom_departement']; ?> </div> 
 											<?php
 										}
 										else

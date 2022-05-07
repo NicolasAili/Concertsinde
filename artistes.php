@@ -62,7 +62,7 @@ Support(s) : pc perso et ecran perso
 				$count = 0;
 			?>
 			<div id = "ajoutartiste">
-					<h3> Ajouter un artiste </h3>
+					<h3> Ajouter un artiste ou un groupe</h3>
 					<form method="post" class="connect" action="action/addartist.php">
 						<input type="text" name="artisteajout" id="artisteajout" placeholder="Nom artiste">
 						<textarea name="description" id="description" placeholder="Ajoutez une description (facultatif)"></textarea> 

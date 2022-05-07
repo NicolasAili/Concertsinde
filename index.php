@@ -83,7 +83,7 @@
 				var height = $(window).height();
 				if (width<900)
 				{
-					alert('Le site mobile n\'est pas encore fonctionnel');
+					alert('Le site mobile n\'est pas encore fonctionnel, vous pouvez néanmoins naviguer librement sur le site. Tips: allez dans les options de votre navigateur et cochez "afficher la version pour ordinateur"');
 				}
 		    });
 

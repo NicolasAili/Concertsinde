@@ -21,4 +21,5 @@
 		printf("Échec de la connexion : %s\n", mysqli_connect_error());
 		exit();
 	}
+	mysqli_set_charset($con, "utf8mb4");
 ?>

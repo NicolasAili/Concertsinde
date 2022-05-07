@@ -42,7 +42,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 		parse_str($string);
 		$finalstring = explode("&", $string);
 		$filtre = " datec ASC";
-		$archivesql = " AND concert.datec >= NOW()";
+		$archivesql = " AND concert.datec >= DATE_FORMAT(NOW(), '%%y-%%m-%%d')";
 		
 		$add = $_GET['add'];
 		$modif = $_GET['modif'];
@@ -592,7 +592,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					switch ($_GET['archive']) 
 					{
 						case 'yes':
-							$archivesql = " AND concert.datec <= NOW()";
+							$archivesql = " AND concert.datec <= DATE_FORMAT(NOW(), '%%y-%%m-%%d')";
 							if($filter != "artisteup" && $filter != "artistedown")
 							{
 								if($filtre == " datec ASC")
@@ -606,10 +606,10 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 							}
 							break;
 						case 'no':
-							$archivesql = " AND concert.datec >= NOW()";
+							$archivesql = " AND concert.datec >= DATE_FORMAT(NOW(), '%%y-%%m-%%d')";
 							break;
 						default:
-							$archivesql = " AND concert.datec >= NOW()";
+							$archivesql = " AND concert.datec >= DATE_FORMAT(NOW(), '%%y-%%m-%%d')";
 							break;
 					}
 					?>
@@ -654,6 +654,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 					{
 						$strf = sprintf("SELECT DISTINCT concert.id_concert FROM concert, artistes_concert WHERE 1 AND concert.id_concert = artistes_concert.id_concert". $archivesql ." ORDER BY". $filtre ."");
 					}
+					
 					$result = mysqli_query($con, $strf);
 					$cnt_row = mysqli_num_rows($result);
 					?>
@@ -817,7 +818,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									unset($artistes_arr);
 									if($row_cnt == 1)
 									{
-										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo utf8_encode($row['nom_artiste']); echo '</a>';
+										echo '<a class="artistetxt" href="supartiste.php?artiste=' . $row['nom_artiste'] . '">'; echo $row['nom_artiste']; echo '</a>';
 										$artistes_arr[0] = $row['nom_artiste'];
 									}
 									else
@@ -828,7 +829,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 										while ($rowart = mysqli_fetch_array($resultx)) 
 										{
 											$artistes_arr[$i-1] = $rowart['nom_artiste'];
-											echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo utf8_encode($rowart['nom_artiste']); echo '</a>';
+											echo '<a class="artistetxt" href="supartiste.php?artiste=' . $rowart['nom_artiste'] . '">'; echo $rowart['nom_artiste']; echo '</a>';
 											if($i < $row_cnt)
 											{
 												echo ' / ';
@@ -957,7 +958,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									}?>
 									<div class="ville"> 
 										<?php 
-											echo utf8_encode($row['ville_nom_reel']);
+											echo $row['ville_nom_reel'];
 											if($row['ville_code_postal'])
 											{
 												?>
@@ -1009,8 +1010,8 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									if($rowdpt['id_region'])
 									{
 										?>
-										<div class="pays"> <?php echo utf8_encode($rowrgn['nom_pays']); ?> </div>
-										<div class="region"> <?php echo utf8_encode($rowrgn['nom_region']); ?> </div> 
+										<div class="pays"> <?php echo $rowrgn['nom_pays']; ?> </div>
+										<div class="region"> <?php echo $rowrgn['nom_region']; ?> </div> 
 										<?php 
 									}
 									else
@@ -1023,7 +1024,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 									if($row['ville_departement'])
 									{
 										?>
-										<div class="departement"> <?php echo utf8_encode($rowdpt['nom_departement']); ?> </div> 
+										<div class="departement"> <?php echo $rowdpt['nom_departement']; ?> </div> 
 										<?php
 									}
 									else
@@ -1073,17 +1074,17 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								foreach ($artistes_arr as &$value) 
 								{
 									?>
-									<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . utf8_encode($artistes_arr[$i]) . '"'; ?> >
+									<input type="hidden" <?php echo 'class="artistepost' . $i . '"'; echo 'name="artistepost' . $i . '"'; echo 'value="' . $artistes_arr[$i] . '"'; ?> >
 								<?php
 									$i++;
 								}?>
 								<input type="hidden" class="indices" name="indices" <?php echo 'value="' . $i . '"' ?> > 
 								<input type="hidden" class="datepost" name="datepost" <?php echo 'value="' . $row['datec'] . '"' ?> > 
 								<input type="hidden" class="heurepost" name="heurepost" <?php echo 'value="' . $row['heure'] . '"' ?> > 
-								<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . utf8_encode($rowrgn['nom_pays']) . '"' ?> > 
-								<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . utf8_encode($rowrgn['nom_region']) . '"' ?> > 
-								<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . utf8_encode($rowdpt['nom_departement']) . '"' ?> > 
-								<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . utf8_encode($row['ville_nom_reel']) . '"' ?> > 
+								<input type="hidden" class="payspost" name="payspost" <?php echo 'value="' . $rowrgn['nom_pays'] . '"' ?> > 
+								<input type="hidden" class="regionpost" name="regionpost" <?php echo 'value="' . $rowrgn['nom_region'] . '"' ?> > 
+								<input type="hidden" class="departementpost" name="departementpost" <?php echo 'value="' . $rowdpt['nom_departement'] . '"' ?> > 
+								<input type="hidden" class="villepost" name="villepost" <?php echo 'value="' . $row['ville_nom_reel'] . '"' ?> > 
 								<input type="hidden" class="cppost" name="cppost" <?php echo 'value="' . $row['ville_code_postal'] . '"' ?> > 
 								<input type="hidden" class="intextpost" name="intextpost" <?php echo 'value="' . $row['intext'] . '"' ?> > 
 								<input type="hidden" class="extpost" name="extpost" <?php echo 'value="' . $row['nom_ext'] . '"' ?> > 
@@ -1092,7 +1093,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 								<input type="hidden" class="fbpost" name="fbpost" <?php echo 'value="' . $row['lien_fb'] . '"' ?> > 
 								<input type="hidden" class="ticketpost" name="ticketpost" <?php echo 'value="' . $row['lien_ticket'] . '"' ?> > 
 								<?php
-								if($archivesql == " AND concert.datec >= NOW()")
+								if($archivesql == " AND concert.datec >= DATE_FORMAT(NOW(), '%%y-%%m-%%d')")
 								{?>
 									<div class="footer"><?php
 										if ($pseudo)

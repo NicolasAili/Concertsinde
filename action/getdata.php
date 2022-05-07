@@ -11,10 +11,12 @@
 ?>
 <?php
   include '../php/error.php';
+  
   header('Content-type: application/json');
-  if( isset( $_POST['search'] ) )
+  if( isset( $_POST['search'] ))
   {
     require('../php/database.php');
+    
     $name = $_POST['search'];
 
     require ('../php/inject.php'); //0) ajouter inject et définir redirect
@@ -41,8 +43,6 @@
     }
     else if($test == 'ville')
     {
-      echo 'okville';
-      echo '<br>';
       $str = "SELECT ville_nom_reel FROM ville WHERE ville_nom_reel LIKE '%{$name}%' LIMIT 20";
       $result = mysqli_query($con, $str);
       while($row = mysqli_fetch_array($result))
@@ -101,6 +101,7 @@
     {
       $response[] = array("label"=>'norep');
     }
-    echo json_encode($response);
+
+    echo json_encode($response); 
   }
 ?>

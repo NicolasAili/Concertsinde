@@ -67,65 +67,10 @@ _________________________________________________
 
 Suivi fichiers modifiés depuis dernier ftp :
 
-	modifié :         ajoutconcert.php
-	modifié :         allconcerts.php
-	modifié :         artistes.php
-	modifié :         classement.php
-	modifié :         connexion.php 
-    modifié :         contact.php
-    modifié :         inbox.php
-	modifié :         inboxmsg.php
-	modifié :         index.php
-	modifié :         inscrire.php
-	modifié :         modifconcert.php
-	modifié :         modifconcert.php
-	modifié :         news.php
-	modifié :         newscontent.php
-	modifié :         nojs.php
-	modifié :         oubli.php
-	modifié :         presentation.php
-	modifié :         profil.php
-	modifié :         searchresult.php
-	modifié :         supartiste.php
-	modifié :         support.php
-	modifié :         supportshow.php
-	modifié :         resetpassword.php
-
-	modifié :         css/body/ajoutconcert.css
-	modifié :         css/body/allconcerts.css
-	modifié :         css/body/superartiste.css
-    modifié :         css/footer.css
-	modifié :         css/formulaire.css
-    modifié :         css/header.css
-    modifié :         css/main.css
-    modifié :         css/reseaux.css
-	modifié :         css/body/modifconcert.css
-	modifié :         css\body\modifconcertvalid.css
-
-
-	modifié :         php/inject.php
-    modifié :         php/base.php
-	nouveau fichier : php/https.php
-
-	modifié :         action/concert.php
-	modifié :         action/getdata.php
-
-	modifié :		  js\scriptform.js
-	modifié :         js/verifmodifconcert.js
-
-	modifié :         contenu/reseaux.php
-
-	nouveau fichier : image/favicon.png
-
-	modifié :         superadmin/contact.php
 
 	_______________________________
 
 	Suivi BDD:
-
-	2 tables artistes
-	Dans modification ajouter champ + NULL
-	Adresse dans salle : NULL
 
 
 

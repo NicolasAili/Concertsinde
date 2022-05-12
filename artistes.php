@@ -153,7 +153,8 @@ Support(s) : pc perso et ecran perso
 							</div>
 							<div class="nbconcert">
 								<?php
-									$nbr = "SELECT COUNT(*) FROM artistes_concert, concert WHERE Nom_artiste = '$artistecnt' AND datec > NOW() AND concert.id_concert = artistes_concert.id_concert";
+									$artistecnt = mysqli_real_escape_string($con, $artistecnt); 
+									$nbr = "SELECT COUNT(*) FROM artistes_concert, concert WHERE Nom_artiste = '$artistecnt' AND concert.datec >= DATE_FORMAT(NOW(), '%y-%m-%d') AND concert.id_concert = artistes_concert.id_concert";
 									$resultnbr = mysqli_query($con, $nbr);
 									$rownbr = mysqli_fetch_array($resultnbr);
 									echo $rownbr[0];

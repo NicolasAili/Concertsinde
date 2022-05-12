@@ -28,10 +28,10 @@
 			$values = array($artiste); //1) mettre données dans un arrray
 			$inject = inject($values, null); //2) les vérifier
 			$validate = validate($inject, $redirect); //3)validation de tous les champs
-			if($validate == 0) //4) si pas d'injection : ajout des variables
+			/*if($validate == 0) //4) si pas d'injection : ajout des variables
 			{
 			  $artiste = mysqli_real_escape_string($con, $artiste); 
-			}
+			}*/
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/superartiste.css">
 	</head>
@@ -43,7 +43,7 @@
 		<?php include 'contenu/reseaux.php'; ?>
 		<div id="main">
 			<?php
-					$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
+				$sql = "SELECT admin FROM utilisateur WHERE pseudo = '$pseudo'";
 				$query = mysqli_query($con, $sql);
 				$row = mysqli_fetch_array($query);
 				$testadmin = $row['admin'];
@@ -94,15 +94,15 @@
 			$row = mysqli_fetch_array($result);
 			?>
 			<div id="bandeau">
-				<span id="spanconcert" onclick="concert();managefooter();">Concerts</span>
-				<span id="spanarchive" onclick="archive();managefooter();">Archives</span>
+				<span id="spanconcert" onclick="concert();">Concerts</span>
+				<span id="spanarchive" onclick="archive();">Archives</span>
 			</div>
 			<div id="futuresconcerts">
 				<?php
 				echo "<h2> Concerts à venir </h2>";
 				if(!$row)
 				{?>
-					<div id="noconcert" onclick="archive(); managefooter();"><?php
+					<div id="noconcert" onclick="archive();"><?php
 						echo "Aucun concert n'est prévu pour cet artiste, consultez les archives";?>
 					</div><?php
 				}
@@ -800,19 +800,6 @@
 		        $('#spanconcert').css('cursor', 'pointer');
 				$('#spanarchive').css('border-bottom', '3px solid #df1c1c');
 				$('#spanconcert').css('border-bottom', '3px solid transparent');
-			}
-
-			function managefooter()
-			{
-				if ($( window ).height() == $( document ).height()) 
-				{
-					$('footer').css('position', 'absolute');
-					$('footer').css('bottom', '0');
-				}
-				else
-				{
-					$('footer').css('position', 'static');
-				}
 			}
 		</script>
 

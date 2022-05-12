@@ -112,7 +112,7 @@
 				<div class="result"> 
 					<?php 
 					$verif = 1;
-					echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . $row['ville_code_postal'] . ")";
+					echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . ' ' . $row['ville_code_postal'] . ")";
 					echo '</a>';?> 
 				</div> 
 				<?php
@@ -127,7 +127,7 @@
 					<div class="result"> 
 						<?php 
 						$verif = 1;
-						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . $row['ville_code_postal'] . ")";
+						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . ' ' . $row['ville_code_postal'] . ")";
 						echo '</a>';?> 
 					</div> 
 					<?php
@@ -135,7 +135,7 @@
 				while($row = mysqli_fetch_array($result))
 				{?>
 					<div class="result"> <?php
-						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . $row['ville_code_postal'] . ")";
+						echo '<a href="allconcerts.php?salle=' . $row['Nom_salle'] . '">' . $row['Nom_salle'] . " (" . $row['ville_nom_reel'] . ' ' . $row['ville_code_postal'] . ")";
 						echo '</a>';?>
 					</div> <?php
 				}

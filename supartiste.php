@@ -70,6 +70,7 @@
 				}?>
 				<div id="partunun"><?php
 					echo '<h1>' . $artiste . '</h1>';
+					$artiste = mysqli_real_escape_string($con, $artiste); 
 					$sql = "SELECT description FROM artiste WHERE Nom_artiste = '$artiste' ";
 					$result = mysqli_query($con, $sql);
 					$row = mysqli_fetch_array($result);
@@ -89,7 +90,7 @@
 					}?>
 				</div>
 			</div><?php
-			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec >= DATE_FORMAT(NOW(), '%y-%m-%d') ORDER BY datec ASC;";
+			$sql = "SELECT DISTINCT artistes_concert.id_concert FROM concert, artistes_concert WHERE concert.id_concert = artistes_concert.id_concert AND Nom_artiste = '$artiste' AND concert.datec >= DATE_FORMAT(NOW(), '%y-%m-%d') ORDER BY datec ASC";
 			$result = mysqli_query($con, $sql);
 			$row = mysqli_fetch_array($result);
 			?>
@@ -138,7 +139,7 @@
 							?> 
 							<div class="inwhile"> 
 								<div class="artiste"> 
-									<div style="margin-left: 2%; width: 8%;">
+									<div style="margin-left: 2%; width: 8%; padding-right: 12px;">
 										<?php 
 										if($row['valide'] == 0)
 										{?>
@@ -513,7 +514,7 @@
 							?> 
 							<div class="inwhile"> 
 								<div class="artiste"> 
-									<div style="margin-left: 2%; width: 8%;">
+									<div style="margin-left: 2%; width: 8%; padding-right: 12px;">
 										<img alt="archive" class="image" src="image/archive.png" height="50" width="50">
 									</div>
 									<?php

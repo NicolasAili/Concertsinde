@@ -17,7 +17,8 @@
     $name = $_POST['input'];
 
     require('../php/database.php');
-    $name = mysqli_real_escape_string($con, $name); 
+    $name = mysqli_real_escape_string($con, $name);
+
     $response = array(); //var qui contiendra nos données JSON
     if($name)
     {
@@ -87,7 +88,18 @@
           }
         break;
         case "ville":
-          $data = "SELECT ville_nom_reel, ville_code_postal, ville_id FROM ville WHERE ville_nom_reel = '$name'";
+          if(substr($name, -1, 1) == ")")
+          {
+            $length = strlen($name);
+            $lengthselect = $length - 8;
+            $codepostal = substr($name, -6, 5); //code postal
+            $villeselect = substr($name, 0, $lengthselect); //ville
+            $data = "SELECT ville_nom_reel, ville_code_postal, ville_id FROM ville WHERE ville_nom_reel = '$villeselect' AND ville_code_postal = '$codepostal'";
+          }
+          else
+          {
+            $data = "SELECT ville_nom_reel, ville_code_postal, ville_id FROM ville WHERE ville_nom_reel = '$name'";
+          }
           $query = mysqli_query($con, $data);
           if($row = mysqli_fetch_array($query)) //si ville trouvee
           {
@@ -110,7 +122,7 @@
               $id_region = $rowdetectrgn['id_region'];
               if($id_region) //departement + region(+pays) + ville
               {
-                $ville = "SELECT nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.ville_nom_reel = '$numdpt' AND  ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
+                $ville = "SELECT nom_departement, nom_region, nom_pays FROM ville, departement, region, pays WHERE ville.ville_nom_reel = '$numdpt' AND ville.ville_code_postal = '$ville_cp' AND ville.ville_departement = departement.numero AND departement.id_region = region.id AND region.id_pays = pays.id";
                 $query = mysqli_query($con, $ville);
                 $row = mysqli_fetch_array($query);
 

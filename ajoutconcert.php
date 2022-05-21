@@ -19,6 +19,7 @@
 			include 'php/css.php'; 
 			include 'php/js.php'; 
 			require 'php/database.php';
+			$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 		?>
 
 		<script>$(this.target).find('input').autocomplete();</script>
@@ -49,7 +50,10 @@
 							<input type="date" name="date" id="date" required>
 						</div>
 						<div id="heurediv">
-							<label for="heure">Heure</label> 
+							<label for="heure">Heure <?php if($lang == 'en')
+							{
+								echo ' (mm:hh AM/PM)';
+							}?></label> 
 							<input type="time" name="heure" id="heure">
 						</div>
 					</div>

@@ -172,7 +172,10 @@
 								<input type="hidden" id="datepost" name="datepost" <?php echo 'value="' . $date . '"' ?> >
 							</div>
 							<div id="heurediv">
-								<label for="heure">Heure </label> 
+								<label for="heure">Heure <?php if($lang == 'en')
+								{
+									echo ' (mm:hh AM/PM)';
+								}?></label> 
 								<input type="time" name="heure" <?php echo 'value="' . $heure . '"' ?>  id="heure">
 								<input type="hidden" id="heurepost" name="heurepost" <?php echo 'value="' . $heure . '"' ?> >
 							</div>

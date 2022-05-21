@@ -57,18 +57,20 @@
 
 /* ____________________________________
 
--ajouter les concerts
--reset oubli php
--github
--upload oubli php
-
-_________________________________________________
-
 
 Suivi fichiers modifiés depuis dernier ftp :
 
+	modifié :         artistes.php
+#       nouveau fichier : deconnexion.php
+#       modifié :         searchresult.php
+#       modifié :         supartiste.php
+#       modifié :         superadmin/saccueil.php
+#       nouveau fichier : superadmin/salles.php
+#       nouveau fichier : superadmin/sallesmodif.php
 
-	_______________________________
+
+
+______________________________________________
 
 	Suivi BDD:
 

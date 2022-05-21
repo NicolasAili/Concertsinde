@@ -57,11 +57,11 @@
                 <?php
                 if(!$salle)
                 {
-                    $sql = "SELECT DISTINCT id_salle, nom_salle, nom_ext, adresse, intext FROM salle";
+                    $sql = "SELECT DISTINCT id_salle, nom_salle, nom_ext, adresse, intext, ville_nom_reel FROM salle, ville WHERE salle.id_ville = ville.ville_id";
                 }
                 else
                 {
-                    $sql = "SELECT id_salle, nom_salle, nom_ext, adresse, intext FROM salle WHERE nom_salle = '$salle'";
+                    $sql = "SELECT id_salle, nom_salle, nom_ext, adresse, intext, ville_nom_reel FROM salle, ville WHERE nom_salle = '$salle' WHERE salle.id_ville = ville.ville_id";
                 }
                 $query = mysqli_query($con, $sql);
                 ?>
@@ -72,6 +72,7 @@
                     <th scope="col">nom salle</th>
                     <th scope="col">nom ext</th>
                     <th scope="col">adresse</th>
+                    <th scope="col">ville</th>
                     </tr>
                     <?php
                     while($row = mysqli_fetch_array($query))
@@ -81,6 +82,7 @@
                                 <td><input type="text" name="nomsalle" <?php echo 'value="' . $row['nom_salle'] . '"' ?> id="nomsalle"></td>
                                 <td><input type="text" name="nomext" <?php echo 'value="' . $row['nom_ext'] . '"' ?> id="nomext"></td>
                                 <td><input type="text" name="adresse" <?php echo 'value="' . $row['adresse'] . '"' ?> id="adresse"></td>
+                                <th scope="row"><?php echo $row['ville_nom_reel']; ?></th>
                                 <input type="hidden" class="idsalle" name="idsalle" <?php echo 'value="' . $row['id_salle'] . '"' ?> >
                                 <td><input type="submit" value="Valider" class="Valider" name="modsuppr" href=""></td>
                             </tr>

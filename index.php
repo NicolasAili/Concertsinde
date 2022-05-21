@@ -45,7 +45,7 @@
 				}?>
 			</div>
 		</header>
-		<?php include 'contenu/reseaux.php'; ?>
+		<?php include 'contenu/reseauxwhite.php'; ?>
 		<div id="main">
 			<?php
 				$pseudo = $_SESSION['pseudo'];

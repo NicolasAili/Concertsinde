@@ -282,6 +282,13 @@ function getdata(identifiant)
                         else
                         {
                             response( data );
+                            console.log(data[0].label);
+                            console.log(identifiant);
+                            if(identifiant == 'ville')
+                            {
+                                extract = data[0].label.length - 8;
+                                data[0].label = data[0].label.slice(0, extract);
+                            }
                             if(data.length == 1 && data[0].label == request.term)
                             {
                                 $( '#'+identifiant+'' ).autocomplete( "close" );
@@ -468,6 +475,17 @@ function retour()
 
 function submit()
 {
+    //verifier s'il y a le cp ou non
+    var champville = $("#ville").val();
+    var testcp = champville.slice(-1);
+
+    if(testcp == ')')
+    {
+        var extract = champville.length - 8;
+        var champvillemodif = champville.slice(0, extract);
+        $("#ville").val(champvillemodif);
+    }
+    
     $("#valider").attr("type", "submit");
     $("#valider").trigger('click');
     $("#dialog").attr("type", "hidden");

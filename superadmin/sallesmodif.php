@@ -17,6 +17,10 @@ $nomext = $_POST['nomext'];
 $adresse = $_POST['adresse'];
 $idsalle = $_POST['idsalle'];
 
+$nomsalle = mysqli_real_escape_string($con, $nomsalle);
+$nomext = mysqli_real_escape_string($con, $nomext);
+$adresse = mysqli_real_escape_string($con, $adresse);
+
 $sql = "UPDATE salle SET nom_salle = '$nomsalle', nom_ext = '$nomext', adresse = '$adresse' WHERE id_salle = '$idsalle' ";
 $query = mysqli_query($con ,$sql);
 echo "action effectuée avec succès";

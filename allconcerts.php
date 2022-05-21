@@ -792,7 +792,7 @@ Support(s) : pc boulot et ecran boulot, pc portable 2eme ecran
 						?> 
 						<div class="inwhile"> 
 							<div class="artiste"> 
-								<div style="margin-left: 2%; width: 8%;">
+								<div style="margin-left: 2%; width: 8%; padding-right: 12px;">
 									<?php 
 									if($archive == 'yes')
 									{?>

@@ -13,10 +13,10 @@
   include '../php/error.php';
   
   header('Content-type: application/json');
-  if( isset( $_POST['search'] ))
+  if( isset( $_POST['search'] ) )
   {
     require('../php/database.php');
-    
+
     $name = $_POST['search'];
 
     require ('../php/inject.php'); //0) ajouter inject et définir redirect
@@ -31,7 +31,7 @@
     }
 
     $test = $_POST['this'];
-    
+
     if($test == 'salle')
     {
       $str = "SELECT Nom_salle FROM salle WHERE Nom_salle LIKE '%{$name}%'";
@@ -43,11 +43,11 @@
     }
     else if($test == 'ville')
     {
-      $str = "SELECT ville_nom_reel FROM ville WHERE ville_nom_reel LIKE '%{$name}%' LIMIT 20";
+      $str = "SELECT ville_nom_reel, ville_code_postal FROM ville WHERE ville_nom_reel LIKE '%{$name}%' ORDER BY CHAR_LENGTH(ville_nom_reel) LIMIT 20";
       $result = mysqli_query($con, $str);
       while($row = mysqli_fetch_array($result))
       {
-        $response[] = array("label"=>$row['ville_nom_reel']);
+        $response[] = array("label"=>$row['ville_nom_reel'] . " (" . $row['ville_code_postal'] . ")");
       }
     }
     else if($test == 'departement')

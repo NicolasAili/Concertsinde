@@ -109,6 +109,13 @@ select#details
   margin-left: 3%;
 }
 
+#footer
+{
+  display: flex;
+  clear: both;
+  justify-content: center;
+}
+
 input.bouton
 { 
   width: 100px;

@@ -126,6 +126,15 @@ function getleave(identifiant)
                             }
                         break;
                         case "ville":
+                            var champville = $("#ville").val();
+                            var testcp = champville.slice(-1);
+
+                            if(testcp == ')')
+                            {
+                                var extract = champville.length - 8;
+                                var champvillemodif = champville.slice(0, extract);
+                                $("#ville").val(champvillemodif);
+                            }
                             if(data.test == 'erreur')
                             {
                                 $('#cp').val('');
@@ -476,7 +485,7 @@ function retour()
 function submit()
 {
     //verifier s'il y a le cp ou non
-    var champville = $("#ville").val();
+    /*var champville = $("#ville").val();
     var testcp = champville.slice(-1);
 
     if(testcp == ')')
@@ -484,7 +493,7 @@ function submit()
         var extract = champville.length - 8;
         var champvillemodif = champville.slice(0, extract);
         $("#ville").val(champvillemodif);
-    }
+    }*/
     
     $("#valider").attr("type", "submit");
     $("#valider").trigger('click');

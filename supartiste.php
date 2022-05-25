@@ -378,7 +378,7 @@
 								</div> 
 								<div class="links">
 									<div class="fb"> 
-										<img alt="lien evenement" src="image/evenement.png">
+										<img src="image/evenement.png" alt="lien_evenement" class="linksimg">
 										<a <?php 
 											if (!$row['lien_fb'])
 											{
@@ -390,9 +390,16 @@
 											}?>> 
 											Lien vers l'événement 
 										</a>
+										<?php 
+										if (!$row['lien_fb'])
+										{?>
+											<img src="image/attention.png" alt="pas de lien" class="nolink" title="Lien non renseigné">
+										<?php
+										}
+										?>
 									</div> 
 									<div class="ticket">
-										<img alt="lien billetterie" src="image/billetterie.png">
+										<img src="image/billetterie.png" alt="lien_billetterie" class="linksimg">
 										<a <?php 
 											if (!$row['lien_ticket'])
 											{
@@ -404,6 +411,13 @@
 											}?>> 
 											Lien vers la billetterie
 										</a>
+										<?php 
+										if (!$row['lien_ticket'])
+										{?>
+											<img src="image/attention.png" alt="pas de lien" class="nolink" title="Lien non renseigné">
+										<?php
+										}
+										?>
 									</div> 
 								</div>
 								<form method="post" action="modifconcert.php" class="modif">
@@ -740,7 +754,7 @@
 								</div> 
 								<div class="links">
 									<div class="fb">
-										<img alt="lien evenement" src="image/evenement.png">
+										<img src="image/evenement.png" alt="lien_evenement" class="linksimg">
 										<a <?php 
 											if (!$row['lien_fb'])
 											{
@@ -752,9 +766,16 @@
 											}?>> 
 											Lien vers l'événement 
 										</a>
+										<?php 
+										if (!$row['lien_fb'])
+										{?>
+											<img src="image/attention.png" alt="pas de lien" class="nolink" title="Lien non renseigné">
+										<?php
+										}
+										?>
 									</div> 
 									<div class="ticket">
-										<img alt="lien billetterie" src="image/billetterie.png">
+										<img src="image/billetterie.png" alt="lien_billetterie" class="linksimg">
 										<a <?php 
 											if (!$row['lien_ticket'])
 											{
@@ -766,6 +787,13 @@
 											}?>> 
 											Lien vers la billetterie
 										</a>
+										<?php 
+										if (!$row['lien_ticket'])
+										{?>
+											<img src="image/attention.png" alt="pas de lien" class="nolink" title="Lien non renseigné">
+										<?php
+										}
+										?>
 									</div> 
 								</div>
 							</div>

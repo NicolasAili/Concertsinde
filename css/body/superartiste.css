@@ -275,11 +275,18 @@ body
 	font-size: 1.02em
 }
 
-.fb > img, .ticket > img
+.linksimg
 {
 	width: 35px;
 	height: 35px;
 	margin-right: 5px;
+}
+
+.nolink
+{
+	width: 18px;
+	height: 18px;
+	padding-left: 10px;
 }
 
 .barrex
@@ -296,13 +303,6 @@ body
 	line-height: 1.1em;
 	overflow: hidden;
 	justify-content: space-between;
-}
-
-.fb > img, .ticket > img
-{
-	width: 35px;
-	height: 35px;
-	margin-right: 5px;
 }
 
 .fb, .ticket

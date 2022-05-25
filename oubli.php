@@ -13,17 +13,17 @@
 <html lang="fr">
 	<head>
 		<?php
-			include 'php/error.php';
+			/*include 'php/error.php';
 			require 'php/connectcookie.php';
 			include 'php/base.php';
 			include 'php/css.php';
 			include 'php/js.php';
-			require 'php/database.php';
+			require 'php/database.php';*/
 		?>
 		<link rel="stylesheet" type="text/css" href="css/body/oubli.css">
 	</head>
 	<?php
-	if(isset($_SESSION['pseudo']) == null)
+	/*if(isset($_SESSION['pseudo']) == null)
 	{?>
 		<body>
 			<header>
@@ -50,7 +50,8 @@
 	else
 	{
 		header("Location: profil.php");
-	}?>
+	}*/?>
+	Désolé, cette fonctionnalité est encore en cours d'implémentation. Merci de <a href="contact.php">me contacter</a> en précisant votre mail (identique à celui utilisé lors de votre inscription).
 </html>
 
 <?php
@@ -60,13 +61,22 @@
 
 Suivi fichiers modifiés depuis dernier ftp :
 
-	modifié :         artistes.php
-#       nouveau fichier : deconnexion.php
-#       modifié :         searchresult.php
+modifié :         action/detectsalle.php
+#       modifié :         action/getdata.php
+#       modifié :         ajoutconcert.php
+#       modifié :         allconcerts.php
+#       modifié :         contenu/reseaux.php
+#       nouveau fichier : contenu/reseauxwhite.php
+#       modifié :         css/body/allconcerts.css
+#       modifié :         css/body/superartiste.css
+#       modifié :         index.php
+#       modifié :         js/scriptform.js
+#       modifié :         modifconcert.php
+#       modifié :         oubli.php
+#       modifié :         php/inject.php
 #       modifié :         supartiste.php
-#       modifié :         superadmin/saccueil.php
-#       nouveau fichier : superadmin/salles.php
-#       nouveau fichier : superadmin/sallesmodif.php
+#       modifié :         superadmin/salles.php
+#       modifié :         superadmin/sallesmodif.php
 
 
 

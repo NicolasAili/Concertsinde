@@ -106,6 +106,7 @@
             $ville_id = $row['ville_id'];
             $ville_cp = $row['ville_code_postal'];
             $numdpt = $row['ville_nom_reel'];
+            $numdpt = mysqli_real_escape_string($con, $numdpt);
             if(!$ville_cp)
             {
               $ville_cp = 'nodata';

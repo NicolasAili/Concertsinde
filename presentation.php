@@ -31,10 +31,10 @@
 			<h1>+ Présentation</h1>
 			<div id="presentation">
 				<br><br>
-				L'objectif de notre site web est de permettre aux fans de rap indépendant de pouvoir facilement être au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite.
+				L'objectif de ce site web est de permettre aux fans de rap indépendant de pouvoir facilement être au courant des concerts futurs au sein de ce milieu, et ce de manière libre et gratuite.
 				<br><br>
 				Ce site a pour caractéristique principale d'être communautaire. Cela signifie que c'est le public qui fait vivre le site, chacun peut -et ce de manière anonyme- renseigner un concert et ainsi aider l'ensemble des utilisateurs.<br>
-				Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier les concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs. 
+				Nous vous invitons néanmoins à créer un compte, cela vous permettra (entre autres) de modifier ou compléter les concerts qui ont déjà été renseignés mais qui pourraient comporter des erreurs. 
 				<br><br>
 				En étant connecté, vous pouvez en outre gagner des points permettant d’obtenir des récompenses (cd, places de concert, vêtements, bons d’achat etc…) en fonction de votre activité sur le site (voir partie « fonctionnement »).
 				<br>
@@ -46,7 +46,7 @@
 			<div id="idee">
 				<br><br>
 				Me rendant régulièrement à des concerts de rap indé, j’ai remarqué qu’il n’existait pas de plateforme recensant tous les concerts. Il y a bien le site « info concert » mais de nombreux concerts de rap français indépendant n’y apparaissent pas. <br><br>
-				De ce fait, le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit suivre assidûment les pages d’organisateurs ou d’artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations. <br>
+				De ce fait, le moyen le plus simple d’être au courant des concerts est soit le bouche à oreille soit de suivre assidûment les pages d’organisateurs ou d’artistes sur les réseaux sociaux. Or, tout le monde n’a pas forcément le temps de le faire et il est très facile de rater des informations. <br>
 				Le fait aussi que ce milieu dispose de peu de moyens rend la communication parfois légère voire inexistante. <br><br>
 				En conséquence, de nombreux concerts se retrouvent en « sous-effectif » du fait de cette mauvaise communication et de la difficulté à récupérer les informations.
 				<br><br>
@@ -60,7 +60,7 @@
 			<div id="fonctionnement">
 			<br><br>
 			Le fonctionnement du site est assez simple avec trois principales utilisations :
-				<br>
+				<br><br>
 				-	Consulter la liste des concerts
 				<br>
 				-	Ajouter un concert
@@ -78,18 +78,18 @@
 			<h1>+ Ajout d’un concert</h1>
 			<div id="ajout">
 				<br><br>
-				Pour ajouter un concert, cliquez sur le bouton correspondant en haut du site.
+				Pour ajouter un concert, cliquez sur le bouton correspondant en haut du site. Avant d'ajouter un concert, il est conseillé de vérifier qu'il n'ait pas été déjà saisi. Pour faire une recherche, aidez-vous des filtres sur la page des concerts, ou recherchez directement l'artiste (onglet « Artistes »).
 				<br><br>
 				Vous pouvez ajouter un concert sans être connecté mais si vous avez un compte n’hésitez pas à vous connecter afin de gagner des points (et éventuellement des récompenses par la suite).<br><br>
 				Une fois sur la page, remplissez les champs dont vous avez connaissance. Vous n’êtes pas obligés de tout remplir à l’exception des champs obligatoires qui sont les suivants :<br><br>
 				-	Nom de l’artiste/du groupe<br>
 				-	Date du concert<br>
 				-	Lieu du concert (en extérieur ou en intérieur)<br>
-				-	Salle (si concert intérieur)<br>
+				-	Salle ou dénomination (en fonction du lieu : intérieur ou extérieur). Si la salle est inonnue, vous pouvez mettre « Non connue » dans le champ. <br>
 				-	Ville<br><br>
 				A noter que lorsque vous remplissez (par exemple) le nom de la salle, une recherche est faite dans notre base de donnée et si la salle y existe, les champs qui suivent se remplissent automatiquement. <br><br>
 				Une fois les champs connus remplis, cliquez sur « enregistrer le concert », une fenêtre récapitulative des informations saisies va s’ouvrir. Vérifiez-les, et si tout est correct, enregistrez le concert (vous pourrez toujours le modifier par la suite), sinon modifiez les informations incorrectes.<br><br>
-				Enfin vous pourrez voir le concert que vous avez enregistré sur une page récapitulative. Pour constater le bon ajout de votre concert sur le site, rendez-vous sur la page « tous les concerts ».<br>
+				Pour constater le bon ajout de votre concert sur le site, rendez-vous sur la page « tous les concerts ».<br>
 				Note : Vous pouvez directement consulter vos concerts ajoutés si vous possédez un compte (page « mon profil », « voir mes concerts ajoutés »)<br><br><br>
 			</div>
 
@@ -100,9 +100,6 @@
 				Si vous constatez une erreur sur un concert validé, n’hésitez pas à faire remonter cette erreur via le formulaire de contact (bouton « signaler une erreur »).<br><br>
 				Une fois le bouton « modifier » cliqué, vous pourrez apercevoir le concert avec les différents champs qui ont été déjà saisis. <br>
 				Tout comme pour l’ajout d’un concert, lorsque vous commencez à saisir un champ, une requête dans notre base de données est effectuée et si le champ saisi y est présent, les champs qui suivent (liés au champ saisi) se remplissent automatiquement. <br><br>
-				Absolument tout est modifiable (ou ajoutable si ça n’a pas été renseigné) à l’exception des champs suivants :<br>
-				-	Nom de l’artiste<br>
-				-	Champs liés à une ville (CP, département etc…)<br><br>
 				A noter que (normalement) toutes les villes françaises sont présentes en base de données. Vous pouvez si vous le souhaitez ajouter un concert à l’étranger. Si la ville étrangère n’est pas dans notre base de données vous aurez dans ce cas la possibilité de renseigner les informations liées à la ville (département, région, pays etc…)<br><br>
 				Vous disposez également des boutons suivants au sein de la page « modifier » :<br><br>
 				- Enregistrer le concert : enregistre les modifications effectuées<br>
@@ -139,7 +136,7 @@
 			<h1>+ Création d’un compte</h1>
 			<div id="creation">
 				<br><br>
-				Rendez-vous sur « connexion » puis « inscrivez-vous maintenant » afin de créer un compte. Vous devez renseigner un e-mail valide (aucun mail intempestif ne vous sera envoyé).<br><br><br>
+				Rendez-vous sur « connexion » puis « inscrivez-vous maintenant » afin de créer un compte. Veuillez renseigner un e-mail valide au cas où vous devriez échanger avec un administrateur ou pour des améliorations futures (rappels etc...). Aucun mail ne vous sera envoyé, et si un jour ce devait être le cas, votre accord vous sera demandé.<br><br><br>
 			</div>
 
 			<h1>+ Mon profil</h1>
@@ -170,7 +167,7 @@
 			<h1>+ Signaler une erreur</h1>
 			<div id="erreur">
 				<br><br>
-				Si vous constatez une erreur, peu importe sa nature, n’hésitez pas à faire remonter cette erreur via le formulaire de contact à gauche (bulle) ou en cliquant <a href="contact.php"> ici</a>. Cela est une aide précieuse afin de faire évoluer le site et en rendre son utilisation plus agréable.<br><br><br>
+				Si vous constatez une erreur, peu importe sa nature, n’hésitez pas à faire remonter cette erreur via le formulaire de contact (bulles à gauche) ou en cliquant <a href="contact.php"> ici</a>. Cela est une aide précieuse afin de faire évoluer le site et en rendre son utilisation plus agréable.<br><br><br>
 			</div>
 
 			<h1>+ Page artiste</h1>

@@ -64,18 +64,13 @@
 				<div id=showmail>
 					<?php if(isset($_SESSION['pseudo']) == null)
 					{
-						echo "<br>";
 						echo "<label> Il semble que vous ne soyez pas connecté, saisissez votre mail ci-dessous ou connectez-vous (nous ne vous enverrons un mail que si cela est strictement nécessaire)<span class='star'>*</span> </label>";?>
-						<br>
 						<input type="email" name="mailinput" id="mailinput" value="">
 						<div id="verifmail"></div>
 						<?php
 					}
 					?>
 				</div> 
-				<div id="contribution">	
-					Merci pour votre contribution
-				</div>
 				<div id="footer">
 					<input type="hidden" name="valider" id="valider">
 					<input type="button" value="Envoyer" class="okbutton" onclick="verification()" style="margin-top: 0px;">
